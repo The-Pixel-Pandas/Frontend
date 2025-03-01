@@ -1,0 +1,9 @@
+build/*
+dist/*
+**/out/*
+**/.next/*
+**/node_modules/*
+
+package-lock.json
+yarn.lock
+commitlint.config.ts
