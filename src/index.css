@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	user-select: none; /* Disable text selection */
+	-webkit-user-select: none; /* For Safari */
+	-ms-user-select: none; /* For older versions of IE */
+	-webkit-touch-callout: none;
+}
