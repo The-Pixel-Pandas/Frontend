@@ -14,7 +14,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.9",
+    "axios": "^1.8.1",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
+    "react-axios": "^2.0.6",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
