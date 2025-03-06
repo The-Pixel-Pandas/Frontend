@@ -3,7 +3,8 @@ import React from "react";
 const Home = () => {
 	return (
 		<>
-			<div>Home</div>
+			{/* test tailwind works correctly remove later */}
+			<div className="text-text-300 bg-primary flex flex-auto">Home</div>
 		</>
 	);
 };

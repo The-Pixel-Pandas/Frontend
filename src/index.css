@@ -6,3 +6,18 @@ body {
 	-ms-user-select: none; /* For older versions of IE */
 	-webkit-touch-callout: none;
 }
+
+/* define theme variables here */
+@theme {
+	--color-blurs-100: #40c5ff;
+	--color-blurs-200: #e46bbb;
+	--color-blurs-300: #311b92;
+
+	--color-text-100: #ffffff;
+	--color-text-200: #b3b3b3;
+	--color-text-300: #808080;
+
+	--color-primary: #0c0724;
+	--color-secondary: #171134;
+	--color-tertiary: #241c4a;
+}
