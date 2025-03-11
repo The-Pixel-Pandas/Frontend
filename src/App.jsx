@@ -1,5 +1,5 @@
 import React from "react";
-import { Home,Login } from "./views";
+import { Home, Login } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

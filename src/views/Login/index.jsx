@@ -1,10 +1,11 @@
 import React from "react";
-import { LoginForm } from "../../components";
+import { GoogleVerification } from "../../components";
 
 const Login = () => {
 	return (
 		<>
-			<LoginForm />
+			{/* sample usage of component */}
+			<GoogleVerification width={800} height={1000} />
 		</>
 	);
 };
