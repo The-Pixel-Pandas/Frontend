@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import googleButton from "../../assets/images/googleButton.png";
 
-const GoogleVerification = ({ width = 200, height = 50 }) => {
+
+const GoogleVerification = ({ width, height }) => {
 	const navigate = useNavigate();
 
 	const handleLoginSuccess = (credentialResponse) => {
@@ -14,7 +16,6 @@ const GoogleVerification = ({ width = 200, height = 50 }) => {
 	const handleLoginError = () => {
 		console.log("Login Failed");
 		alert("ERROR Cant Continue With Google");
-
 	};
 
 	const login = useGoogleLogin({
@@ -37,6 +38,11 @@ const GoogleVerification = ({ width = 200, height = 50 }) => {
 			/>
 		</button>
 	);
+};
+
+GoogleVerification.propTypes = {
+	width: PropTypes.number,
+	height: PropTypes.number,
 };
 
 export default GoogleVerification;
