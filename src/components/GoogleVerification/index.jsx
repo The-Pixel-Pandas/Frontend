@@ -59,7 +59,7 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 GoogleVerification.propTypes = {
 	width: PropTypes.number,
 	height: PropTypes.number,
-	verificationType: PropTypes.oneOf("Login", "SignUp"),
+	verificationType: PropTypes.oneOf(["Login", "SignUp"]),
 };
 
 export default GoogleVerification;
