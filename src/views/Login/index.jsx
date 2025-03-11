@@ -5,7 +5,7 @@ const Login = () => {
 	return (
 		<>
 			{/* sample usage of component */}
-			<GoogleVerification width={800} height={1000} />
+			<GoogleVerification width={800} height={1000} verificationType="Login" />
 		</>
 	);
 };
