@@ -5,6 +5,7 @@ body {
 	-webkit-user-select: none; /* For Safari */
 	-ms-user-select: none; /* For older versions of IE */
 	-webkit-touch-callout: none;
+	background-color: #0c0724;
 }
 
 /* define theme variables here */
