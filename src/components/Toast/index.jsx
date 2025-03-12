@@ -42,7 +42,7 @@ const Toast = ({
 			draggable
 			pauseOnHover
 			theme={theme}
-			transition="bounce"
+			transition:Bounce
 		/>
 	);
 };
