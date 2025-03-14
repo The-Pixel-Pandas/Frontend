@@ -13,13 +13,13 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 	const [toastMessage, setToastMessage] = useState("");
 
 	const handleLoginSuccess = (credentialResponse) => {
-		setToastMessage(`Successfully ${verificationType}ed!`);
+		setToastMessage(`${verificationType} با موفقیت انجام شد`);
 		console.log(toastMessage, credentialResponse);
 		setShowSuccessToast(true);
 	};
 
 	const handleLoginError = () => {
-		setToastMessage(`Failed to ${verificationType.toLowerCase()}!`);
+		setToastMessage(`در هنگام ${verificationType} خطایی رخ داد`);
 		setShowErrorToast(true);
 	};
 
@@ -59,7 +59,7 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 GoogleVerification.propTypes = {
 	width: PropTypes.number,
 	height: PropTypes.number,
-	verificationType: PropTypes.oneOf("Login", "SignUp"),
+	verificationType: PropTypes.oneOf(["ورود", "ثبت نام"]),
 };
 
 export default GoogleVerification;
