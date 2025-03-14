@@ -7,5 +7,13 @@ import Wallet from "./Wallet";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 
-export { Home, Login, SignUp, News, UserProfile, Wallet, LeaderBoard ,,NotFound};
-
+export {
+	Home,
+	Login,
+	SignUp,
+	News,
+	UserProfile,
+	Wallet,
+	LeaderBoard,
+	NotFound,
+};

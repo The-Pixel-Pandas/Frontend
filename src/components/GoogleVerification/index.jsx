@@ -48,7 +48,7 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 				<>
 					<Toast type="success" message={toastMessage} />
 					{setTimeout(() => {
-						navigate("/home");
+						navigate("/");
 					}, 2000)}
 				</>
 			)}

@@ -7,4 +7,13 @@ import GoogleVerification from "./GoogleVerification";
 import LottieAnim from "./LottieAnim";
 import PopupComponent from "./PopupComponent";
 
-export { Navbar, SearchBar, QuestionCard, NewsCard, LoginForm, SignInForm, LeaderBoardTable ,LottieAnim,PopupComponent,GoogleVerification};
+export {
+	Navbar,
+	SearchBar,
+	QuestionCard,
+	NewsCard,
+	LeaderBoardTable,
+	LottieAnim,
+	PopupComponent,
+	GoogleVerification,
+};
