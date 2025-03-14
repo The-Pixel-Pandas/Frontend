@@ -4,7 +4,7 @@ const Home = () => {
 	return (
 		<>
 			{/* test tailwind works correctly remove later */}
-			<div className="flex flex-auto text-white">Home</div>
+			<div className="flex flex-auto text-white font-Lalezar">Home</div>
 		</>
 	);
 };
