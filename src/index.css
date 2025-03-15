@@ -1,33 +1,117 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: 'Lalezar';
-    src: url('../public/fonts/Lalezar.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: "Lalezar";
+	src: url("./fonts/Lalezar.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "InterMedium";
+	src: url("./fonts/InterTight-Medium.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaBlack";
+	src: url("./fonts/Morabba-Black.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaBold";
+	src: url("./fonts/Morabba-Bold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaHeavy";
+	src: url("./fonts/Morabba-Heavy.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaExtraBold";
+	src: url("./fonts/Morabba-ExtraBold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaLight";
+	src: url("./fonts/Morabba-Light.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaMedium";
+	src: url("./fonts/Morabba-Medium.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaRegular";
+	src: url("./fonts/Morabba-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaSemiBold";
+	src: url("./fonts/Morabba-SemiBold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "MorabbaUltraLight";
+	src: url("./fonts/Morabba-UltraLight.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
 
 body {
-    user-select: none; /* Disable text selection */
-    -webkit-user-select: none; /* For Safari */
-    -ms-user-select: none; /* For older versions of IE */
-    -webkit-touch-callout: none;
-    background-color: #0c0724;
+	user-select: none; /* Disable text selection */
+	-webkit-user-select: none; /* For Safari */
+	-ms-user-select: none; /* For older versions of IE */
+	-webkit-touch-callout: none;
+	background-color: #0c0724;
+}
+
+* {
+	cursor: url("./cursor/hover.png"), auto;
 }
 
 /* define theme variables here */
 @theme {
-    --color-blurs-100: #40c5ff;
-    --color-blurs-200: #e46bbb;
-    --color-blurs-300: #311b92;
+	--color-blurs-100: #40c5ff;
+	--color-blurs-200: #e46bbb;
+	--color-blurs-300: #311b92;
 
-    --color-text-100: #ffffff;
-    --color-text-200: #b3b3b3;
-    --color-text-300: #808080;
+	--color-text-100: #ffffff;
+	--color-text-200: #b3b3b3;
+	--color-text-300: #808080;
 
-    --color-primary: #0c0724;
-    --color-secondary: #171134;
-    --color-tertiary: #241c4a;
+	--color-primary: #0c0724;
+	--color-secondary: #171134;
+	--color-tertiary: #241c4a;
 
-	--font-Lalezar: 'Lalezar', sans-serif;
+	--font-Lalezar: "Lalezar", sans-serif;
+    --font-InterMedium: "InterMedium", sans-serif;
+    --font-MorabbaBlack: "MorabbaBlack", sans-serif;
+    --font-MorabbaBold: "MorabbaBold", sans-serif;    
+    --font-MorabbaHeavy: "MorabbaHeavy", sans-serif;
+    --font-MorabbaExtraBold: "MorabbaExtraBold", sans-serif;        
+    --font-MorabbaLight: "MorabbaLight", sans-serif;
+    --font-MorabbaMedium: "MorabbaMedium", sans-serif;    
+    --font-MorabbaRegular: "MorabbaRegular", sans-serif;
+    --font-MorabbaSemiBold: "MorabbaSemiBold", sans-serif;      
+    --font-MorabbaSemiBold: "MorabbaUltraLight", sans-serif;       
 }
