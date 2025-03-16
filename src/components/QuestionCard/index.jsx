@@ -3,7 +3,7 @@ import questionBox from "../../assets/images/questionBox.png";
 import PropTypes from "prop-types";
 import coinLogo from "../../assets/images/coinLogo.png";
 
-const QuestionCard = ({ text, width = 347, height = 209 }) => {
+const QuestionCard = ({ question, width = 347, height = 209 }) => {
 	return (
 		<>
 			<div style={{ width, height }}>
@@ -17,7 +17,12 @@ const QuestionCard = ({ text, width = 347, height = 209 }) => {
 								transform: "translate(-50%, -50%)",
 							}}
 						>
-							<p>{text}</p>
+							<p>{question}</p>
+						</div>
+						<div className="absolute bottom-0 right-0 flex items-center ">
+							<span className="text-white font-Lalezar text-xl">پانداکوین</span>
+							<span className="text-white font-Lalezar text-3xl">000</span>
+							<img src={coinLogo} alt="coinLogo" />
 						</div>
 						<img src={questionBox} alt="questionBox" />
 					</div>
@@ -28,7 +33,7 @@ const QuestionCard = ({ text, width = 347, height = 209 }) => {
 };
 
 QuestionCard.propTypes = {
-	text: PropTypes.string.isRequired,
+	question: PropTypes.string.isRequired,
 	width: PropTypes.number,
 	height: PropTypes.number,
 };

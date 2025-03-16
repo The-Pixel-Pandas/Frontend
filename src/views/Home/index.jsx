@@ -1,10 +1,15 @@
 import React from "react";
-import { QuestionCard } from "../../components";
+import { QuestionCard, Navbar } from "../../components";
+
 
 const Home = () => {
+	//const questions = ["سوال 1", "سوال 2", "سوال 3", "سوال 4", "سوال 5"];
 	return (
 		<>
-			<QuestionCard text="سوال 1" />
+			<Navbar/>
+			{/* <CategoryFilter onSelect={() => {}} /> */}
+			<QuestionCard question="سوال 1" />
+			{/* <QuestionGrid questions={questions} /> */}
 
 			{/* see all font styles. remove later */}
 			{/* <div className="flex flex-col flex-auto text-white justify-center items-center">
