@@ -1,11 +1,7 @@
 import React from "react";
 
 const SignUp = () => {
-	return (
-		<>
-
-		</>
-	);
+	return <></>;
 };
 
 export default SignUp;

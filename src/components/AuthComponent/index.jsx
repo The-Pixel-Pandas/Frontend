@@ -9,7 +9,6 @@ import AudioPlayer from "../AudioPlayer";
 import authButton from "../../assets/images/authButton.png";
 import logo from "../../assets/images/logo.png";
 
-
 const AuthComponent = ({ authType }) => {
 	const { isAuthenticated, isError, loginMessage } = useAuthStore();
 	const navigate = useNavigate();

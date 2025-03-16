@@ -16,5 +16,3 @@ class EventHandler {
 
 const eventHandler = new EventHandler();
 export default eventHandler;
-
-

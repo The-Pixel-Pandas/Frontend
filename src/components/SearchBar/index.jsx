@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import searchIcon from "../../assets/images/SearchIcon.png";
 
 const SearchBar = ({ width = "535px" }) => {
@@ -6,7 +7,7 @@ const SearchBar = ({ width = "535px" }) => {
 		e.preventDefault();
 		console.log("Searched!");
 	};
-	
+
 	return (
 		<>
 			<div className="relative flex" style={{ width }}>
@@ -28,6 +29,10 @@ const SearchBar = ({ width = "535px" }) => {
 			</div>
 		</>
 	);
+};
+
+SearchBar.propTypes = {
+	width: PropTypes.string,
 };
 
 export default SearchBar;
