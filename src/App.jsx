@@ -1,5 +1,13 @@
 import React from "react";
-import { Home, LeaderBoard, Login, News, SignUp, UserProfile,NotFound } from "./views";
+import {
+	Home,
+	LeaderBoard,
+	Login,
+	News,
+	SignUp,
+	UserProfile,
+	NotFound,
+} from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,7 +22,7 @@ function App() {
 					<Route path="/leaderBoard" element={<LeaderBoard />} />
 					<Route path="/userProfile" element={<UserProfile />} />
 					{/* Add another routes here */}
-					<Route path="*" element={<NotFound />} /> 
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</>
