@@ -1,6 +1,20 @@
 @import "tailwindcss";
 
 @font-face {
+	font-family: "LalezarTight";
+	src: url("./fonts/LalezarTight.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "LalezarTightItalic";
+	src: url("./fonts/LalezarTightItalic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: "Lalezar";
 	src: url("./fonts/Lalezar.ttf") format("truetype");
 	font-weight: normal;
@@ -104,14 +118,16 @@ body {
 	--color-tertiary: #241c4a;
 
 	--font-Lalezar: "Lalezar", sans-serif;
-    --font-InterMedium: "InterMedium", sans-serif;
-    --font-MorabbaBlack: "MorabbaBlack", sans-serif;
-    --font-MorabbaBold: "MorabbaBold", sans-serif;    
-    --font-MorabbaHeavy: "MorabbaHeavy", sans-serif;
-    --font-MorabbaExtraBold: "MorabbaExtraBold", sans-serif;        
-    --font-MorabbaLight: "MorabbaLight", sans-serif;
-    --font-MorabbaMedium: "MorabbaMedium", sans-serif;    
-    --font-MorabbaRegular: "MorabbaRegular", sans-serif;
-    --font-MorabbaSemiBold: "MorabbaSemiBold", sans-serif;      
-    --font-MorabbaSemiBold: "MorabbaUltraLight", sans-serif;       
+	--font-LalezarTight: "LalezarTight", sans-serif;
+	--font-LalezarTightItalic: "LalezarTightItalic", sans-serif;
+	--font-InterMedium: "InterMedium", sans-serif;
+	--font-MorabbaBlack: "MorabbaBlack", sans-serif;
+	--font-MorabbaBold: "MorabbaBold", sans-serif;
+	--font-MorabbaHeavy: "MorabbaHeavy", sans-serif;
+	--font-MorabbaExtraBold: "MorabbaExtraBold", sans-serif;
+	--font-MorabbaLight: "MorabbaLight", sans-serif;
+	--font-MorabbaMedium: "MorabbaMedium", sans-serif;
+	--font-MorabbaRegular: "MorabbaRegular", sans-serif;
+	--font-MorabbaSemiBold: "MorabbaSemiBold", sans-serif;
+	--font-MorabbaSemiBold: "MorabbaUltraLight", sans-serif;
 }
