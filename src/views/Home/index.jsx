@@ -1,10 +1,13 @@
 import React from "react";
+import { QuestionCard } from "../../components";
 
 const Home = () => {
 	return (
 		<>
+			<QuestionCard text="سوال 1" />
+
 			{/* see all font styles. remove later */}
-			<div className="flex flex-col flex-auto text-white justify-center items-center">
+			{/* <div className="flex flex-col flex-auto text-white justify-center items-center">
 				<div className="font-Lalezar">پانداهای پیکسلی</div>
 				<div className="font-InterMedium"> پانداهای پیکسلی</div>
 				<div className="font-MorabbaBlack">پانداهای پیکسلی</div>
@@ -16,7 +19,7 @@ const Home = () => {
 				<div className="font-MorabbaRegular">پانداهای پیکسلی</div>
 				<div className="font-MorabbaSemiBold">پانداهای پیکسلی</div>
 				<div className="font-MorabbaUltraLight">پانداهای پیکسلی</div>
-			</div>
+			</div> */}
 		</>
 	);
 };
