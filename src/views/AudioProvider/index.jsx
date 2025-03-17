@@ -5,8 +5,8 @@ const AudioProvider = () => {
 	return (
 		<>
 			<AudioPlayer src="/audios/Click.mp3" audioName="ClickSound" />
-			<AudioPlayer src="/audios/ClosePopup.mp3" audioName="ClosePopupSound" />
-			<AudioPlayer src="/audios/OpenPopup.mp3" audioName="OpenPopupSound" />
+			<AudioPlayer src="/audios/ClosePopup.wav" audioName="ClosePopupSound" />
+			<AudioPlayer src="/audios/OpenPopup.wav" audioName="OpenPopupSound" />
 		</>
 	);
 };

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import homeAuthBtn from "../../assets/images/homeAuthBtn.png";
+import { eventHandler } from "../../services";
 
 const NavbarAuthBtn = ({ authType }) => {
 	const navigate = useNavigate();
@@ -12,6 +13,7 @@ const NavbarAuthBtn = ({ authType }) => {
 		} else {
 			navigate("/signup");
 		}
+		eventHandler.dispatchEvent("OpenPopupSound");
 	};
 
 	return (
