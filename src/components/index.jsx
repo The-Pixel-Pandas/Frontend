@@ -6,6 +6,7 @@ import LeaderBoardTable from "./LeaderBoardTable";
 import GoogleVerification from "./GoogleVerification";
 import LottieAnim from "./LottieAnim";
 import PopupComponent from "./PopupComponent";
+import AuthComponent from "./AuthComponent";
 
 export {
 	Navbar,
@@ -16,4 +17,5 @@ export {
 	LottieAnim,
 	PopupComponent,
 	GoogleVerification,
+	AuthComponent,
 };
