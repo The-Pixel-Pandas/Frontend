@@ -47,7 +47,7 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 		<>
 			<div
 				className="flex flex-col items-center relative transition-transform hover:scale-105 mt-64 outline-none"
-				onClick={() => eventHandler.dispatchEvent("playClickSound")}
+				onClick={() => eventHandler.dispatchEvent("ClickSound")}
 			>
 				<button onClick={login} className="outline-none">
 					<div
