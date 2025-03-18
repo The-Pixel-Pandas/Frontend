@@ -7,6 +7,7 @@ import {
 	SignUp,
 	UserProfile,
 	NotFound,
+	AudioProvider,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<AudioProvider />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Login />} />

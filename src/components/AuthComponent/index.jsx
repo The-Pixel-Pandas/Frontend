@@ -5,7 +5,6 @@ import { useAuthStore, eventHandler } from "../../services";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../Toast";
-import AudioPlayer from "../AudioPlayer";
 import authButton from "../../assets/images/authButton.png";
 import logo from "../../assets/images/logo.png";
 
@@ -14,7 +13,7 @@ const AuthComponent = ({ authType }) => {
 	const navigate = useNavigate();
 
 	const submitButton = () => {
-		eventHandler.dispatchEvent("playClickSound");
+		eventHandler.dispatchEvent("ClickSound");
 	};
 
 	useEffect(() => {
@@ -55,7 +54,6 @@ const AuthComponent = ({ authType }) => {
 				/>
 				<div className="text-white font-MorabbaMedium text-xl mt-6">یا</div>
 				<AuthForm />
-				<AudioPlayer src="/audios/Click.mp3" audioName="playClickSound" />
 				<button
 					className="relative mt-12 transition-transform hover:scale-105"
 					style={{ width: 481, height: 63 }}

@@ -6,6 +6,8 @@ import LeaderBoardTable from "./LeaderBoardTable";
 import GoogleVerification from "./GoogleVerification";
 import LottieAnim from "./LottieAnim";
 import PopupComponent from "./PopupComponent";
+import AuthComponent from "./AuthComponent";
+import AudioPlayer from "./AudioPlayer";
 
 export {
 	Navbar,
@@ -16,4 +18,6 @@ export {
 	LottieAnim,
 	PopupComponent,
 	GoogleVerification,
+	AuthComponent,
+	AudioPlayer,
 };
