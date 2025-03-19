@@ -9,7 +9,7 @@ const NotFound = () => {
 				<div className="w-[500px] max-w-full px-4">
 					<LottieAnim lottieJson={notFoundAnim} width="100%" height="100%" />
 				</div>
-				<h1 className="text-2xl md:text-5xl font-bold text-white drop-shadow-lg tracking-wide text-center px-4">
+				<h1 className="text-2xl md:text-5xl text-white drop-shadow-lg tracking-wide text-center px-4 font-Lalezar">
 					صفحه مورد نظر یافت نشد
 				</h1>
 			</div>

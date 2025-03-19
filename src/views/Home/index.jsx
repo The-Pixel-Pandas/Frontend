@@ -1,12 +1,11 @@
 import React from "react";
 import { QuestionCard, Navbar } from "../../components";
 
-
 const Home = () => {
 	//const questions = ["سوال 1", "سوال 2", "سوال 3", "سوال 4", "سوال 5"];
 	return (
 		<>
-			<Navbar/>
+			<Navbar />
 			{/* <CategoryFilter onSelect={() => {}} /> */}
 			<QuestionCard question="سوال 1" />
 			{/* <QuestionGrid questions={questions} /> */}
