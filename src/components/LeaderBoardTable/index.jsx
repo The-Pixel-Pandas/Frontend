@@ -22,7 +22,7 @@ const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 							key={index}
 							avatarNumber={user.avatarNumber}
 							name={user.name}
-							coinAmount={user.coinAmount}
+							coinAmount={user.coinAmount.toLocaleString("fa")}
 						/>
 					))}
 				</div>
