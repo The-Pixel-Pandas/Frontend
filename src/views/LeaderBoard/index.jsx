@@ -40,7 +40,7 @@ const LeaderBoard = () => {
 
 			<div className="flex flex-col justify-center items-center mt-28">
 				{/* Header */}
-				<div className="text-white font-Lalezar text-5xl">جدول امتیازات</div>
+				<div className="text-white font-Lalezar text-4xl">جدول امتیازات</div>
 				{/* Buttons */}
 				<div className="flex flex-row justify-center items-center mt-5">
 					<button onClick={handleAllClick}>
@@ -115,16 +115,78 @@ const LeaderBoard = () => {
 						</div>
 					</button>
 				</div>
-				<div className="mt-5 flex flex-row gap-10">
+				<div className="mt-16 flex flex-row gap-16">
 					<LeaderBoardTable
 						title="امتیاز عملکرد"
 						titleImg={coinIcon}
-						usersData={[]}
+						usersData={[
+							{
+								avatarNumber: 1,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 2,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 3,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 4,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 5,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 6,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+						]}
 					/>
 					<LeaderBoardTable
 						title="میزان مشارکت"
 						titleImg={volumeIcon}
-						usersData={[]}
+						usersData={[
+							{
+								avatarNumber: 1,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 2,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 3,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 4,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 5,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+							{
+								avatarNumber: 6,
+								name: "نام کاربری",
+								coinAmount: 32596587,
+							},
+						]}
 					/>
 				</div>
 			</div>

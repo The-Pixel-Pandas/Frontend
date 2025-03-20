@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import leaderBoardBox from "../../assets/images/leaderBoardBox.png";
-// use phaser library here if needed
-// import Phaser from "phaser";
+import LeaderBoardProfileCard from "../LeaderBoardProfileCard";
 
 const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 	return (
@@ -10,13 +9,24 @@ const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 			<img
 				src={leaderBoardBox}
 				alt="leaderBoardBox"
-				style={{ width: 500, height: 510 }}
+				style={{ width: 550, height: 470 }}
 			/>
 			<div className="absolute top-0 right-0 flex items-center gap-4 mt-10 mr-10">
-				<div className="text-white font-Lalezar text-3xl">{title}</div>
+				<div className="text-white font-Lalezar text-2xl">{title}</div>
 				<img src={titleImg} alt="titleImg" />
 			</div>
-			<div className="absolute inset-0">{usersData}</div>
+			<div className="absolute top-0 right-0 mt-28 mr-6 overflow-y-scroll max-h-[350px] no-scrollbar">
+				<div className="flex flex-col gap-1.5">
+					{usersData.map((user, index) => (
+						<LeaderBoardProfileCard
+							key={index}
+							avatarNumber={user.avatarNumber}
+							name={user.name}
+							coinAmount={user.coinAmount}
+						/>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

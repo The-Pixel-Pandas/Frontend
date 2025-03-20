@@ -17,6 +17,7 @@ const useAvatarStore = create((set, get) => ({
     setAvatarNumber: (avatarNumber) => set({ avatarNumber: avatarNumber }),
     getAvatarNumber: () => get().avatarNumber,
     getAvatarSrc: () => avatars[get().avatarNumber - 1],
+    getAvatarByNumber: (avatarNumber) => avatars[avatarNumber - 1],
 }));
 
 export default useAvatarStore;
