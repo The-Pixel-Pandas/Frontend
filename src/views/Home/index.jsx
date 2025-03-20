@@ -1,11 +1,13 @@
 import React from "react";
 import { QuestionCard, Navbar } from "../../components";
+import { useAuthStore } from "../../services";
 
 const Home = () => {
+	const { isAuthenticated } = useAuthStore();
 	//const questions = ["سوال 1", "سوال 2", "سوال 3", "سوال 4", "سوال 5"];
 	return (
 		<>
-			<Navbar />
+			<Navbar isLandingPage={true} isAuthenticated={isAuthenticated} />
 			{/* <CategoryFilter onSelect={() => {}} /> */}
 			<QuestionCard question="سوال 1" />
 			{/* <QuestionGrid questions={questions} /> */}
