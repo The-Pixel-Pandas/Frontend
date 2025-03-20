@@ -51,7 +51,7 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 			>
 				<button onClick={login} className="outline-none">
 					<div
-						className="absolute z-10 text-white font-InterMedium text-xl"
+						className="absolute z-10 text-white font-MorabbaMedium text-xl"
 						style={{
 							top: "50%",
 							left: "50%",

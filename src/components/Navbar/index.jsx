@@ -6,16 +6,23 @@ import leaderboard from "../../assets/images/leaderboard.png";
 import logo from "../../assets/images/logo.png";
 import SearchBar from "../SearchBar";
 import NavbarAuthBtn from "../NavbarAuthBtn";
+import { useNavigate } from "react-router-dom";
+import { eventHandler } from "../../services";
+import UserAvatar from "../UserAvatar";
+import { useCoinStore } from "../../services";
 
 const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
+	const navigate = useNavigate();
+	const { getCoin } = useCoinStore();
+
 	return (
 		<>
 			<div className="mt-3">
 				{/* Logo */}
 				<div className="flex flex-row items-center">
 					<div className="flex flex-row items-center">
-						<img src={logo} alt="Logo" style={{ width: 155, height: 122 }} />
-						<div className="text-white font-Lalezar text-4xl">
+						<img src={logo} alt="Logo" style={{ width: 105, height: 80 }} />
+						<div className="text-white font-Lalezar text-3xl">
 							پانداهای پیکسلی
 						</div>
 					</div>
@@ -25,35 +32,54 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 						</div>
 					</div>
 					{/* User Buttons */}
-					<div className="flex flex-row mr-10">
+					<div className="flex flex-row mr-10 mt-3">
 						<button
-							style={{ width: "28.5px", height: "33.25px" }}
-							className="mr-10 transition-transform hover:scale-105"
+							style={{ width: "26.5px", height: "30.67px" }}
+							className="mr-10 transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/userProfile");
+							}}
 						>
 							<img src={userProfile} alt="userProfile" />
 						</button>
 						<button
-							style={{ width: "31.67px", height: "31.67px" }}
-							className="mr-10 transition-transform hover:scale-105"
+							style={{ width: "28.67px", height: "28.67px" }}
+							className="mr-10 transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/news");
+							}}
 						>
 							<img src={news} alt="news" />
 						</button>
 						<button
-							style={{ width: "28.5px", height: "31.67px" }}
-							className="mr-10 transition-transform hover:scale-105"
+							style={{ width: "25.5px", height: "28.67px" }}
+							className=" transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/leaderboard");
+							}}
 						>
 							<img src={leaderboard} alt="leaderboard" />
 						</button>
 						{/* Auth Buttons */}
-						<div className="flex flex-row ">
-							<div className={isAuthenticated ? "hidden" : ""}>
-								<NavbarAuthBtn authType="ورود" />
-							</div>
+						<div className={isAuthenticated ? "hidden" : ""}>
 							<div className="flex flex-row ml-10">
-								<div className={isAuthenticated ? "hidden" : ""}>
+								<NavbarAuthBtn authType="ورود" />
+								<div className="flex flex-row ml-10">
 									<NavbarAuthBtn authType="ثبت نام" />
 								</div>
 							</div>
+						</div>
+					</div>
+					{/* Avatar */}
+					<div className={isAuthenticated ? "" : "hidden"}>
+						<div className="flex flex-col items-center mr-10 relative">
+							<div className="text-white font-Lalezar text-2xl absolute mt-16">
+								{getCoin()}
+							</div>
+							<UserAvatar width={70} height={65} />
 						</div>
 					</div>
 				</div>

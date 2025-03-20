@@ -20,6 +20,7 @@ const NavbarAuthBtn = ({ authType }) => {
 		<button
 			className="relative hover:scale-105 transition-transform"
 			onClick={handleAuth}
+			style={{ width: "108.09px", height: "38.66px" }}
 		>
 			<div
 				className="absolute z-10 text-white font-Lalezar"
