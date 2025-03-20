@@ -6,8 +6,11 @@ import leaderboard from "../../assets/images/leaderboard.png";
 import logo from "../../assets/images/logo.png";
 import SearchBar from "../SearchBar";
 import NavbarAuthBtn from "../NavbarAuthBtn";
+import { useNavigate } from "react-router-dom";
+import { eventHandler } from "../../services";
 
 const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<div className="mt-3">
@@ -15,7 +18,7 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 				<div className="flex flex-row items-center">
 					<div className="flex flex-row items-center">
 						<img src={logo} alt="Logo" style={{ width: 155, height: 122 }} />
-						<div className="text-white font-Lalezar text-4xl">
+						<div className="text-white font-Lalezar text-3xl">
 							پانداهای پیکسلی
 						</div>
 					</div>
@@ -29,18 +32,30 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 						<button
 							style={{ width: "28.5px", height: "33.25px" }}
 							className="mr-10 transition-transform hover:scale-105"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/userProfile");
+							}}
 						>
 							<img src={userProfile} alt="userProfile" />
 						</button>
 						<button
 							style={{ width: "31.67px", height: "31.67px" }}
 							className="mr-10 transition-transform hover:scale-105"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/news");
+							}}
 						>
 							<img src={news} alt="news" />
 						</button>
 						<button
 							style={{ width: "28.5px", height: "31.67px" }}
 							className="mr-10 transition-transform hover:scale-105"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/leaderboard");
+							}}
 						>
 							<img src={leaderboard} alt="leaderboard" />
 						</button>

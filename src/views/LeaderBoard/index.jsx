@@ -63,7 +63,7 @@ const LeaderBoard = () => {
 									/>
 								</div>
 							)}
-							<img src={leaderBoardButton} alt="leaderBoardButton" />
+							<img src={leaderBoardButton} alt="allButton" />
 						</div>
 					</button>
 
@@ -87,7 +87,7 @@ const LeaderBoard = () => {
 									/>
 								</div>
 							)}
-							<img src={leaderBoardButton} alt="leaderBoardButton" />
+							<img src={leaderBoardButton} alt="monthlyButton" />
 						</div>
 					</button>
 
@@ -111,11 +111,11 @@ const LeaderBoard = () => {
 									/>
 								</div>
 							)}
-							<img src={leaderBoardButton} alt="leaderBoardButton" />
+							<img src={leaderBoardButton} alt="weeklyButton" />
 						</div>
 					</button>
 				</div>
-				<div className="mt-5 flex flex-row gap-5">
+				<div className="mt-5 flex flex-row gap-10">
 					<LeaderBoardTable
 						title="امتیاز عملکرد"
 						titleImg={coinIcon}

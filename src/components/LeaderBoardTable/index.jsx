@@ -7,7 +7,11 @@ import leaderBoardBox from "../../assets/images/leaderBoardBox.png";
 const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 	return (
 		<div className="relative">
-			<img src={leaderBoardBox} alt="leaderBoardBox" />
+			<img
+				src={leaderBoardBox}
+				alt="leaderBoardBox"
+				style={{ width: 500, height: 510 }}
+			/>
 			<div className="absolute top-0 right-0 flex items-center gap-4 mt-10 mr-10">
 				<div className="text-white font-Lalezar text-3xl">{title}</div>
 				<img src={titleImg} alt="titleImg" />
