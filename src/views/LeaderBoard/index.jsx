@@ -31,6 +31,39 @@ const LeaderBoard = () => {
 		setIsMonthly(false);
 	};
 
+	const sampleTestData = [
+		{
+			avatarNumber: 1,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+		{
+			avatarNumber: 2,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+		{
+			avatarNumber: 3,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+		{
+			avatarNumber: 4,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+		{
+			avatarNumber: 5,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+		{
+			avatarNumber: 6,
+			name: "نام کاربری",
+			coinAmount: 32596587,
+		},
+	];
+
 	return (
 		<>
 			{/* Navbar */}
@@ -119,74 +152,12 @@ const LeaderBoard = () => {
 					<LeaderBoardTable
 						title="امتیاز عملکرد"
 						titleImg={coinIcon}
-						usersData={[
-							{
-								avatarNumber: 1,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 2,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 3,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 4,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 5,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 6,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-						]}
+						usersData={sampleTestData}
 					/>
 					<LeaderBoardTable
 						title="میزان مشارکت"
 						titleImg={volumeIcon}
-						usersData={[
-							{
-								avatarNumber: 1,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 2,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 3,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 4,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 5,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-							{
-								avatarNumber: 6,
-								name: "نام کاربری",
-								coinAmount: 32596587,
-							},
-						]}
+						usersData={sampleTestData}
 					/>
 				</div>
 			</div>
