@@ -7,6 +7,7 @@ import Wallet from "./Wallet";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 import AudioProvider from "./AudioProvider";
+import Game from "./Game";
 
 export {
 	Home,
@@ -18,4 +19,5 @@ export {
 	LeaderBoard,
 	NotFound,
 	AudioProvider,
+	Game,
 };
