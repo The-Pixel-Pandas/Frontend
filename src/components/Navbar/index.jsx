@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import game from "../../assets/images/game.png";
 import userProfile from "../../assets/images/userProfile.png";
 import news from "../../assets/images/news.png";
 import leaderboard from "../../assets/images/leaderboard.png";
@@ -50,43 +51,55 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 					</div>
 				</div>
 				{/* User Buttons */}
-				<div className="flex flex-row mr-10 mt-3">
+				<div className="flex flex-row mr-10">
 					<button
-						style={{ width: "26.5px", height: "30.67px" }}
-						className="mr-10 transition-transform hover:scale-105 outline-none"
+						style={{ width: "46px", height: "46px" }}
+						className="mr-10 transition-transform hover:scale-105 outline-none mt-1.5"
 						onClick={() => {
 							eventHandler.dispatchEvent("ClickSound");
-							navigate("/userProfile");
+							navigate("/game");
 						}}
 					>
-						<img src={userProfile} alt="userProfile" />
+						<img src={game} alt="game" style={{ width: "38px", height: "25.13px" }}/>
 					</button>
-					<button
-						style={{ width: "28.67px", height: "28.67px" }}
-						className="mr-10 transition-transform hover:scale-105 outline-none"
-						onClick={() => {
-							eventHandler.dispatchEvent("ClickSound");
-							navigate("/news");
-						}}
-					>
-						<img src={news} alt="news" />
-					</button>
-					<button
-						style={{ width: "25.5px", height: "28.67px" }}
-						className=" transition-transform hover:scale-105 outline-none"
-						onClick={() => {
-							eventHandler.dispatchEvent("ClickSound");
-							navigate("/leaderboard");
-						}}
-					>
-						<img src={leaderboard} alt="leaderboard" />
-					</button>
-					{/* Auth Buttons */}
-					<div className={isAuth ? "hidden" : ""}>
-						<div className="flex flex-row ml-10">
-							<NavbarAuthBtn authType="ورود" />
+					<div className="flex flex-row mr-10 mt-3">
+						<button
+							style={{ width: "26.5px", height: "30.67px" }}
+							className="mr-10 transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/userProfile");
+							}}
+						>
+							<img src={userProfile} alt="userProfile" />
+						</button>
+						<button
+							style={{ width: "28.67px", height: "28.67px" }}
+							className="mr-10 transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/news");
+							}}
+						>
+							<img src={news} alt="news" />
+						</button>
+						<button
+							style={{ width: "25.5px", height: "28.67px" }}
+							className=" transition-transform hover:scale-105 outline-none"
+							onClick={() => {
+								eventHandler.dispatchEvent("ClickSound");
+								navigate("/leaderboard");
+							}}
+						>
+							<img src={leaderboard} alt="leaderboard" />
+						</button>
+						{/* Auth Buttons */}
+						<div className={isAuth ? "hidden" : ""}>
 							<div className="flex flex-row ml-10">
-								<NavbarAuthBtn authType="ثبت نام" />
+								<NavbarAuthBtn authType="ورود" />
+								<div className="flex flex-row ml-10">
+									<NavbarAuthBtn authType="ثبت نام" />
+								</div>
 							</div>
 						</div>
 					</div>
