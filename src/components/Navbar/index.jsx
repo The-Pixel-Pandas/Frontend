@@ -60,7 +60,11 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 							navigate("/game");
 						}}
 					>
-						<img src={game} alt="game" style={{ width: "38px", height: "25.13px" }}/>
+						<img
+							src={game}
+							alt="game"
+							style={{ width: "38px", height: "25.13px" }}
+						/>
 					</button>
 					<div className="flex flex-row mr-10 mt-3">
 						<button

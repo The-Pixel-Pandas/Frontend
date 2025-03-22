@@ -77,7 +77,7 @@ import morabbaFont from "./fonts/Morabba-Medium.ttf";
 
 import attackSound from "./audios/attack.wav";
 import theEndSound from "./audios/theEnd.wav";
-import backGroundSound from './audios/bg.wav';
+import backGroundSound from "./audios/bg.wav";
 
 export const assets = [
 	{ key: "plane1", path: plane1 },
@@ -162,7 +162,7 @@ export const assets = [
 
 	{ key: "morabbaFont", path: morabbaFont },
 
-    { key: "attackSound", path: attackSound },
-    { key: "theEndSound", path: theEndSound },
-    { key: "backGroundSound", path: backGroundSound },
+	{ key: "attackSound", path: attackSound },
+	{ key: "theEndSound", path: theEndSound },
+	{ key: "backGroundSound", path: backGroundSound },
 ];
