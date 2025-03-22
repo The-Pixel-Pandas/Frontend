@@ -11,238 +11,261 @@ class GameScene extends Phaser.Scene {
 		this.background = null;
 		this.cursors = null;
 		this.gameOver = false;
+		this.score = 0;
+		this.lastScoreTime = 0;
 	}
 
 	create() {
-		// Set up the background
 		this.background = new Background(this);
 
-		// Initialize keyboard cursors
 		this.cursors = this.input.keyboard.createCursorKeys();
 
-		// Get ground height for plane boundaries
-		const groundTexture = this.textures.get('bg_ground');
+		const groundTexture = this.textures.get("bg_ground");
 		const groundHeight = groundTexture.getSourceImage().height;
-		
-		// Set up world bounds with ground consideration
+
 		this.physics.world.setBounds(
-			0, 
-			0, 
-			window.innerWidth, 
+			0,
+			0,
+			window.innerWidth,
 			window.innerHeight - groundHeight
 		);
 
-		// Create player plane
 		const planeX = this.cameras.main.centerX / 4;
 		const planeY = this.cameras.main.centerY;
 		this.plane = new Plane(this, planeX, planeY, {
 			bodyWidth: 80,
 			bodyHeight: 40,
-			scale: 1
+			scale: 1,
 		}).spawn();
 
-		// Create Baroness boss at ground level
-		const bossX = this.cameras.main.width * 0.8; 
+		const bossX = this.cameras.main.width * 0.8;
 		const bossY = this.cameras.main.height - groundHeight;
 		this.baroness = new Baroness(this, bossX, bossY, {
 			scale: 1,
-			projectileSpeed: 250,
-			attackInterval: 2000,
+			projectileSpeed: 500,
+			attackInterval: 1000,
 			projectilesPerAttack: 3,
-			projectileSpread: 25
+			projectileSpread: 25,
 		});
 
-		// Set up input
 		this.cursors = this.input.keyboard.createCursorKeys();
 
-		// Set up collision handling
 		this.setupCollisions();
 
-		// Initialize game state
 		this.gameOver = false;
 		this.score = 0;
+		this.lastScoreTime = 0;
 
-		// Create UI elements
 		this.createHealthBars();
 		this.createScoreText();
+
+		this.time.addEvent({
+			delay: 1000,
+			callback: () => {
+				if (!this.gameOver) {
+					this.updateScore(1);
+				}
+			},
+			loop: true,
+		});
 	}
 
 	setupCollisions() {
-		// Handle collisions between player projectiles and baroness
 		this.physics.add.overlap(
 			this.plane.projectiles,
 			this.baroness,
 			(baroness, projectile) => {
 				projectile.destroy();
-				baroness.takeDamage(projectile.getDamage());
+				const bossHealth = baroness.takeDamage(projectile.getDamage());
 				this.updateHealthBars();
+
+				if (bossHealth <= 0) {
+					this.onBossDefeated();
+				}
 			}
 		);
 
-		// Handle collisions between baroness projectiles and player
 		this.physics.add.overlap(
 			this.baroness.projectiles,
 			this.plane,
 			(plane, projectile) => {
 				projectile.destroy();
-				plane.takeDamage(projectile.getDamage());
+				const playerHealth = plane.takeDamage(projectile.getDamage());
 				this.updateHealthBars();
+
+				if (playerHealth <= 0) {
+					this.onGameOver(false);
+				}
 			}
 		);
 	}
 
 	createHealthBars() {
-        // Create graphics objects for health bars
-        this.playerHealthBar = this.add.graphics();
-        this.bossHealthBar = this.add.graphics();
-        
-        // Set fixed scroll factor to keep UI elements on screen
-        this.playerHealthBar.setScrollFactor(0);
-        this.bossHealthBar.setScrollFactor(0);
-        
-        // Initial update
-        this.updateHealthBars();
+		this.playerHealthBar = this.add.graphics();
+		this.bossHealthBar = this.add.graphics();
+
+		this.playerHealthBar.setScrollFactor(0);
+		this.bossHealthBar.setScrollFactor(0);
+
+		this.updateHealthBars();
 	}
 
 	updateHealthBars() {
-        // Clear previous graphics
-        this.playerHealthBar.clear();
-        this.bossHealthBar.clear();
+		this.playerHealthBar.clear();
+		this.bossHealthBar.clear();
 
-        // Update player health bar
-        const playerHealth = this.plane.getHealth();
-        const playerMaxHealth = this.plane.getMaxHealth();
-        const playerHealthPercent = playerHealth / playerMaxHealth;
+		const playerHealth = this.plane.getHealth();
+		const playerMaxHealth = this.plane.getMaxHealth();
+		const playerHealthPercent = playerHealth / playerMaxHealth;
 
-        // Draw player health bar (left side)
-        this.playerHealthBar.fillStyle(0xff0000); // Red background
-        this.playerHealthBar.fillRect(10, 50, 200, 20);
-        this.playerHealthBar.fillStyle(0x00ff00); // Green health
-        this.playerHealthBar.fillRect(10, 50, 200 * playerHealthPercent, 20);
-        this.playerHealthBar.lineStyle(2, 0xffffff); // White border
-        this.playerHealthBar.strokeRect(10, 50, 200, 20);
+		this.playerHealthBar.fillStyle(0xff0000);
+		this.playerHealthBar.fillRect(10, 50, 200, 20);
+		this.playerHealthBar.fillStyle(0x00ff00);
+		this.playerHealthBar.fillRect(10, 50, 200 * playerHealthPercent, 20);
+		this.playerHealthBar.lineStyle(2, 0xffffff);
+		this.playerHealthBar.strokeRect(10, 50, 200, 20);
 
-        // Update boss health bar
-        const bossHealth = this.baroness.getHealth();
-        const bossMaxHealth = this.baroness.getMaxHealth();
-        const bossHealthPercent = bossHealth / bossMaxHealth;
+		const bossHealth = this.baroness.getHealth();
+		const bossMaxHealth = this.baroness.getMaxHealth();
+		const bossHealthPercent = bossHealth / bossMaxHealth;
 
-        // Draw boss health bar (right side)
-        const bossBarX = this.cameras.main.width - 210;
-        this.bossHealthBar.fillStyle(0xff0000); // Red background
-        this.bossHealthBar.fillRect(bossBarX, 50, 200, 20);
-        this.bossHealthBar.fillStyle(0x00ff00); // Green health
-        this.bossHealthBar.fillRect(bossBarX, 50, 200 * bossHealthPercent, 20);
-        this.bossHealthBar.lineStyle(2, 0xffffff); // White border
-        this.bossHealthBar.strokeRect(bossBarX, 50, 200, 20);
+		const bossBarX = this.cameras.main.width - 210;
+		this.bossHealthBar.fillStyle(0xff0000);
+		this.bossHealthBar.fillRect(bossBarX, 50, 200, 20);
+		this.bossHealthBar.fillStyle(0x00ff00);
+		this.bossHealthBar.fillRect(bossBarX, 50, 200 * bossHealthPercent, 20);
+		this.bossHealthBar.lineStyle(2, 0xffffff);
+		this.bossHealthBar.strokeRect(bossBarX, 50, 200, 20);
+
+		if (playerHealth <= 0 && !this.gameOver) {
+			this.onGameOver(false);
+		} else if (bossHealth <= 0 && !this.gameOver) {
+			this.onGameOver(true);
+		}
 	}
 
 	createScoreText() {
-        // Add score text with fixed position
-        this.scoreText = this.add.text(16, 16, 'Score: 0', {
-            fontSize: '32px',
-            fill: '#fff',
-            fontFamily: 'Arial'
-        });
-        this.scoreText.setScrollFactor(0);
-        this.scoreText.setDepth(1000); // Ensure it's always on top
-    }
+		this.scoreText = this.add.text(16, 16, "Score: 0", {
+			fontSize: "32px",
+			fill: "#fff",
+			fontFamily: "Arial",
+		});
+		this.scoreText.setScrollFactor(0);
+		this.scoreText.setDepth(1000);
+	}
 
-    updateScore(points) {
-        this.score += points;
-        this.scoreText.setText('Score: ' + this.score);
-    }
+	updateScore(points) {
+		this.score += points;
+		this.scoreText.setText("Score: " + this.score);
+	}
 
 	onPlayerHit(damage) {
-        if (this.gameOver) return;
+		if (this.gameOver) return;
 
-        // Apply damage to player
-        const health = this.plane.takeDamage(damage);
-        
-        // Update health bars
-        this.updateHealthBars();
-        
-        if (health <= 0) {
-            this.gameOver = true;
-            this.onGameOver(false); // Player lost
-        }
+		const health = this.plane.takeDamage(damage);
+
+		this.updateHealthBars();
+
+		if (health <= 0) {
+			this.gameOver = true;
+			this.onGameOver(false);
+		}
 	}
 
 	onBossDefeated() {
-        if (this.gameOver) return;
-        
-        this.gameOver = true;
-        this.updateScore(1000); // Add score for defeating boss
-        this.updateHealthBars(); // Update health bars one last time
-        this.onGameOver(true); // Player won
+		if (this.gameOver) return;
+
+		this.gameOver = true;
+		this.updateScore(1000);
+		this.updateHealthBars();
+		this.onGameOver(true);
 	}
 
 	onGameOver(playerWon) {
-		// Stop all movement
+		if (this.gameOver) return;
+		this.gameOver = true;
+
 		this.plane.setVelocity(0);
-		
-		// Display game over text
-		const text = playerWon ? 'Victory!' : 'Game Over';
-		const color = playerWon ? '#00ff00' : '#ff0000';
-		
-		this.add.text(
-			this.cameras.main.centerX,
-			this.cameras.main.centerY,
-			text,
-			{
-				fontSize: '64px',
-				fill: color
-			}
-		).setOrigin(0.5);
+		this.baroness.setVelocity(0);
 
-		// Add restart button
-		const restartButton = this.add.text(
-			this.cameras.main.centerX,
-			this.cameras.main.centerY + 100,
-			'Click to Restart',
-			{
-				fontSize: '32px',
-				fill: '#ffffff'
-			}
-		)
-		.setOrigin(0.5)
-		.setInteractive();
+		const overlay = this.add.graphics();
+		overlay.fillStyle(0x000000, 0.7);
+		overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+		overlay.setDepth(998);
 
-		restartButton.on('pointerdown', () => {
-			this.scene.restart();
-		});
+		const text = playerWon ? "YOU WIN!" : "GAME OVER";
+		const color = playerWon ? "#00ff00" : "#ff0000";
+
+		const gameOverText = this.add
+			.text(this.cameras.main.centerX, this.cameras.main.centerY - 50, text, {
+				fontSize: "64px",
+				fill: color,
+				fontStyle: "bold",
+				fontFamily: "Arial",
+			})
+			.setOrigin(0.5);
+		gameOverText.setDepth(999);
+
+		const scoreText = this.add
+			.text(
+				this.cameras.main.centerX,
+				this.cameras.main.centerY + 50,
+				`Final Score: ${this.score}`,
+				{
+					fontSize: "32px",
+					fill: "#ffffff",
+					fontFamily: "Arial",
+				}
+			)
+			.setOrigin(0.5);
+		scoreText.setDepth(999);
+
+		const restartButton = this.add
+			.text(
+				this.cameras.main.centerX,
+				this.cameras.main.centerY + 150,
+				"Click to Restart",
+				{
+					fontSize: "24px",
+					fill: "#ffffff",
+					backgroundColor: "#444444",
+					padding: { x: 20, y: 10 },
+					fontFamily: "Arial",
+				}
+			)
+			.setOrigin(0.5)
+			.setInteractive()
+			.on("pointerover", () => restartButton.setStyle({ fill: "#ffff00" }))
+			.on("pointerout", () => restartButton.setStyle({ fill: "#ffffff" }))
+			.on("pointerdown", () => this.scene.restart());
+
+		restartButton.setDepth(999);
 	}
 
 	update() {
-        if (this.gameOver) return;
+		if (this.gameOver) return;
 
-        // Update player movement based on input
-        if (this.cursors.left.isDown) {
-            this.plane.moveLeft();
-        } else if (this.cursors.right.isDown) {
-            this.plane.moveRight();
-        } else {
-            this.plane.setVelocityX(0);
-        }
+		if (this.cursors.left.isDown) {
+			this.plane.moveLeft();
+		} else if (this.cursors.right.isDown) {
+			this.plane.moveRight();
+		} else {
+			this.plane.setVelocityX(0);
+		}
 
-        if (this.cursors.up.isDown) {
-            this.plane.moveUp();
-        } else if (this.cursors.down.isDown) {
-            this.plane.moveDown();
-        } else {
-            this.plane.setVelocityY(0);
-        }
+		if (this.cursors.up.isDown) {
+			this.plane.moveUp();
+		} else if (this.cursors.down.isDown) {
+			this.plane.moveDown();
+		} else {
+			this.plane.setVelocityY(0);
+		}
 
-        // Auto-shoot
-        // this.plane.shoot();
+		this.plane.update(this.cursors);
+		this.baroness.update();
+		this.background.update();
 
-        // Update game objects
-        this.plane.update(this.cursors);
-        this.baroness.update();
-        this.background.update();
-
-        // Update UI
-        this.updateHealthBars();
+		this.updateHealthBars();
 	}
 }
 

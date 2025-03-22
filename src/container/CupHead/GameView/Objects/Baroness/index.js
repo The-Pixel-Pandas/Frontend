@@ -2,151 +2,139 @@ import Phaser from "phaser";
 import { Projectile } from "../Projectile";
 
 export class Baroness extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, config = {}) {
-        super(scene, x, y, "baroness_shoot_1");
+	constructor(scene, x, y, config = {}) {
+		super(scene, x, y, "baroness_shoot_1");
 
-        this.scene = scene;
-        this.config = {
-            scale: 1,
-            health: 100,
-            attackInterval: 0,
-            projectileSpeed: 0,
-            projectileScale: 0.5,
-            ...config
-        };
+		this.scene = scene;
+		this.config = {
+			scale: 1,
+			health: 100,
+			attackInterval: 0,
+			projectileSpeed: 0,
+			projectileScale: 0.5,
+			...config,
+		};
 
-        // Add to scene and enable physics
-        this.scene.add.existing(this);
-        this.scene.physics.add.existing(this);
+		this.scene.add.existing(this);
+		this.scene.physics.add.existing(this);
 
-        // Set up physics body
-        this.body.setImmovable(true);
-        
-        // Position at ground level
-        const groundTexture = this.scene.textures.get('bg_ground');
-        this.groundHeight = groundTexture.getSourceImage().height;
-        this.y = window.innerHeight - this.groundHeight - this.height/2;
+		this.body.setImmovable(true);
 
-        // Create projectiles group
-        this.projectiles = this.scene.physics.add.group();
+		const groundTexture = this.scene.textures.get("bg_ground");
+		this.groundHeight = groundTexture.getSourceImage().height;
+		this.y = window.innerHeight - this.groundHeight - this.height / 2;
 
-        // Set up animations
-        this.setupAnimations();
-        
-        // Start attack timer
-        this.attackTimer = this.scene.time.addEvent({
-            delay: this.config.attackInterval,
-            callback: () => this.attack(this.scene.plane),
-            callbackScope: this,
-            loop: true
-        });
+		this.projectiles = this.scene.physics.add.group();
 
-        // Play shoot animation on loop
-        this.play("baroness_shoot");
-    }
+		this.setupAnimations();
 
-    setupAnimations() {
-        if (!this.scene.anims.exists("baroness_shoot")) {
-            // Create array of frame objects for all 35 frames
-            const frames = Array.from({ length: 35 }, (_, i) => ({
-                key: `baroness_shoot_${i + 1}`
-            }));
+		this.attackTimer = this.scene.time.addEvent({
+			delay: this.config.attackInterval,
+			callback: () => this.attack(this.scene.plane),
+			callbackScope: this,
+			loop: true,
+		});
 
-            this.scene.anims.create({
-                key: "baroness_shoot",
-                frames: frames,
-                frameRate: 15,
-                repeat: -1 // Don't repeat, we'll handle this manually
-            });
-        }
+		this.play("baroness_shoot");
+	}
 
-        // Listen for animation complete
-        this.on('animationcomplete', this.onAnimComplete, this);
-    }
+	setupAnimations() {
+		if (!this.scene.anims.exists("baroness_shoot")) {
+			const frames = Array.from({ length: 35 }, (_, i) => ({
+				key: `baroness_shoot_${i + 1}`,
+			}));
 
-    onAnimComplete(animation) {
-        if (animation.key === 'baroness_shoot') {
-            // Start the animation again after a short delay
-            this.scene.time.delayedCall(300, () => {
-                this.play("baroness_shoot");
-            });
-        }
-    }
+			this.scene.anims.create({
+				key: "baroness_shoot",
+				frames: frames,
+				frameRate: 15,
+				repeat: -1,
+			});
+		}
 
-    attack(target) {
-        if (!target || !target.active) return;
+		this.on("animationcomplete", this.onAnimComplete, this);
+	}
 
-        // Create a single candy projectile
-        const projectile = new Projectile(
-            this.scene,
-            this.x - 150 , // Spawn slightly in front of baroness
-            this.y - this.height/3 + 150, // Spawn from mouth area
-            {
-                isEnemy: true,
-                speed: this.config.projectileSpeed,
-                scale: this.config.projectileScale,
-                damage: 10
-            }
-        );
+	onAnimComplete(animation) {
+		if (animation.key === "baroness_shoot") {
+			this.scene.time.delayedCall(300, () => {
+				this.play("baroness_shoot");
+			});
+		}
+	}
 
-        this.projectiles.add(projectile);
-        
-        // Calculate direction to plane
-        const angle = Phaser.Math.Angle.Between(
-            projectile.x,
-            projectile.y,
-            target.x,
-            target.y
-        );
+	attack(target) {
+		if (!target || !target.active) return;
 
-        // Set velocity towards plane
-        const velocity = new Phaser.Math.Vector2(
-            Math.cos(angle) * this.config.projectileSpeed,
-            Math.sin(angle) * this.config.projectileSpeed
-        );
-        projectile.setVelocity(velocity.x, velocity.y);
+		const projectile = new Projectile(
+			this.scene,
+			this.x - 150,
+			this.y - this.height / 3 + 150,
+			{
+				isEnemy: true,
+				speed: this.config.projectileSpeed,
+				scale: this.config.projectileScale,
+				damage: 10,
+			}
+		);
 
-        // Add event listener for when projectile is destroyed
-        projectile.on('destroy', () => {
-            this.projectiles.remove(projectile);
-        });
-    }
+		this.projectiles.add(projectile);
 
-    update() {
-        // Clean up off-screen projectiles
-        this.projectiles.getChildren().forEach(projectile => {
-            if (!projectile.active || projectile.x < 0 || projectile.y < 0 || 
-                projectile.x > this.scene.game.config.width || 
-                projectile.y > this.scene.game.config.height) {
-                projectile.destroy();
-            }
-        });
-    }
+		const angle = Phaser.Math.Angle.Between(
+			projectile.x,
+			projectile.y,
+			target.x,
+			target.y
+		);
 
-    takeDamage(amount) {
-        this.config.health = Math.max(0, this.config.health - amount);
-        
-        // Flash red when hit
-        this.scene.tweens.add({
-            targets: this,
-            alpha: 0.5,
-            duration: 100,
-            yoyo: true,
-            repeat: 2
-        });
+		const velocity = new Phaser.Math.Vector2(
+			Math.cos(angle) * this.config.projectileSpeed,
+			Math.sin(angle) * this.config.projectileSpeed
+		);
+		projectile.setVelocity(velocity.x, velocity.y);
 
-        if (this.config.health <= 0) {
-            this.emit('defeated');
-        }
+		projectile.on("destroy", () => {
+			this.projectiles.remove(projectile);
+		});
+	}
 
-        return this.config.health;
-    }
+	update() {
+		this.projectiles.getChildren().forEach((projectile) => {
+			if (
+				!projectile.active ||
+				projectile.x < 0 ||
+				projectile.y < 0 ||
+				projectile.x > this.scene.game.config.width ||
+				projectile.y > this.scene.game.config.height
+			) {
+				projectile.destroy();
+			}
+		});
+	}
 
-    getHealth() {
-        return this.config.health;
-    }
+	takeDamage(amount) {
+		this.config.health = Math.max(0, this.config.health - amount);
 
-    getMaxHealth() {
-        return 100; // Return the max health value
-    }
+		this.scene.tweens.add({
+			targets: this,
+			alpha: 0.5,
+			duration: 100,
+			yoyo: true,
+			repeat: 2,
+		});
+
+		if (this.config.health <= 0) {
+			this.emit("defeated");
+		}
+
+		return this.config.health;
+	}
+
+	getHealth() {
+		return this.config.health;
+	}
+
+	getMaxHealth() {
+		return 100;
+	}
 }
