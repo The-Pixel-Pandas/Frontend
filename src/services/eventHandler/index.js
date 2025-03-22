@@ -14,7 +14,7 @@ class EventHandler {
 	getCoin() {
 		return this.coin;
 	}
-	
+
 	addEventListener(eventName, callback) {
 		this.events.on(eventName, callback);
 	}

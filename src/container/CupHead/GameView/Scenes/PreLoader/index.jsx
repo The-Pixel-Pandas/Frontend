@@ -14,7 +14,7 @@ class PreLoader extends Phaser.Scene {
 	}
 
 	preload() {
-        this.loadAssets();
+		this.loadAssets();
 		this.setupProgressBar();
 	}
 
@@ -42,7 +42,7 @@ class PreLoader extends Phaser.Scene {
 				centerY + this.progressHeight / 2 + 50,
 				"در حال بارگذاری",
 				{
-					fontSize: `${this.progressHeight*3/2}px`,
+					fontSize: `${(this.progressHeight * 3) / 2}px`,
 					color: "#ffffff",
 					fontFamily: "Arial",
 				}
