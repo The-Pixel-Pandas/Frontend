@@ -31,14 +31,15 @@ const LeaderBoardProfileCard = ({
 					<div className="text-white font-MorabbaMedium text-lg">{name}</div>
 				</div>
 				<div className="absolute top-0 left-0 mt-4">
-                    <div className="flex items-center gap-1.5">
-					<img
-						src={coinLogo}
-						alt="coinLogo"
-						style={{ width: 45, height: 40 }}
-                        
-					/>
-                    <div className="text-white font-MorabbaMedium text-lg mt-1">{coinAmount}</div>
+					<div className="flex items-center gap-1.5">
+						<img
+							src={coinLogo}
+							alt="coinLogo"
+							style={{ width: 45, height: 40 }}
+						/>
+						<div className="text-white font-MorabbaMedium text-lg mt-1">
+							{coinAmount}
+						</div>
 					</div>
 				</div>
 			</div>

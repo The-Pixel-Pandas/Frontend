@@ -1,8 +1,20 @@
 import { Events } from "phaser";
 class EventHandler {
 	constructor() {
+		if (this.instance) {
+			return;
+		}
 		this.events = new Events.EventEmitter();
+		this.coin = 0;
+		this.instance = this;
 	}
+	setCoin(amount) {
+		this.coin = amount;
+	}
+	getCoin() {
+		return this.coin;
+	}
+
 	addEventListener(eventName, callback) {
 		this.events.on(eventName, callback);
 	}

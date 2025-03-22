@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import game from "../../assets/images/game.png";
 import userProfile from "../../assets/images/userProfile.png";
 import news from "../../assets/images/news.png";
 import leaderboard from "../../assets/images/leaderboard.png";
@@ -7,31 +8,64 @@ import logo from "../../assets/images/logo.png";
 import SearchBar from "../SearchBar";
 import NavbarAuthBtn from "../NavbarAuthBtn";
 import { useNavigate } from "react-router-dom";
-import { eventHandler } from "../../services";
+import { useCoinStore, eventHandler } from "../../services";
 import UserAvatar from "../UserAvatar";
-import { useCoinStore } from "../../services";
 
 const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 	const navigate = useNavigate();
-	const { getCoin } = useCoinStore();
+	const { getCoin, addCoin } = useCoinStore();
+	const [isAuth, setAuth] = useState(isAuthenticated);
+
+	useEffect(() => {
+		setAuth(isAuthenticated);
+	}, [isAuthenticated]);
+
+	useEffect(() => {
+		const coins = eventHandler.getCoin();
+		if (coins > 0) {
+			addCoin(coins);
+		}
+	}, [addCoin]);
 
 	return (
 		<>
-			<div className="mt-3">
-				{/* Logo */}
-				<div className="flex flex-row items-center">
-					<div className="flex flex-row items-center">
+			{/* Logo */}
+			<div className="flex flex-row items-center bg-secondary">
+				<div className="flex flex-row items-center mt-3 mb-1">
+					<button
+						className="outline-none"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							navigate("/");
+						}}
+					>
 						<img src={logo} alt="Logo" style={{ width: 105, height: 80 }} />
-						<div className="text-white font-Lalezar text-3xl">
-							پانداهای پیکسلی
-						</div>
+					</button>
+					<div className="text-white font-Lalezar text-3xl">
+						پانداهای پیکسلی
 					</div>
-					<div className="flex flex-1 ml-10">
-						<div className={isLandingPage ? "" : "hidden"}>
-							<SearchBar width="535px" />
-						</div>
+				</div>
+				<div className="flex flex-1 ml-10">
+					<div className={isLandingPage ? "" : "hidden"}>
+						<SearchBar width="535px" />
 					</div>
-					{/* User Buttons */}
+				</div>
+				{/* User Buttons */}
+				<div className="flex flex-row mr-10">
+					<button
+						style={{ width: "46px", height: "46px" }}
+						className="mr-10 transition-transform hover:scale-105 outline-none mt-1.5"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							navigate("/game");
+						}}
+					>
+						<img
+							src={game}
+							alt="game"
+							style={{ width: "38px", height: "25.13px" }}
+						/>
+					</button>
 					<div className="flex flex-row mr-10 mt-3">
 						<button
 							style={{ width: "26.5px", height: "30.67px" }}
@@ -64,7 +98,7 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 							<img src={leaderboard} alt="leaderboard" />
 						</button>
 						{/* Auth Buttons */}
-						<div className={isAuthenticated ? "hidden" : ""}>
+						<div className={isAuth ? "hidden" : ""}>
 							<div className="flex flex-row ml-10">
 								<NavbarAuthBtn authType="ورود" />
 								<div className="flex flex-row ml-10">
@@ -73,14 +107,14 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 							</div>
 						</div>
 					</div>
-					{/* Avatar */}
-					<div className={isAuthenticated ? "" : "hidden"}>
-						<div className="flex flex-col items-center mr-10 relative">
-							<div className="text-white font-Lalezar text-2xl absolute mt-16">
-								{getCoin()}
-							</div>
-							<UserAvatar width={70} height={65} />
+				</div>
+				{/* Avatar */}
+				<div className={isAuth ? "" : "hidden"}>
+					<div className="flex flex-col items-center mr-10 relative">
+						<div className="text-white font-Lalezar text-lg absolute mt-12">
+							{getCoin().toLocaleString("fa")}
 						</div>
+						<UserAvatar width={52} height={50} />
 					</div>
 				</div>
 			</div>

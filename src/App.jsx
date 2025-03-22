@@ -8,6 +8,7 @@ import {
 	UserProfile,
 	NotFound,
 	AudioProvider,
+	Game,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,7 @@ function App() {
 					<Route path="/news" element={<News />} />
 					<Route path="/leaderBoard" element={<LeaderBoard />} />
 					<Route path="/userProfile" element={<UserProfile />} />
+					<Route path="/game" element={<Game />} />
 					{/* Add another routes here */}
 					<Route path="*" element={<NotFound />} />
 				</Routes>
