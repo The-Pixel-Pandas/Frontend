@@ -228,6 +228,7 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
 
 		if (cursors?.space?.isDown) {
 			this.shoot();
+			// this.scene.sound.play("attackSound");
 		}
 	}
 }

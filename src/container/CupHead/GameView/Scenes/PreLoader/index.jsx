@@ -14,8 +14,8 @@ class PreLoader extends Phaser.Scene {
 	}
 
 	preload() {
+        this.loadAssets();
 		this.setupProgressBar();
-		this.loadAssets();
 	}
 
 	setupProgressBar = () => {
@@ -37,11 +37,16 @@ class PreLoader extends Phaser.Scene {
 		this.progressBar = this.add.graphics();
 
 		this.loadingText = this.add
-			.text(centerX, centerY + this.progressHeight / 2 + 50, "Loading...", {
-				fontSize: `${this.progressHeight}px`,
-				color: "#ffffff",
-				fontFamily: "Arial, sans-serif",
-			})
+			.text(
+				centerX,
+				centerY + this.progressHeight / 2 + 50,
+				"در حال بارگذاری",
+				{
+					fontSize: `${this.progressHeight*3/2}px`,
+					color: "#ffffff",
+					fontFamily: "Arial",
+				}
+			)
 			.setOrigin(0.5);
 
 		this.load.on("progress", this.updateTargetProgress, this);
@@ -82,7 +87,7 @@ class PreLoader extends Phaser.Scene {
 		);
 
 		if (this.currentProgress >= 1) {
-			this.loadingText.setText("Load Complete");
+			this.loadingText.setText("بارگذاری تکمیل شد");
 		}
 	};
 
@@ -90,7 +95,6 @@ class PreLoader extends Phaser.Scene {
 		console.log("Assets fully loaded");
 
 		this.time.delayedCall(1000, () => {
-			this.loadingText.setText("Starting Game...");
 			this.time.delayedCall(500, () => {
 				this.scene.start("GameScene");
 			});
@@ -104,8 +108,31 @@ class PreLoader extends Phaser.Scene {
 
 	loadAssets = () => {
 		assets.forEach((asset) => {
-			this.load.image(asset.key, asset.path);
+			if (
+				asset.path.endsWith(".png") ||
+				asset.path.endsWith(".jpg") ||
+				asset.path.endsWith(".jpeg")
+			) {
+				this.load.image(asset.key, asset.path);
+			} else if (asset.path.endsWith(".wav") || asset.path.endsWith(".mp3")) {
+				this.load.audio(asset.key, asset.path);
+			} else if (asset.path.endsWith(".ttf") || asset.path.endsWith(".otf")) {
+				this.loadFont(asset.key, asset.path);
+			}
 		});
+	};
+
+	loadFont = (name, url) => {
+		const newFont = new FontFace(name, `url(${url})`);
+		newFont
+			.load()
+			.then((loaded) => {
+				document.fonts.add(loaded);
+				this.fontLoaded = true;
+			})
+			.catch((error) => {
+				console.error(`Failed to load font: ${name}`, error);
+			});
 	};
 }
 

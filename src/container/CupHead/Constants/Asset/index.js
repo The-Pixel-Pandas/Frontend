@@ -1,4 +1,3 @@
-// Player plane sprites
 import plane1 from "./idle/plane1.png";
 import plane2 from "./idle/plane2.png";
 import plane3 from "./idle/plane3.png";
@@ -12,7 +11,6 @@ import cupheadPlaneIdleUp2 from "./idle/up/cuphead_plane_idle_up_0002.png";
 import cupheadPlaneIdleUp3 from "./idle/up/cuphead_plane_idle_up_0003.png";
 import cupheadPlaneIdleUp4 from "./idle/up/cuphead_plane_idle_up_0004.png";
 
-// Baroness sprites
 import baronessIdle1 from "./baroness/idle/baroness_idle_0001.png";
 import baronessIdle2 from "./baroness/idle/baroness_idle_0002.png";
 import baronessIdle3 from "./baroness/idle/baroness_idle_0003.png";
@@ -53,7 +51,6 @@ import baronessShoot33 from "./baroness/shoot/baroness_shoot_0033.png";
 import baronessShoot34 from "./baroness/shoot/baroness_shoot_0034.png";
 import baronessShoot35 from "./baroness/shoot/baroness_shoot_0035.png";
 
-// Plane Attack sprites
 import planeAttack1 from "./planeAttack/weapon_charge_large_loop_0001.png";
 import planeAttack2 from "./planeAttack/weapon_charge_large_loop_0002.png";
 import planeAttack3 from "./planeAttack/weapon_charge_large_loop_0003.png";
@@ -67,16 +64,20 @@ import planeAttack10 from "./planeAttack/weapon_charge_large_loop_0010.png";
 import planeAttack11 from "./planeAttack/weapon_charge_large_loop_0011.png";
 import planeAttack12 from "./planeAttack/weapon_charge_large_loop_0012.png";
 
-// Projectiles
 import candyProjectile1 from "./candy/candy_0001.png";
 import candyProjectile2 from "./candy/candy_0002.png";
 import candyProjectile3 from "./candy/candy_0003.png";
 import candyProjectile4 from "./candy/candy_0004.png";
 
-// Background layers
 import bgSky from "./background/sky.png";
 import baronessBgLoop from "./background/baroness_main_bg_loop.png";
 import bgGround from "./background/ground.png";
+
+import morabbaFont from "./fonts/Morabba-Medium.ttf";
+
+import attackSound from "./audios/attack.wav";
+import theEndSound from "./audios/theEnd.wav";
+import backGroundSound from './audios/bg.wav';
 
 export const assets = [
 	{ key: "plane1", path: plane1 },
@@ -158,4 +159,10 @@ export const assets = [
 	{ key: "bg_sky", path: bgSky },
 	{ key: "baroness_bg_loop", path: baronessBgLoop },
 	{ key: "bg_ground", path: bgGround },
+
+	{ key: "morabbaFont", path: morabbaFont },
+
+    { key: "attackSound", path: attackSound },
+    { key: "theEndSound", path: theEndSound },
+    { key: "backGroundSound", path: backGroundSound },
 ];

@@ -16,6 +16,11 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create() {
+        this.sound.add("theEndSound");
+        this.sound.add("attackSound");
+        this.sound.add("backGroundSound");
+        this.sound.stopAll();
+        this.sound.play("backGroundSound", { loop: true});
 		this.background = new Background(this);
 
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -42,7 +47,7 @@ class GameScene extends Phaser.Scene {
 		const bossY = this.cameras.main.height - groundHeight;
 		this.baroness = new Baroness(this, bossX, bossY, {
 			scale: 1,
-			projectileSpeed: 500,
+			projectileSpeed: 300,
 			attackInterval: 1000,
 			projectilesPerAttack: 3,
 			projectileSpread: 25,
@@ -69,6 +74,11 @@ class GameScene extends Phaser.Scene {
 			loop: true,
 		});
 	}
+
+	convertToFarsiNumbers = (num) => {
+		const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+		return num.toString().replace(/\d/g, x => farsiDigits[x]);
+	};
 
 	setupCollisions() {
 		this.physics.add.overlap(
@@ -145,10 +155,10 @@ class GameScene extends Phaser.Scene {
 	}
 
 	createScoreText() {
-		this.scoreText = this.add.text(16, 16, "Score: 0", {
-			fontSize: "32px",
+		this.scoreText = this.add.text(16, 16, `امتیاز: ${this.convertToFarsiNumbers(this.score)}`, {
+			fontSize: "26px",
 			fill: "#fff",
-			fontFamily: "Arial",
+			fontFamily: "morabbaFont",
 		});
 		this.scoreText.setScrollFactor(0);
 		this.scoreText.setDepth(1000);
@@ -156,7 +166,7 @@ class GameScene extends Phaser.Scene {
 
 	updateScore(points) {
 		this.score += points;
-		this.scoreText.setText("Score: " + this.score);
+		this.scoreText.setText(`امتیاز: ${this.convertToFarsiNumbers(this.score)}`);
 	}
 
 	onPlayerHit(damage) {
@@ -184,6 +194,8 @@ class GameScene extends Phaser.Scene {
 	onGameOver(playerWon) {
 		if (this.gameOver) return;
 		this.gameOver = true;
+        this.sound.play("theEndSound");
+        
 
 		this.plane.setVelocity(0);
 		this.baroness.setVelocity(0);
@@ -193,15 +205,15 @@ class GameScene extends Phaser.Scene {
 		overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
 		overlay.setDepth(998);
 
-		const text = playerWon ? "YOU WIN!" : "GAME OVER";
+		const text = playerWon ? "شما برنده شدید" : "شما باختید";
 		const color = playerWon ? "#00ff00" : "#ff0000";
 
 		const gameOverText = this.add
-			.text(this.cameras.main.centerX, this.cameras.main.centerY - 50, text, {
+			.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, text, {
 				fontSize: "64px",
 				fill: color,
 				fontStyle: "bold",
-				fontFamily: "Arial",
+				fontFamily: "morabbaFont",
 			})
 			.setOrigin(0.5);
 		gameOverText.setDepth(999);
@@ -209,12 +221,12 @@ class GameScene extends Phaser.Scene {
 		const scoreText = this.add
 			.text(
 				this.cameras.main.centerX,
-				this.cameras.main.centerY + 50,
-				`Final Score: ${this.score}`,
+				this.cameras.main.centerY,
+				`امتیاز نهایی: ${this.convertToFarsiNumbers(this.score)}`,
 				{
 					fontSize: "32px",
 					fill: "#ffffff",
-					fontFamily: "Arial",
+					fontFamily: "morabbaFont",
 				}
 			)
 			.setOrigin(0.5);
@@ -223,14 +235,14 @@ class GameScene extends Phaser.Scene {
 		const restartButton = this.add
 			.text(
 				this.cameras.main.centerX,
-				this.cameras.main.centerY + 150,
-				"Click to Restart",
+				this.cameras.main.centerY + 100,
+				"بازی دوباره",
 				{
 					fontSize: "24px",
 					fill: "#ffffff",
 					backgroundColor: "#444444",
 					padding: { x: 20, y: 10 },
-					fontFamily: "Arial",
+					fontFamily: "morabbaFont",
 				}
 			)
 			.setOrigin(0.5)
@@ -240,6 +252,29 @@ class GameScene extends Phaser.Scene {
 			.on("pointerdown", () => this.scene.restart());
 
 		restartButton.setDepth(999);
+
+		const backButton = this.add
+			.text(
+				this.cameras.main.centerX,
+				this.cameras.main.centerY + 180,
+				"بازگشت به خانه",
+				{
+					fontSize: "24px",
+					fill: "#ffffff",
+					backgroundColor: "#444444",
+					padding: { x: 20, y: 10 },
+					fontFamily: "morabbaFont",
+				}
+			)
+			.setOrigin(0.5)
+			.setInteractive()
+			.on("pointerover", () => backButton.setStyle({ fill: "#ffff00" }))
+			.on("pointerout", () => backButton.setStyle({ fill: "#ffffff" }))
+			.on("pointerdown", () => {
+				window.location.href = "/";
+			});
+
+		backButton.setDepth(999);
 	}
 
 	update() {
