@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Plane } from "../../Objects/Plane";
 import { Baroness } from "../../Objects/Baroness";
 import { Background } from "../../Objects/Background";
+import { eventHandler } from "../../../../../services";
 
 class GameScene extends Phaser.Scene {
 	constructor() {
@@ -13,14 +14,15 @@ class GameScene extends Phaser.Scene {
 		this.gameOver = false;
 		this.score = 0;
 		this.lastScoreTime = 0;
+		this.eventHandler = eventHandler;
 	}
 
 	create() {
-        this.sound.add("theEndSound");
-        this.sound.add("attackSound");
-        this.sound.add("backGroundSound");
-        this.sound.stopAll();
-        this.sound.play("backGroundSound", { loop: true});
+		this.sound.add("theEndSound");
+		this.sound.add("attackSound");
+		this.sound.add("backGroundSound");
+		this.sound.stopAll();
+		this.sound.play("backGroundSound", { loop: true });
 		this.background = new Background(this);
 
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -77,7 +79,7 @@ class GameScene extends Phaser.Scene {
 
 	convertToFarsiNumbers = (num) => {
 		const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-		return num.toString().replace(/\d/g, x => farsiDigits[x]);
+		return num.toString().replace(/\d/g, (x) => farsiDigits[x]);
 	};
 
 	setupCollisions() {
@@ -155,11 +157,16 @@ class GameScene extends Phaser.Scene {
 	}
 
 	createScoreText() {
-		this.scoreText = this.add.text(16, 16, `امتیاز: ${this.convertToFarsiNumbers(this.score)}`, {
-			fontSize: "26px",
-			fill: "#fff",
-			fontFamily: "morabbaFont",
-		});
+		this.scoreText = this.add.text(
+			16,
+			16,
+			`امتیاز: ${this.convertToFarsiNumbers(this.score)}`,
+			{
+				fontSize: "26px",
+				fill: "#fff",
+				fontFamily: "morabbaFont",
+			}
+		);
 		this.scoreText.setScrollFactor(0);
 		this.scoreText.setDepth(1000);
 	}
@@ -194,8 +201,7 @@ class GameScene extends Phaser.Scene {
 	onGameOver(playerWon) {
 		if (this.gameOver) return;
 		this.gameOver = true;
-        this.sound.play("theEndSound");
-        
+		this.sound.play("theEndSound");
 
 		this.plane.setVelocity(0);
 		this.baroness.setVelocity(0);
@@ -231,6 +237,7 @@ class GameScene extends Phaser.Scene {
 			)
 			.setOrigin(0.5);
 		scoreText.setDepth(999);
+		this.eventHandler.setCoin(this.score);
 
 		const restartButton = this.add
 			.text(

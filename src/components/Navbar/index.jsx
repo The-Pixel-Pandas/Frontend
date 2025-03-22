@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import userProfile from "../../assets/images/userProfile.png";
 import news from "../../assets/images/news.png";
@@ -7,13 +7,24 @@ import logo from "../../assets/images/logo.png";
 import SearchBar from "../SearchBar";
 import NavbarAuthBtn from "../NavbarAuthBtn";
 import { useNavigate } from "react-router-dom";
-import { eventHandler } from "../../services";
+import { useCoinStore, eventHandler } from "../../services";
 import UserAvatar from "../UserAvatar";
-import { useCoinStore } from "../../services";
 
 const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 	const navigate = useNavigate();
-	const { getCoin } = useCoinStore();
+	const { getCoin, addCoin } = useCoinStore();
+	const [isAuth, setAuth] = useState(isAuthenticated);
+
+	useEffect(() => {
+		setAuth(isAuthenticated);
+	}, [isAuthenticated]);
+
+	useEffect(() => {
+		const coins = eventHandler.getCoin();
+		if (coins > 0) {
+			addCoin(coins);
+		}
+	}, [addCoin]);
 
 	return (
 		<>
@@ -71,7 +82,7 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 						<img src={leaderboard} alt="leaderboard" />
 					</button>
 					{/* Auth Buttons */}
-					<div className={isAuthenticated ? "hidden" : ""}>
+					<div className={isAuth ? "hidden" : ""}>
 						<div className="flex flex-row ml-10">
 							<NavbarAuthBtn authType="ورود" />
 							<div className="flex flex-row ml-10">
@@ -81,7 +92,7 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 					</div>
 				</div>
 				{/* Avatar */}
-				<div className={isAuthenticated ? "" : "hidden"}>
+				<div className={isAuth ? "" : "hidden"}>
 					<div className="flex flex-col items-center mr-10 relative">
 						<div className="text-white font-Lalezar text-lg absolute mt-12">
 							{getCoin().toLocaleString("fa")}
