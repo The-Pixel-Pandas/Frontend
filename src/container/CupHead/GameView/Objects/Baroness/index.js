@@ -9,11 +9,9 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
         this.config = {
             scale: 1,
             health: 100,
-            attackInterval: 2000,
-            projectileSpeed: 300,
+            attackInterval: 0,
+            projectileSpeed: 0,
             projectileScale: 0.5,
-            projectileSpread: 30, // Degrees between projectiles
-            projectilesPerAttack: 3,
             ...config
         };
 
@@ -57,7 +55,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
             this.scene.anims.create({
                 key: "baroness_shoot",
                 frames: frames,
-                frameRate: 24,
+                frameRate: 15,
                 repeat: 0 // Don't repeat, we'll handle this manually
             });
         }
@@ -69,7 +67,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
     onAnimComplete(animation) {
         if (animation.key === 'baroness_shoot') {
             // Start the animation again after a short delay
-            this.scene.time.delayedCall(500, () => {
+            this.scene.time.delayedCall(85, () => {
                 this.play("baroness_shoot");
             });
         }
@@ -78,38 +76,40 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
     attack(target) {
         if (!target || !target.active) return;
 
-        // Calculate spread angles based on number of projectiles
-        const totalSpread = this.config.projectileSpread * (this.config.projectilesPerAttack - 1);
-        const startAngle = -totalSpread / 2;
+        // Create a single candy projectile
+        const projectile = new Projectile(
+            this.scene,
+            this.x - 150 , // Spawn slightly in front of baroness
+            this.y - this.height/3 + 150, // Spawn from mouth area
+            {
+                isEnemy: true,
+                speed: this.config.projectileSpeed,
+                scale: this.config.projectileScale,
+                damage: 10
+            }
+        );
+
+        this.projectiles.add(projectile);
         
-        for (let i = 0; i < this.config.projectilesPerAttack; i++) {
-            const angle = startAngle + (i * this.config.projectileSpread);
-            
-            const projectile = new Projectile(
-                this.scene,
-                this.x - 20, // Spawn slightly in front of baroness
-                this.y - this.height/3, // Spawn from mouth area
-                {
-                    isEnemy: true,
-                    speed: this.config.projectileSpeed,
-                    scale: this.config.projectileScale,
-                    damage: 10
-                }
-            );
+        // Calculate direction to plane
+        const angle = Phaser.Math.Angle.Between(
+            projectile.x,
+            projectile.y,
+            target.x,
+            target.y
+        );
 
-            this.projectiles.add(projectile);
-            
-            // Calculate velocity based on angle
-            const rad = Phaser.Math.DegToRad(angle);
-            const velocity = new Phaser.Math.Vector2(-this.config.projectileSpeed, 0);
-            velocity.rotate(rad);
-            projectile.setVelocity(velocity.x, velocity.y);
+        // Set velocity towards plane
+        const velocity = new Phaser.Math.Vector2(
+            Math.cos(angle) * this.config.projectileSpeed,
+            Math.sin(angle) * this.config.projectileSpeed
+        );
+        projectile.setVelocity(velocity.x, velocity.y);
 
-            // Add event listener for when projectile is destroyed
-            projectile.on('destroy', () => {
-                this.projectiles.remove(projectile);
-            });
-        }
+        // Add event listener for when projectile is destroyed
+        projectile.on('destroy', () => {
+            this.projectiles.remove(projectile);
+        });
     }
 
     update() {

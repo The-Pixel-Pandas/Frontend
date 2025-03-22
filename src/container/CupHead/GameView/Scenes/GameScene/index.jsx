@@ -231,7 +231,7 @@ class GameScene extends Phaser.Scene {
         }
 
         // Auto-shoot
-        this.plane.shoot();
+        // this.plane.shoot();
 
         // Update game objects
         this.plane.update();
