@@ -5,11 +5,12 @@ import { eventHandler } from "../../services";
 const AudioPlayer = ({ src, audioName }) => {
 	const [, setSoundActive] = useState(false);
 	const audioRef = useRef(null);
+	const eventHandlerRef = useRef(eventHandler);
 
 	useEffect(() => {
-		eventHandler.addEventListener(audioName, playSound);
+		eventHandlerRef.current.addEventListener(audioName, playSound);
 		return () => {
-			eventHandler.removeEventListener(audioName, playSound);
+			eventHandlerRef.current.removeEventListener(audioName, playSound);
 		};
 	}, []);
 
