@@ -17,6 +17,9 @@ class GameScene extends Phaser.Scene {
 		// Set up the background
 		this.background = new Background(this);
 
+		// Initialize keyboard cursors
+		this.cursors = this.input.keyboard.createCursorKeys();
+
 		// Get ground height for plane boundaries
 		const groundTexture = this.textures.get('bg_ground');
 		const groundHeight = groundTexture.getSourceImage().height;
@@ -234,7 +237,7 @@ class GameScene extends Phaser.Scene {
         // this.plane.shoot();
 
         // Update game objects
-        this.plane.update();
+        this.plane.update(this.cursors);
         this.baroness.update();
         this.background.update();
 

@@ -53,11 +53,19 @@ import baronessShoot33 from "./baroness/shoot/baroness_shoot_0033.png";
 import baronessShoot34 from "./baroness/shoot/baroness_shoot_0034.png";
 import baronessShoot35 from "./baroness/shoot/baroness_shoot_0035.png";
 
-// Candy projectiles
-import candy1 from "./candy/candy_0001.png";
-import candy2 from "./candy/candy_0002.png";
-import candy3 from "./candy/candy_0003.png";
-import candy4 from "./candy/candy_0004.png";
+// Plane Attack sprites
+import planeAttack1 from "./planeAttack/weapon_charge_large_loop_0001.png";
+import planeAttack2 from "./planeAttack/weapon_charge_large_loop_0002.png";
+import planeAttack3 from "./planeAttack/weapon_charge_large_loop_0003.png";
+import planeAttack4 from "./planeAttack/weapon_charge_large_loop_0004.png";
+import planeAttack5 from "./planeAttack/weapon_charge_large_loop_0005.png";
+import planeAttack6 from "./planeAttack/weapon_charge_large_loop_0006.png";
+import planeAttack7 from "./planeAttack/weapon_charge_large_loop_0007.png";
+import planeAttack8 from "./planeAttack/weapon_charge_large_loop_0008.png";
+import planeAttack9 from "./planeAttack/weapon_charge_large_loop_0009.png";
+import planeAttack10 from "./planeAttack/weapon_charge_large_loop_0010.png";
+import planeAttack11 from "./planeAttack/weapon_charge_large_loop_0011.png";
+import planeAttack12 from "./planeAttack/weapon_charge_large_loop_0012.png";
 
 // Projectiles
 import candyProjectile1 from "./candy/candy_0001.png";
@@ -126,6 +134,20 @@ export const assets = [
     { key: "baroness_shoot_34", path: baronessShoot34 },
     { key: "baroness_shoot_35", path: baronessShoot35 },
 
+    // Plane Attack
+    { key: "planeAttack1", path: planeAttack1 },
+    { key: "planeAttack2", path: planeAttack2 },
+    { key: "planeAttack3", path: planeAttack3 },
+    { key: "planeAttack4", path: planeAttack4 },
+    { key: "planeAttack5", path: planeAttack5 },
+    { key: "planeAttack6", path: planeAttack6 },
+    { key: "planeAttack7", path: planeAttack7 },
+    { key: "planeAttack8", path: planeAttack8 },
+    { key: "planeAttack9", path: planeAttack9 },
+    { key: "planeAttack10", path: planeAttack10 },
+    { key: "planeAttack11", path: planeAttack11 },
+    { key: "planeAttack12", path: planeAttack12 },
+
     // Candy projectiles
     { key: "candy1", path: candyProjectile1 },
     { key: "candy2", path: candyProjectile2 },
@@ -140,5 +162,5 @@ export const assets = [
     // Background
     { key: "bg_sky", path: bgSky },
     { key: "baroness_bg_loop", path: baronessBgLoop },
-    { key: "bg_ground", path: bgGround }
+    { key: "bg_ground", path: bgGround },
 ];

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { Projectile } from "../Projectile";
+import { PlaneAttack } from "../PlaneAttack";
 
 export class Plane extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, config = {}) {
@@ -41,7 +41,12 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
 
         this.isInvulnerable = false;
         this.lastShootTime = 0;
-        this.projectiles = this.scene.physics.add.group();
+        
+        // Create projectiles group with physics
+        this.projectiles = this.scene.physics.add.group({
+            classType: PlaneAttack,
+            runChildUpdate: true
+        });
 
         this.setupAnimations();
         this.play("plane_idle");
@@ -100,8 +105,22 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
                     { key: "candy3" },
                     { key: "candy4" },
                 ],
-                frameRate: 12,
-                repeat: -1
+                frameRate: 10,
+                repeat: -1,
+            });
+        }
+
+        // Add plane attack animation
+        if (!this.scene.anims.exists("plane_attack")) {
+            this.scene.anims.create({
+                key: "plane_attack",
+                frames: [
+                    { key: "plane1" },
+                    { key: "plane2" },
+                    { key: "plane3" },
+                ],
+                frameRate: 15,
+                repeat: 0
             });
         }
     }
@@ -190,47 +209,47 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
 
     shoot() {
         const currentTime = this.scene.time.now;
-        if (currentTime - this.lastShootTime < this.config.shootDelay) return;
+        if (currentTime - this.lastShootTime < this.config.shootDelay) {
+            return;
+        }
 
-        // Create new projectile using Projectile class
-        const projectile = new Projectile(
+        // Create plane attack projectile
+        const attack = new PlaneAttack(
             this.scene,
-            this.x + (this.width * 0.75),
-            this.y - (this.height * 0.1),
+            this.x + this.width / 2,
+            this.y,
             {
-                speed: this.config.projectileSpeed,
                 scale: this.config.projectileScale,
-                isEnemy: false // player projectiles move right
+                speed: this.config.projectileSpeed,
+                damage: 10
             }
         );
         
-        this.projectiles.add(projectile);
-
-        // Add event listener for when projectile is destroyed
-        projectile.on('destroy', () => {
-            this.projectiles.remove(projectile);
-        });
-
+        // Add to projectiles group
+        this.projectiles.add(attack);
+        
+        // Play attack animation
+        this.play("plane_attack", true);
+        
         this.lastShootTime = currentTime;
-        return projectile;
     }
 
-    update() {
-        // Ensure we never go below ground
+    update(cursors) {
+        // Handle movement
         if (this.y + this.height/2 > this.groundY) {
             this.y = this.groundY - this.height/2;
-            this.setVelocityY(0);
         }
 
-        if (this.body.velocity.y === 0) {
-            this.play("plane_idle", true);
-        }
-
-        // Clean up off-screen projectiles
-        this.projectiles.getChildren().forEach(projectile => {
+        // Clean up destroyed projectiles
+        this.projectiles.children.each(projectile => {
             if (!projectile.active) {
-                projectile.destroy();
+                this.projectiles.remove(projectile, true, true);
             }
         });
+
+        // Handle shooting with spacebar
+        if (cursors?.space?.isDown) {
+            this.shoot();
+        }
     }
 }

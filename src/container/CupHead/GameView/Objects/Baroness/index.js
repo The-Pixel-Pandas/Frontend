@@ -56,7 +56,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
                 key: "baroness_shoot",
                 frames: frames,
                 frameRate: 15,
-                repeat: 0 // Don't repeat, we'll handle this manually
+                repeat: -1 // Don't repeat, we'll handle this manually
             });
         }
 
@@ -67,7 +67,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
     onAnimComplete(animation) {
         if (animation.key === 'baroness_shoot') {
             // Start the animation again after a short delay
-            this.scene.time.delayedCall(85, () => {
+            this.scene.time.delayedCall(300, () => {
                 this.play("baroness_shoot");
             });
         }
