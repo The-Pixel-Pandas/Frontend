@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { Projectile } from "../Projectile";
 
 export class Plane extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, config = {}) {
@@ -191,20 +192,24 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
         const currentTime = this.scene.time.now;
         if (currentTime - this.lastShootTime < this.config.shootDelay) return;
 
-        const projectile = this.scene.physics.add.sprite(
-            this.x + this.width/2,
-            this.y,
-            'candy1'
+        // Create new projectile using Projectile class
+        const projectile = new Projectile(
+            this.scene,
+            this.x + (this.width * 0.75),
+            this.y - (this.height * 0.1),
+            {
+                speed: this.config.projectileSpeed,
+                scale: this.config.projectileScale,
+                isEnemy: false // player projectiles move right
+            }
         );
         
         this.projectiles.add(projectile);
-        projectile.setScale(this.config.projectileScale);
-        projectile.setVelocityX(this.config.projectileSpeed);
-        projectile.play('candy_projectile');
 
-        // Auto-destroy projectile when it goes off screen
-        projectile.checkWorldBounds = true;
-        projectile.outOfBoundsKill = true;
+        // Add event listener for when projectile is destroyed
+        projectile.on('destroy', () => {
+            this.projectiles.remove(projectile);
+        });
 
         this.lastShootTime = currentTime;
         return projectile;
@@ -222,8 +227,8 @@ export class Plane extends Phaser.Physics.Arcade.Sprite {
         }
 
         // Clean up off-screen projectiles
-        this.projectiles.children.each(projectile => {
-            if (projectile.x > this.scene.game.config.width) {
+        this.projectiles.getChildren().forEach(projectile => {
+            if (!projectile.active) {
                 projectile.destroy();
             }
         });

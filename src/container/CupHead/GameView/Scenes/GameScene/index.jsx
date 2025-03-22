@@ -43,16 +43,17 @@ class GameScene extends Phaser.Scene {
 		const bossY = this.cameras.main.height - groundHeight;
 		this.baroness = new Baroness(this, bossX, bossY, {
 			scale: 1,
-			projectileSpeed: 250, 
-			attackInterval: 2000
+			projectileSpeed: 250,
+			attackInterval: 2000,
+			projectilesPerAttack: 3,
+			projectileSpread: 25
 		});
 
 		// Set up input
 		this.cursors = this.input.keyboard.createCursorKeys();
 
 		// Set up collision handling
-		this.baroness.on('projectileHit', this.onPlayerHit, this);
-		this.baroness.on('defeated', this.onBossDefeated, this);
+		this.setupCollisions();
 
 		// Initialize game state
 		this.gameOver = false;
@@ -61,6 +62,30 @@ class GameScene extends Phaser.Scene {
 		// Create UI elements
 		this.createHealthBars();
 		this.createScoreText();
+	}
+
+	setupCollisions() {
+		// Handle collisions between player projectiles and baroness
+		this.physics.add.overlap(
+			this.plane.projectiles,
+			this.baroness,
+			(baroness, projectile) => {
+				projectile.destroy();
+				baroness.takeDamage(projectile.getDamage());
+				this.updateHealthBars();
+			}
+		);
+
+		// Handle collisions between baroness projectiles and player
+		this.physics.add.overlap(
+			this.baroness.projectiles,
+			this.plane,
+			(plane, projectile) => {
+				projectile.destroy();
+				plane.takeDamage(projectile.getDamage());
+				this.updateHealthBars();
+			}
+		);
 	}
 
 	createHealthBars() {
@@ -188,18 +213,7 @@ class GameScene extends Phaser.Scene {
 	update() {
         if (this.gameOver) return;
 
-        // Update background
-        this.background.update();
-
-        // Handle player movement
-        if (this.cursors.up.isDown) {
-            this.plane.moveUp();
-        } else if (this.cursors.down.isDown) {
-            this.plane.moveDown();
-        } else {
-            this.plane.idle();
-        }
-
+        // Update player movement based on input
         if (this.cursors.left.isDown) {
             this.plane.moveLeft();
         } else if (this.cursors.right.isDown) {
@@ -208,13 +222,21 @@ class GameScene extends Phaser.Scene {
             this.plane.setVelocityX(0);
         }
 
-        // Update plane (includes ground collision check)
-        this.plane.update();
-
-        // Update baroness with target if plane is alive
-        if (this.baroness && !this.gameOver) {
-            this.baroness.update(this.plane);
+        if (this.cursors.up.isDown) {
+            this.plane.moveUp();
+        } else if (this.cursors.down.isDown) {
+            this.plane.moveDown();
+        } else {
+            this.plane.setVelocityY(0);
         }
+
+        // Auto-shoot
+        this.plane.shoot();
+
+        // Update game objects
+        this.plane.update();
+        this.baroness.update();
+        this.background.update();
 
         // Update UI
         this.updateHealthBars();

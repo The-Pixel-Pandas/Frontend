@@ -132,6 +132,11 @@ export const assets = [
     { key: "candy3", path: candyProjectile3 },
     { key: "candy4", path: candyProjectile4 },
 
+    { key: "candy_projectile_1", path: candyProjectile1 },
+    { key: "candy_projectile_2", path: candyProjectile2 },
+    { key: "candy_projectile_3", path: candyProjectile3 },
+    { key: "candy_projectile_4", path: candyProjectile4 },
+
     // Background
     { key: "bg_sky", path: bgSky },
     { key: "baroness_bg_loop", path: baronessBgLoop },

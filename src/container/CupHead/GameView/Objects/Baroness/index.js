@@ -11,7 +11,9 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
             health: 100,
             attackInterval: 2000,
             projectileSpeed: 300,
-            projectileScale: 0.3,
+            projectileScale: 0.5,
+            projectileSpread: 30, // Degrees between projectiles
+            projectilesPerAttack: 3,
             ...config
         };
 
@@ -28,10 +30,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
         this.y = window.innerHeight - this.groundHeight - this.height/2;
 
         // Create projectiles group
-        this.projectiles = this.scene.add.group({
-            classType: Projectile,
-            runChildUpdate: true
-        });
+        this.projectiles = this.scene.physics.add.group();
 
         // Set up animations
         this.setupAnimations();
@@ -39,7 +38,7 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
         // Start attack timer
         this.attackTimer = this.scene.time.addEvent({
             delay: this.config.attackInterval,
-            callback: this.attack,
+            callback: () => this.attack(this.scene.plane),
             callbackScope: this,
             loop: true
         });
@@ -77,81 +76,49 @@ export class Baroness extends Phaser.Physics.Arcade.Sprite {
     }
 
     attack(target) {
-        if (!target) return;
+        if (!target || !target.active) return;
 
-        // Create multiple candy projectiles with different angles
-        const angles = [-30, -15, 0, 15, 30]; // Spread pattern
-        angles.forEach(angleOffset => {
-            // Calculate base angle to target
-            const baseAngle = Phaser.Math.Angle.Between(
-                this.x, this.y,
-                target.x, target.y
-            );
+        // Calculate spread angles based on number of projectiles
+        const totalSpread = this.config.projectileSpread * (this.config.projectilesPerAttack - 1);
+        const startAngle = -totalSpread / 2;
+        
+        for (let i = 0; i < this.config.projectilesPerAttack; i++) {
+            const angle = startAngle + (i * this.config.projectileSpread);
             
-            // Add offset to create spread pattern
-            const finalAngle = baseAngle + Phaser.Math.DegToRad(angleOffset);
-
-            // Create projectile at the correct frame of animation (frame 20 is when mouth is open)
-            const projectile = new Projectile(this.scene, 
-                this.x - 20, // Adjust spawn position
+            const projectile = new Projectile(
+                this.scene,
+                this.x - 20, // Spawn slightly in front of baroness
                 this.y - this.height/3, // Spawn from mouth area
                 {
-                    angle: Phaser.Math.RadToDeg(finalAngle),
+                    isEnemy: true,
                     speed: this.config.projectileSpeed,
-                    damage: 10,
-                    scale: this.config.projectileScale
+                    scale: this.config.projectileScale,
+                    damage: 10
                 }
             );
 
-            // Add to group for tracking
             this.projectiles.add(projectile);
+            
+            // Calculate velocity based on angle
+            const rad = Phaser.Math.DegToRad(angle);
+            const velocity = new Phaser.Math.Vector2(-this.config.projectileSpeed, 0);
+            velocity.rotate(rad);
+            projectile.setVelocity(velocity.x, velocity.y);
 
-            // Set up collision with player
-            this.scene.physics.add.overlap(
-                projectile,
-                target,
-                (proj, player) => this.onProjectileHit(proj, player),
-                null,
-                this
-            );
-        });
-
-        // Restart shooting animation
-        this.play("baroness_shoot", true);
-    }
-
-    onProjectileHit(projectile, target) {
-        // Create hit effect
-        const hitEffect = this.scene.add.sprite(projectile.x, projectile.y, 'candy_1');
-        hitEffect.setScale(projectile.scale * 1.5);
-        hitEffect.alpha = 0.8;
-        
-        // Add hit animation
-        this.scene.tweens.add({
-            targets: hitEffect,
-            alpha: 0,
-            scale: projectile.scale * 2,
-            duration: 200,
-            onComplete: () => hitEffect.destroy()
-        });
-
-        // Emit hit event with damage amount, passing target for idle check
-        this.emit('projectileHit', projectile.getDamage(target));
-        
-        // Destroy projectile
-        projectile.destroy();
-    }
-
-    update(target) {
-        // Attack the target if it exists and timer is ready
-        if (target && this.attackTimer.getProgress() === 1) {
-            this.attack(target);
+            // Add event listener for when projectile is destroyed
+            projectile.on('destroy', () => {
+                this.projectiles.remove(projectile);
+            });
         }
+    }
 
-        // Clean up projectiles that are out of bounds
+    update() {
+        // Clean up off-screen projectiles
         this.projectiles.getChildren().forEach(projectile => {
-            if (projectile.active) {
-                projectile.update();
+            if (!projectile.active || projectile.x < 0 || projectile.y < 0 || 
+                projectile.x > this.scene.game.config.width || 
+                projectile.y > this.scene.game.config.height) {
+                projectile.destroy();
             }
         });
     }
