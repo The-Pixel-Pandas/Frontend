@@ -62,7 +62,7 @@ const LeaderBoard = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center items-center mt-28">
+    <div className="flex flex-col justify-center items-center mt-10">
       {/* Header */}
       <div className="text-white font-Lalezar text-4xl">جدول امتیازات</div>
       
