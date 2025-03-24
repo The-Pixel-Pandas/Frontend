@@ -11,25 +11,64 @@ import {
 	Game,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 
 function App() {
 	return (
-		<>
-			<BrowserRouter>
-				<AudioProvider />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/signUp" element={<SignUp />} />
-					<Route path="/news" element={<News />} />
-					<Route path="/leaderBoard" element={<LeaderBoard />} />
-					<Route path="/userProfile" element={<UserProfile />} />
-					<Route path="/game" element={<Game />} />
-					{/* Add another routes here */}
-					<Route path="*" element={<NotFound />} />
-				</Routes>
-			</BrowserRouter>
-		</>
+		<BrowserRouter>
+			<AudioProvider />
+			<Routes>
+				{/* Home has special layout with landing page navbar */}
+				<Route
+					path="/"
+					element={
+						<Layout isLandingPage={true}>
+							<Home />
+						</Layout>
+					}
+				>
+					<Route index element={<Home />} />
+					<Route path=":questionId" element={<Home />} />
+				</Route>
+
+				{/* Routes with regular layout */}
+				<Route
+					path="/leaderBoard"
+					element={
+						<Layout isLandingPage={false}>
+							<LeaderBoard />
+						</Layout>
+					}
+				/>
+
+				<Route
+					path="/news"
+					element={
+						<Layout isLandingPage={false}>
+							<News />
+						</Layout>
+					}
+				>
+					<Route index element={<News />} />
+					<Route path=":newsId" element={<News />} />
+				</Route>
+
+				<Route
+					path="/userProfile"
+					element={
+						<Layout isLandingPage={false}>
+							<UserProfile />
+						</Layout>
+					}
+				/>
+
+				{/* Other routes without layout */}
+				<Route path="/login" element={<Login />} />
+				<Route path="/signUp" element={<SignUp />} />
+				<Route path="/game" element={<Game />} />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
