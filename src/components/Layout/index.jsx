@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Navbar from "../Navbar";
 import { useAuthStore } from "../../services";
 
@@ -14,6 +15,11 @@ const Layout = ({ children, isLandingPage = false }) => {
       {children}
     </>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+  isLandingPage: PropTypes.bool,
 };
 
 export default Layout;
