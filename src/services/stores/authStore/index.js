@@ -15,7 +15,7 @@ const useAuthStore = create((set) => ({
 			...(password && { password }),
 			isAuthenticated: isAuthenticated,
 			isSuccess: isSuccess,
-			isError: false,
+			isError: !isSuccess,
 			isLoading: false,
 		}),
 

@@ -20,13 +20,13 @@ const LeaderBoard = () => {
 		setIsMonthly(false);
 
 		httpService
-			.get("https://mocki.io/v1/68bfe3cd-136b-4124-8a46-c5252e264f77")
-			.then((res) => setVolumeData(res))
+			.get("https://mocki.io/v1/e45c7efc-6c89-4ab9-8245-3c6910a0c3ac")
+			.then((res) => setVolumeData(res.data))
 			.catch((err) => console.log(err));
 
 		httpService
-			.get("https://mocki.io/v1/68bfe3cd-136b-4124-8a46-c5252e264f77")
-			.then((res) => setProfitData(res))
+			.get("https://mocki.io/v1/e45c7efc-6c89-4ab9-8245-3c6910a0c3ac")
+			.then((res) => setProfitData(res.data))
 			.catch((err) => console.log(err));
 	};
 
@@ -36,13 +36,13 @@ const LeaderBoard = () => {
 		setIsMonthly(true);
 
 		httpService
-			.get("https://mocki.io/v1/de1f5c5e-f952-4c91-a49d-641404857294")
-			.then((res) => setVolumeData(res))
+			.get("https://mocki.io/v1/482214e7-8701-404d-8189-8278e7fe5450")
+			.then((res) => setVolumeData(res.data))
 			.catch((err) => console.log(err));
 
 		httpService
-			.get("https://mocki.io/v1/de1f5c5e-f952-4c91-a49d-641404857294")
-			.then((res) => setProfitData(res))
+			.get("https://mocki.io/v1/482214e7-8701-404d-8189-8278e7fe5450")
+			.then((res) => setProfitData(res.data))
 			.catch((err) => console.log(err));
 	};
 
@@ -52,13 +52,13 @@ const LeaderBoard = () => {
 		setIsMonthly(false);
 
 		httpService
-			.get("https://mocki.io/v1/6a71b437-d07a-4b90-8dbf-302f2c8ae566")
-			.then((res) => setVolumeData(res))
+			.get("https://mocki.io/v1/c66a2571-8298-499c-aca2-47a0fa4a659b")
+			.then((res) => setVolumeData(res.data))
 			.catch((err) => console.log(err));
 
 		httpService
-			.get("https://mocki.io/v1/6a71b437-d07a-4b90-8dbf-302f2c8ae566")
-			.then((res) => setProfitData(res))
+			.get("https://mocki.io/v1/c66a2571-8298-499c-aca2-47a0fa4a659b")
+			.then((res) => setProfitData(res.data))
 			.catch((err) => console.log(err));
 	};
 

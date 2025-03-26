@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore, eventHandler } from "../../services";
@@ -10,13 +10,20 @@ import logo from "../../assets/images/logo.png";
 import { httpService, useCoinStore, useAvatarStore } from "../../services";
 
 const AuthComponent = ({ authType }) => {
-	const { isAuthenticated, isError, loginMessage, email, password, setUser } =
-		useAuthStore();
+	const {
+		isAuthenticated,
+		isError,
+		loginMessage,
+		email,
+		password,
+		setUser,
+		setLoginMessage,
+	} = useAuthStore();
 	const { setAvatarNumber } = useAvatarStore();
 	const { setCoin } = useCoinStore();
 	const navigate = useNavigate();
 
-	const handleLoginSignInAPI = (URL, data) => {
+	const handleAuthAPI = (URL, data) => {
 		httpService
 			.post(URL, data)
 			.then((res) => {
@@ -25,29 +32,42 @@ const AuthComponent = ({ authType }) => {
 					setUser(email, password, true);
 					setAvatarNumber(res.data.user.avatar);
 					setCoin(res.data.user.coinAmount);
-					navigate("/");
+					setLoginMessage(`${authType} با موفقیت انجام شد`);
+				} else {
+					setUser(email, password, false, false);
+					setLoginMessage(res.message);
 				}
 			})
 			.catch((err) => {
 				console.log("Login/Signin API error:", err);
-				setUser(email, password, true, false);
+				setUser(email, password, false, false);
+				setLoginMessage(err.message);
 			});
 	};
 
 	const submitButton = () => {
 		eventHandler.dispatchEvent("ClickSound");
 		if (authType === "ورود") {
-			handleLoginSignInAPI("https://dummyjson.com/c/7539-63f8-4f6a-82a6", {
+			handleAuthAPI("https://dummyjson.com/c/7539-63f8-4f6a-82a6", {
 				email,
 				password,
 			});
 		} else if (authType === "ثبت نام") {
-			handleLoginSignInAPI("https://dummyjson.com/c/7386-d8b3-4242-9903", {
+			handleAuthAPI("https://dummyjson.com/c/09e5-f551-47ed-af13", {
 				email,
 				password,
 			});
 		}
 	};
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			const timer = setTimeout(() => {
+				navigate("/");
+			}, 2000);
+			return () => clearTimeout(timer);
+		}
+	}, [isAuthenticated, navigate]);
 
 	return (
 		<>
@@ -99,7 +119,7 @@ const AuthComponent = ({ authType }) => {
 			{isError && (
 				<Toast type="error" message={loginMessage} position="bottom-left" />
 			)}
-			{isAuthenticated && (
+			{isAuthenticated && !isError && (
 				<Toast type="success" message={loginMessage} position="bottom-left" />
 			)}
 		</>
