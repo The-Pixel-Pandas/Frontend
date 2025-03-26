@@ -4,22 +4,19 @@ import Navbar from "../Navbar";
 import { useAuthStore } from "../../services";
 
 const Layout = ({ children, isLandingPage = false }) => {
-  const { isAuthenticated } = useAuthStore();
-  
-  return (
-    <>
-      <Navbar 
-        isLandingPage={isLandingPage} 
-        isAuthenticated={isAuthenticated} 
-      />
-      {children}
-    </>
-  );
+	const { isAuthenticated } = useAuthStore();
+
+	return (
+		<>
+			<Navbar isLandingPage={isLandingPage} isAuthenticated={isAuthenticated} />
+			{children}
+		</>
+	);
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  isLandingPage: PropTypes.bool,
+	children: PropTypes.node.isRequired,
+	isLandingPage: PropTypes.bool,
 };
 
 export default Layout;

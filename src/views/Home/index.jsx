@@ -2,10 +2,10 @@ import React from "react";
 import { QuestionCard } from "../../components";
 
 const Home = () => {
-  return (
-    <>
-      <QuestionCard question="سوال 1" />
-	  {/* <QuestionGrid questions={questions} /> */}
+	return (
+		<>
+			<QuestionCard question="سوال 1" />
+			{/* <QuestionGrid questions={questions} /> */}
 
 			{/* see all font styles. remove later */}
 			{/* <div className="flex flex-col flex-auto text-white justify-center items-center">
@@ -21,8 +21,8 @@ const Home = () => {
 				<div className="font-MorabbaSemiBold">پانداهای پیکسلی</div>
 				<div className="font-MorabbaUltraLight">پانداهای پیکسلی</div>
 			</div> */}
-    </>
-  );
+		</>
+	);
 };
 
 export default Home;

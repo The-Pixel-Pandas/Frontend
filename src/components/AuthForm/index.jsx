@@ -3,12 +3,10 @@ import { useState } from "react";
 import authInput from "../../assets/images/authInput.png";
 import { useFormik } from "formik";
 import { authYup } from "../../services";
-import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../services";
 
 const AuthForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
-	const navigate = useNavigate();
 	const { setUser } = useAuthStore();
 
 	const formik = useFormik({
@@ -16,8 +14,7 @@ const AuthForm = () => {
 		validationSchema: authYup.validationSchema,
 		onSubmit: (values) => {
 			console.log(values);
-			setUser(values.email, values.password);
-			navigate("/");
+			setUser(values.email, values.password, false);
 		},
 	});
 

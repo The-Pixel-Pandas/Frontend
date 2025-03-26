@@ -9,12 +9,12 @@ const useAuthStore = create((set) => ({
 	isError: false,
 	loginMessage: "",
 
-	setUser: (email, password = null) =>
+	setUser: (email, password = null, isAuthenticated = true, isSuccess = true) =>
 		set({
 			email,
 			...(password && { password }),
-			isAuthenticated: true,
-			isSuccess: true,
+			isAuthenticated: isAuthenticated,
+			isSuccess: isSuccess,
 			isError: false,
 			isLoading: false,
 		}),
