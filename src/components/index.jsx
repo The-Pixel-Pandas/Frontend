@@ -8,6 +8,7 @@ import LottieAnim from "./LottieAnim";
 import PopupComponent from "./PopupComponent";
 import AuthComponent from "./AuthComponent";
 import AudioPlayer from "./AudioPlayer";
+import QuestionGrid from "./QuestionGrid";
 
 export {
 	Navbar,
@@ -20,4 +21,5 @@ export {
 	GoogleVerification,
 	AuthComponent,
 	AudioPlayer,
+	QuestionGrid,
 };
