@@ -4,7 +4,8 @@ import { Skeleton } from "@mui/material";
 import { httpService } from "../../services";
 
 const Home = () => {
-	const [isLoading, setIsLoading] = useState(true);
+	// toggle state for see and manage loading skeleton 
+	const [isLoading, setIsLoading] = useState(false);
 
 	// const [questions, setQuestions] = useState([]);
 	// useEffect(() => {
@@ -65,6 +66,7 @@ const Home = () => {
 				</div>
 			) : (
 				// TODO: implement question card exactly as figma
+				// if change grid positions or margins please fix skeleton to match as grid
 				<QuestionGrid questions={questions} />
 			)}
 			{/* TODO: implement Footer and add it */}
