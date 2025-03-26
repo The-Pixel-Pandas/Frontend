@@ -1,26 +1,73 @@
-import React from "react";
-import { QuestionCard } from "../../components";
+import React, { useEffect, useState } from "react";
+import { QuestionGrid } from "../../components";
+import { Skeleton } from "@mui/material";
+import { httpService } from "../../services";
 
 const Home = () => {
+	const [isLoading, setIsLoading] = useState(true);
+
+	// const [questions, setQuestions] = useState([]);
+	// useEffect(() => {
+	// 	httpService
+	// 		.get()
+	// 		.then((res) => {
+	// 			setQuestions(res.data);
+	// 			setIsLoading(false);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 		});
+	// }, []);
+
+	// TODO: Add coin to question list and manage coin to pass into card
+	const questions = [
+		"سوال 1",
+		"سوال 2",
+		"سوال 3",
+		"سوال 4",
+		"سوال 5",
+		"سوال 6",
+		"سوال 7",
+		"سوال 8",
+		"سوال 9",
+		"سوال 10",
+		"سوال 11",
+		"سوال 12",
+		"سوال 13",
+		"سوال 14",
+		"سوال 15",
+		"سوال 16",
+		"سوال 17",
+		"سوال 18",
+		"سوال 19",
+		"سوال 20",
+	];
 	return (
 		<>
-			<QuestionCard question="سوال 1" />
-			{/* <QuestionGrid questions={questions} /> */}
-
-			{/* see all font styles. remove later */}
-			{/* <div className="flex flex-col flex-auto text-white justify-center items-center">
-				<div className="font-Lalezar">پانداهای پیکسلی</div>
-				<div className="font-InterMedium"> پانداهای پیکسلی</div>
-				<div className="font-MorabbaBlack">پانداهای پیکسلی</div>
-				<div className="font-MorabbaBold">پانداهای پیکسلی</div>
-				<div className="font-MorabbaExtraBold">پانداهای پیکسلی</div>
-				<div className="font-MorabbaHeavy">پانداهای پیکسلی</div>
-				<div className="font-MorabbaLight">پانداهای پیکسلی</div>
-				<div className="font-MorabbaMedium">پانداهای پیکسلی</div>
-				<div className="font-MorabbaRegular">پانداهای پیکسلی</div>
-				<div className="font-MorabbaSemiBold">پانداهای پیکسلی</div>
-				<div className="font-MorabbaUltraLight">پانداهای پیکسلی</div>
-			</div> */}
+			{isLoading ? (
+				<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
+					{[
+						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+						20,
+					].map((i) => (
+						<div className="mt-7" key={i}>
+							<Skeleton
+								variant="rect"
+								sx={{
+									bgcolor: "#171134",
+									borderRadius: "16px",
+									height: "170px",
+									width: "300px",
+								}}
+							/>
+						</div>
+					))}
+				</div>
+			) : (
+				// TODO: implement question card exactly as figma
+				<QuestionGrid questions={questions} />
+			)}
+			{/* TODO: implement Footer and add it */}
 		</>
 	);
 };
