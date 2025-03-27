@@ -3,12 +3,20 @@ import PropTypes from "prop-types";
 import Navbar from "../Navbar";
 import { useAuthStore } from "../../services";
 
-const Layout = ({ children, isLandingPage = false }) => {
+const Layout = ({
+	children,
+	hasSearchBarItem = false,
+	isQuestionSearchBar = true,
+}) => {
 	const { isAuthenticated } = useAuthStore();
 
 	return (
 		<>
-			<Navbar isLandingPage={isLandingPage} isAuthenticated={isAuthenticated} />
+			<Navbar
+				hasSearchBarItem={hasSearchBarItem}
+				isAuthenticated={isAuthenticated}
+				isQuestionSearchBar={isQuestionSearchBar}
+			/>
 			{children}
 		</>
 	);
@@ -16,7 +24,8 @@ const Layout = ({ children, isLandingPage = false }) => {
 
 Layout.propTypes = {
 	children: PropTypes.node.isRequired,
-	isLandingPage: PropTypes.bool,
+	hasSearchBarItem: PropTypes.bool,
+	isQuestionSearchBar: PropTypes.bool,
 };
 
 export default Layout;
