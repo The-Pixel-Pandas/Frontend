@@ -4,6 +4,8 @@ import useAvatarStore from "./stores/avatarStore";
 import eventHandler from "./eventHandler";
 import authYup from "./yupObjects/authYup";
 import useCoinStore from "./stores/coinStore";
+import useQuestionStore from "./stores/questionStore";
+import useNewsStore from "./stores/newsStore";
 
 export {
 	httpService,
@@ -12,4 +14,6 @@ export {
 	authYup,
 	useAvatarStore,
 	useCoinStore,
+	useQuestionStore,
+	useNewsStore,
 };

@@ -17,11 +17,13 @@ const QuestionCard = ({ question, width = 300, height = 160 }) => {
 								transform: "translate(-50%, -50%)",
 							}}
 						>
-							<p>{question}</p>
+							<p>{question.title}</p>
 						</div>
 						<div className="absolute bottom-0 right-0 flex items-center ">
 							<span className="text-white font-Lalezar text-xl">پانداکوین</span>
-							<span className="text-white font-Lalezar text-3xl">000</span>
+							<span className="text-white font-Lalezar text-3xl">
+								{question.coin}
+							</span>
 							<img src={coinLogo} alt="coinLogo" />
 						</div>
 						<img src={questionBox} alt="questionBox" />
@@ -33,7 +35,7 @@ const QuestionCard = ({ question, width = 300, height = 160 }) => {
 };
 
 QuestionCard.propTypes = {
-	question: PropTypes.string.isRequired,
+	question: PropTypes.object.isRequired,
 	width: PropTypes.number,
 	height: PropTypes.number,
 };
