@@ -11,7 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { useCoinStore, eventHandler } from "../../services";
 import UserAvatar from "../UserAvatar";
 
-const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
+const Navbar = ({
+	hasSearchBarItem = true,
+	isAuthenticated = false,
+	isQuestionSearchBar = true,
+}) => {
 	const navigate = useNavigate();
 	const { getCoin, addCoin } = useCoinStore();
 	const [isAuth, setAuth] = useState(isAuthenticated);
@@ -46,8 +50,11 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 					</div>
 				</div>
 				<div className="flex flex-1 ml-10">
-					<div className={isLandingPage ? "" : "hidden"}>
-						<SearchBar width="535px" />
+					<div className={hasSearchBarItem ? "" : "hidden"}>
+						<SearchBar
+							width="535px"
+							isQuestionSearchBar={isQuestionSearchBar}
+						/>
 					</div>
 				</div>
 				{/* User Buttons */}
@@ -123,8 +130,9 @@ const Navbar = ({ isLandingPage = true, isAuthenticated = false }) => {
 };
 
 Navbar.propTypes = {
-	isLandingPage: PropTypes.bool,
+	hasSearchBarItem: PropTypes.bool,
 	isAuthenticated: PropTypes.bool,
+	isQuestionSearchBar: PropTypes.bool,
 };
 
 export default Navbar;
