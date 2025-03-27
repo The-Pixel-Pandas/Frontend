@@ -3,10 +3,10 @@ import questionBox from "../../assets/images/questionBox.png";
 import PropTypes from "prop-types";
 import coinLogo from "../../assets/images/coinLogo.png";
 
-const QuestionCard = ({ question, width = 347, height = 209 }) => {
+const QuestionCard = ({ question, width = 300, height = 160 }) => {
 	return (
 		<>
-			<div style={{ width, height }}>
+			<div style={{ width, height }} className="mt-7">
 				<button>
 					<div className="flex relative flex-col">
 						<div

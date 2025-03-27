@@ -7,13 +7,57 @@ import AuthForm from "../AuthForm";
 import Toast from "../Toast";
 import authButton from "../../assets/images/authButton.png";
 import logo from "../../assets/images/logo.png";
+import { httpService, useCoinStore, useAvatarStore } from "../../services";
 
 const AuthComponent = ({ authType }) => {
-	const { isAuthenticated, isError, loginMessage } = useAuthStore();
+	const {
+		isAuthenticated,
+		isError,
+		loginMessage,
+		email,
+		password,
+		setUser,
+		setLoginMessage,
+	} = useAuthStore();
+	const { setAvatarNumber } = useAvatarStore();
+	const { setCoin } = useCoinStore();
 	const navigate = useNavigate();
+
+	const handleAuthAPI = (URL, data) => {
+		httpService
+			.post(URL, data)
+			.then((res) => {
+				console.log("Login/Signin API response:", res);
+				if (res.status == "success") {
+					setUser(email, password, true);
+					setAvatarNumber(res.data.user.avatar);
+					setCoin(res.data.user.coinAmount);
+					setLoginMessage(`${authType} با موفقیت انجام شد`);
+				} else {
+					setUser(email, password, false, false);
+					setLoginMessage(res.message);
+				}
+			})
+			.catch((err) => {
+				console.log("Login/Signin API error:", err);
+				setUser(email, password, false, false);
+				setLoginMessage(err.message);
+			});
+	};
 
 	const submitButton = () => {
 		eventHandler.dispatchEvent("ClickSound");
+		if (authType === "ورود") {
+			handleAuthAPI("https://dummyjson.com/c/7539-63f8-4f6a-82a6", {
+				email,
+				password,
+			});
+		} else if (authType === "ثبت نام") {
+			handleAuthAPI("https://dummyjson.com/c/09e5-f551-47ed-af13", {
+				email,
+				password,
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -21,7 +65,6 @@ const AuthComponent = ({ authType }) => {
 			const timer = setTimeout(() => {
 				navigate("/");
 			}, 2000);
-
 			return () => clearTimeout(timer);
 		}
 	}, [isAuthenticated, navigate]);
@@ -76,7 +119,7 @@ const AuthComponent = ({ authType }) => {
 			{isError && (
 				<Toast type="error" message={loginMessage} position="bottom-left" />
 			)}
-			{isAuthenticated && (
+			{isAuthenticated && !isError && (
 				<Toast type="success" message={loginMessage} position="bottom-left" />
 			)}
 		</>
