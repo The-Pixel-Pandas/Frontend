@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 
 const News = () => {
 	const { newsId } = useParams();
-	return <></>
+	return <></>;
 };
 
 export default News;
