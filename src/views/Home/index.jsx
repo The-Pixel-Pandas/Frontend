@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
 import { Skeleton } from "@mui/material";
 import { httpService, useQuestionStore } from "../../services";
+import { Footer } from "../../components";
 
 const Home = () => {
 	// toggle state for see and manage loading skeleton
@@ -156,7 +157,10 @@ const Home = () => {
 					questions={getQuestions().map((q) => ({ ...q, coin: q.coin }))}
 				/>
 			)}
-			{/* TODO: implement Footer and add it */}
+
+			<div className="mt-20">
+				<Footer isPageFooter={true} />
+			</div>
 		</>
 	);
 };

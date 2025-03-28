@@ -9,6 +9,7 @@ import PopupComponent from "./PopupComponent";
 import AuthComponent from "./AuthComponent";
 import AudioPlayer from "./AudioPlayer";
 import QuestionGrid from "./QuestionGrid";
+import Footer from "./Footer";
 
 export {
 	Navbar,
@@ -22,4 +23,5 @@ export {
 	AuthComponent,
 	AudioPlayer,
 	QuestionGrid,
+	Footer,
 };
