@@ -10,6 +10,7 @@ import AuthComponent from "./AuthComponent";
 import AudioPlayer from "./AudioPlayer";
 import QuestionGrid from "./QuestionGrid";
 import Footer from "./Footer";
+import CategoryFilter from "./CategoryFilter";
 
 export {
 	Navbar,
@@ -24,4 +25,5 @@ export {
 	AudioPlayer,
 	QuestionGrid,
 	Footer,
+	CategoryFilter,
 };
