@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
 import { Skeleton } from "@mui/material";
 import { httpService, useQuestionStore } from "../../services";
+import { Footer, CategoryFilter } from "../../components";
 
 const Home = () => {
 	// toggle state for see and manage loading skeleton
@@ -130,6 +131,7 @@ const Home = () => {
 
 	return (
 		<>
+			<CategoryFilter />
 			{isLoading ? (
 				<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
 					{[
@@ -151,12 +153,16 @@ const Home = () => {
 				</div>
 			) : (
 				// TODO: implement question card exactly as figma
+				// TODO: implement show more button to if click more question showed
 				// if change grid positions or margins please fix skeleton to match as grid
 				<QuestionGrid
 					questions={getQuestions().map((q) => ({ ...q, coin: q.coin }))}
 				/>
 			)}
-			{/* TODO: implement Footer and add it */}
+
+			<div className="mt-20">
+				<Footer isPageFooter={true} />
+			</div>
 		</>
 	);
 };
