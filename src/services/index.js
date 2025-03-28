@@ -6,6 +6,7 @@ import authYup from "./yupObjects/authYup";
 import useCoinStore from "./stores/coinStore";
 import useQuestionStore from "./stores/questionStore";
 import useNewsStore from "./stores/newsStore";
+import useMedalStore from "./stores/medalStore";
 
 export {
 	httpService,
@@ -16,4 +17,5 @@ export {
 	useCoinStore,
 	useQuestionStore,
 	useNewsStore,
+	useMedalStore,
 };
