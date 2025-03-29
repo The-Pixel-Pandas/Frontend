@@ -9,6 +9,9 @@ import {
 	NotFound,
 	AudioProvider,
 	Game,
+	Wallet,
+	Dashboard,
+	UserInfo,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -54,15 +57,18 @@ function App() {
 				</Route>
 
 				<Route
-					path="/userProfile"
+					path="/dashboard"
 					element={
 						<Layout hasSearchBarItem={false}>
-							<UserProfile />
+							<Dashboard />
 						</Layout>
 					}
-				/>
+				>
+					<Route path="userProfile" element={<UserProfile />} />
+					<Route path="userInfo" element={<UserInfo />} />
+					<Route path="wallet" element={<Wallet />} />
+				</Route>
 
-				{/* Other routes without layout */}
 				<Route path="/login" element={<Login />} />
 				<Route path="/signUp" element={<SignUp />} />
 				<Route path="/game" element={<Game />} />
