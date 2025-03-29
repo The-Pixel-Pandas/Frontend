@@ -106,31 +106,31 @@
 
 /* Modern High Contrast Mode Support */
 @media (forced-colors: active) {
-  /* System Colors for High Contrast Mode */
-  :root {
-    --button-text: ButtonText;
-    --button-bg: ButtonFace;
-    --link-color: LinkText;
-    --background: Canvas;
-    --text: CanvasText;
-  }
+	/* System Colors for High Contrast Mode */
+	:root {
+		--button-text: ButtonText;
+		--button-bg: ButtonFace;
+		--link-color: LinkText;
+		--background: Canvas;
+		--text: CanvasText;
+	}
 
-  /* Apply system colors while preserving layout */
-  button,
-  [role="button"] {
-    color: var(--button-text);
-    background-color: var(--button-bg);
-  }
+	/* Apply system colors while preserving layout */
+	button,
+	[role="button"] {
+		color: var(--button-text);
+		background-color: var(--button-bg);
+	}
 
-  a {
-    color: var(--link-color);
-  }
+	a {
+		color: var(--link-color);
+	}
 
-  /* Preserve images and SVGs */
-  img,
-  svg {
-    forced-colors: preserve-colors;
-  }
+	/* Preserve images and SVGs */
+	img,
+	svg {
+		forced-colors: preserve-colors;
+	}
 }
 
 body {
