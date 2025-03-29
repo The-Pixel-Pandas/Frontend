@@ -2,93 +2,135 @@
 
 @font-face {
 	font-family: "LalezarTight";
-	src: url("./fonts/LalezarTight.ttf") format("truetype");
+	src: url("/fonts/LalezarTight.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "LalezarTightItalic";
-	src: url("./fonts/LalezarTightItalic.ttf") format("truetype");
+	src: url("/fonts/LalezarTightItalic.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "Lalezar";
-	src: url("./fonts/Lalezar.ttf") format("truetype");
+	src: url("/fonts/Lalezar.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "InterMedium";
-	src: url("./fonts/InterTight-Medium.ttf") format("truetype");
+	src: url("/fonts/InterTight-Medium.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaBlack";
-	src: url("./fonts/Morabba-Black.ttf") format("truetype");
+	src: url("/fonts/Morabba-Black.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaBold";
-	src: url("./fonts/Morabba-Bold.ttf") format("truetype");
+	src: url("/fonts/Morabba-Bold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaHeavy";
-	src: url("./fonts/Morabba-Heavy.ttf") format("truetype");
+	src: url("/fonts/Morabba-Heavy.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaExtraBold";
-	src: url("./fonts/Morabba-ExtraBold.ttf") format("truetype");
+	src: url("/fonts/Morabba-ExtraBold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaLight";
-	src: url("./fonts/Morabba-Light.ttf") format("truetype");
+	src: url("/fonts/Morabba-Light.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaMedium";
-	src: url("./fonts/Morabba-Medium.ttf") format("truetype");
+	src: url("/fonts/Morabba-Medium.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaRegular";
-	src: url("./fonts/Morabba-Regular.ttf") format("truetype");
+	src: url("/fonts/Morabba-Regular.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaSemiBold";
-	src: url("./fonts/Morabba-SemiBold.ttf") format("truetype");
+	src: url("/fonts/Morabba-SemiBold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "MorabbaUltraLight";
-	src: url("./fonts/Morabba-UltraLight.ttf") format("truetype");
+	src: url("/fonts/Morabba-UltraLight.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
+}
+
+/* Modern High Contrast Mode Support */
+@media (forced-colors: active) {
+	/* System Colors for High Contrast Mode */
+	:root {
+		--button-text: ButtonText;
+		--button-bg: ButtonFace;
+		--link-color: LinkText;
+		--background: Canvas;
+		--text: CanvasText;
+	}
+
+	/* Apply system colors while preserving layout */
+	button,
+	[role="button"] {
+		color: var(--button-text);
+		background-color: var(--button-bg);
+	}
+
+	a {
+		color: var(--link-color);
+	}
+
+	/* Preserve images and SVGs */
+	img,
+	svg {
+		forced-colors: preserve-colors;
+	}
 }
 
 body {
@@ -112,7 +154,7 @@ body {
 }
 
 * {
-	cursor: url("./cursor/hover.png"), auto;
+	cursor: url("/cursor/hover.png"), auto;
 }
 
 /* define theme variables here */
@@ -141,5 +183,5 @@ body {
 	--font-MorabbaMedium: "MorabbaMedium", sans-serif;
 	--font-MorabbaRegular: "MorabbaRegular", sans-serif;
 	--font-MorabbaSemiBold: "MorabbaSemiBold", sans-serif;
-	--font-MorabbaSemiBold: "MorabbaUltraLight", sans-serif;
+	--font-MorabbaUltraLight: "MorabbaUltraLight", sans-serif;
 }

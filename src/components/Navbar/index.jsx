@@ -79,7 +79,7 @@ const Navbar = ({
 							className="mr-10 transition-transform hover:scale-105 outline-none"
 							onClick={() => {
 								eventHandler.dispatchEvent("ClickSound");
-								navigate("/userProfile");
+								navigate("/dashboard");
 							}}
 						>
 							<img src={userProfile} alt="userProfile" />

@@ -8,6 +8,8 @@ import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 import AudioProvider from "./AudioProvider";
 import Game from "./Game";
+import Dashboard from "./Dashboard";
+import UserInfo from "./UserInfo";
 
 export {
 	Home,
@@ -20,4 +22,6 @@ export {
 	NotFound,
 	AudioProvider,
 	Game,
+	Dashboard,
+	UserInfo,
 };
