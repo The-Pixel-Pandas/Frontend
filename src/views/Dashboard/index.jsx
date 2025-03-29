@@ -7,7 +7,7 @@ import dashboardContainer from "../../assets/images/dashboardContainer.png";
 const Dashboard = () => {
 	const [selectedButton, setSelectedButton] = useState(0);
 
-	const handleAllClick = (index) => {
+	const handleClick = (index) => {
 		setSelectedButton(index);
 	};
 
@@ -16,7 +16,7 @@ const Dashboard = () => {
 			<div className="relative">
 				<div className="absolute right-0 top-0 flex flex-col items-end justify-end mt-16 gap-20 mr-14">
 					<NavLink to="/dashboard/userProfile">
-						<button onClick={() => handleAllClick(0)} className="outline-none">
+						<button onClick={() => handleClick(0)} className="outline-none">
 							<div className="relative">
 								<div
 									className="absolute z-10 text-white font-Lalezar text-lg whitespace-nowrap"
@@ -47,7 +47,7 @@ const Dashboard = () => {
 						</button>
 					</NavLink>
 					<NavLink to="/dashboard/userInfo">
-						<button onClick={() => handleAllClick(1)} className="outline-none">
+						<button onClick={() => handleClick(1)} className="outline-none">
 							<div className="relative">
 								<div
 									className="absolute z-10 text-white font-Lalezar text-lg whitespace-nowrap"
@@ -78,7 +78,7 @@ const Dashboard = () => {
 						</button>
 					</NavLink>
 					<NavLink to="/dashboard/wallet">
-						<button onClick={() => handleAllClick(2)} className="outline-none">
+						<button onClick={() => handleClick(2)} className="outline-none">
 							<div className="relative">
 								<div
 									className="absolute z-10 text-white font-Lalezar text-lg whitespace-nowrap"
