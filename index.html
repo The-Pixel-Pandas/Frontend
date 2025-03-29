@@ -4,6 +4,89 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/Logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Critical fonts that are used immediately -->
+    <link 
+      rel="preload" 
+      href="/fonts/MorabbaRegular.ttf" 
+      as="font" 
+      type="font/ttf" 
+      crossorigin="anonymous"
+      fetchpriority="high"
+    />
+    <link 
+      rel="preload" 
+      href="/fonts/MorabbaMedium.ttf" 
+      as="font" 
+      type="font/ttf" 
+      crossorigin="anonymous"
+      fetchpriority="high"
+    />
+    
+    <!-- Other fonts loaded with lower priority -->
+    <link rel="preload" href="/fonts/LalezarTight.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/LalezarTightItalic.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Lalezar.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/InterTight-Medium.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-Black.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-Heavy.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-ExtraBold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-Light.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-SemiBold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/Morabba-UltraLight.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    
+    <style>
+      /* Critical fonts loaded immediately */
+      @font-face {
+        font-family: 'MorabbaRegular';
+        src: url('/fonts/MorabbaRegular.ttf') format('truetype');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'MorabbaMedium';
+        src: url('/fonts/MorabbaMedium.ttf') format('truetype');
+        font-display: swap;
+      }
+      
+      /* Apply critical fonts to body immediately */
+      body {
+        font-family: 'MorabbaRegular', system-ui, -apple-system, sans-serif;
+      }
+      
+      h1, h2, h3, h4, h5, h6, strong {
+        font-family: 'MorabbaMedium', system-ui, -apple-system, sans-serif;
+      }
+
+      /* Modern High Contrast Mode Support */
+      @media (forced-colors: active) {
+        /* System Colors for High Contrast Mode */
+        :root {
+          --button-text: ButtonText;
+          --button-bg: ButtonFace;
+          --link-color: LinkText;
+          --background: Canvas;
+          --text: CanvasText;
+        }
+
+        /* Apply system colors while preserving layout */
+        button,
+        [role="button"] {
+          color: var(--button-text);
+          background-color: var(--button-bg);
+        }
+
+        a {
+          color: var(--link-color);
+        }
+
+        /* Preserve images and SVGs */
+        img,
+        svg {
+          forced-colors: preserve-colors;
+        }
+      }
+    </style>
     <title>Pixel Pandas</title>
   </head>
   <body>
