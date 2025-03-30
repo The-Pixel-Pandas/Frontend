@@ -36,7 +36,7 @@ const DataContainer = ({
 					<div className="flex-grow pr-6">
 						<p className="text-white text-3xl font-Lalezar">{title}</p>
 						<p
-							className="text-white text-2xl font-MorabbaMedium mt-5"
+							className="text-white text-xl font-MorabbaMedium mt-5"
 							style={{ width: "93%" }}
 						>
 							{description}
@@ -44,7 +44,7 @@ const DataContainer = ({
 						<p className="text-white text-lg font-MorabbaRegular absolute top-5 left-10">
 							{numberOfVisits.toLocaleString("fa")} &nbsp; بازدید
 						</p>
-						<div className="flex flex-row gap-4 items-center absolute bottom-0 left-10 mb-8">
+						<div className="flex flex-row gap-4 items-center absolute bottom-5 left-10">
 							<div className="flex flex-row gap-0 items-center">
 								<img src={coinLogo} alt="coinLogo" className="w-14 h-12" />
 								<p className="text-white text-lg font-MorabbaRegular">
@@ -61,7 +61,7 @@ const DataContainer = ({
 					</div>
 
 					{/* Categories */}
-					<div className="absolute bottom-10 right-10 flex flex-row gap-2 mr-10">
+					<div className="absolute bottom-5 right-10 flex flex-row gap-2 mr-10">
 						{categories.map((category, index) => (
 							<div key={index} className="relative">
 								<img

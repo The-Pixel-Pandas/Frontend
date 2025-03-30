@@ -12,6 +12,7 @@ import QuestionGrid from "./QuestionGrid";
 import Footer from "./Footer";
 import CategoryFilter from "./CategoryFilter";
 import DataContainer from "./DataContainer";
+import Comment from "./Comment";
 
 export {
 	Navbar,
@@ -28,4 +29,5 @@ export {
 	Footer,
 	CategoryFilter,
 	DataContainer,
+	Comment
 };
