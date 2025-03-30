@@ -23,6 +23,11 @@ const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 							avatarNumber={user.avatarNumber}
 							name={user.name}
 							coinAmount={user.coinAmount.toLocaleString("fa")}
+							biography={user.biography}
+							transaction={user.transaction}
+							volume={user.volume}
+							rank={user.rank}
+							medals={user.medals}
 						/>
 					))}
 				</div>

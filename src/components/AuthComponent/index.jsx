@@ -36,6 +36,7 @@ const AuthComponent = ({ authType }) => {
 				} else {
 					setUser(email, password, false, false);
 					setLoginMessage(res.message);
+					console.log(res.message);
 				}
 			})
 			.catch((err) => {
@@ -47,16 +48,29 @@ const AuthComponent = ({ authType }) => {
 
 	const submitButton = () => {
 		eventHandler.dispatchEvent("ClickSound");
-		if (authType === "ورود") {
-			handleAuthAPI("https://dummyjson.com/c/7539-63f8-4f6a-82a6", {
-				email,
-				password,
-			});
-		} else if (authType === "ثبت نام") {
-			handleAuthAPI("https://dummyjson.com/c/09e5-f551-47ed-af13", {
-				email,
-				password,
-			});
+		const form = document.getElementById("authForm");
+		if (form) {
+			const submitEvent = new Event("submit", { cancelable: true });
+			form.dispatchEvent(submitEvent);
+
+			const formState = window.authFormState || {};
+			if (!form.checkValidity() || !formState.isValid || !formState.dirty) {
+				setLoginMessage("لطفا فرم را به درستی پر کنید");
+				setUser(email, password, false, false);
+				return;
+			}
+
+			if (authType === "ورود") {
+				handleAuthAPI("https://dummyjson.com/c/2a61-718b-4cd4-aeb2", {
+					email,
+					password,
+				});
+			} else if (authType === "ثبت نام") {
+				handleAuthAPI("https://dummyjson.com/c/2083-02bd-418a-a281", {
+					email,
+					password,
+				});
+			}
 		}
 	};
 
@@ -68,6 +82,12 @@ const AuthComponent = ({ authType }) => {
 			return () => clearTimeout(timer);
 		}
 	}, [isAuthenticated, navigate]);
+
+	useEffect(() => {
+		if (isError) {
+			setLoginMessage("");
+		}
+	}, [isError, loginMessage, authType]);
 
 	return (
 		<>

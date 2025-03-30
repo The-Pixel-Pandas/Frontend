@@ -11,6 +11,7 @@ import AudioPlayer from "./AudioPlayer";
 import QuestionGrid from "./QuestionGrid";
 import Footer from "./Footer";
 import CategoryFilter from "./CategoryFilter";
+import DataContainer from "./DataContainer";
 
 export {
 	Navbar,
@@ -26,4 +27,5 @@ export {
 	QuestionGrid,
 	Footer,
 	CategoryFilter,
+	DataContainer,
 };

@@ -21,7 +21,7 @@ const CategoryFilter = () => {
 			{categories.map((category) => (
 				<button
 					key={category}
-					className={`px-6 py-2 transition-all duration-300 relative rounded-full text-lg ${
+					className={`px-6 py-2 transition-all duration-300 relative rounded-full text-lg font-MorabbaMedium ${
 						activeCategory === category ? "text-white" : "text-purple-500"
 					}`}
 					onClick={() => {

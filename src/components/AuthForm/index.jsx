@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import authInput from "../../assets/images/authInput.png";
 import { useFormik } from "formik";
@@ -12,11 +12,20 @@ const AuthForm = () => {
 	const formik = useFormik({
 		initialValues: authYup.initialValues,
 		validationSchema: authYup.validationSchema,
+		validateOnChange: true,
+		validateOnBlur: true,
 		onSubmit: (values) => {
 			console.log(values);
 			setUser(values.email, values.password, false);
 		},
 	});
+
+	useEffect(() => {
+		window.authFormState = {
+			isValid: formik.isValid,
+			dirty: formik.dirty,
+		};
+	}, [formik.isValid, formik.dirty]);
 
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
@@ -24,7 +33,7 @@ const AuthForm = () => {
 
 	return (
 		<>
-			<form onSubmit={formik.handleSubmit}>
+			<form id="authForm" onSubmit={formik.handleSubmit}>
 				<div className="relative mt-6" style={{ width: 411, height: 61 }}>
 					<input
 						type="email"
@@ -34,7 +43,6 @@ const AuthForm = () => {
 						style={{ width: 411, height: 61 }}
 						{...formik.getFieldProps("email")}
 						onChange={(e) => {
-							formik.errors.email && formik.setFieldError("email", "");
 							formik.handleChange(e);
 						}}
 					/>
@@ -59,7 +67,6 @@ const AuthForm = () => {
 						style={{ width: 411, height: 61 }}
 						{...formik.getFieldProps("password")}
 						onChange={(e) => {
-							formik.errors.password && formik.setFieldError("password", "");
 							formik.handleChange(e);
 						}}
 					/>
@@ -74,7 +81,7 @@ const AuthForm = () => {
 						</div>
 					)}
 					<button
-						type="submit"
+						type="button"
 						onClick={togglePasswordVisibility}
 						className="absolute inset-y-0 left-0.5 flex items-center px-3 text-white z-20"
 					>
