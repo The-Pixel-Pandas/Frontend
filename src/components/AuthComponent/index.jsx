@@ -60,16 +60,15 @@ const AuthComponent = ({ authType }) => {
 				return;
 			}
 
+			const data = {
+				email: email,
+				password: password,
+			};
+
 			if (authType === "ورود") {
-				handleAuthAPI("https://dummyjson.com/c/2a61-718b-4cd4-aeb2", {
-					email,
-					password,
-				});
+				handleAuthAPI("https://dummyjson.com/c/2a61-718b-4cd4-aeb2", data);
 			} else if (authType === "ثبت نام") {
-				handleAuthAPI("https://dummyjson.com/c/2083-02bd-418a-a281", {
-					email,
-					password,
-				});
+				handleAuthAPI("https://dummyjson.com/c/2083-02bd-418a-a281", data);
 			}
 		}
 	};

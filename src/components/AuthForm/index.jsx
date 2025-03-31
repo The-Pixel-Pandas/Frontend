@@ -15,7 +15,6 @@ const AuthForm = () => {
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: (values) => {
-			console.log(values);
 			setUser(values.email, values.password, false);
 		},
 	});
@@ -33,7 +32,7 @@ const AuthForm = () => {
 
 	return (
 		<>
-			<form id="authForm" onSubmit={formik.handleSubmit}>
+			<form id="authForm" onSubmit={formik.handleSubmit} onChange={formik.handleSubmit}>
 				<div className="relative mt-6" style={{ width: 411, height: 61 }}>
 					<input
 						type="email"
