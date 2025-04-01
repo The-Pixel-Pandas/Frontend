@@ -1,6 +1,6 @@
 import React from "react";
 import notFoundAnim from "../../assets/animations/notFoundAnim.json";
-import LottieAnim from "../../components/LottieAnim";
+import { LottieAnim } from "../../components";
 
 const NotFound = () => {
 	return (

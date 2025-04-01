@@ -14,7 +14,7 @@ import {
 	UserInfo,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
+import { Layout } from "./components";
 
 function App() {
 	return (
