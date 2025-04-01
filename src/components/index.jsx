@@ -5,7 +5,6 @@ import NewsCard from "./NewsCard";
 import LeaderBoardTable from "./LeaderBoardTable";
 import GoogleVerification from "./GoogleVerification";
 import LottieAnim from "./LottieAnim";
-import PopupComponent from "./PopupComponent";
 import AuthComponent from "./AuthComponent";
 import AudioPlayer from "./AudioPlayer";
 import QuestionGrid from "./QuestionGrid";
@@ -21,7 +20,6 @@ export {
 	NewsCard,
 	LeaderBoardTable,
 	LottieAnim,
-	PopupComponent,
 	GoogleVerification,
 	AuthComponent,
 	AudioPlayer,

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useAvatarStore, eventHandler } from "../../services";
-import PublicProfilePopup from "../PublicProfilePopup";
 import userCommentBox from "../../assets/images/userCommentBox.png";
 import likeOption from "../../assets/images/likeOption.png";
 import unlikeOption from "../../assets/images/unlikeOption.png";
+import useProfilePopup from "../../hooks/useProfilePopup";
+import ProfilePopupOverlay from "../ProfilePopupOverlay";
 
 const UserComment = ({
 	avatarNumber,
@@ -18,17 +19,8 @@ const UserComment = ({
 	likesNumber = 0,
 }) => {
 	const { getAvatarByNumber } = useAvatarStore();
-	const [showProfile, setShowProfile] = useState(false);
+	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
     const [isLiked, setIsLiked] = useState(false);
-
-	const openPopUp = () => {
-		setShowProfile(true);
-		eventHandler.dispatchEvent("OpenPopupSound");
-	};
-	const closePopUp = () => {
-		setShowProfile(false);
-		eventHandler.dispatchEvent("ClosePopupSound");
-	};
 
     const handleLike = () => {
         eventHandler.dispatchEvent("LikeSound");
@@ -39,7 +31,7 @@ const UserComment = ({
 		<>
 			<div className="flex flex-row  gap-4 ">
 				<button
-					onClick={() => openPopUp()}
+					onClick={openPopUp}
 					className="focus:outline-none mb-10 mr-10"
 				>
 					<img
@@ -71,23 +63,17 @@ const UserComment = ({
 				</div>
 			</div>
 
-			{showProfile && (
-				<div className="fixed inset-0 flex items-center justify-center z-50">
-					<div className="absolute inset-0 bg-gray-600 opacity-35" />
-					<div className="relative z-10">
-						<PublicProfilePopup
-							avatarNumber={avatarNumber}
-							name={name}
-							biography={biography}
-							transaction={transaction}
-							volume={volume}
-							rank={rank}
-							medals={medals}
-							onClick={() => closePopUp()}
-						/>
-					</div>
-				</div>
-			)}
+			<ProfilePopupOverlay
+				show={showProfile}
+				avatarNumber={avatarNumber}
+				name={name}
+				biography={biography}
+				transaction={transaction}
+				volume={volume}
+				rank={rank}
+				medals={medals}
+				onClose={closePopUp}
+			/>
 		</>
 	);
 };
