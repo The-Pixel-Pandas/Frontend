@@ -1,31 +1,47 @@
-import Navbar from "./Navbar";
-import SearchBar from "./SearchBar";
-import QuestionCard from "./QuestionCard";
-import NewsCard from "./NewsCard";
-import LeaderBoardTable from "./LeaderBoardTable";
-import GoogleVerification from "./GoogleVerification";
-import LottieAnim from "./LottieAnim";
-import AuthComponent from "./AuthComponent";
-import AudioPlayer from "./AudioPlayer";
-import QuestionGrid from "./QuestionGrid";
-import Footer from "./Footer";
-import CategoryFilter from "./CategoryFilter";
-import DataContainer from "./DataContainer";
-import Comment from "./Comment";
+// Chore components
+import {
+	AudioPlayer,
+	CategoryFilter,
+	Footer,
+	Layout,
+	LottieAnim,
+} from "./chore";
+
+// Auth components
+import { AuthComponent } from "./auth";
+
+// Question components
+import { QuestionGrid } from "./question";
+
+// LeaderBoard components
+import { LeaderBoardTable } from "./leaderBoard";
+
+// PostDetail components
+import { PostDetail } from "./postDetail";
+
+// Profile Popup components
+import { PublicProfilePopup } from "./profilePopup";
 
 export {
-	Navbar,
-	SearchBar,
-	QuestionCard,
-	NewsCard,
-	LeaderBoardTable,
-	LottieAnim,
-	GoogleVerification,
-	AuthComponent,
+	// Chore
 	AudioPlayer,
-	QuestionGrid,
-	Footer,
 	CategoryFilter,
-	DataContainer,
-	Comment
+	Footer,
+	Layout,
+	LottieAnim,
+
+	// Auth
+	AuthComponent,
+
+	// Question
+	QuestionGrid,
+
+	// LeaderBoard
+	LeaderBoardTable,
+
+	// PostDetail
+	PostDetail,
+
+	// Profile Popup
+	PublicProfilePopup,
 };

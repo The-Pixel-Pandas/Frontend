@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { CategoryFilter, DataContainer, Comment } from "../../components";
+import { CategoryFilter } from "../../components";
+import { PostDetail } from "../../components";
 
 const News = () => {
 	const { newsId } = useParams();
@@ -62,26 +63,7 @@ const News = () => {
 
 		return (
 			<>
-				<div className="flex flex-col gap-0">
-					{newsData.map((item) => (
-						<div key={item.id} className="mt-5">
-							<DataContainer
-								width={1200}
-								height={260}
-								title={item.title}
-								description={item.description}
-								image={item.image}
-								categories={item.categories}
-								numberOfVisits={item.numberOfVisits}
-								coins={item.coins}
-								date={item.date}
-							/>
-						</div>
-					))}
-					<div className="mr-40">
-						<Comment users={usersData} />
-					</div>
-				</div>
+				<PostDetail newsData={newsData} usersData={usersData} />
 			</>
 		);
 	};
