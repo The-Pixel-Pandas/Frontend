@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useAvatarStore } from "../../services";
 import leaderBoardUserBox from "../../assets/images/leaderBoardUserBox.png";
 import coinLogo from "../../assets/images/coinLogo.png";
-import PublicProfilePopup from "../PublicProfilePopup";
-import { eventHandler } from "../../services";
+import useProfilePopup from "../../hooks/useProfilePopup";
+import ProfilePopupOverlay from "../ProfilePopupOverlay";
 
 const LeaderBoardProfileCard = ({
 	width = 500,
@@ -19,16 +19,7 @@ const LeaderBoardProfileCard = ({
 	medals = [1, 2, 3],
 }) => {
 	const { getAvatarByNumber } = useAvatarStore();
-	const [showProfile, setShowProfile] = useState(false);
-
-	const openPopUp = () => {
-		setShowProfile(true);
-		eventHandler.dispatchEvent("OpenPopupSound");
-	};
-	const closePopUp = () => {
-		setShowProfile(false);
-		eventHandler.dispatchEvent("ClosePopupSound");
-	};
+	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
 
 	return (
 		<>
@@ -39,7 +30,7 @@ const LeaderBoardProfileCard = ({
 					style={{ width: width, height: height }}
 				/>
 				<div className="absolute top-0 right-0 mr-6 mt-2">
-					<button onClick={() => openPopUp()}>
+					<button onClick={openPopUp}>
 						<img
 							src={getAvatarByNumber(avatarNumber)}
 							alt="avatar"
@@ -64,23 +55,17 @@ const LeaderBoardProfileCard = ({
 				</div>
 			</div>
 
-			{showProfile && (
-				<div className="fixed inset-0 flex items-center justify-center z-50">
-					<div className="absolute inset-0 bg-gray-600 opacity-35" />
-					<div className="relative z-10">
-						<PublicProfilePopup
-							avatarNumber={avatarNumber}
-							name={name}
-							biography={biography}
-							transaction={transaction}
-							volume={volume}
-							rank={rank}
-							medals={medals}
-							onClick={() => closePopUp()}
-						/>
-					</div>
-				</div>
-			)}
+			<ProfilePopupOverlay
+				show={showProfile}
+				avatarNumber={avatarNumber}
+				name={name}
+				biography={biography}
+				transaction={transaction}
+				volume={volume}
+				rank={rank}
+				medals={medals}
+				onClose={closePopUp}
+			/>
 		</>
 	);
 };
