@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: "LalezarTight";
-	src: url("/fonts/LalezarTight.ttf") format("truetype");
+	src: url("./assets/fonts/LalezarTight.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
 	font-family: "LalezarTightItalic";
-	src: url("/fonts/LalezarTightItalic.ttf") format("truetype");
+	src: url("./assets/fonts/LalezarTightItalic.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -18,7 +18,7 @@
 
 @font-face {
 	font-family: "Lalezar";
-	src: url("/fonts/Lalezar.ttf") format("truetype");
+	src: url("./assets/fonts/Lalezar.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -26,7 +26,7 @@
 
 @font-face {
 	font-family: "InterMedium";
-	src: url("/fonts/InterTight-Medium.ttf") format("truetype");
+	src: url("./assets/fonts/InterTight-Medium.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -34,7 +34,7 @@
 
 @font-face {
 	font-family: "MorabbaBlack";
-	src: url("/fonts/Morabba-Black.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Black.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -42,7 +42,7 @@
 
 @font-face {
 	font-family: "MorabbaBold";
-	src: url("/fonts/Morabba-Bold.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Bold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -50,7 +50,7 @@
 
 @font-face {
 	font-family: "MorabbaHeavy";
-	src: url("/fonts/Morabba-Heavy.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Heavy.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -58,7 +58,7 @@
 
 @font-face {
 	font-family: "MorabbaExtraBold";
-	src: url("/fonts/Morabba-ExtraBold.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-ExtraBold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -66,7 +66,7 @@
 
 @font-face {
 	font-family: "MorabbaLight";
-	src: url("/fonts/Morabba-Light.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Light.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -74,7 +74,7 @@
 
 @font-face {
 	font-family: "MorabbaMedium";
-	src: url("/fonts/Morabba-Medium.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Medium.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -82,7 +82,7 @@
 
 @font-face {
 	font-family: "MorabbaRegular";
-	src: url("/fonts/Morabba-Regular.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-Regular.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -90,7 +90,7 @@
 
 @font-face {
 	font-family: "MorabbaSemiBold";
-	src: url("/fonts/Morabba-SemiBold.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-SemiBold.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -98,7 +98,7 @@
 
 @font-face {
 	font-family: "MorabbaUltraLight";
-	src: url("/fonts/Morabba-UltraLight.ttf") format("truetype");
+	src: url("./assets/fonts/Morabba-UltraLight.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
@@ -154,7 +154,7 @@ body {
 }
 
 * {
-	cursor: url("/cursor/hover.png"), auto;
+	cursor: url("./assets/cursor/hover.png"), auto;
 }
 
 /* define theme variables here */

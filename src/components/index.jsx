@@ -14,7 +14,7 @@ import { AuthComponent } from "./auth";
 import { QuestionGrid } from "./question";
 
 // LeaderBoard components
-import { LeaderBoardTable } from "./leaderBoard";	
+import { LeaderBoardTable } from "./leaderBoard";
 
 // PostDetail components
 import { PostDetail } from "./postDetail";

@@ -136,7 +136,10 @@ const PublicProfilePopup = ({
 							>
 								<p>مدال های کسب شده</p>
 							</div>
-							<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[86%]" dir="rtl">
+							<div
+								className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[86%]"
+								dir="rtl"
+							>
 								<div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent no-scrollbar mt-4">
 									<div className="flex flex-row gap-3.5 min-w-max px-2 py-4">
 										{medals.map((medal, index) => (

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useAvatarStore } from "../../../services";
 import ProfilePopupOverlay from "../../profilePopup/ProfilePopupOverlay";
-import useProfilePopup from "../../../hooks/useProfilePopup";
+import { useProfilePopup } from "../../../hooks";
 import leaderBoardUserBox from "../../../assets/images/leaderBoardUserBox.png";
 import coinLogo from "../../../assets/images/coinLogo.png";
 

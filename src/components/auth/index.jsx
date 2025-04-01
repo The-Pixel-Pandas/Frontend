@@ -1,3 +1,3 @@
-import AuthComponent from './AuthComponent';
+import AuthComponent from "./AuthComponent";
 
 export { AuthComponent };

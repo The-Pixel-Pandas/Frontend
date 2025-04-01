@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useAvatarStore, eventHandler } from "../../../../services";
-import useProfilePopup from "../../../../hooks/useProfilePopup";
+import { useProfilePopup } from "../../../../hooks";
 import ProfilePopupOverlay from "../../../profilePopup/ProfilePopupOverlay";
 import userCommentBox from "../../../../assets/images/userCommentBox.png";
 import likeOption from "../../../../assets/images/likeOption.png";
@@ -20,20 +20,17 @@ const UserComment = ({
 }) => {
 	const { getAvatarByNumber } = useAvatarStore();
 	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
-    const [isLiked, setIsLiked] = useState(false);
+	const [isLiked, setIsLiked] = useState(false);
 
-    const handleLike = () => {
-        eventHandler.dispatchEvent("LikeSound");
-        setIsLiked(!isLiked);
-    };
+	const handleLike = () => {
+		eventHandler.dispatchEvent("LikeSound");
+		setIsLiked(!isLiked);
+	};
 
 	return (
 		<>
 			<div className="flex flex-row  gap-4 ">
-				<button
-					onClick={openPopUp}
-					className="focus:outline-none mb-10 mr-10"
-				>
+				<button onClick={openPopUp} className="focus:outline-none mb-10 mr-10">
 					<img
 						src={getAvatarByNumber(avatarNumber)}
 						alt="avatar"
@@ -56,9 +53,20 @@ const UserComment = ({
 						<span className="text-white font-MorabbaMedium ">
 							{likesNumber}
 						</span>
-                        <button type="button" className="focus:outline-none" onClick={handleLike}>
-                            <img src={isLiked ? likeOption : unlikeOption} alt="likeOption" style={{ width: isLiked ? 19.43 : 19, height: isLiked ? 16.79 : 19 }} />
-                        </button>
+						<button
+							type="button"
+							className="focus:outline-none"
+							onClick={handleLike}
+						>
+							<img
+								src={isLiked ? likeOption : unlikeOption}
+								alt="likeOption"
+								style={{
+									width: isLiked ? 19.43 : 19,
+									height: isLiked ? 16.79 : 19,
+								}}
+							/>
+						</button>
 					</div>
 				</div>
 			</div>

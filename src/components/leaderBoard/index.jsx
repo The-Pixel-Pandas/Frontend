@@ -1,3 +1,3 @@
-import LeaderBoardTable from './LeaderBoardTable';
+import LeaderBoardTable from "./LeaderBoardTable";
 
 export { LeaderBoardTable };
