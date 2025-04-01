@@ -40,7 +40,7 @@ const Footer = ({ isPageFooter = true }) => {
 								/>
 							</a>
 							<a
-								href="https://www.twitter.com"
+								href="https://www.x.com"
 								target="_blank"
 								rel="noopener noreferrer"
 								style={{
