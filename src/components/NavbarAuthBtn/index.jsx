@@ -13,7 +13,7 @@ const NavbarAuthBtn = ({ authType }) => {
 		} else {
 			navigate("/signup");
 		}
-		eventHandler.dispatchEvent("OpenPopupSound");
+		eventHandler.dispatchEvent("ButtonSound");
 	};
 
 	return (
