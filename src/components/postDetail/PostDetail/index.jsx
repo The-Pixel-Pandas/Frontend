@@ -2,10 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import DataContainer from "../DataContainer";
 import { Comment } from "../comment";
+import { DraggableButton } from "../../chore";
 
 const PostDetail = ({ newsData, usersData }) => {
 	return (
 		<>
+			<DraggableButton />
+
 			<div className="flex flex-col gap-0">
 				{newsData.map((item) => (
 					<div key={item.id} className="mt-5">

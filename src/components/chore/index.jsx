@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import LottieAnim from "./LottieAnim";
 import Toast from "./Toast";
 import UserAvatar from "./UserAvatar";
+import DraggableButton from "./DraggableButton";
 
 export {
 	AudioPlayer,
@@ -14,4 +15,5 @@ export {
 	LottieAnim,
 	Toast,
 	UserAvatar,
+	DraggableButton,
 };
