@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
 import { Skeleton } from "@mui/material";
 import { httpService, useQuestionStore } from "../../services";
-import { Footer, CategoryFilter } from "../../components";
+import { Footer, CategoryFilter, PostDetail } from "../../components";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
 	// toggle state for see and manage loading skeleton
 	const [isLoading, setIsLoading] = useState(false);
 	const { setQuestions, getQuestions } = useQuestionStore();
+	const { questionId } = useParams();
 
 	// const [questions, setQuestions] = useState([]);
 	// useEffect(() => {
@@ -21,6 +23,72 @@ const Home = () => {
 	// 			console.log(err);
 	// 		});
 	// }, []);
+
+	const GetData = () => {
+		const newsData = {
+			id: 1,
+			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری",
+			description:
+				"معاون فرماندهی انتظامی تهران بزرگ گفت: افرادی که قصد برهم زدن نظم شهر را داشته باشند باید بدانند که اگر گزارشی از آن‌ها از سوی مردم، معتمدین محله یا سایر شهروندان به پلیس ارائه شود، پلیس پس از چهارشنبه‌سوری حتماً با آن‌ها برخورد خواهد کرد",
+			image: "https://i.postimg.cc/h4LGD39C/sample.png",
+			categories: ["همه موارد", "اخبار پلیس", "اخبار اجتماعی"],
+			numberOfVisits: 100,
+			coins: 100,
+			date: new Date("2025-03-30").toLocaleDateString("fa-IR"),
+			yesPercentage: 50,
+			noPercentage: 50,
+		};
+
+		const usersData = [
+			{
+				id: 1,
+				avatarNumber: 1,
+				name: "نام کاربر",
+				comment:
+					"باید برای جشن گرفتن مراسم مون ارزش قایل شیم و بتونیم انجامشون بدیم ولی نه با ضرر زدن ...",
+				likesNumber: 10,
+				biography: "",
+				transaction: 0,
+				volume: 0,
+				rank: 0,
+				medals: [1, 2, 3],
+			},
+			{
+				id: 2,
+				avatarNumber: 2,
+				name: "نام کاربر",
+				comment: "نظر کاربر",
+				likesNumber: 10,
+				biography: "",
+				transaction: 0,
+				volume: 0,
+				rank: 0,
+				medals: [1, 2, 3],
+			},
+			{
+				id: 3,
+				avatarNumber: 3,
+				name: "نام کاربر",
+				comment: "نظر کاربر",
+				likesNumber: 10,
+				biography: "",
+				transaction: 0,
+				volume: 0,
+				rank: 0,
+				medals: [1, 2, 3],
+			},
+		];
+
+		return (
+			<>
+				<PostDetail
+					postData={newsData}
+					usersData={usersData}
+					isExchange={true}
+				/>
+			</>
+		);
+	};
 
 	const questions = [
 		{
@@ -131,38 +199,44 @@ const Home = () => {
 
 	return (
 		<>
-			<CategoryFilter />
-			{isLoading ? (
-				<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
-					{[
-						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-						20,
-					].map((i) => (
-						<div className="mt-7" key={i}>
-							<Skeleton
-								variant="rect"
-								sx={{
-									bgcolor: "#171134",
-									borderRadius: "16px",
-									height: "170px",
-									width: "300px",
-								}}
-							/>
+			{!questionId ? (
+				<>
+					<CategoryFilter />
+					{isLoading ? (
+						<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
+							{[
+								1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+								19, 20,
+							].map((i) => (
+								<div className="mt-7" key={i}>
+									<Skeleton
+										variant="rect"
+										sx={{
+											bgcolor: "#171134",
+											borderRadius: "16px",
+											height: "170px",
+											width: "300px",
+										}}
+									/>
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			) : (
-				// TODO: implement question card exactly as figma
-				// TODO: implement show more button to if click more question showed
-				// if change grid positions or margins please fix skeleton to match as grid
-				<QuestionGrid
-					questions={getQuestions().map((q) => ({ ...q, coin: q.coin }))}
-				/>
-			)}
+					) : (
+						// TODO: implement question card exactly as figma
+						// TODO: implement show more button to if click more question showed
+						// if change grid positions or margins please fix skeleton to match as grid
+						<QuestionGrid
+							questions={getQuestions().map((q) => ({ ...q, coin: q.coin }))}
+						/>
+					)}
 
-			<div className="mt-20">
-				<Footer isPageFooter={true} />
-			</div>
+					<div className="mt-20">
+						<Footer isPageFooter={true} />
+					</div>
+				</>
+			) : (
+				GetData()
+			)}
 		</>
 	);
 };
