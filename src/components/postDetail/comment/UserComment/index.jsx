@@ -29,7 +29,7 @@ const UserComment = ({
 
 	return (
 		<>
-			<div className="flex flex-row  gap-4 ">
+			<div className="flex flex-row gap-4">
 				<button onClick={openPopUp} className="focus:outline-none mb-10 mr-10">
 					<img
 						src={getAvatarByNumber(avatarNumber)}
@@ -50,9 +50,7 @@ const UserComment = ({
 						</div>
 					</div>
 					<div className="absolute bottom-4 left-4 flex flex-row gap-2 items-center">
-						<span className="text-white font-MorabbaMedium ">
-							{likesNumber}
-						</span>
+						<span className="text-white font-MorabbaMedium">{likesNumber}</span>
 						<button
 							type="button"
 							className="focus:outline-none"
@@ -86,8 +84,6 @@ const UserComment = ({
 	);
 };
 
-export default UserComment;
-
 UserComment.propTypes = {
 	avatarNumber: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
@@ -96,6 +92,8 @@ UserComment.propTypes = {
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.arrayOf(PropTypes.number),
-	comment: PropTypes.string.isRequired,
-	likesNumber: PropTypes.number.isRequired,
+	comment: PropTypes.string,
+	likesNumber: PropTypes.number,
 };
+
+export default UserComment;

@@ -3,10 +3,14 @@ import PropTypes from "prop-types";
 import DataContainer from "../DataContainer";
 import { Comment } from "../comment";
 import ExchangeBox from "../exchangeContainer";
+import { DraggableButton } from "../../chore";
+
 
 const PostDetail = ({ postData, usersData, isExchange = true }) => {
 	return (
 		<>
+			<DraggableButton />
+
 			<div className="flex flex-col gap-0">
 				<div className="flex flex-row justify-center items-center gap-10">
 					{isExchange && (
