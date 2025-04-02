@@ -6,13 +6,14 @@ const DraggableButton = ({ initialPosition = "right" }) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const [position, setPosition] = useState({ x: 0, y: 0 });
 	const [isHovered, setIsHovered] = useState(false);
+	const [isAtEdge, setIsAtEdge] = useState(false);
 	const buttonRef = useRef(null);
 	const dragRef = useRef({ startX: 0, startY: 0 });
 	const navigate = useNavigate();
 	const [canNavigate, setCanNavigate] = useState(true);
 
 	useEffect(() => {
-		const x = initialPosition === "right" ? window.innerWidth - 50 : 50;
+		const x = initialPosition === "right" ? window.innerWidth - 40 : -25;
 		setPosition({ x, y: window.innerHeight / 2 });
 	}, [initialPosition]);
 
@@ -36,16 +37,19 @@ const DraggableButton = ({ initialPosition = "right" }) => {
 		setPosition({ x, y });
 	};
 
-	const handleMouseUp = () => {
+	const handleMouseUp = (e) => {
 		if (!isDragging) return;
 
 		setIsDragging(false);
 
-		const distanceToLeft = position.x;
-		const distanceToRight = window.innerWidth - position.x;
+		const distanceToLeft = e.pageX - position.x;
+		const distanceToRight = e.pageX - (window.innerWidth - position.x);
+		console.log("distanceToLeft", distanceToLeft);
+		console.log("distanceToRight", distanceToRight);
 
-		const newX = distanceToLeft < distanceToRight ? 50 : window.innerWidth - 50;
+		const newX = distanceToLeft < distanceToRight ? -25 : window.innerWidth - 40;
 		setPosition((prev) => ({ ...prev, x: newX }));
+		setIsAtEdge(distanceToLeft < distanceToRight);
 	};
 
 	useEffect(() => {
@@ -92,7 +96,7 @@ const DraggableButton = ({ initialPosition = "right" }) => {
 						: "https://platform-ik.g123.jp/game/production/assets/aria-top-idel-c3d83f4d.png?tr=dpr-1.25%2Ch-64%2Cw-64"
 				}
 				alt="DraggableButton"
-				className="w-full h-full select-none"
+				className={`w-full h-full select-none ${isAtEdge ? "transform rotate-y-180" : ""}`}
 				draggable="false"
 			/>
 		</div>
