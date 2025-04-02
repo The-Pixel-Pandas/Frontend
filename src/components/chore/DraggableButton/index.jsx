@@ -47,7 +47,8 @@ const DraggableButton = ({ initialPosition = "right" }) => {
 		console.log("distanceToLeft", distanceToLeft);
 		console.log("distanceToRight", distanceToRight);
 
-		const newX = distanceToLeft < distanceToRight ? -25 : window.innerWidth - 40;
+		const newX =
+			distanceToLeft < distanceToRight ? -25 : window.innerWidth - 40;
 		setPosition((prev) => ({ ...prev, x: newX }));
 		setIsAtEdge(distanceToLeft < distanceToRight);
 	};

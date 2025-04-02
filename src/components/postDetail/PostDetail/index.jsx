@@ -5,7 +5,6 @@ import { Comment } from "../comment";
 import ExchangeBox from "../exchangeContainer";
 import { DraggableButton } from "../../chore";
 
-
 const PostDetail = ({ postData, usersData, isExchange = true }) => {
 	return (
 		<>
