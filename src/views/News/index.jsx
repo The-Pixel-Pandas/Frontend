@@ -65,7 +65,7 @@ const News = () => {
 			<PostDetail
 				postData={questionData}
 				usersData={usersData}
-				isExchange={true}
+				isExchange={false}
 			/>
 		);
 	}
@@ -74,28 +74,31 @@ const News = () => {
 		<>
 			<>
 				<CategoryFilter />
-				{isLoading ? (
-					<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
-						{[
-							1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-							20,
-						].map((i) => (
-							<div className="mt-7" key={i}>
-								<Skeleton
-									variant="rect"
-									sx={{
-										bgcolor: "#171134",
-										borderRadius: "16px",
-										height: "170px",
-										width: "300px",
-									}}
-								/>
-							</div>
-						))}
-					</div>
-				) : (
-					<QuestionGrid questions={currentQuestions} />
-				)}
+				<div className="flex mt-0 justify-center mb-10 pb-24">
+					{isLoading ? (
+						<div className="grid grid-cols-4 gap-4 ml-24 mr-24 mt-10">
+							{[
+								1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+								19, 20,
+							].map((i) => (
+								<div className="mt-7" key={i}>
+									<Skeleton
+										variant="rect"
+										sx={{
+											bgcolor: "#171134",
+											borderRadius: "16px",
+											height: "170px",
+											width: "300px",
+										}}
+									/>
+								</div>
+							))}
+						</div>
+					) : (
+						// TODO: Replace it whit News Grid
+						<QuestionGrid questions={currentQuestions} />
+					)}
+				</div>
 
 				<div className="mt-20">
 					<Footer isPageFooter={true} />

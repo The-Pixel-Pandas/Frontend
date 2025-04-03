@@ -14,7 +14,7 @@ const SearchBar = ({ width = "535px", isQuestionSearchBar = true }) => {
 
 	useEffect(() => {
 		setOptions(isQuestionSearchBar ? getQuestions() : getNews());
-	}, [isQuestionSearchBar]);
+	}, [isQuestionSearchBar, getQuestions, getNews]);
 
 	const handleSearch = (e) => {
 		if (e.key === "Enter") {
