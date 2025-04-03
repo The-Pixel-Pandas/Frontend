@@ -28,7 +28,7 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 							image={postData.image}
 							categories={postData.categories}
 							numberOfVisits={postData.numberOfVisits}
-							coins={postData.coins}
+							coins={postData.coin}
 							date={postData.date}
 						/>
 					</div>

@@ -17,6 +17,10 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		setCoin(coin - 1);
 	};
 
+	const handleExchange = () => {
+		console.log("Exchange");
+	};
+
 	return (
 		<>
 			<div className="flex justify-center items-center flex-col mt-5">
@@ -70,7 +74,11 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 					</div>
 
 					<div className="absolute inset-0 top-1/2 flex items-center justify-center mt-20">
-						<button>
+						<button
+							type="button"
+							className="focus:outline-none hover:opacity-90"
+							onClick={handleExchange}
+						>
 							<div className="relative">
 								<div className="absolute inset-0 flex items-center justify-center items-center ">
 									<span className="text-white font-Lalezar text-lg mb-1">

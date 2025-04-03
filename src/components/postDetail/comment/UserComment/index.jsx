@@ -21,9 +21,15 @@ const UserComment = ({
 	const { getAvatarByNumber } = useAvatarStore();
 	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
 	const [isLiked, setIsLiked] = useState(false);
+	const [likesCount, setLikesCount] = useState(likesNumber);
 
 	const handleLike = () => {
 		eventHandler.dispatchEvent("LikeSound");
+		if (isLiked) {
+			setLikesCount(likesCount - 1);
+		} else {
+			setLikesCount(likesCount + 1);
+		}
 		setIsLiked(!isLiked);
 	};
 
@@ -50,7 +56,7 @@ const UserComment = ({
 						</div>
 					</div>
 					<div className="absolute bottom-4 left-4 flex flex-row gap-2 items-center">
-						<span className="text-white font-MorabbaMedium">{likesNumber}</span>
+						<span className="text-white font-MorabbaMedium">{likesCount}</span>
 						<button
 							type="button"
 							className="focus:outline-none"
