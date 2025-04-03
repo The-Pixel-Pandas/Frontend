@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import coinLogo from "../../../assets/images/coinLogo.png";
 import questionBox from "../../../assets/images/questionBox.png";
+import { useNavigate } from "react-router-dom";
 
 const QuestionCard = ({ question, width = 300, height = 160 }) => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<div style={{ width, height }} className="mt-7">
-				<button>
+				<button onClick={() => navigate(`/${question.id}`)}>
 					<div className="flex relative flex-col">
 						<div
 							className="absolute z-10 text-white font-Lalezar text-3xl"
