@@ -44,8 +44,6 @@ const DraggableButton = ({ initialPosition = "right" }) => {
 
 		const distanceToLeft = Math.abs(e.pageX - -25);
 		const distanceToRight = Math.abs(e.pageX - (window.innerWidth - 40));
-		console.log("distanceToLeft", distanceToLeft);
-		console.log("distanceToRight", distanceToRight);
 
 		const newX =
 			distanceToLeft < distanceToRight ? -25 : window.innerWidth - 40;

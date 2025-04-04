@@ -2,8 +2,39 @@ import React from "react";
 import PropTypes from "prop-types";
 import UserComment from "../UserComment";
 import submitComment from "../../../../assets/images/submitComment.png";
+import { httpService } from "../../../../services";
 
 const Comment = ({ users }) => {
+	const [comment, setComment] = React.useState("");
+	const getUserInfoAPI = async () => {
+		try {
+			const response = await httpService.get(
+				`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`
+			);
+			return response.data.user;
+		} catch (err) {
+			console.error("Failed to fetch user info:", err);
+		}
+	};
+	const addComment = async () => {
+		const response = await getUserInfoAPI();
+
+		users.push({
+			id: users.length + 1,
+			comment: comment,
+			likesNumber: 0,
+			avatarNumber: response.avatarNumber,
+			name: response.name,
+			coinAmount: response.coinAmount,
+			biography: response.biography,
+			transaction: response.transaction,
+			volume: response.volume,
+			rank: response.rank,
+			medals: response.medals,
+		});
+		setComment("");
+	};
+
 	return (
 		<>
 			<div
@@ -11,11 +42,13 @@ const Comment = ({ users }) => {
 				dir="rtl"
 			>
 				<div className="flex flex-col gap-6 w-full">
+					{/* Title */}
 					<div className="text-white font-MorabbaMedium text-lg relative mr-5">
 						<span className="relative after:content-[''] after:absolute after:right-0 after:w-full after:h-[2px] after:bg-white after:bottom-[-9px]">
 							نظرات کاربران
 						</span>
 					</div>
+					{/* Input */}
 					<div
 						className="relative ml-10 w-full"
 						style={{ width: 927, height: 47 }}
@@ -23,6 +56,8 @@ const Comment = ({ users }) => {
 						<input
 							type="text"
 							placeholder="نظرات خود را ثبت کنید  ..."
+							value={comment}
+							onChange={(e) => setComment(e.target.value)}
 							className="placeholder:text-text-200 text-white font-MorabbaMedium text-xl pr-5 pl-20 py-3 bg-transparent relative z-10 focus:outline-none w-full"
 							dir="rtl"
 						/>
@@ -35,10 +70,12 @@ const Comment = ({ users }) => {
 							type="submit"
 							className="absolute left-0 top-0 w-[54px] h-full z-10 focus:outline-none text-[#CFAEEF] font-MorabbaMedium text-xl ml-3"
 							dir="rtl"
+							onClick={addComment}
 						>
 							ثبت
 						</button>
 					</div>
+					{/* Comments */}
 					<div className=" overflow-y-scroll max-h-[250px] no-scrollbar">
 						<div className="flex flex-col gap-5">
 							{users.map((user) => (
