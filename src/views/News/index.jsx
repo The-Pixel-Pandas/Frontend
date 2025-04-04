@@ -95,7 +95,7 @@ const News = () => {
 							))}
 						</div>
 					) : (
-						// TODO: Replace it whit News Grid
+						// TODO: Replace it with News Grid
 						<QuestionGrid questions={currentQuestions} />
 					)}
 				</div>
