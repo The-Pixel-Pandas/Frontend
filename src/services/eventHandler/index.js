@@ -5,16 +5,8 @@ class EventHandler {
 			return;
 		}
 		this.events = new Events.EventEmitter();
-		this.coin = 0;
 		this.instance = this;
 	}
-	setCoin(amount) {
-		this.coin = amount;
-	}
-	getCoin() {
-		return this.coin;
-	}
-
 	addEventListener(eventName, callback) {
 		this.events.on(eventName, callback);
 	}

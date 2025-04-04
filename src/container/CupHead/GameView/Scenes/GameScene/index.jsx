@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import { Plane } from "../../Objects/Plane";
 import { Baroness } from "../../Objects/Baroness";
 import { Background } from "../../Objects/Background";
-import { eventHandler } from "../../../../../services";
 
 class GameScene extends Phaser.Scene {
 	constructor() {
@@ -14,7 +13,6 @@ class GameScene extends Phaser.Scene {
 		this.gameOver = false;
 		this.score = 0;
 		this.lastScoreTime = 0;
-		this.eventHandler = eventHandler;
 	}
 
 	create() {
@@ -227,7 +225,7 @@ class GameScene extends Phaser.Scene {
 		const scoreText = this.add
 			.text(
 				this.cameras.main.centerX,
-				this.cameras.main.centerY,
+				this.cameras.main.centerY - 15,
 				`امتیاز نهایی: ${this.convertToFarsiNumbers(this.score)}`,
 				{
 					fontSize: "32px",
@@ -237,7 +235,24 @@ class GameScene extends Phaser.Scene {
 			)
 			.setOrigin(0.5);
 		scoreText.setDepth(999);
-		this.eventHandler.setCoin(this.score);
+
+		if (localStorage.getItem("score") < this.score) {
+			localStorage.setItem("score", this.score);
+		}
+
+		const recordText = this.add
+			.text(
+				this.cameras.main.centerX,
+				this.cameras.main.centerY + 30,
+				` رکورد شما: ${this.convertToFarsiNumbers(localStorage.getItem("score"))}`,
+				{
+					fontSize: "32px",
+					fill: "#ffffff",
+					fontFamily: "morabbaFont",
+				}
+			)
+			.setOrigin(0.5);
+		recordText.setDepth(999);
 
 		const restartButton = this.add
 			.text(

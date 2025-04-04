@@ -17,19 +17,12 @@ const Navbar = ({
 	isQuestionSearchBar = true,
 }) => {
 	const navigate = useNavigate();
-	const { getCoin, addCoin } = useCoinStore();
+	const { getCoin } = useCoinStore();
 	const [isAuth, setAuth] = useState(isAuthenticated);
 
 	useEffect(() => {
 		setAuth(isAuthenticated);
 	}, [isAuthenticated]);
-
-	useEffect(() => {
-		const coins = eventHandler.getCoin();
-		if (coins > 0) {
-			addCoin(coins);
-		}
-	}, [addCoin]);
 
 	return (
 		<>
