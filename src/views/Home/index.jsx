@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
 import { Skeleton } from "@mui/material";
-import { httpService, useQuestionStore } from "../../services";
-import { Footer, CategoryFilter, PostDetail } from "../../components";
+import { httpService } from "../../services";
+import { useFetchData } from "../../hooks";
+import { Footer, CategoryFilter, PostDetail, Toast } from "../../components";
 import { useParams } from "react-router-dom";
 
 const Home = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState(null);
-	const { setQuestions, getQuestions } = useQuestionStore();
+	const { fetchData, data, isLoading, error } = useFetchData();
 	const [questionData, setQuestionData] = useState(null);
 	const [usersData, setUsersData] = useState([]);
 	const { questionId } = useParams();
 
 	useEffect(() => {
-		const fetchQuestions = async () => {
+		const fetchInitialData = async () => {
 			try {
-				const response = await httpService.get(
-					"https://mocki.io/v1/d12f1197-9bf8-44ab-8c3e-0a75746475cd"
+				const response = await fetchData(
+					"https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9"
 				);
-				setQuestions(response.current_node.data);
-				setIsLoading(false);
-			} catch (err) {
-				console.error("Failed to fetch questions:", err);
-				setError("خطا در ارتباط با سرور لطفا مجددا تلاش کنید");
-				setIsLoading(false);
+				console.log("Fetched data:", response);
+			} catch (error) {
+				console.error("Error fetching initial data:", error);
 			}
 		};
-
-		fetchQuestions();
-	}, [setQuestions]);
+		fetchInitialData();
+	}, []);
 
 	useEffect(() => {
 		if (questionId) {
@@ -47,7 +42,6 @@ const Home = () => {
 					setUsersData(commentsResponse);
 				} catch (err) {
 					console.error("Failed to fetch question details:", err);
-					setError("خطا در ارتباط با سرور لطفا مجددا تلاش کنید");
 				}
 			};
 
@@ -55,10 +49,8 @@ const Home = () => {
 		}
 	}, [questionId]);
 
-	let currentQuestions = getQuestions();
-
 	if (error) {
-		return <div className="text-center text-red-600 mt-4">{error}</div>;
+		return <Toast type="error" message={error} position="bottom-left" />;
 	}
 
 	if (questionId && questionData) {
@@ -70,110 +62,6 @@ const Home = () => {
 			/>
 		);
 	}
-
-	// TODO:for test comment it after full implementation question grid and card
-	currentQuestions = [
-		{
-			title: "سوال 1",
-			coin: 100,
-			description: "این یک سوال تست است",
-		},
-		{
-			title: "سوال 2",
-			coin: 200,
-			description: "این سوال تست دوم است",
-		},
-		{
-			title: "سوال 3",
-			coin: 300,
-			description: "این سوال تست سوم است",
-		},
-		{
-			title: "سوال 4",
-			coin: 400,
-			description: "این سوال تست چهارم است",
-		},
-		{
-			title: "سوال 5",
-			coin: 500,
-			description: "این سوال تست پنجم است",
-		},
-		{
-			title: "سوال 6",
-			coin: 600,
-			description: "این سوال تست ششم است",
-		},
-		{
-			title: "سوال 7",
-			coin: 700,
-			description: "این سوال تست هفتم است",
-		},
-		{
-			title: "سوال 8",
-			coin: 800,
-			description: "این سوال تست هشتم است",
-		},
-		{
-			title: "سوال 9",
-			coin: 900,
-			description: "این سوال تست نهم است",
-		},
-		{
-			title: "سوال 10",
-			coin: 1000,
-			description: "این سوال تست دهم است",
-		},
-		{
-			title: "سوال 11",
-			coin: 1100,
-			description: "این سوال تست یازدهم است",
-		},
-		{
-			title: "سوال 12",
-			coin: 1200,
-			description: "این سوال تست دوازدهم است",
-		},
-		{
-			title: "سوال 13",
-			coin: 1300,
-			description: "این سوال تست سیزدهم است",
-		},
-		{
-			title: "سوال 14",
-			coin: 1400,
-			description: "این سوال تست چهاردهم است",
-		},
-		{
-			title: "سوال 15",
-			coin: 1500,
-			description: "این سوال تست پانزدهم است",
-		},
-		{
-			title: "سوال 16",
-			coin: 1600,
-			description: "این سوال تست شانزدهم است",
-		},
-		{
-			title: "سوال 17",
-			coin: 1700,
-			description: "این سوال تست هفدهم است",
-		},
-		{
-			title: "سوال 18",
-			coin: 1800,
-			description: "این سوال تست هجدهم است",
-		},
-		{
-			title: "سوال 19",
-			coin: 1900,
-			description: "این سوال تست نوزدهم است",
-		},
-		{
-			title: "سوال 20",
-			coin: 2000,
-			description: "این سوال تست بیستم است",
-		},
-	];
 
 	return (
 		<>
@@ -200,13 +88,12 @@ const Home = () => {
 							))}
 						</div>
 					) : (
-						// TODO: implement question card exactly as figma
-						// TODO: implement show more button to if click more question showed
-						// if change grid positions or margins please fix skeleton to match as grid
-						<QuestionGrid questions={currentQuestions} />
+						/* TODO: implement question card exactly as figma */
+						/* TODO: implement show more button to if click more question showed */
+						/* if change grid positions or margins please fix skeleton to match as grid */
+						<QuestionGrid questions={data.current_node.data} />
 					)}
 				</div>
-
 				<div className="mt-20">
 					<Footer isPageFooter={true} />
 				</div>
