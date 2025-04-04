@@ -5,6 +5,7 @@ import {
 	Footer,
 	Layout,
 	LottieAnim,
+	Toast,
 } from "./chore";
 
 // Auth components
@@ -29,6 +30,7 @@ export {
 	Footer,
 	Layout,
 	LottieAnim,
+	Toast,
 
 	// Auth
 	AuthComponent,
