@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Autocomplete, TextField } from "@mui/material";
-import { useQuestionStore, useNewsStore } from "../../../services";
+import { useFetchData } from "../../../hooks";
 import searchIcon from "../../../assets/images/SearchIcon.png";
 
 const SearchBar = ({ width = "535px", isQuestionSearchBar = true }) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState([]);
-
-	const { getQuestions } = useQuestionStore();
-	const { getNews } = useNewsStore();
+	const { fetchData } = useFetchData();
 
 	useEffect(() => {
-		setOptions(isQuestionSearchBar ? getQuestions() : getNews());
-	}, [isQuestionSearchBar, getQuestions, getNews]);
+		const fetchInitialData = async () => {
+			try {
+				const response = isQuestionSearchBar
+					? await fetchData(
+							window.location.pathname === "/"
+								? "https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9"
+								: "https://mocki.io/v1/72c8396c-45fd-4930-a663-421d8a4e22c8"
+						)
+					: await fetchData(
+							"https://mocki.io/v1/72c8396c-45fd-4930-a663-421d8a4e22c8"
+						);
+				if (response && response.current_node && response.current_node.data) {
+					setOptions(response.current_node.data);
+				} else {
+					setOptions([]);
+				}
+			} catch (error) {
+				console.error("Error fetching initial data:", error);
+			}
+		};
+		fetchInitialData();
+	}, [isQuestionSearchBar]);
 
 	const handleSearch = (e) => {
 		if (e.key === "Enter") {
