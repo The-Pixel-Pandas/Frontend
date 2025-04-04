@@ -42,11 +42,13 @@ const Comment = ({ users }) => {
 				dir="rtl"
 			>
 				<div className="flex flex-col gap-6 w-full">
+					{/* Title */}
 					<div className="text-white font-MorabbaMedium text-lg relative mr-5">
 						<span className="relative after:content-[''] after:absolute after:right-0 after:w-full after:h-[2px] after:bg-white after:bottom-[-9px]">
 							نظرات کاربران
 						</span>
 					</div>
+					{/* Input */}
 					<div
 						className="relative ml-10 w-full"
 						style={{ width: 927, height: 47 }}
@@ -73,6 +75,7 @@ const Comment = ({ users }) => {
 							ثبت
 						</button>
 					</div>
+					{/* Comments */}
 					<div className=" overflow-y-scroll max-h-[250px] no-scrollbar">
 						<div className="flex flex-col gap-5">
 							{users.map((user) => (

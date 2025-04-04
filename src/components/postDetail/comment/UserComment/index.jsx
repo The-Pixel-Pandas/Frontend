@@ -36,6 +36,7 @@ const UserComment = ({
 	return (
 		<>
 			<div className="flex flex-row gap-4">
+				{/* Avatar */}
 				<button onClick={openPopUp} className="focus:outline-none mb-10 mr-10">
 					<img
 						src={getAvatarByNumber(avatarNumber)}
@@ -43,18 +44,22 @@ const UserComment = ({
 						style={{ width: 50, height: 50 }}
 					/>
 				</button>
+				{/* User Comment Box */}
 				<div className="relative">
+					{/* User Comment Box Image */}
 					<img
 						src={userCommentBox}
 						alt="userCommentBox"
 						style={{ width: 759, height: 117 }}
 					/>
+					{/* User Comment Texts */}
 					<div className="absolute top-2 right-4">
 						<div className="flex flex-col gap-2 text-white font-MorabbaMedium text-lg">
 							<span>{name}</span>
 							<span className="text-gray-400 mr-2">{comment}</span>
 						</div>
 					</div>
+					{/* Likes */}
 					<div className="absolute bottom-4 left-4 flex flex-row gap-2 items-center">
 						<span className="text-white font-MorabbaMedium">{likesCount}</span>
 						<button
@@ -74,7 +79,7 @@ const UserComment = ({
 					</div>
 				</div>
 			</div>
-
+			{/* Profile Popup */}
 			<ProfilePopupOverlay
 				show={showProfile}
 				avatarNumber={avatarNumber}

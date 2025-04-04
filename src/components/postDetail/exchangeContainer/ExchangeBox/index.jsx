@@ -25,16 +25,19 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		<>
 			<div className="flex justify-center items-center flex-col mt-5">
 				<div className="relative ">
+					{/* Yes/No Percentage */}
 					<div className="flex flex-col gap-14 absolute inset-0 top-16">
 						<PercentageButton percentage={yesPercentage} text="بله" />
 						<PercentageButton percentage={noPercentage} text="نه" />
 					</div>
 
+					{/* Title */}
 					<div className="absolute right-5 top-2 flex flex-row items-center gap-2">
 						<span className="text-white font-MorabbaRegular text-lg">خرید</span>
 						<img src={drop} alt="drop" style={{ width: 15, height: 15 }} />
 					</div>
 
+					{/* Coin Input */}
 					<div className="absolute inset-0 top-1/2 flex items-center justify-center mb-10">
 						<div className="flex flex-row gap-5">
 							<button
@@ -72,11 +75,11 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 							</button>
 						</div>
 					</div>
-
+					{/* Exchange Button */}
 					<div className="absolute inset-0 top-1/2 flex items-center justify-center mt-20">
 						<button
 							type="button"
-							className="focus:outline-none hover:opacity-90"
+							className="focus:outline-none hover:opacity-85"
 							onClick={handleExchange}
 						>
 							<div className="relative">
@@ -93,7 +96,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 							</div>
 						</button>
 					</div>
-
+					{/* Background Image */}
 					<img
 						src={exchangeBoxContainer}
 						alt="exchangeBoxContainer"
