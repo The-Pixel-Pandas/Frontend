@@ -64,6 +64,7 @@ function App() {
 						</Layout>
 					}
 				>
+					<Route index element={<UserProfile />} />
 					<Route path="userProfile" element={<UserProfile />} />
 					<Route path="userInfo" element={<UserInfo />} />
 					<Route path="wallet" element={<Wallet />} />
