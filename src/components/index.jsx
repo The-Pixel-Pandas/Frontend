@@ -24,6 +24,8 @@ import { PostDetail } from "./postDetail";
 // Profile Popup components
 import { PublicProfilePopup } from "./profilePopup";
 
+import { ProfileInfoContainer } from "./dashboard";
+
 export {
 	// Chore
 	AudioPlayer,
@@ -48,4 +50,7 @@ export {
 
 	// Profile Popup
 	PublicProfilePopup,
+
+	// Dashboard
+	ProfileInfoContainer,
 };
