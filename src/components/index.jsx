@@ -6,6 +6,7 @@ import {
 	Layout,
 	LottieAnim,
 	Toast,
+	UserAvatar,
 } from "./chore";
 
 // Auth components
@@ -31,6 +32,7 @@ export {
 	Layout,
 	LottieAnim,
 	Toast,
+	UserAvatar,
 
 	// Auth
 	AuthComponent,
