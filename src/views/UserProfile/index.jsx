@@ -2,7 +2,6 @@ import React from "react";
 import { UserAvatar } from "../../components";
 import medalBox from "../../assets/images/medalBox.png";
 import { ProfileInfoContainer } from "../../components";
-import infoContainer from "../../assets/images/infoContainer.png";
 
 const UserProfile = () => {
 	return (
@@ -28,18 +27,26 @@ const UserProfile = () => {
 				<div className="top-1/2 left-0  mt-48 ml-40">
 					<div className="relative">
 						<img src={medalBox} alt="medalBox" />
+						<div className="absolute inset-0 top-1 left-[330px]">
+							<div className="text-white font-MorabbaMedium text-lg">
+								مدال های کسب شده
+							</div>
+						</div>
 					</div>
 				</div>
 				{/* Info Container */}
 				<div className="flex flex-row gap-5 absolute top-1/2 left-0  mt-60 ml-40">
 					<div>
-						<ProfileInfoContainer />
+						<ProfileInfoContainer text="درصد پاسخ صحیح" amount={145} />
 					</div>
 					<div>
-						<ProfileInfoContainer />
+						<ProfileInfoContainer text="تعداد مشارکت" amount={145} />
 					</div>
 					<div>
-						<ProfileInfoContainer />
+						<ProfileInfoContainer
+							text="رتبه فعلی در جدول امتیازات"
+							amount={145}
+						/>
 					</div>
 				</div>
 			</div>
