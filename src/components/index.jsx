@@ -25,7 +25,7 @@ import { PostDetail } from "./postDetail";
 // Profile Popup components
 import { PublicProfilePopup } from "./profilePopup";
 
-import { ProfileInfoContainer } from "./dashboard";
+import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
 
 export {
 	// Chore
@@ -55,4 +55,5 @@ export {
 
 	// Dashboard
 	ProfileInfoContainer,
+	ProfileMedal,
 };

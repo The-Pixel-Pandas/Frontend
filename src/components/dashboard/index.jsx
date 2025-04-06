@@ -1,3 +1,4 @@
 import ProfileInfoContainer from "./ProfileInfoContainer";
+import ProfileMedal from "./ProfileMedal";
 
-export { ProfileInfoContainer };
+export { ProfileInfoContainer, ProfileMedal };

@@ -1,7 +1,7 @@
 import React from "react";
-import { UserAvatar } from "../../components";
+import { UserAvatar, ProfileInfoContainer } from "../../components";
 import medalBox from "../../assets/images/medalBox.png";
-import { ProfileInfoContainer } from "../../components";
+import { ProfileMedal } from "../../components";
 
 const UserProfile = () => {
 	return (
@@ -30,6 +30,19 @@ const UserProfile = () => {
 						<div className="absolute inset-0 top-1 left-[330px]">
 							<div className="text-white font-MorabbaMedium text-lg">
 								مدال های کسب شده
+							</div>
+						</div>
+						<div className="absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-4">
+							<div className="flex flex-row gap-5">
+								<div className="flex flex-col">
+									<ProfileMedal medalNumber={1} medalAmount={10} />
+								</div>
+								<div className="flex flex-col">
+									<ProfileMedal medalNumber={2} medalAmount={30} />
+								</div>
+								<div className="flex flex-col">
+									<ProfileMedal medalNumber={3} medalAmount={30} />
+								</div>
 							</div>
 						</div>
 					</div>
