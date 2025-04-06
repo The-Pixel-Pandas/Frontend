@@ -12,6 +12,7 @@ import {
 	Wallet,
 	Dashboard,
 	UserInfo,
+	Preloader,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components";
@@ -19,6 +20,7 @@ import { Layout } from "./components";
 function App() {
 	return (
 		<BrowserRouter>
+			<Preloader />
 			<AudioProvider />
 			<Routes>
 				{/* Home has special layout with landing page navbar */}
