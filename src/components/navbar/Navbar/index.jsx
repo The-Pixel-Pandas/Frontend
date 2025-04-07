@@ -24,6 +24,17 @@ const Navbar = ({
 		setAuth(isAuthenticated);
 	}, [isAuthenticated]);
 
+	const shouldShowSearchBar = () => {
+		return (
+			(hasSearchBarItem &&
+				window.location.pathname === "/" &&
+				!window.location.pathname.includes("/[0-9]+")) ||
+			(hasSearchBarItem &&
+				window.location.pathname === "/news" &&
+				!window.location.pathname.includes("/news/[0-9]+"))
+		);
+	};
+
 	return (
 		<>
 			{/* Logo */}
@@ -43,7 +54,7 @@ const Navbar = ({
 					</div>
 				</div>
 				<div className="flex flex-1 ml-10">
-					<div className={hasSearchBarItem ? "" : "hidden"}>
+					<div className={shouldShowSearchBar() ? "" : "hidden"}>
 						<SearchBar
 							width="535px"
 							isQuestionSearchBar={isQuestionSearchBar}

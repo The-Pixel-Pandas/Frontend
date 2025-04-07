@@ -10,6 +10,7 @@ import AudioProvider from "./AudioProvider";
 import Game from "./Game";
 import Dashboard from "./Dashboard";
 import UserInfo from "./UserInfo";
+import Preloader from "./PreLoader";
 
 export {
 	Home,
@@ -24,4 +25,5 @@ export {
 	Game,
 	Dashboard,
 	UserInfo,
+	Preloader,
 };

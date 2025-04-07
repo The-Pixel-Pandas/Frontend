@@ -6,6 +6,8 @@ import {
 	Layout,
 	LottieAnim,
 	Toast,
+	UserAvatar,
+	PreLoader,
 } from "./chore";
 
 // Auth components
@@ -23,6 +25,8 @@ import { PostDetail } from "./postDetail";
 // Profile Popup components
 import { PublicProfilePopup } from "./profilePopup";
 
+import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
+
 export {
 	// Chore
 	AudioPlayer,
@@ -31,6 +35,8 @@ export {
 	Layout,
 	LottieAnim,
 	Toast,
+	UserAvatar,
+	PreLoader,
 
 	// Auth
 	AuthComponent,
@@ -46,4 +52,8 @@ export {
 
 	// Profile Popup
 	PublicProfilePopup,
+
+	// Dashboard
+	ProfileInfoContainer,
+	ProfileMedal,
 };
