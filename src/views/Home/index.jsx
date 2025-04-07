@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Pagination } from "@mui/material";
 import { httpService } from "../../services";
 import { useFetchData } from "../../hooks";
 import { Footer, CategoryFilter, PostDetail, Toast } from "../../components";
@@ -10,20 +10,30 @@ const Home = () => {
 	const { fetchData, data, isLoading, error } = useFetchData();
 	const [questionData, setQuestionData] = useState(null);
 	const [usersData, setUsersData] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
 	const { questionId } = useParams();
 
+	const handleChangePage = (event, page) => {
+		setPageNumber(page);
+		handleQuestionAPI(
+			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${page}`
+		);
+		event.preventDefault();
+	};
+
+	const handleQuestionAPI = async (url) => {
+		try {
+			const response = await fetchData(url);
+			console.log("Fetched data:", response);
+		} catch (error) {
+			console.error("Error fetching initial data:", error);
+		}
+	};
+
 	useEffect(() => {
-		const fetchInitialData = async () => {
-			try {
-				const response = await fetchData(
-					"https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9"
-				);
-				console.log("Fetched data:", response);
-			} catch (error) {
-				console.error("Error fetching initial data:", error);
-			}
-		};
-		fetchInitialData();
+		handleQuestionAPI(
+			"https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9"
+		);
 	}, []);
 
 	useEffect(() => {
@@ -88,14 +98,36 @@ const Home = () => {
 							))}
 						</div>
 					) : (
-						/* TODO: implement question card exactly as figma */
-						/* TODO: implement show more button to if click more question showed */
-						/* if change grid positions or margins please fix skeleton to match as grid */
 						<QuestionGrid questions={data.current_node.data} />
 					)}
 				</div>
-				<div className="mt-20">
-					<Footer isPageFooter={true} />
+
+				<div>
+					<div className="flex justify-center mb-48">
+						<Pagination
+							boundaryCount={1}
+							page={pageNumber}
+							onChange={handleChangePage}
+							shape="rounded"
+							siblingCount={1}
+							count={2}
+							color="primary"
+							size="large"
+							variant="text"
+							sx={{
+								"& .MuiPaginationItem-root": {
+									color: "#fff",
+									"&.Mui-selected": {
+										color: "#fff",
+										borderColor: "#fff",
+									},
+								},
+							}}
+						/>
+					</div>
+					<div>
+						<Footer isPageFooter={true} />
+					</div>
 				</div>
 			</>
 		</>
