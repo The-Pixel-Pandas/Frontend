@@ -1,38 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import UserComment from "../UserComment";
 import submitComment from "../../../../assets/images/submitComment.png";
-import { httpService } from "../../../../services";
+import { useProfileStore } from "../../../../services";
+// import { httpService } from "../../../../services";
 
 const Comment = ({ users }) => {
-	const [comment, setComment] = React.useState("");
-	const getUserInfoAPI = async () => {
-		try {
-			const response = await httpService.get(
-				`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`
-			);
-			return response.data.user;
-		} catch (err) {
-			console.error("Failed to fetch user info:", err);
-		}
+	const [comment, setComment] = useState("");
+
+	// const getUserInfoAPI = async () => {
+	// 	try {
+	// 		const response = await httpService.get(
+	// 			`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`
+	// 		);
+	// 		return response.data.user;
+	// 	} catch (err) {
+	// 		console.error("Failed to fetch user info:", err);
+	// 	}
+	// };
+
+	const setCommentAPI = async () => {
+		// try {
+		// 	const response = await httpService.post(
+		// 		`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`,
+		// 		{
+		// 			comment: comment,
+		// 		}
+		// 	);
+		// 	return response.data;
+		// } catch (err) {
+		// 	console.error("Failed to set comment:", err);
+		// }
 	};
+
 	const addComment = async () => {
-		const response = await getUserInfoAPI();
+		// const response = await getUserInfoAPI();
+		const { avatarNumber, name, biography, transaction, volume, rank, medals } =
+			useProfileStore.getState();
 
 		users.push({
 			id: users.length + 1,
 			comment: comment,
 			likesNumber: 0,
-			avatarNumber: response.avatarNumber,
-			name: response.name,
-			coinAmount: response.coinAmount,
-			biography: response.biography,
-			transaction: response.transaction,
-			volume: response.volume,
-			rank: response.rank,
-			medals: response.medals,
+			avatarNumber: avatarNumber,
+			name: name,
+			biography: biography,
+			transaction: transaction,
+			volume: volume,
+			rank: rank,
+			medals: medals,
 		});
 		setComment("");
+		setCommentAPI();
 	};
 
 	return (
@@ -68,7 +87,7 @@ const Comment = ({ users }) => {
 						/>
 						<button
 							type="submit"
-							className="absolute left-0 top-0 w-[54px] h-full z-10 focus:outline-none text-[#CFAEEF] font-MorabbaMedium text-xl ml-3"
+							className="absolute left-0 top-0 w-[54px] h-full z-10 focus:outline-none text-[#CFAEEF] font-MorabbaMedium text-xl ml-3 hover:scale-125 transition-transform"
 							dir="rtl"
 							onClick={addComment}
 						>
@@ -85,7 +104,6 @@ const Comment = ({ users }) => {
 									height={75}
 									avatarNumber={user.avatarNumber}
 									name={user.name}
-									coinAmount={user.coinAmount}
 									biography={user.biography}
 									transaction={user.transaction}
 									volume={user.volume}
