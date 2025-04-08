@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useAuthStore, eventHandler } from "../../../services";
+import { useAuthStore, eventHandler, useTokenStore } from "../../../services";
 import axios from "axios";
 import googleButton from "../../../assets/images/googleButton.png";
 
 const GoogleVerification = ({ width, height, verificationType }) => {
 	const { setUser, setLoading, setError, setLoginMessage } = useAuthStore();
+	const { setToken } = useTokenStore();
 
 	const handleLoginSuccess = async (credentialResponse) => {
 		try {
@@ -21,9 +22,10 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 				}
 			);
 			const { email } = response.data;
-
-			setUser(email);
-			localStorage.setItem("userEmail", email);
+			// Store User Info
+			setUser(email, credentialResponse.access_token);
+			setToken(credentialResponse.access_token);
+			// Set Login Message
 			setLoginMessage(`${verificationType} با موفقیت انجام شد`);
 		} catch (error) {
 			setError("خطا در دریافت اطلاعات کاربر");

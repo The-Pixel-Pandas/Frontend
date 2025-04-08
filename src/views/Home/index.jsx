@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { QuestionGrid } from "../../components";
-import { Skeleton, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { httpService } from "../../services";
 import { useFetchData } from "../../hooks";
-import { Footer, CategoryFilter, PostDetail, Toast } from "../../components";
+import {
+	Footer,
+	CategoryFilter,
+	PostDetail,
+	Toast,
+	HomeSkeleton,
+} from "../../components";
 import { useParams } from "react-router-dom";
 
 const Home = () => {
@@ -14,6 +20,7 @@ const Home = () => {
 	const [pageNumber, setPageNumber] = useState(1);
 	const { questionId } = useParams();
 	const [activeCategory, setActiveCategory] = useState("همه موارد");
+	const [totalPages, setTotalPages] = useState(0);
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
@@ -35,6 +42,7 @@ const Home = () => {
 			const response = await fetchData(url);
 			console.log("Fetched data:", response);
 			setInitialLoad(false);
+			setTotalPages(response.total_pages);
 		} catch (error) {
 			console.error("Error fetching initial data:", error);
 			setInitialLoad(false);
@@ -90,24 +98,7 @@ const Home = () => {
 				<CategoryFilter onSelect={handleCategoryClick} />
 				<div className="flex mt-0 justify-center mb-10 pb-24">
 					{isLoading && initialLoad ? (
-						<div className="grid grid-cols-4 gap-4 ml-24 mr-24 ">
-							{[
-								1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-								19, 20,
-							].map((i) => (
-								<div className="mt-7" key={i}>
-									<Skeleton
-										variant="rect"
-										sx={{
-											bgcolor: "#171134",
-											borderRadius: "16px",
-											height: "170px",
-											width: "300px",
-										}}
-									/>
-								</div>
-							))}
-						</div>
+						<HomeSkeleton />
 					) : (
 						<QuestionGrid questions={data.current_node.data} />
 					)}
@@ -121,7 +112,7 @@ const Home = () => {
 							onChange={handleChangePage}
 							shape="rounded"
 							siblingCount={1}
-							count={2}
+							count={totalPages}
 							color="primary"
 							size="large"
 							variant="text"

@@ -25,6 +25,10 @@ import { PostDetail } from "./postDetail";
 // Profile Popup components
 import { PublicProfilePopup } from "./profilePopup";
 
+// Skeletons components
+import { HomeSkeleton } from "./skeletons";
+
+// Dashboard components
 import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
 
 export {
@@ -52,6 +56,9 @@ export {
 
 	// Profile Popup
 	PublicProfilePopup,
+
+	// Skeletons
+	HomeSkeleton,
 
 	// Dashboard
 	ProfileInfoContainer,

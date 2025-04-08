@@ -5,7 +5,12 @@ import { useAuthStore, eventHandler } from "../../../services";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../../chore/Toast";
-import { httpService, useCoinStore, useAvatarStore } from "../../../services";
+import {
+	httpService,
+	useCoinStore,
+	useAvatarStore,
+	useTokenStore,
+} from "../../../services";
 import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
 
@@ -21,6 +26,7 @@ const AuthComponent = ({ authType }) => {
 	} = useAuthStore();
 	const { setAvatarNumber } = useAvatarStore();
 	const { setCoin } = useCoinStore();
+	const { setToken } = useTokenStore();
 	const navigate = useNavigate();
 
 	const handleAuthAPI = (URL, data) => {
@@ -29,12 +35,17 @@ const AuthComponent = ({ authType }) => {
 			.then((res) => {
 				console.log("Login/Signin API response:", res);
 				if (res.status == "success") {
-					setUser(email, password, true);
+					// Store User Info
+					setUser(email, password);
 					setAvatarNumber(res.data.user.avatar);
 					setCoin(res.data.user.coinAmount);
+					setToken(res.data.token);
+					// Set Login Message
 					setLoginMessage(`${authType} با موفقیت انجام شد`);
 				} else {
+					// Store User Info
 					setUser(email, password, false, false);
+					// Set Login Message
 					setLoginMessage(res.message);
 					console.log(res.message);
 				}
