@@ -8,15 +8,24 @@ import { useParams } from "react-router-dom";
 
 const Home = () => {
 	const { fetchData, data, isLoading, error } = useFetchData();
+	const [initialLoad, setInitialLoad] = useState(true);
 	const [questionData, setQuestionData] = useState(null);
 	const [usersData, setUsersData] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
 	const { questionId } = useParams();
+	const [activeCategory, setActiveCategory] = useState("همه موارد");
+
+	const handleCategoryClick = (category) => {
+		setActiveCategory(category);
+		handleQuestionAPI(
+			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${category}`
+		);
+	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${page}`
+			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${page}&_category=${activeCategory}`
 		);
 		event.preventDefault();
 	};
@@ -25,8 +34,10 @@ const Home = () => {
 		try {
 			const response = await fetchData(url);
 			console.log("Fetched data:", response);
+			setInitialLoad(false);
 		} catch (error) {
 			console.error("Error fetching initial data:", error);
+			setInitialLoad(false);
 		}
 	};
 
@@ -76,9 +87,9 @@ const Home = () => {
 	return (
 		<>
 			<>
-				<CategoryFilter />
+				<CategoryFilter onSelect={handleCategoryClick} />
 				<div className="flex mt-0 justify-center mb-10 pb-24">
-					{isLoading ? (
+					{isLoading && initialLoad ? (
 						<div className="grid grid-cols-4 gap-4 ml-24 mr-24 ">
 							{[
 								1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
@@ -103,7 +114,7 @@ const Home = () => {
 				</div>
 
 				<div>
-					<div className="flex justify-center mb-48">
+					<div className="flex justify-center mb-10">
 						<Pagination
 							boundaryCount={1}
 							page={pageNumber}
