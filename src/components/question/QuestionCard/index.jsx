@@ -11,22 +11,19 @@ const QuestionCard = ({ question, width = 300, height = 160 }) => {
 			<div style={{ width, height }} className="mt-7">
 				<button onClick={() => navigate(`/${question.id}`)}>
 					<div className="flex relative flex-col">
-						<div
-							className="absolute z-10 text-white font-Lalezar text-3xl"
-							style={{
-								top: "50%",
-								left: "50%",
-								transform: "translate(-50%, -50%)",
-							}}
-						>
+						<div className="absolute z-10 text-white font-MorabbaMedium text-lg top-5 right-5">
 							<p>{question.title}</p>
 						</div>
-						<div className="absolute bottom-0 right-0 flex items-center ">
-							<span className="text-white font-Lalezar text-xl">پانداکوین</span>
-							<span className="text-white font-Lalezar text-3xl">
-								{question.coin}
+						<div className="absolute bottom-0 right-0 flex items-center flex-row gap-1">
+							<span className="text-white font-MorabbaMedium text-lg">
+								پانداکوین&nbsp;
 							</span>
-							<img src={coinLogo} alt="coinLogo" />
+							<span className="text-white font-MorabbaMedium text-lg">
+								{question.coin.toLocaleString("fa")}
+							</span>
+							<div>
+								<img src={coinLogo} alt="coinLogo" />
+							</div>
 						</div>
 						<img src={questionBox} alt="questionBox" />
 					</div>

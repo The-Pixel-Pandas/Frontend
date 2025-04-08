@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-// TODO: Add store for categories to get active category in other component
 const categories = [
 	"همه موارد",
 	"ورزشی",
@@ -13,8 +12,13 @@ const categories = [
 	"موسیقی",
 ];
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ onSelect }) => {
 	const [activeCategory, setActiveCategory] = useState(categories[0]);
+
+	const handleCategoryClick = (category) => {
+		setActiveCategory(category);
+		onSelect(category);
+	};
 
 	return (
 		<div className="flex p-4 mr-24" dir="rtl">
@@ -24,9 +28,7 @@ const CategoryFilter = () => {
 					className={`px-6 py-2 transition-all duration-300 relative rounded-full text-lg font-MorabbaMedium ${
 						activeCategory === category ? "text-white" : "text-purple-500"
 					}`}
-					onClick={() => {
-						setActiveCategory(category);
-					}}
+					onClick={() => handleCategoryClick(category)}
 				>
 					{category}
 					<div
