@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import avatar1 from "../../../assets/images/Avatars/user01.png";
 import avatar2 from "../../../assets/images/Avatars/user02.png";
 import avatar3 from "../../../assets/images/Avatars/user03.png";
@@ -19,13 +20,21 @@ const avatars = [
 	avatar8,
 ];
 
-const useAvatarStore = create((set, get) => ({
-	avatars: avatars,
-	avatarNumber: 1,
-	setAvatarNumber: (avatarNumber) => set({ avatarNumber: avatarNumber }),
-	getAvatarNumber: () => get().avatarNumber,
-	getAvatarSrc: () => avatars[get().avatarNumber - 1],
-	getAvatarByNumber: (avatarNumber) => avatars[avatarNumber - 1],
-}));
+const useAvatarStore = create(
+	persist(
+		(set, get) => ({
+			avatars: avatars,
+			avatarNumber: 1,
+			setAvatarNumber: (avatarNumber) => set({ avatarNumber: avatarNumber }),
+			getAvatarNumber: () => get().avatarNumber,
+			getAvatarSrc: () => avatars[get().avatarNumber - 1],
+			getAvatarByNumber: (avatarNumber) => avatars[avatarNumber - 1],
+		}),
+		{
+			name: "avatar-storage",
+			getStorage: () => localStorage,
+		}
+	)
+);
 
 export default useAvatarStore;
