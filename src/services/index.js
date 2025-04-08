@@ -7,6 +7,8 @@ import useCoinStore from "./stores/coinStore";
 import useQuestionStore from "./stores/questionStore";
 import useNewsStore from "./stores/newsStore";
 import useMedalStore from "./stores/medalStore";
+import useTokenStore from "./stores/tokenStore";
+import useProfileStore from "./stores/profileStore";
 
 export {
 	httpService,
@@ -18,4 +20,6 @@ export {
 	useQuestionStore,
 	useNewsStore,
 	useMedalStore,
+	useTokenStore,
+	useProfileStore,
 };

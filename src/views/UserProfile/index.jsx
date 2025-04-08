@@ -2,8 +2,16 @@ import React from "react";
 import { UserAvatar, ProfileInfoContainer } from "../../components";
 import medalBox from "../../assets/images/medalBox.png";
 import { ProfileMedal } from "../../components";
+// import { useProfileStore } from "../../services";
 
 const UserProfile = () => {
+	// TODO: after fix ui replace data with this parameters
+	// const { avatarNumber, name, biography, transaction, volume, rank, medals } =
+	// 	useProfileStore.getState();
+	// const goldMedal = medals.filter((medal) => medal === 1);
+	// const silverMedal = medals.filter((medal) => medal === 2);
+	// const bronzeMedal = medals.filter((medal) => medal === 3);
+
 	return (
 		<>
 			{/* Header */}
@@ -35,13 +43,13 @@ const UserProfile = () => {
 						<div className="absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-4">
 							<div className="flex flex-row gap-5">
 								<div className="flex flex-col">
-									<ProfileMedal medalNumber={1} medalAmount={10} />
+									<ProfileMedal medalNumber={1} medalAmount={4} />
 								</div>
 								<div className="flex flex-col">
-									<ProfileMedal medalNumber={2} medalAmount={30} />
+									<ProfileMedal medalNumber={2} medalAmount={2} />
 								</div>
 								<div className="flex flex-col">
-									<ProfileMedal medalNumber={3} medalAmount={30} />
+									<ProfileMedal medalNumber={3} medalAmount={4} />
 								</div>
 							</div>
 						</div>
