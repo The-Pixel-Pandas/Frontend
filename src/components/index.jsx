@@ -31,6 +31,8 @@ import { HomeSkeleton } from "./skeletons";
 // Dashboard components
 import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
 
+import { SearchBar } from "./navbar";
+
 export {
 	// Chore
 	AudioPlayer,
@@ -63,4 +65,7 @@ export {
 	// Dashboard
 	ProfileInfoContainer,
 	ProfileMedal,
+
+	// Navbar elements
+	SearchBar,
 };
