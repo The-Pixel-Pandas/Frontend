@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import SearchBar from "../SearchBar";
 import NavbarAuthBtn from "../NavbarAuthBtn";
 import { useNavigate } from "react-router-dom";
 import { useCoinStore, eventHandler } from "../../../services";
@@ -11,11 +10,7 @@ import news from "../../../assets/images/news.png";
 import leaderboard from "../../../assets/images/leaderboard.png";
 import logo from "../../../assets/images/logo.png";
 
-const Navbar = ({
-	hasSearchBarItem = true,
-	isAuthenticated = false,
-	isQuestionSearchBar = true,
-}) => {
+const Navbar = ({ isAuthenticated = false }) => {
 	const navigate = useNavigate();
 	const { getCoin } = useCoinStore();
 	const [isAuth, setAuth] = useState(isAuthenticated);
@@ -23,17 +18,6 @@ const Navbar = ({
 	useEffect(() => {
 		setAuth(isAuthenticated);
 	}, [isAuthenticated]);
-
-	const shouldShowSearchBar = () => {
-		return (
-			(hasSearchBarItem &&
-				window.location.pathname === "/" &&
-				!window.location.pathname.includes("/[0-9]+")) ||
-			(hasSearchBarItem &&
-				window.location.pathname === "/news" &&
-				!window.location.pathname.includes("/news/[0-9]+"))
-		);
-	};
 
 	return (
 		<>
@@ -53,14 +37,7 @@ const Navbar = ({
 						پانداهای پیکسلی
 					</div>
 				</div>
-				<div className="flex flex-1 ml-10">
-					<div className={shouldShowSearchBar() ? "" : "hidden"}>
-						<SearchBar
-							width="535px"
-							isQuestionSearchBar={isQuestionSearchBar}
-						/>
-					</div>
-				</div>
+				<div className="flex flex-1 ml-10"></div>
 				{/* User Buttons */}
 				<div className="flex flex-row mr-10">
 					<button

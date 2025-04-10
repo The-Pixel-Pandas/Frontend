@@ -9,6 +9,7 @@ import {
 	PostDetail,
 	Toast,
 	HomeSkeleton,
+	SearchBar,
 } from "../../components";
 import { useParams } from "react-router-dom";
 
@@ -21,6 +22,13 @@ const Home = () => {
 	const { questionId } = useParams();
 	const [activeCategory, setActiveCategory] = useState("همه موارد");
 	const [totalPages, setTotalPages] = useState(0);
+
+	const handleSearch = (searchText) => {
+		console.log("Searched!", searchText);
+		handleQuestionAPI(
+			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+		);
+	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
@@ -95,7 +103,13 @@ const Home = () => {
 	return (
 		<>
 			<>
+				{/* SearchBar */}
+				<div className="absolute top-0 left-0 ml-80 mt-8">
+					<SearchBar width="535px" searchAction={handleSearch} />
+				</div>
+				{/* CategoryFilter */}
 				<CategoryFilter onSelect={handleCategoryClick} />
+				{/* Questions Layout */}
 				<div className="flex mt-0 justify-center mb-10 pb-24">
 					{isLoading && initialLoad ? (
 						<HomeSkeleton />
@@ -103,7 +117,7 @@ const Home = () => {
 						<QuestionGrid questions={data.current_node.data} />
 					)}
 				</div>
-
+				{/* Pagination */}
 				<div>
 					<div className="flex justify-center mb-10">
 						<Pagination
@@ -127,6 +141,7 @@ const Home = () => {
 							}}
 						/>
 					</div>
+					{/* Footer */}
 					<div>
 						<Footer isPageFooter={true} />
 					</div>
