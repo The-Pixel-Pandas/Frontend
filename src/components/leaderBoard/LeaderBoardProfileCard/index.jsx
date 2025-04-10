@@ -23,20 +23,18 @@ const LeaderBoardProfileCard = ({
 
 	return (
 		<>
-			<div className="relative">
+			<div className="relative" onClick={openPopUp}>
 				<img
 					src={leaderBoardUserBox}
 					alt="leaderBoardUserBox"
 					style={{ width: width, height: height }}
 				/>
 				<div className="absolute top-0 right-0 mr-6 mt-2">
-					<button onClick={openPopUp}>
-						<img
-							src={getAvatarByNumber(avatarNumber)}
-							alt="avatar"
-							style={{ width: 50, height: 50 }}
-						/>
-					</button>
+					<img
+						src={getAvatarByNumber(avatarNumber)}
+						alt="avatar"
+						style={{ width: 50, height: 50 }}
+					/>
 				</div>
 				<div className="absolute top-0 right-0 mr-20 mt-5">
 					<div className="text-white font-MorabbaMedium text-lg">{name}</div>

@@ -28,6 +28,9 @@ const Home = () => {
 		handleQuestionAPI(
 			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
 		);
+		// handleQuestionAPI(
+		// 	"https://mocki.io/v1/39306c41-5841-4cea-b447-e5c86fdd3680"
+		// );
 	};
 
 	const handleCategoryClick = (category) => {
@@ -35,6 +38,9 @@ const Home = () => {
 		handleQuestionAPI(
 			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${category}`
 		);
+		// handleQuestionAPI(
+		// 	"https://mocki.io/v1/76d7cf1f-432d-4c9c-923c-b79c6e4b15b6"
+		// );
 	};
 
 	const handleChangePage = (event, page) => {
@@ -42,6 +48,9 @@ const Home = () => {
 		handleQuestionAPI(
 			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${page}&_category=${activeCategory}`
 		);
+		// handleQuestionAPI(
+		// 	"https://mocki.io/v1/4f77a0f2-3604-4b37-9505-9f8a943951ef"
+		// );
 		event.preventDefault();
 	};
 
