@@ -27,7 +27,7 @@ function App() {
 				<Route
 					path="/"
 					element={
-						<Layout hasSearchBarItem={true} isQuestionSearchBar={true}>
+						<Layout>
 							<Home />
 						</Layout>
 					}
@@ -40,7 +40,7 @@ function App() {
 				<Route
 					path="/leaderBoard"
 					element={
-						<Layout hasSearchBarItem={false}>
+						<Layout>
 							<LeaderBoard />
 						</Layout>
 					}
@@ -49,7 +49,7 @@ function App() {
 				<Route
 					path="/news"
 					element={
-						<Layout hasSearchBarItem={true} isQuestionSearchBar={false}>
+						<Layout>
 							<News />
 						</Layout>
 					}
@@ -61,7 +61,7 @@ function App() {
 				<Route
 					path="/dashboard"
 					element={
-						<Layout hasSearchBarItem={false}>
+						<Layout>
 							<Dashboard />
 						</Layout>
 					}

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useCoinStore } from "../../../../services";
+import { Toast } from "../../../chore";
 import PercentageButton from "../PercentageButton";
 import exchangeBoxContainer from "../../../../assets/images/exchangeBoxContainer.png";
 import drop from "../../../../assets/images/drop.png";
@@ -10,6 +12,11 @@ import exchangeBtn from "../../../../assets/images/exchangeBtn.png";
 
 const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	const [coin, setCoin] = useState(10);
+	const [showToast, setShowToast] = useState(false);
+	const [isError, setIsError] = useState(false);
+	const [ToastMessage, setToastMessage] = useState("");
+	const { getCoin, removeCoin } = useCoinStore();
+
 	const increaseCoin = () => {
 		setCoin(coin + 1);
 	};
@@ -18,8 +25,31 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	};
 
 	const handleExchange = () => {
+		setShowToast(true);
+
+		if (getCoin() < coin) {
+			setIsError(true);
+			setToastMessage("تعداد پانداکوین کافی نیست");
+			return;
+		}
+
+		removeCoin(coin);
+		setIsError(false);
+		setToastMessage("مبادله با موفقیت انجام شد");
 		console.log("Exchange");
 	};
+
+	useEffect(() => {
+		if (ToastMessage) {
+			setTimeout(() => {
+				setToastMessage("");
+				setShowToast(false);
+			}, 2000);
+		}
+		return () => {
+			clearTimeout();
+		};
+	}, [ToastMessage, showToast]);
 
 	return (
 		<>
@@ -96,6 +126,25 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 							</div>
 						</button>
 					</div>
+					{/* Toasts */}
+					{showToast && isError && (
+						<div className="absolute inset-0">
+							<Toast
+								type="error"
+								message={ToastMessage}
+								position="bottom-left"
+							/>
+						</div>
+					)}
+					{showToast && !isError && (
+						<div className="absolute inset-0">
+							<Toast
+								type="success"
+								message={ToastMessage}
+								position="bottom-left"
+							/>
+						</div>
+					)}
 					{/* Background Image */}
 					<img
 						src={exchangeBoxContainer}
