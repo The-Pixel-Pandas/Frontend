@@ -77,6 +77,11 @@ const Comment = ({ users }) => {
 							placeholder="نظرات خود را ثبت کنید  ..."
 							value={comment}
 							onChange={(e) => setComment(e.target.value)}
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									addComment();
+								}
+							}}
 							className="placeholder:text-text-200 text-white font-MorabbaMedium text-xl pr-5 pl-20 py-3 bg-transparent relative z-10 focus:outline-none w-full"
 							dir="rtl"
 						/>
