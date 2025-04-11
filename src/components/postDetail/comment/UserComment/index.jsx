@@ -61,7 +61,9 @@ const UserComment = ({
 					</div>
 					{/* Likes */}
 					<div className="absolute bottom-4 left-4 flex flex-row gap-2 items-center">
-						<span className="text-white font-MorabbaMedium">{likesCount}</span>
+						<span className="text-white font-MorabbaMedium text-lg">
+							{likesCount.toLocaleString("fa")}
+						</span>
 						<button
 							type="button"
 							className="focus:outline-none"
