@@ -13,8 +13,8 @@ import {
 // Auth components
 import { AuthComponent } from "./auth";
 
-// Question components
-import { QuestionGrid } from "./question";
+// Card Component
+import { CardGrid } from "./card";
 
 // LeaderBoard components
 import { LeaderBoardTable } from "./leaderBoard";
@@ -31,6 +31,7 @@ import { HomeSkeleton } from "./skeletons";
 // Dashboard components
 import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
 
+// Navbar
 import { SearchBar } from "./navbar";
 
 export {
@@ -47,8 +48,8 @@ export {
 	// Auth
 	AuthComponent,
 
-	// Question
-	QuestionGrid,
+	// Card
+	CardGrid,
 
 	// LeaderBoard
 	LeaderBoardTable,

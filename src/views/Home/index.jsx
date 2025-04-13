@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { QuestionGrid } from "../../components";
 import { Pagination } from "@mui/material";
 import { httpService } from "../../services";
 import { useFetchData } from "../../hooks";
@@ -10,6 +9,7 @@ import {
 	Toast,
 	HomeSkeleton,
 	SearchBar,
+	CardGrid,
 } from "../../components";
 import { useParams } from "react-router-dom";
 
@@ -26,31 +26,22 @@ const Home = () => {
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
 		handleQuestionAPI(
-			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
 		);
-		// handleQuestionAPI(
-		// 	"https://mocki.io/v1/39306c41-5841-4cea-b447-e5c86fdd3680"
-		// );
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
 		handleQuestionAPI(
-			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${pageNumber}&_category=${category}`
+			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${pageNumber}&_category=${category}`
 		);
-		// handleQuestionAPI(
-		// 	"https://mocki.io/v1/76d7cf1f-432d-4c9c-923c-b79c6e4b15b6"
-		// );
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9?_page=${page}&_category=${activeCategory}`
+			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${page}&_category=${activeCategory}`
 		);
-		// handleQuestionAPI(
-		// 	"https://mocki.io/v1/4f77a0f2-3604-4b37-9505-9f8a943951ef"
-		// );
 		event.preventDefault();
 	};
 
@@ -68,7 +59,7 @@ const Home = () => {
 
 	useEffect(() => {
 		handleQuestionAPI(
-			"https://mocki.io/v1/c0b30442-ef1f-4a6c-9743-28663d7353d9"
+			"https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405"
 		);
 	}, []);
 
@@ -123,7 +114,7 @@ const Home = () => {
 					{isLoading && initialLoad ? (
 						<HomeSkeleton />
 					) : (
-						<QuestionGrid questions={data.current_node.data} />
+						<CardGrid items={data.current_node.data} />
 					)}
 				</div>
 				{/* Pagination */}
