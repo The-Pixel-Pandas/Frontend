@@ -26,21 +26,21 @@ const Home = () => {
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
 		handleQuestionAPI(
-			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
 		);
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
 		handleQuestionAPI(
-			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${pageNumber}&_category=${category}`
+			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${category}`
 		);
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405?_page=${page}&_category=${activeCategory}`
+			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${page}&_category=${activeCategory}`
 		);
 		event.preventDefault();
 	};
@@ -50,7 +50,7 @@ const Home = () => {
 			const response = await fetchData(url);
 			console.log("Fetched data:", response);
 			setInitialLoad(false);
-			setTotalPages(response.total_pages);
+			setTotalPages(response.current_node.total_pages);
 		} catch (error) {
 			console.error("Error fetching initial data:", error);
 			setInitialLoad(false);
@@ -59,7 +59,7 @@ const Home = () => {
 
 	useEffect(() => {
 		handleQuestionAPI(
-			"https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405"
+			"https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140"
 		);
 	}, []);
 
@@ -102,51 +102,49 @@ const Home = () => {
 
 	return (
 		<>
-			<>
-				{/* SearchBar */}
-				<div className="absolute top-0 left-0 ml-80 mt-8">
-					<SearchBar width="535px" searchAction={handleSearch} />
-				</div>
-				{/* CategoryFilter */}
-				<CategoryFilter onSelect={handleCategoryClick} />
-				{/* Questions Layout */}
-				<div className="flex mt-0 justify-center mb-10 pb-24">
-					{isLoading && initialLoad ? (
-						<HomeSkeleton />
-					) : (
-						<CardGrid items={data.current_node.data} />
-					)}
-				</div>
-				{/* Pagination */}
-				<div>
-					<div className="flex justify-center mb-10">
-						<Pagination
-							boundaryCount={1}
-							page={pageNumber}
-							onChange={handleChangePage}
-							shape="rounded"
-							siblingCount={1}
-							count={totalPages}
-							color="primary"
-							size="large"
-							variant="text"
-							sx={{
-								"& .MuiPaginationItem-root": {
+			{/* SearchBar */}
+			<div className="absolute top-0 left-0 ml-80 mt-8">
+				<SearchBar width="535px" searchAction={handleSearch} />
+			</div>
+			{/* CategoryFilter */}
+			<CategoryFilter onSelect={handleCategoryClick} />
+			{/* Questions Layout */}
+			<div className="flex mt-0 justify-center mb-10 pb-24">
+				{isLoading && initialLoad ? (
+					<HomeSkeleton />
+				) : (
+					<CardGrid items={data.current_node.data} />
+				)}
+			</div>
+			{/* Pagination */}
+			<div>
+				<div className="flex justify-center mb-10">
+					<Pagination
+						boundaryCount={1}
+						page={pageNumber}
+						onChange={handleChangePage}
+						shape="rounded"
+						siblingCount={1}
+						count={totalPages}
+						color="primary"
+						size="large"
+						variant="text"
+						sx={{
+							"& .MuiPaginationItem-root": {
+								color: "#fff",
+								"&.Mui-selected": {
 									color: "#fff",
-									"&.Mui-selected": {
-										color: "#fff",
-										borderColor: "#fff",
-									},
+									borderColor: "#fff",
 								},
-							}}
-						/>
-					</div>
-					{/* Footer */}
-					<div>
-						<Footer isPageFooter={true} />
-					</div>
+							},
+						}}
+					/>
 				</div>
-			</>
+				{/* Footer */}
+				<div>
+					<Footer isPageFooter={true} />
+				</div>
+			</div>
 		</>
 	);
 };
