@@ -55,10 +55,6 @@ const News = () => {
 		);
 	}
 
-	if (isLoading || initialLoad) {
-		return <HomeSkeleton />;
-	}
-
 	return (
 		<>
 			{/* SearchBar */}
