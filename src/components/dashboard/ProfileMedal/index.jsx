@@ -10,15 +10,23 @@ const ProfileMedal = ({ medalNumber, medalAmount }) => {
 	const { getMedalByNumber } = useMedalStore();
 	const medalBox = [goldBox, silverBox, bronzeBox];
 	return (
-		<>
-			<div className=" flex justify-center items-center ">
+		<div className="w-[300px] h-[136px] flex-shrink-0">
+			<div className="flex justify-center items-center">
 				<div className="relative flex justify-center items-center">
-					<img src={medalContainer} alt="medalContainer" style={{ width: 170, height: 150 }} />
+					<img
+						src={medalContainer}
+						alt="medalContainer"
+						style={{ width: 160, height: 140 }}
+					/>
 					<div className="flex justify-center items-center absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 						<img src={getMedalByNumber(medalNumber)} alt="goldMedal" />
 					</div>
 					<div className="flex justify-center items-center absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-[70px]">
-						<img src={medalBox[medalNumber - 1]} alt="goldBox" />
+						<img
+							src={medalBox[medalNumber - 1]}
+							alt="goldBox"
+							style={{ width: 100, height: 30 }}
+						/>
 						<div className="flex justify-center items-center absolute inset-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 							<div className="text-black/60 font-MorabbaBold text-lg">
 								{medalAmount.toLocaleString("fa")}
@@ -27,7 +35,7 @@ const ProfileMedal = ({ medalNumber, medalAmount }) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
