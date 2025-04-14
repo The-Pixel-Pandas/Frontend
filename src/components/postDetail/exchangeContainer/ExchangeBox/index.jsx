@@ -21,7 +21,9 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		setCoin(coin + 1);
 	};
 	const decreaseCoin = () => {
-		setCoin(coin - 1);
+		if (coin > 1) {
+			setCoin(coin - 1);
+		}
 	};
 
 	const handleExchange = () => {
