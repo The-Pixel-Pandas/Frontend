@@ -38,7 +38,7 @@ const Comment = ({ users }) => {
 		const { avatarNumber, name, biography, transaction, volume, rank, medals } =
 			useProfileStore.getState();
 
-		users.push({
+		users.unshift({
 			id: users.length + 1,
 			comment: comment,
 			likesNumber: 0,
