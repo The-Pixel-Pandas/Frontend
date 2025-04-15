@@ -15,6 +15,11 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	const [showToast, setShowToast] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [ToastMessage, setToastMessage] = useState("");
+	const [buttonPositions, setButtonPositions] = useState({
+		yes: true,
+		no: true,
+	});
+	const [exchangeType, setExchangeType] = useState("");
 	const { getCoin, removeCoin } = useCoinStore();
 
 	const increaseCoin = () => {
@@ -24,8 +29,38 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		setCoin(coin - 1);
 	};
 
+	const handleTogglePosition = (id) => {
+		setButtonPositions((prev) => {
+			if (prev[id]) {
+				const otherId = id === "yes" ? "no" : "yes";
+				return {
+					...prev,
+					[id]: false,
+					[otherId]: true,
+				};
+			} else {
+				return {
+					...prev,
+					[id]: true,
+				};
+			}
+		});
+		if (
+			(id == "yes" && buttonPositions.yes) ||
+			(id == "no" && buttonPositions.no)
+		) {
+			setExchangeType(id == "yes" ? "بله" : "نه");
+		}
+	};
+
 	const handleExchange = () => {
 		setShowToast(true);
+
+		if (buttonPositions.yes == true && buttonPositions.no == true) {
+			setIsError(true);
+			setToastMessage("لطفا ابتدا مورد مبادله را مشخص کنید");
+			return;
+		}
 
 		if (getCoin() < coin) {
 			setIsError(true);
@@ -35,8 +70,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 
 		removeCoin(coin);
 		setIsError(false);
-		setToastMessage("مبادله با موفقیت انجام شد");
-		console.log("Exchange");
+		setToastMessage(`مبادله با موفقیت روی "${exchangeType}" انجام شد`);
 	};
 
 	useEffect(() => {
@@ -57,8 +91,20 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 				<div className="relative ">
 					{/* Yes/No Percentage */}
 					<div className="flex flex-col gap-14 absolute inset-0 top-16">
-						<PercentageButton percentage={yesPercentage} text="بله" />
-						<PercentageButton percentage={noPercentage} text="نه" />
+						<PercentageButton
+							percentage={yesPercentage}
+							text="بله"
+							isRight={buttonPositions.yes}
+							onTogglePosition={handleTogglePosition}
+							id="yes"
+						/>
+						<PercentageButton
+							percentage={noPercentage}
+							text="نه"
+							isRight={buttonPositions.no}
+							onTogglePosition={handleTogglePosition}
+							id="no"
+						/>
 					</div>
 
 					{/* Title */}
