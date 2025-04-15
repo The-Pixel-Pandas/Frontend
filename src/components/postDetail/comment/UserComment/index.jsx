@@ -56,7 +56,12 @@ const UserComment = ({
 					<div className="absolute top-2 right-4">
 						<div className="flex flex-col gap-2 text-white font-MorabbaMedium text-lg">
 							<span>{name}</span>
-							<span className="text-gray-400 mr-2">{comment}</span>
+							<span
+								className="text-gray-400 mr-2 whitespace-pre-wrap break-words overflow-y-scroll no-scrollbar"
+								style={{ maxWidth: 659, maxHeight: 50 }}
+							>
+								{comment}
+							</span>
 						</div>
 					</div>
 					{/* Likes */}
