@@ -56,13 +56,31 @@ const UserInfo = () => {
 											<img
 												src={avatarBorder}
 												alt="avatarBorder"
-												className={`w-[75px] h-[76px] object-contain ${selectedAvatar === index ? "opacity-100" : "opacity-50"}`}
+												className={`w-[75px] h-[76px] object-contain ${selectedAvatar === index ? "opacity-100" : "hidden"}`}
 											/>
 										</div>
 									</div>
 								))}
 							</div>
 						</div>
+					</div>
+				</div>
+
+				{/* TODO: Use this template to implement other parts */}
+				<div className="flex flex-col gap-0.5">
+					<div className="text-white font-MorabbaMedium text-lg ml-96 pl-1">
+						نام کاربری
+					</div>
+
+					<div className="relative">
+						{/* TODO: Import correct source of that here */}
+						<img
+							src={avatarInfoContainer}
+							alt="avatarInfoContainer"
+							className="w-[500px] h-[100px]"
+						/>
+						{/* TODO: Add Input or dropdown and change className related usage */}
+						<div className="absolute inset-0 left-6 top-3 right-10 pr-2 "></div>
 					</div>
 				</div>
 			</div>
