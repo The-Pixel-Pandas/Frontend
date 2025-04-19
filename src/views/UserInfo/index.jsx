@@ -5,7 +5,7 @@ import avatarBorder from "../../assets/images/avatarBorder.png";
 import inputUser from "../../assets/images/inputUser.png";
 import dropDownIcon from "../../assets/images/dropDownIcon.png";
 import taskInfoContainer from "../../assets/images/taskInfoContainer.png";
-
+import inputBioUser from "../../assets/images/inputBioUser.png";
 const UserInfo = () => {
 	const { avatars, setAvatarNumber, getAvatarNumber } = useAvatarStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
@@ -215,7 +215,27 @@ const UserInfo = () => {
 						/>
 					</div>
 				</div>
+
+				{/* Bio Input */}
+				<div className="flex flex-col gap-0.5 mt-4 ml-72 ">
+					<div className="text-white font-MorabbaMedium text-lg ml-[50px] mb-0.5">
+						توضیح (بیوگرافی)
+					</div>
+					<div className="relative w-[200px] h-[150px]">
+						<img
+							src={inputBioUser}
+							alt="inputBioUser"
+							className="absolute inset-0 w-full h-full"
+						/>
+						<textarea
+							dir="rtl"
+							className="relative w-full h-full bg-transparent px-4 pt-3 outline-none text-white placeholder-white/70 z-10 resize-none"
+							style={{ verticalAlign: 'top' }}
+						/>
+					</div>
+				</div>
 			</div>
+
 			{/* Tasks */}
 			{/* <div className="absolute inset-0 left-0 mt-16">
 				<div className="relative">
