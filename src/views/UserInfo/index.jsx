@@ -4,7 +4,6 @@ import avatarInfoContainer from "../../assets/images/avatarInfoContainer.png";
 import avatarBorder from "../../assets/images/avatarBorder.png";
 import inputUser from "../../assets/images/inputUser.png";
 import dropDownIcon from "../../assets/images/dropDownIcon.png";
-import taskInfoContainer from "../../assets/images/taskInfoContainer.png";
 import inputBioUser from "../../assets/images/inputBioUser.png";
 const UserInfo = () => {
 	const { avatars, setAvatarNumber, getAvatarNumber } = useAvatarStore();
@@ -37,7 +36,7 @@ const UserInfo = () => {
 	return (
 		<>
 			{/* Right Inputs */}
-			<div className="absolute inset-0 left-1/2 -translate-x-1/2 mt-16 ml-40">
+			<div className="absolute inset-0 left-1/2 -translate-x-1/2 mt-16 ml-40 z-50">
 				{/* Avatar Selector */}
 				<div className="flex flex-col gap-0.5">
 					{/* Title */}
