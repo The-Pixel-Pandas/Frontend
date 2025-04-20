@@ -29,7 +29,12 @@ import { PublicProfilePopup } from "./profilePopup";
 import { HomeSkeleton } from "./skeletons";
 
 // Dashboard components
-import { ProfileInfoContainer, ProfileMedal } from "./dashboard";
+import {
+	ProfileInfoContainer,
+	ProfileMedal,
+	ProfileHeaderContainer,
+	UserInfoInput,
+} from "./dashboard";
 
 // Navbar
 import { SearchBar } from "./navbar";
@@ -66,6 +71,8 @@ export {
 	// Dashboard
 	ProfileInfoContainer,
 	ProfileMedal,
+	ProfileHeaderContainer,
+	UserInfoInput,
 
 	// Navbar elements
 	SearchBar,

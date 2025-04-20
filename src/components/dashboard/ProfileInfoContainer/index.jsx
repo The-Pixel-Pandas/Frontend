@@ -6,7 +6,11 @@ const ProfileInfoContainer = ({ text, amount }) => {
 	return (
 		<>
 			<div className="relative">
-				<img src={infoContainer} alt="infoContainer" />
+				<img
+					src={infoContainer}
+					alt="infoContainer"
+					style={{ width: 300, height: 150 }}
+				/>
 				<div className=" absolute inset-0 top-0 left-0">
 					<div className=" flex flex-col  gap-5 text-nowrap justify-center items-center">
 						<div className=" font-MorabbaMedium  text-white text-lg  mt-5">
@@ -14,7 +18,7 @@ const ProfileInfoContainer = ({ text, amount }) => {
 						</div>
 						<div className=" font-MorabbaMedium text-white text-lg  ">
 							{" "}
-							{amount}{" "}
+							{amount.toLocaleString("fa")}{" "}
 						</div>
 					</div>
 				</div>
