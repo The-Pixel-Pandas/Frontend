@@ -224,12 +224,12 @@ const UserInfo = () => {
 						<img
 							src={inputBioUser}
 							alt="inputBioUser"
-							className="absolute inset-0 w-full h-full"
+							className="absolute inset-0 w-full h-full "
 						/>
 						<textarea
 							dir="rtl"
-							className="relative w-full h-full bg-transparent px-4 pt-3 outline-none text-white placeholder-white/70 z-10 resize-none"
-							style={{ verticalAlign: 'top' }}
+							className="relative w-full h-[140px] mb-4 bg-transparent px-4 pt-3 outline-none text-white placeholder-white/70 z-10 resize-none no-scrollbar pt-4 pb-4"
+							style={{ verticalAlign: "top" }}
 						/>
 					</div>
 				</div>
