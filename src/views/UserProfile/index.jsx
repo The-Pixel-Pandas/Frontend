@@ -15,7 +15,6 @@ const UserProfile = () => {
 
 	return (
 		<>
-			{" "}
 			{/* Header Container */}
 			<div className="absolute">
 				<div className=" flex flex-row justify-between items-center gap-4 ml-40 mt-15">
