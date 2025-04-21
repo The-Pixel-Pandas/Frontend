@@ -32,7 +32,7 @@ const useAvatarStore = create(
 		}),
 		{
 			name: "avatar-storage",
-			getStorage: () => localStorage,
+			partialize: (state) => ({ avatarNumber: state.avatarNumber }),
 		}
 	)
 );

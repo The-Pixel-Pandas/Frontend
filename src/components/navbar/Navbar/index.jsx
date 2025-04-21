@@ -14,6 +14,12 @@ const Navbar = ({ isAuthenticated = false }) => {
 	const navigate = useNavigate();
 	const { getCoin } = useCoinStore();
 	const [isAuth, setAuth] = useState(isAuthenticated);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+	const handleSignOut = () => {
+		eventHandler.dispatchEvent("ClickSound");
+		navigate("/login");
+	};
 
 	useEffect(() => {
 		setAuth(isAuthenticated);
@@ -60,7 +66,8 @@ const Navbar = ({ isAuthenticated = false }) => {
 							className="mr-10 transition-transform hover:scale-105 outline-none"
 							onClick={() => {
 								eventHandler.dispatchEvent("ClickSound");
-								navigate("/dashboard");
+								if (isAuthenticated) navigate("/dashboard");
+								else navigate("/login");
 							}}
 						>
 							<img src={userProfile} alt="userProfile" />
@@ -99,10 +106,37 @@ const Navbar = ({ isAuthenticated = false }) => {
 				{/* Avatar */}
 				<div className={isAuth ? "" : "hidden"}>
 					<div className="flex flex-col items-center mr-10 relative">
+						{/* Coin */}
 						<div className="text-white font-Lalezar text-lg absolute mt-12">
 							{getCoin().toLocaleString("fa")}
 						</div>
-						<UserAvatar width={52} height={50} />
+						{/* Icon */}
+						<button
+							className="focus:outline-none -mr-2"
+							onClick={() => {
+								setIsDropdownOpen(!isDropdownOpen);
+							}}
+						>
+							<UserAvatar width={52} height={50} />
+						</button>
+						{/* Dropdown */}
+						<div
+							className={`${
+								isDropdownOpen ? "" : "hidden"
+							} absolute top-0 right-0 -mr-5 mt-[70px] bg-purple-950 rounded-xl p-2 hover:bg-purple-800 w-20`}
+						>
+							<button
+								className="focus:outline-none w-full"
+								onClick={() => {
+									handleSignOut();
+									setIsDropdownOpen(false);
+								}}
+							>
+								<div className="text-white font-MorabbaMedium  text-lg whitespace-nowrap text-center">
+									خروج
+								</div>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

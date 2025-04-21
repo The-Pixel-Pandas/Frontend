@@ -10,9 +10,27 @@ const axiosInstance = axios.create({
 	},
 });
 
+axiosInstance.interceptors.response.use(
+	(response) => {
+		return response;
+	},
+	(error) => {
+		const { response } = error;
+
+		if (response) {
+			if (response.status === 401) {
+				localStorage.removeItem("token-storage");
+				window.location = "/login";
+				return Promise.reject(error);
+			}
+		}
+		return Promise.reject(error);
+	}
+);
+
 axiosInstance.interceptors.request.use(
 	(config) => {
-		const token = localStorage.getItem("token");
+		const token = localStorage.getItem("token-storage");
 		if (token) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}

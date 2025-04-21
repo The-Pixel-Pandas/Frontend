@@ -20,7 +20,7 @@ const useAuthStore = create(
 			) =>
 				set({
 					email,
-					...(password && { password }),
+					...(password ? { password: "" } : {}),
 					isAuthenticated: isAuthenticated,
 					isSuccess: isSuccess,
 					isError: !isSuccess,
@@ -59,7 +59,10 @@ const useAuthStore = create(
 		}),
 		{
 			name: "auth-storage",
-			getStorage: () => localStorage,
+			partialize: (state) => ({
+				email: state.email,
+				isAuthenticated: state.isAuthenticated,
+			}),
 		}
 	)
 );
