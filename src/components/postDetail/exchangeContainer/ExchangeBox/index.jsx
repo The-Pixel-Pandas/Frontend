@@ -127,7 +127,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 						<div className="flex flex-row gap-5">
 							<button
 								onClick={decreaseCoin}
-								className="text-white font-MorabbaRegular text-lg"
+								className="text-white font-MorabbaRegular text-lg focus:outline-none hover:opacity-85 hover:scale-105 transition-all duration-300"
 							>
 								<img
 									src={decreaseButton}
@@ -150,7 +150,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 							</div>
 							<button
 								onClick={increaseCoin}
-								className="text-white font-MorabbaRegular text-lg"
+								className="text-white font-MorabbaRegular text-lg focus:outline-none hover:opacity-85 hover:scale-105 transition-all duration-300"
 							>
 								<img
 									src={increaseButton}
