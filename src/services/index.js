@@ -9,6 +9,7 @@ import useNewsStore from "./stores/newsStore";
 import useMedalStore from "./stores/medalStore";
 import useTokenStore from "./stores/tokenStore";
 import useProfileStore from "./stores/profileStore";
+import cacheService from "./cacheService";
 
 export {
 	httpService,
@@ -22,4 +23,5 @@ export {
 	useMedalStore,
 	useTokenStore,
 	useProfileStore,
+	cacheService,
 };

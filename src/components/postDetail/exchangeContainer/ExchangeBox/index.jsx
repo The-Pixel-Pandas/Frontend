@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useCoinStore } from "../../../../services";
+import { useCoinStore, useAuthStore } from "../../../../services";
 import { Toast } from "../../../chore";
 import PercentageButton from "../PercentageButton";
 import exchangeBoxContainer from "../../../../assets/images/exchangeBoxContainer.png";
@@ -21,6 +21,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	});
 	const [exchangeType, setExchangeType] = useState("");
 	const { getCoin, removeCoin } = useCoinStore();
+	const { isAuthenticated } = useAuthStore();
 
 	const increaseCoin = () => {
 		setCoin(coin + 1);
@@ -61,6 +62,12 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		if (buttonPositions.yes == true && buttonPositions.no == true) {
 			setIsError(true);
 			setToastMessage("لطفا ابتدا مورد مبادله را مشخص کنید");
+			return;
+		}
+
+		if (!isAuthenticated) {
+			setIsError(true);
+			setToastMessage("لطفا ابتدا وارد حساب کاربری شوید");
 			return;
 		}
 
@@ -157,7 +164,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 					<div className="absolute inset-0 top-1/2 flex items-center justify-center mt-20">
 						<button
 							type="button"
-							className="focus:outline-none hover:opacity-85"
+							className="focus:outline-none hover:opacity-85 hover:scale-105 transition-all duration-300"
 							onClick={handleExchange}
 						>
 							<div className="relative">

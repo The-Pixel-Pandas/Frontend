@@ -1,4 +1,5 @@
 import axios from "axios";
+import cacheService from "../cacheService";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
@@ -19,7 +20,7 @@ axiosInstance.interceptors.response.use(
 
 		if (response) {
 			if (response.status === 401) {
-				localStorage.removeItem("token-storage");
+				cacheService.resetAll();
 				window.location = "/login";
 				return Promise.reject(error);
 			}

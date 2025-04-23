@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import NavbarAuthBtn from "../NavbarAuthBtn";
 import { useNavigate } from "react-router-dom";
-import { useCoinStore, eventHandler } from "../../../services";
+import { useCoinStore, eventHandler, cacheService } from "../../../services";
 import UserAvatar from "../../chore/UserAvatar";
 import game from "../../../assets/images/game.png";
 import userProfile from "../../../assets/images/userProfile.png";
@@ -13,12 +13,13 @@ import logo from "../../../assets/images/logo.png";
 const Navbar = ({ isAuthenticated = false }) => {
 	const navigate = useNavigate();
 	const { getCoin } = useCoinStore();
+	const { resetAll } = cacheService;
 	const [isAuth, setAuth] = useState(isAuthenticated);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const handleSignOut = () => {
 		eventHandler.dispatchEvent("ClickSound");
-		navigate("/login");
+		resetAll();
 	};
 
 	useEffect(() => {
@@ -125,6 +126,7 @@ const Navbar = ({ isAuthenticated = false }) => {
 								isDropdownOpen ? "" : "hidden"
 							} absolute top-0 right-0 -mr-5 mt-[70px] bg-purple-950 rounded-xl p-2 hover:bg-purple-800 w-20`}
 						>
+							{/* Exit Button */}
 							<button
 								className="focus:outline-none w-full"
 								onClick={() => {

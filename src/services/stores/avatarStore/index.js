@@ -29,6 +29,7 @@ const useAvatarStore = create(
 			getAvatarNumber: () => get().avatarNumber,
 			getAvatarSrc: () => avatars[get().avatarNumber - 1],
 			getAvatarByNumber: (avatarNumber) => avatars[avatarNumber - 1],
+			reset: () => set({ avatarNumber: 1 }),
 		}),
 		{
 			name: "avatar-storage",
