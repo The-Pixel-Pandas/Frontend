@@ -12,7 +12,7 @@ const useProfileStore = create(
 			transaction: 0,
 			volume: 0,
 			rank: 0,
-			medals: [1, 2, 3, 3, 3, 3, 1, 1],
+			medals: [],
 
 			setAvatarNumber: (number) => {
 				useAvatarStore.getState().setAvatarNumber(number);
@@ -31,6 +31,16 @@ const useProfileStore = create(
 				set({ medals: medals });
 			},
 			getMedalSources: () => get().medals.map((medal) => medal.src),
+			reset: () =>
+				set({
+					avatarNumber: 1,
+					name: "نام کاربری",
+					biography: "توضیحات(بیوگرافی)",
+					transaction: 0,
+					volume: 0,
+					rank: 0,
+					medals: [],
+				}),
 		}),
 		{
 			name: "profile-storage",

@@ -6,6 +6,7 @@ const useTokenStore = create(
 		(set) => ({
 			token: null,
 			setToken: (token) => set({ token }),
+			reset: () => set({ token: null }),
 		}),
 		{
 			name: "token-storage",

@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserComment from "../UserComment";
 import submitComment from "../../../../assets/images/submitComment.png";
-import { useProfileStore } from "../../../../services";
+import { useProfileStore, useAuthStore } from "../../../../services";
+import { Toast } from "../../../../components";
 // import { httpService } from "../../../../services";
 
 const Comment = ({ users }) => {
 	const [comment, setComment] = useState("");
+	const [showToast, setShowToast] = useState(false);
+	const [ToastMessage, setToastMessage] = useState("");
 
 	// const getUserInfoAPI = async () => {
 	// 	try {
@@ -35,6 +38,12 @@ const Comment = ({ users }) => {
 
 	const addComment = async () => {
 		// const response = await getUserInfoAPI();
+		const { isAuthenticated } = useAuthStore.getState();
+		if (!isAuthenticated) {
+			setShowToast(true);
+			setToastMessage("لطفا ابتدا وارد حساب کاربری خود شوید");
+			return;
+		}
 		const { avatarNumber, name, biography, transaction, volume, rank, medals } =
 			useProfileStore.getState();
 
@@ -53,6 +62,16 @@ const Comment = ({ users }) => {
 		setComment("");
 		setCommentAPI();
 	};
+
+	useEffect(() => {
+		setToastMessage("");
+		setTimeout(() => {
+			setShowToast(false);
+		}, 2000);
+		return () => {
+			clearTimeout();
+		};
+	}, [ToastMessage]);
 
 	return (
 		<>
@@ -122,6 +141,12 @@ const Comment = ({ users }) => {
 					</div>
 				</div>
 			</div>
+			{/* Error Toast Handling */}
+			{showToast && (
+				<div className="absolute inset-0">
+					<Toast type="error" message={ToastMessage} position="bottom-left" />
+				</div>
+			)}
 		</>
 	);
 };

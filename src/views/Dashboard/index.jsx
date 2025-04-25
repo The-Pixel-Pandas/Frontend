@@ -1,15 +1,32 @@
-import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import dashboardButton from "../../assets/images/dashboardButton.png";
 import dashboardButtonBorder from "../../assets/images/dashboardButtonBorder.png";
 import dashboardContainer from "../../assets/images/dashboardContainer.png";
 
 const Dashboard = () => {
 	const [selectedButton, setSelectedButton] = useState(0);
+	const location = useLocation();
 
 	const handleClick = (index) => {
 		setSelectedButton(index);
 	};
+
+	useEffect(() => {
+		switch (location.pathname) {
+			case "/dashboard/userProfile":
+				setSelectedButton(0);
+				break;
+			case "/dashboard/userInfo":
+				setSelectedButton(1);
+				break;
+			case "/dashboard/wallet":
+				setSelectedButton(2);
+				break;
+			default:
+				break;
+		}
+	}, [location.pathname]);
 
 	return (
 		<>

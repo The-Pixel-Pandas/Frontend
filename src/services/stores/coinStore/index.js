@@ -9,6 +9,7 @@ const useCoinStore = create(
 			getCoin: () => get().coin,
 			addCoin: (coin) => set({ coin: get().coin + coin }),
 			removeCoin: (coin) => set({ coin: get().coin - coin }),
+			reset: () => set({ coin: 0 }),
 		}),
 		{
 			name: "coin-storage",
