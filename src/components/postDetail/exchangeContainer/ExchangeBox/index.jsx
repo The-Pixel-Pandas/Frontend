@@ -59,15 +59,15 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	const handleExchange = () => {
 		setShowToast(true);
 
-		if (buttonPositions.yes == true && buttonPositions.no == true) {
-			setIsError(true);
-			setToastMessage("لطفا ابتدا مورد مبادله را مشخص کنید");
-			return;
-		}
-
 		if (!isAuthenticated) {
 			setIsError(true);
 			setToastMessage("لطفا ابتدا وارد حساب کاربری شوید");
+			return;
+		}
+
+		if (buttonPositions.yes == true && buttonPositions.no == true) {
+			setIsError(true);
+			setToastMessage("لطفا ابتدا مورد مبادله را مشخص کنید");
 			return;
 		}
 
