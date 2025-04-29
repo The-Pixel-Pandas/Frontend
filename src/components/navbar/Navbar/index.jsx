@@ -7,7 +7,7 @@ import UserAvatar from "../../chore/UserAvatar";
 import game from "../../../assets/images/game.png";
 import userProfile from "../../../assets/images/userProfile.png";
 import news from "../../../assets/images/news.png";
-import leaderboard from "../../../assets/images/leaderboard.png";
+import leaderboard from "../../../assets/images/leaderBoard.png";
 import logo from "../../../assets/images/logo.png";
 
 const Navbar = ({ isAuthenticated = false }) => {
