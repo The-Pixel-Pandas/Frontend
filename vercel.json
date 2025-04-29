@@ -1,14 +1,8 @@
 {
   "routes": [
-    { "src": "/login", "dest": "/login" },
-    { "src": "/signup", "dest": "/signup" },
-    { "src": "/dashboard", "dest": "/dashboard" },
-    { "src": "/leaderboard", "dest": "/leaderboard" },
-    { "src": "/news", "dest": "/news" },
-    { "src": "/news/(.*)", "dest": "/news/[id]", "status": 200 },  
-    { "src": "/([0-9]+)", "dest": "/[id]", "status": 200 },      
-    { "src": "/([0-9]+)/(.*)", "dest": "/[id]/[slug]", "status": 200 },
-    { "src": "/", "dest": "/" },
-    { "src": "/(.*)", "dest": "*" }
+    {
+      "src": "/[^.]+",
+      "dest": "/"
+    }
   ]
 }
