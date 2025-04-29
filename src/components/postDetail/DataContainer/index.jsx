@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import databox from "../../../assets/images/databox.png";
+import databox from "../../../assets/images/dataBox.png";
 import dataCategory from "../../../assets/images/dataCategory.png";
 import clock from "../../../assets/images/clock.png";
 import coinLogo from "../../../assets/images/coinLogo.png";

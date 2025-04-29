@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { assets } from "../../../Constants/Asset/INDEX.JS";
+import { assets } from "../../../Constants/Asset/index";
 
 class PreLoader extends Phaser.Scene {
 	constructor() {
