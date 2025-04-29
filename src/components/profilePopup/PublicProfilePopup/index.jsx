@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useAvatarStore } from "../../../services";
 import { Footer } from "../../index";
 import PublicProfileMedal from "../PublicProfileMedal";
-import popupBackground from "../../../assets/images/popupBackground.png";
+import popupBackground from "../../../assets/images/popupBackGround.png";
 import closeButton from "../../../assets/images/closeButton.png";
 import popupContainer from "../../../assets/images/popupContainer.png";
 import popupBox from "../../../assets/images/popupBox.png";
