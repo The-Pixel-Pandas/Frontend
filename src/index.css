@@ -1,10 +1,185 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: "LalezarTight";
+	src: url("./assets/fonts/LalezarTight.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "LalezarTightItalic";
+	src: url("./assets/fonts/LalezarTightItalic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Lalezar";
+	src: url("./assets/fonts/Lalezar.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "InterMedium";
+	src: url("./assets/fonts/InterTight-Medium.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaBlack";
+	src: url("./assets/fonts/Morabba-Black.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaBold";
+	src: url("./assets/fonts/Morabba-Bold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaHeavy";
+	src: url("./assets/fonts/Morabba-Heavy.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaExtraBold";
+	src: url("./assets/fonts/Morabba-ExtraBold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaLight";
+	src: url("./assets/fonts/Morabba-Light.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaMedium";
+	src: url("./assets/fonts/Morabba-Medium.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaRegular";
+	src: url("./assets/fonts/Morabba-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaSemiBold";
+	src: url("./assets/fonts/Morabba-SemiBold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "MorabbaUltraLight";
+	src: url("./assets/fonts/Morabba-UltraLight.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Modern High Contrast Mode Support */
+@media (forced-colors: active) {
+	/* System Colors for High Contrast Mode */
+	:root {
+		--button-text: ButtonText;
+		--button-bg: ButtonFace;
+		--link-color: LinkText;
+		--background: Canvas;
+		--text: CanvasText;
+	}
+
+	/* Apply system colors while preserving layout */
+	button,
+	[role="button"] {
+		color: var(--button-text);
+		background-color: var(--button-bg);
+	}
+
+	a {
+		color: var(--link-color);
+	}
+
+	/* Preserve images and SVGs */
+	img,
+	svg {
+		forced-colors: preserve-colors;
+	}
+}
+
 body {
 	user-select: none; /* Disable text selection */
 	-webkit-user-select: none; /* For Safari */
 	-ms-user-select: none; /* For older versions of IE */
 	-webkit-touch-callout: none;
+	background-color: #0c0724;
+}
+
+/* --------- */
+/*Scrollbar   */
+/* --------- */
+
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #2d1950;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgba(178, 121, 216, 0.959);
+	border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(222, 130, 235, 0.911);
+	border-radius: 12px;
+}
+
+@layer utilities {
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+}
+
+* {
+	cursor: url("./assets/cursor/hover.png"), auto;
 }
 
 /* define theme variables here */
@@ -20,4 +195,18 @@ body {
 	--color-primary: #0c0724;
 	--color-secondary: #171134;
 	--color-tertiary: #241c4a;
+
+	--font-Lalezar: "Lalezar", sans-serif;
+	--font-LalezarTight: "LalezarTight", sans-serif;
+	--font-LalezarTightItalic: "LalezarTightItalic", sans-serif;
+	--font-InterMedium: "InterMedium", sans-serif;
+	--font-MorabbaBlack: "MorabbaBlack", sans-serif;
+	--font-MorabbaBold: "MorabbaBold", sans-serif;
+	--font-MorabbaHeavy: "MorabbaHeavy", sans-serif;
+	--font-MorabbaExtraBold: "MorabbaExtraBold", sans-serif;
+	--font-MorabbaLight: "MorabbaLight", sans-serif;
+	--font-MorabbaMedium: "MorabbaMedium", sans-serif;
+	--font-MorabbaRegular: "MorabbaRegular", sans-serif;
+	--font-MorabbaSemiBold: "MorabbaSemiBold", sans-serif;
+	--font-MorabbaUltraLight: "MorabbaUltraLight", sans-serif;
 }
