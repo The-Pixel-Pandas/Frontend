@@ -13,6 +13,11 @@ import UserInfo from "./UserInfo";
 import Preloader from "./Preloader";
 import SubmitQuestion from "./SubmitQuestion";
 import ForecastResults from "./ForecastResults";
+import AdminProfile from "./AdminProfile";
+import AdminSubmitQuestion from "./AdminSubmitQuestion";
+import AdminManageQuestion from "./AdminManageQuestion";
+import AdminSubmitNews from "./AdminSubmitNews";
+import AdminManageNews from "./AdminManageNews";
 
 export {
 	Home,
@@ -30,4 +35,9 @@ export {
 	Preloader,
 	SubmitQuestion,
 	ForecastResults,
+	AdminProfile,
+	AdminSubmitQuestion,
+	AdminManageQuestion,
+	AdminSubmitNews,
+	AdminManageNews,
 };

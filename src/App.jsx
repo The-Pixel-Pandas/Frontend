@@ -15,6 +15,11 @@ import {
 	Preloader,
 	SubmitQuestion,
 	ForecastResults,
+	AdminProfile,
+	AdminSubmitQuestion,
+	AdminManageQuestion,
+	AdminSubmitNews,
+	AdminManageNews,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components";
@@ -75,11 +80,11 @@ function App() {
 					<Route path="submitQuestion" element={<SubmitQuestion />} />
 					<Route path="forecastResults" element={<ForecastResults />} />
 
-					<Route path="adminProfile" element={<UserProfile />} />
-					<Route path="adminSubmitQuestion" element={<UserInfo />} />
-					<Route path="adminManageQuestion" element={<Wallet />} />
-					<Route path="adminSubmitNews" element={<SubmitQuestion />} />
-					<Route path="adminManageNews" element={<ForecastResults />} />
+					<Route path="adminProfile" element={<AdminProfile />} />
+					<Route path="adminSubmitQuestion" element={<AdminSubmitQuestion />} />
+					<Route path="adminManageQuestion" element={<AdminManageQuestion />} />
+					<Route path="adminSubmitNews" element={<AdminSubmitNews />} />
+					<Route path="adminManageNews" element={<AdminManageNews />} />
 				</Route>
 
 				<Route path="/login" element={<Login />} />

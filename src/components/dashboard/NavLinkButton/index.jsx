@@ -5,8 +5,9 @@ import adminButton from "../../../assets/images/adminButton.png";
 import dashboardButton from "../../../assets/images/dashboardButton.png";
 import dashboardButtonBorder from "../../../assets/images/dashboardButtonBorder.png";
 
-const NavLinkButton = ({ text, path, number, isAdmin = false }) => {
+const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 	const [selectedButton, setSelectedButton] = useState(0);
+	const [isAdmin, setAdmin] = useState(isAdminButton);
 	const location = useLocation();
 
 	const handleClick = (index) => {
@@ -34,18 +35,23 @@ const NavLinkButton = ({ text, path, number, isAdmin = false }) => {
 			// Admin Dashboard
 			case "/dashboard/adminProfile":
 				setSelectedButton(0);
+				setAdmin(true);
 				break;
 			case "/dashboard/adminSubmitQuestion":
 				setSelectedButton(1);
+				setAdmin(true);
 				break;
 			case "/dashboard/adminManageQuestion":
 				setSelectedButton(2);
+				setAdmin(true);
 				break;
 			case "/dashboard/adminSubmitNews":
 				setSelectedButton(3);
+				setAdmin(true);
 				break;
 			case "/dashboard/adminManageNews":
 				setSelectedButton(4);
+				setAdmin(true);
 				break;
 			default:
 				break;
@@ -93,7 +99,7 @@ NavLinkButton.propTypes = {
 	text: PropTypes.string.isRequired,
 	path: PropTypes.string.isRequired,
 	number: PropTypes.number.isRequired,
-	isAdmin: PropTypes.bool,
+	isAdminButton: PropTypes.bool,
 };
 
 export default NavLinkButton;
