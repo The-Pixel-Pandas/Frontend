@@ -33,7 +33,7 @@ import {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
 } from "./dashboard";
 
 // Navbar
@@ -72,7 +72,7 @@ export {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
 
 	// Navbar elements
 	SearchBar,

@@ -11,6 +11,8 @@ import Game from "./Game";
 import Dashboard from "./Dashboard";
 import UserInfo from "./UserInfo";
 import Preloader from "./Preloader";
+import SubmitQuestion from "./SubmitQuestion";
+import ForecastResults from "./ForecastResults";
 
 export {
 	Home,
@@ -26,4 +28,6 @@ export {
 	Dashboard,
 	UserInfo,
 	Preloader,
+	SubmitQuestion,
+	ForecastResults,
 };

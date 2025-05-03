@@ -1,11 +1,11 @@
 import ProfileInfoContainer from "./ProfileInfoContainer";
 import ProfileMedal from "./ProfileMedal";
 import ProfileHeaderContainer from "./ProfileHeaderContainer";
-import UserInfoInput from "./UserInfoInput";
+import NavLinkButton from "./NavLinkButton";
 
 export {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
 };
