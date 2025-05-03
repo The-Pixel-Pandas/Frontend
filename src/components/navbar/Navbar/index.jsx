@@ -20,6 +20,7 @@ const Navbar = ({ isAuthenticated = false }) => {
 	const handleSignOut = () => {
 		eventHandler.dispatchEvent("ClickSound");
 		resetAll();
+		navigate("/");
 	};
 
 	useEffect(() => {

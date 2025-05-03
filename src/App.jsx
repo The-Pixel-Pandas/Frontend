@@ -13,6 +13,13 @@ import {
 	Dashboard,
 	UserInfo,
 	Preloader,
+	SubmitQuestion,
+	ForecastResults,
+	AdminProfile,
+	AdminSubmitQuestion,
+	AdminManageQuestion,
+	AdminSubmitNews,
+	AdminManageNews,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components";
@@ -70,6 +77,14 @@ function App() {
 					<Route path="userProfile" element={<UserProfile />} />
 					<Route path="userInfo" element={<UserInfo />} />
 					<Route path="wallet" element={<Wallet />} />
+					<Route path="submitQuestion" element={<SubmitQuestion />} />
+					<Route path="forecastResults" element={<ForecastResults />} />
+
+					<Route path="adminProfile" element={<AdminProfile />} />
+					<Route path="adminSubmitQuestion" element={<AdminSubmitQuestion />} />
+					<Route path="adminManageQuestion" element={<AdminManageQuestion />} />
+					<Route path="adminSubmitNews" element={<AdminSubmitNews />} />
+					<Route path="adminManageNews" element={<AdminManageNews />} />
 				</Route>
 
 				<Route path="/login" element={<Login />} />
