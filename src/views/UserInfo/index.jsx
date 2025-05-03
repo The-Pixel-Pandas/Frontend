@@ -7,6 +7,7 @@ import inputBioUser from "../../assets/images/inputBioUser.png";
 import userInfoContainer from "../../assets/images/userInfoContainer.png";
 import userInfoBox from "../../assets/images/userInfoBox.png";
 import inputUser2 from "../../assets/images/inputUser2.png";
+import userInfoButton from "../../assets/images/userInfoButton.png";
 
 const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
@@ -34,13 +35,45 @@ const UserInfo = () => {
 
 	return (
 		<>
-			{/* BackGround Image */}
 			<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
-				<img
-					src={userInfoContainer}
-					alt="dashboardContainer"
-					style={{ width: 1100, height: 600 }}
-				/>
+				<div className="relative">
+					{/* BackGround Image */}
+					<img
+						src={userInfoContainer}
+						alt="dashboardContainer"
+						style={{ width: 1100, height: 600 }}
+					/>
+					{/* Text */}
+					<div className="absolute inset-0 z-50 flex flex-col right-1/2 translate-x-1/2 mr-72 mt-28">
+						<div
+							className=" text-white text-4xl font-MorabbaMedium whitespace-nowrap"
+							dir="rtl"
+						>
+							پروفایل خود را تکمیل کنید
+						</div>
+						<div
+							className=" text-white text-4xl font-MorabbaMedium whitespace-nowrap"
+							dir="rtl"
+						>
+							پاداش دریافت کنید!
+						</div>
+					</div>
+					{/* Button */}
+					<div className="absolute inset-0 z-50 flex flex-col top-1/2 right-1/2 translate-x-1/2 translate-y-1/2 mr-96 mt-28">
+						<div className="relative">
+							<img
+								src={userInfoButton}
+								alt="userInfoButton"
+								style={{ width: 200, height: 50 }}
+							/>
+							<div className="absolute inset-0 z-50 flex items-center justify-center">
+								<div className="text-white font-MorabbaMedium text-lg whitespace-nowrap">
+									ذخیره تغییرات
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div className="w-full h-full flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-80 pt-10 pl-32">
@@ -276,12 +309,6 @@ const UserInfo = () => {
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				{/* Submit Button */}
-				<div className="absolute inset-0 z-50 right-1/2 -translate-x-1/2 mt-6">
-					<div className=" text-white text-2xl font-MorabbaMedium">
-						پروفایل خود را تکمیل کنید و پاداش دریافت کنید
 					</div>
 				</div>
 			</div>
