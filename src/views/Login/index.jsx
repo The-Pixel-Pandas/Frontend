@@ -23,7 +23,7 @@ const Login = () => {
 							ایجاد حساب کاربری
 						</button>
 						<div className="text-white font-MorabbaMedium text-xl">
-							آیا حساب کاربری ندارید؟
+							حساب کاربری ندارید؟
 						</div>
 					</div>
 				</div>
