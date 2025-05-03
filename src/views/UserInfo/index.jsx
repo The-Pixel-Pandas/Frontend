@@ -14,6 +14,27 @@ const UserInfo = () => {
 	const { setAvatarNumber, setName, setBiography } = useProfileStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
 
+	const [formState, setFormState] = useState({
+		avatarSelected: false,
+		username: "",
+		job: "",
+		age: "",
+		gender: "",
+		biography: "",
+		location: "",
+		favoriteTopic: "",
+	});
+
+	const calculateProgress = () => {
+		const fields = Object.values(formState);
+		const filledFields = fields.filter(
+			(field) => field !== "" && field !== false
+		).length;
+		return (filledFields / fields.length) * 100;
+	};
+
+	const progress = calculateProgress();
+
 	const topics = [
 		"بازی‌های ویدیویی",
 		"برنامه‌نویسی",
@@ -27,6 +48,7 @@ const UserInfo = () => {
 	const handleAvatarSelect = (index) => {
 		setSelectedAvatar(index);
 		setAvatarNumber(index + 1);
+		setFormState((prev) => ({ ...prev, avatarSelected: true }));
 	};
 
 	useEffect(() => {
@@ -58,20 +80,37 @@ const UserInfo = () => {
 							پاداش دریافت کنید!
 						</div>
 					</div>
-					{/* Button */}
-					<div className="absolute inset-0 z-50 flex flex-col top-1/2 right-1/2 translate-x-1/2 translate-y-1/2 mr-96 mt-28">
-						<div className="relative">
-							<img
-								src={userInfoButton}
-								alt="userInfoButton"
-								style={{ width: 200, height: 50 }}
-							/>
-							<div className="absolute inset-0 z-50 flex items-center justify-center">
-								<div className="text-white font-MorabbaMedium text-lg whitespace-nowrap">
-									ذخیره تغییرات
-								</div>
+					{/* Progress Bar */}
+					<div className="absolute inset-0 z-50 flex flex-col right-1/2 translate-x-1/2 mr-80 mt-60">
+						<div className="flex flex-col gap-1 justify-center items-center mb-2">
+							<div className="w-[320px] h-4 bg-[#3B2F6F] rounded-full overflow-hidden">
+								<div
+									className="h-full bg-[#9F6AD4] transition-all duration-500 ease-in-out"
+									style={{ width: `${progress}%` }}
+								></div>
+							</div>
+							<div className="text-white font-MorabbaMedium text-2xl ml-72 mt-1">
+								{Math.round(progress).toLocaleString("fa")}%
 							</div>
 						</div>
+					</div>
+
+					{/* Button */}
+					<div className="absolute inset-0 z-50 flex flex-col top-1/2 right-1/2  translate-x-1/2 translate-y-1/2 mr-96 mt-28">
+						<button className="hover:scale-105 transition duration-300 ease-in-out ">
+							<div className="relative">
+								<img
+									src={userInfoButton}
+									alt="userInfoButton"
+									style={{ width: 200, height: 50 }}
+								/>
+								<div className="absolute inset-0 z-50 flex items-center justify-center">
+									<div className="text-white font-MorabbaMedium text-lg whitespace-nowrap">
+										ذخیره تغییرات
+									</div>
+								</div>
+							</div>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -140,7 +179,13 @@ const UserInfo = () => {
 								<input
 									type="text"
 									dir="rtl"
-									onChange={(e) => setName(e.target.value)}
+									onChange={(e) => {
+										setName(e.target.value);
+										setFormState((prev) => ({
+											...prev,
+											username: e.target.value,
+										}));
+									}}
 									placeholder="نام کاربری"
 									className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 placeholder:text-white placeholder:font-MorabbaMedium placeholder:text-lg"
 								/>
@@ -157,6 +202,9 @@ const UserInfo = () => {
 									type="text"
 									dir="rtl"
 									placeholder="شغل"
+									onChange={(e) =>
+										setFormState((prev) => ({ ...prev, job: e.target.value }))
+									}
 									className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 placeholder:text-white placeholder:font-MorabbaMedium placeholder:text-lg"
 								/>
 							</div>
@@ -181,6 +229,7 @@ const UserInfo = () => {
 												/[0-9]/g,
 												(d) => "۰۱۲۳۴۵۶۷۸۹"[d]
 											);
+											setFormState((prev) => ({ ...prev, age: value }));
 										}}
 										onKeyDown={(e) => {
 											if (e.key === "Backspace") return;
@@ -203,6 +252,12 @@ const UserInfo = () => {
 											className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 appearance-none rounded-tl-md rounded-tr-md "
 											dir="rtl"
 											style={{ backgroundImage: "none" }}
+											onChange={(e) =>
+												setFormState((prev) => ({
+													...prev,
+													gender: e.target.value,
+												}))
+											}
 										>
 											<option value="" disabled hidden selected>
 												جنسیت
@@ -247,7 +302,13 @@ const UserInfo = () => {
 								<textarea
 									dir="rtl"
 									placeholder="توضیحات (بیوگرافی)"
-									onChange={(e) => setBiography(e.target.value)}
+									onChange={(e) => {
+										setBiography(e.target.value);
+										setFormState((prev) => ({
+											...prev,
+											biography: e.target.value,
+										}));
+									}}
 									className="relative w-full h-[80px] mb-4 bg-transparent px-4  outline-none text-white font-MorabbaMedium text-lg  z-10 resize-none no-scrollbar pt-4 pb-4 placeholder:text-white placeholder:font-MorabbaMedium placeholder:text-lg"
 									style={{ verticalAlign: "top" }}
 								/>
@@ -266,6 +327,12 @@ const UserInfo = () => {
 										type="text"
 										dir="rtl"
 										placeholder="محل زندگی"
+										onChange={(e) =>
+											setFormState((prev) => ({
+												...prev,
+												location: e.target.value,
+											}))
+										}
 										className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 placeholder:text-white placeholder:font-MorabbaMedium placeholder:text-lg"
 									/>
 								</div>
@@ -282,6 +349,12 @@ const UserInfo = () => {
 											className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 appearance-none  "
 											dir="rtl"
 											style={{ backgroundImage: "none" }}
+											onChange={(e) =>
+												setFormState((prev) => ({
+													...prev,
+													favoriteTopic: e.target.value,
+												}))
+											}
 										>
 											<option value="" disabled hidden selected>
 												موضوع مورد علاقه
