@@ -77,7 +77,7 @@ const UserInfo = () => {
 							className=" text-white text-4xl font-MorabbaMedium whitespace-nowrap"
 							dir="rtl"
 						>
-							پاداش دریافت کنید!
+							پاداش دریافت کنید !
 						</div>
 					</div>
 					{/* Progress Bar */}
@@ -96,7 +96,7 @@ const UserInfo = () => {
 					</div>
 
 					{/* Button */}
-					<div className="absolute inset-0 z-50 flex flex-col top-1/2 right-1/2  translate-x-1/2 translate-y-1/2 mr-96 mt-28">
+					<div className="absolute inset-0 z-50 flex flex-col justify-center items-center mr-96 mt-96 pt-20 pr-96 ">
 						<button className="hover:scale-105 transition duration-300 ease-in-out ">
 							<div className="relative">
 								<img
