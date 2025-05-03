@@ -5,6 +5,8 @@ import avatarBorder from "../../assets/images/avatarBorder.png";
 import inputUser from "../../assets/images/inputUser.png";
 import dropDownIcon from "../../assets/images/dropDownIcon.png";
 import inputBioUser from "../../assets/images/inputBioUser.png";
+import userInfoContainer from "../../assets/images/userInfoContainer.png";
+import userInfoBox from "../../assets/images/userInfoBox.png";
 
 const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
@@ -37,6 +39,22 @@ const UserInfo = () => {
 
 	return (
 		<>
+			{/* BackGround Image */}
+			<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
+				<img
+					src={userInfoContainer}
+					alt="dashboardContainer"
+					style={{ width: 1100, height: 600 }}
+				/>
+			</div>
+			{/* UserInfo Box */}
+			<div className="w-full h-full flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-80 pt-10 pl-32">
+				<img
+					src={userInfoBox}
+					alt="userInfoBox"
+					style={{ width: 600, height: 550 }}
+				/>
+			</div>
 			<div className="w-full h-full flex justify-center items-center absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 				{/* Right Inputs */}
 				<div className="absolute inset-0 left-1/2 -translate-x-1/2 mt-16 ml-40 z-50">
@@ -65,7 +83,7 @@ const UserInfo = () => {
 									{avatars.map((avatar, index) => (
 										<div
 											key={index}
-											className={`relative flex-shrink-0 cursor-pointer ${selectedAvatar === index ? "opacity-100" : "opacity-80"}`}
+											className={`relative flex-shrink-0 cursor-pointer ${selectedAvatar === index ? "opacity-100 " : "opacity-80"}`}
 											onClick={() => handleAvatarSelect(index)}
 										>
 											<img

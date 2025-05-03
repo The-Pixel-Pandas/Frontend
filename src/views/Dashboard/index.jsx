@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import dashboardButton from "../../assets/images/dashboardButton.png";
 import dashboardButtonBorder from "../../assets/images/dashboardButtonBorder.png";
-import dashboardContainer from "../../assets/images/dashboardContainer.png";
 
 const Dashboard = () => {
 	const [selectedButton, setSelectedButton] = useState(0);
@@ -127,13 +126,13 @@ const Dashboard = () => {
 					</NavLink>
 				</div>
 
-				<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
+				{/* <div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
 					<img
 						src={dashboardContainer}
 						alt="dashboardContainer"
 						style={{ width: 1100, height: 600 }}
 					/>
-				</div>
+				</div> */}
 				<Outlet />
 			</div>
 		</>
