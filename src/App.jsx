@@ -12,6 +12,7 @@ import {
 	Wallet,
 	Dashboard,
 	UserInfo,
+	Tasks,
 	Preloader,
 	SubmitQuestion,
 	ForecastResults,
@@ -76,6 +77,7 @@ function App() {
 					<Route index element={<UserProfile />} />
 					<Route path="userProfile" element={<UserProfile />} />
 					<Route path="userInfo" element={<UserInfo />} />
+					<Route path="tasks" element={<Tasks />} />
 					<Route path="wallet" element={<Wallet />} />
 					<Route path="submitQuestion" element={<SubmitQuestion />} />
 					<Route path="forecastResults" element={<ForecastResults />} />

@@ -23,14 +23,17 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 			case "/dashboard/userInfo":
 				setSelectedButton(1);
 				break;
-			case "/dashboard/submitQuestion":
+			case "/dashboard/tasks":
 				setSelectedButton(2);
 				break;
-			case "/dashboard/wallet":
+			case "/dashboard/submitQuestion":
 				setSelectedButton(3);
 				break;
-			case "/dashboard/forecastResults":
+			case "/dashboard/wallet":
 				setSelectedButton(4);
+				break;
+			case "/dashboard/forecastResults":
+				setSelectedButton(5);
 				break;
 			// Admin Dashboard
 			case "/dashboard/adminProfile":

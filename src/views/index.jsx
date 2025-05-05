@@ -10,6 +10,7 @@ import AudioProvider from "./AudioProvider";
 import Game from "./Game";
 import Dashboard from "./Dashboard";
 import UserInfo from "./UserInfo";
+import Tasks from "./Tasks";
 import Preloader from "./Preloader";
 import SubmitQuestion from "./SubmitQuestion";
 import ForecastResults from "./ForecastResults";
@@ -32,6 +33,7 @@ export {
 	Game,
 	Dashboard,
 	UserInfo,
+	Tasks,
 	Preloader,
 	SubmitQuestion,
 	ForecastResults,
