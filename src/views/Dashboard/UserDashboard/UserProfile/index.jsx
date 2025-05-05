@@ -1,13 +1,13 @@
 import React from "react";
-import { useProfileStore } from "../../../services";
+import { useProfileStore } from "../../../../services";
 import {
 	ProfileMedal,
 	ProfileHeaderContainer,
 	UserAvatar,
 	ProfileInfoContainer,
-} from "../../../components";
-import infoContainer from "../../../assets/images/infoContainer.png";
-import medalBox from "../../../assets/images/medalBox.png";
+} from "../../../../components";
+import infoContainer from "../../../../assets/images/infoContainer.png";
+import medalBox from "../../../../assets/images/medalBox.png";
 
 const UserProfile = () => {
 	const { name, biography, transaction, volume, rank, medals } =

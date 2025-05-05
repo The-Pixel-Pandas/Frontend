@@ -7,18 +7,20 @@ import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 import AudioProvider from "./AudioProvider";
 import Game from "./Game";
-import Dashboard from "./Dashboard";
+import DashboardBase from "./Dashboard";
+import Dashboard from "./Dashboard/UserDashboard";
+import AdminDashboard from "./Dashboard/AdminDashboard";
 import Preloader from "./Preloader";
-import UserInfo from "./Dashboard/UserInfo";
-import Tasks from "./Dashboard/Tasks";
-import UserProfile from "./Dashboard/UserProfile";
-import SubmitQuestion from "./Dashboard/SubmitQuestion";
-import ForecastResults from "./Dashboard/ForecastResults";
-import AdminProfile from "./AdminDashboard/AdminProfile";
-import AdminSubmitQuestion from "./AdminDashboard/AdminSubmitQuestion";
-import AdminManageQuestion from "./AdminDashboard/AdminManageQuestion";
-import AdminSubmitNews from "./AdminDashboard/AdminSubmitNews";
-import AdminManageNews from "./AdminDashboard/AdminManageNews";
+import UserInfo from "./Dashboard/UserDashboard/UserInfo";
+import Tasks from "./Dashboard/UserDashboard/Tasks";
+import UserProfile from "./Dashboard/UserDashboard/UserProfile";
+import SubmitQuestion from "./Dashboard/UserDashboard/SubmitQuestion";
+import ForecastResults from "./Dashboard/UserDashboard/ForecastResults";
+import AdminProfile from "./Dashboard/AdminDashboard/AdminProfile";
+import AdminSubmitQuestion from "./Dashboard/AdminDashboard/AdminSubmitQuestion";
+import AdminManageQuestion from "./Dashboard/AdminDashboard/AdminManageQuestion";
+import AdminSubmitNews from "./Dashboard/AdminDashboard/AdminSubmitNews";
+import AdminManageTasks from "./Dashboard/AdminDashboard/AdminManageTasks";
 
 export {
 	Home,
@@ -30,7 +32,9 @@ export {
 	NotFound,
 	AudioProvider,
 	Game,
+	DashboardBase,
 	Dashboard,
+	AdminDashboard,
 	Preloader,
 	UserProfile,
 	UserInfo,
@@ -41,5 +45,5 @@ export {
 	AdminSubmitQuestion,
 	AdminManageQuestion,
 	AdminSubmitNews,
-	AdminManageNews,
+	AdminManageTasks,
 };

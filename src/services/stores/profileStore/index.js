@@ -6,6 +6,7 @@ import useMedalStore from "../medalStore";
 const useProfileStore = create(
 	persist(
 		(set, get) => ({
+			isAdmin: false,
 			avatarNumber: useAvatarStore.getState().avatarNumber,
 			name: "نام کاربری",
 			biography: "توضیحات(بیوگرافی)",
@@ -14,6 +15,9 @@ const useProfileStore = create(
 			rank: 0,
 			medals: [],
 
+			setAdmin: (isAdmin) => {
+				set({ isAdmin: isAdmin });
+			},
 			setAvatarNumber: (number) => {
 				useAvatarStore.getState().setAvatarNumber(number);
 				set({ avatarNumber: number });
@@ -33,6 +37,7 @@ const useProfileStore = create(
 			getMedalSources: () => get().medals.map((medal) => medal.src),
 			reset: () =>
 				set({
+					isAdmin: false,
 					avatarNumber: 1,
 					name: "نام کاربری",
 					biography: "توضیحات(بیوگرافی)",

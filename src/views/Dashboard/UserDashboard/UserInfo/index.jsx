@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useAvatarStore, useProfileStore } from "../../../services";
-import avatarBorder from "../../../assets/images/avatarBorder.png";
-import inputUser from "../../../assets/images/inputUser.png";
-import dropDownIcon from "../../../assets/images/dropDownIcon.png";
-import inputBioUser from "../../../assets/images/inputBioUser.png";
-import userInfoContainer from "../../../assets/images/userInfoContainer.png";
-import userInfoBox from "../../../assets/images/userInfoBox.png";
-import inputUser2 from "../../../assets/images/inputUser2.png";
-import userInfoButton from "../../../assets/images/userInfoButton.png";
+import { useAvatarStore, useProfileStore } from "../../../../services";
+import avatarBorder from "../../../../assets/images/avatarBorder.png";
+import inputUser from "../../../../assets/images/inputUser.png";
+import dropDownIcon from "../../../../assets/images/dropDownIcon.png";
+import inputBioUser from "../../../../assets/images/inputBioUser.png";
+import userInfoContainer from "../../../../assets/images/userInfoContainer.png";
+import userInfoBox from "../../../../assets/images/userInfoBox.png";
+import inputUser2 from "../../../../assets/images/inputUser2.png";
+import userInfoButton from "../../../../assets/images/userInfoButton.png";
 
 const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
