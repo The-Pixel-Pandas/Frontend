@@ -6,7 +6,7 @@ import useMedalStore from "../medalStore";
 const useProfileStore = create(
 	persist(
 		(set, get) => ({
-			isAdmin: false,
+			isAdmin: true,
 			avatarNumber: useAvatarStore.getState().avatarNumber,
 			name: "نام کاربری",
 			biography: "توضیحات(بیوگرافی)",
