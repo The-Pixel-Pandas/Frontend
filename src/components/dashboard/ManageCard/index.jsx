@@ -8,15 +8,15 @@ const ManageCard = ({ title, description, coin, categories }) => {
 	return (
 		<>
 			<div>
-				<div className="relative">
+				<div className="relative ">
 					{/* BackGround Image */}
 					<img
 						src={manageCardContainer}
 						alt="manageCardContainer"
-						style={{ width: 740, height: 266 }}
+						style={{ width: 740, height: 276 }}
 					/>
 
-					<div className="absolute inset-0 z-50 mt-10 ">
+					<div className="absolute inset-0 z-50 mt-11 ">
 						{/* Title And Description */}
 						<div className="flex flex-col gap-5 mr-5 ml-5" dir="rtl">
 							<div className="text-[22px] font-MorabbaBold text-white">
