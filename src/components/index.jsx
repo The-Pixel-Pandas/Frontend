@@ -34,6 +34,8 @@ import {
 	ProfileMedal,
 	ProfileHeaderContainer,
 	NavLinkButton,
+	ManageCard,
+	ManageButton,
 } from "./dashboard";
 
 // Navbar
@@ -73,6 +75,8 @@ export {
 	ProfileMedal,
 	ProfileHeaderContainer,
 	NavLinkButton,
+	ManageCard,
+	ManageButton,
 
 	// Navbar elements
 	SearchBar,

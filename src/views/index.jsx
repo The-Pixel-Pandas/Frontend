@@ -2,44 +2,48 @@ import Home from "./Home";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import News from "./News";
-import UserProfile from "./UserProfile";
 import Wallet from "./Wallet";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 import AudioProvider from "./AudioProvider";
 import Game from "./Game";
-import Dashboard from "./Dashboard";
-import UserInfo from "./UserInfo";
-import Tasks from "./Tasks";
+import DashboardBase from "./Dashboard";
+import Dashboard from "./Dashboard/UserDashboard";
+import AdminDashboard from "./Dashboard/AdminDashboard";
 import Preloader from "./Preloader";
-import SubmitQuestion from "./SubmitQuestion";
-import ForecastResults from "./ForecastResults";
-import AdminProfile from "./AdminProfile";
-import AdminSubmitQuestion from "./AdminSubmitQuestion";
-import AdminManageQuestion from "./AdminManageQuestion";
-import AdminSubmitNews from "./AdminSubmitNews";
-import AdminManageNews from "./AdminManageNews";
+import UserInfo from "./Dashboard/UserDashboard/UserInfo";
+import Tasks from "./Dashboard/UserDashboard/Tasks";
+import UserProfile from "./Dashboard/UserDashboard/UserProfile";
+import SubmitQuestion from "./Dashboard/UserDashboard/SubmitQuestion";
+import ForecastResults from "./Dashboard/UserDashboard/ForecastResults";
+import AdminProfile from "./Dashboard/AdminDashboard/AdminProfile";
+import AdminSubmitQuestion from "./Dashboard/AdminDashboard/AdminSubmitQuestion";
+import AdminManageQuestion from "./Dashboard/AdminDashboard/AdminManageQuestion";
+import AdminSubmitNews from "./Dashboard/AdminDashboard/AdminSubmitNews";
+import AdminManageTasks from "./Dashboard/AdminDashboard/AdminManageTasks";
 
 export {
 	Home,
 	Login,
 	SignUp,
 	News,
-	UserProfile,
 	Wallet,
 	LeaderBoard,
 	NotFound,
 	AudioProvider,
 	Game,
+	DashboardBase,
 	Dashboard,
+	AdminDashboard,
+	Preloader,
+	UserProfile,
 	UserInfo,
 	Tasks,
-	Preloader,
 	SubmitQuestion,
 	ForecastResults,
 	AdminProfile,
 	AdminSubmitQuestion,
 	AdminManageQuestion,
 	AdminSubmitNews,
-	AdminManageNews,
+	AdminManageTasks,
 };
