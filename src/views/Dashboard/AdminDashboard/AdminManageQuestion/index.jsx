@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { httpService } from "../../../../services";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { ManageCard, ManageButton } from "../../../../components";
@@ -14,57 +15,7 @@ const AdminManageQuestion = () => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isCompleted, setIsCompleted] = useState(false);
 	const swiperRef = useRef(null);
-
-	const questions = [
-		{
-			id: 1,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری1",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 10,
-			categories: ["برنامه نویسی", "برنامه نویسی", "برنامه نویسی"],
-		},
-		{
-			id: 2,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری2",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 15,
-			categories: ["طراحی", "گرافیک", "هنر"],
-		},
-		{
-			id: 3,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری3",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 20,
-			categories: ["مدیریت", "کسب و کار", "استراتژی"],
-		},
-		{
-			id: 4,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری4",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 10,
-			categories: ["برنامه نویسی", "برنامه نویسی", "برنامه نویسی"],
-		},
-		{
-			id: 5,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری5",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 15,
-			categories: ["طراحی", "گرافیک", "هنر"],
-		},
-		{
-			id: 6,
-			title: "گزارشات مردمی مبنای دستگیری هنجارشکنان درفردای چهارشنبه‌سوری6",
-			description:
-				"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-			coin: 20,
-			categories: ["مدیریت", "کسب و کار", "استراتژی"],
-		},
-	];
+	const [questions, setQuestions] = useState([]);
 
 	const handleAction = (type) => {
 		if (isCompleted) return;
@@ -88,6 +39,20 @@ const AdminManageQuestion = () => {
 			}
 		}, 500);
 	};
+
+	const handleGetData = () => {
+		httpService
+			.get("https://mocki.io/v1/8e4b4d4c-02fc-4679-b362-7de4a5d4ea9e")
+			.then((res) => {
+				setQuestions(res.data);
+				console.log(res);
+			})
+			.catch((err) => console.log(err));
+	};
+
+	useEffect(() => {
+		handleGetData();
+	}, []);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -130,28 +95,36 @@ const AdminManageQuestion = () => {
 								onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
 								className="mySwiper h-full"
 							>
-								{questions.map((question, index) => {
-									let isActive = currentIndex === index;
+								{questions && questions.length > 0 ? (
+									questions.map((question, index) => {
+										let isActive = currentIndex === index;
 
-									let className =
-										"transition-all duration-500 flex items-center justify-center h-full ";
-									className += isActive
-										? " scale-100 opacity-100 z-50 "
-										: " scale-90 opacity-20 z-10 ";
+										let className =
+											"transition-all duration-500 flex items-center justify-center h-full ";
+										className += isActive
+											? " scale-100 opacity-100 z-50 "
+											: " scale-90 opacity-20 z-10 ";
 
-									return (
-										<SwiperSlide key={question.id}>
-											<div className={className}>
-												<ManageCard
-													title={question.title}
-													description={question.description}
-													coin={question.coin}
-													categories={question.categories}
-												/>
-											</div>
-										</SwiperSlide>
-									);
-								})}
+										return (
+											<SwiperSlide key={question.id}>
+												<div className={className}>
+													<ManageCard
+														title={question.title}
+														description={question.description}
+														coin={question.coin}
+														categories={question.categories}
+													/>
+												</div>
+											</SwiperSlide>
+										);
+									})
+								) : (
+									<SwiperSlide>
+										<div className="flex items-center justify-center h-full text-white font-MorabbaBold text-xl">
+											در حال بارگذاری سوالات...
+										</div>
+									</SwiperSlide>
+								)}
 							</Swiper>
 						)}
 					</div>
