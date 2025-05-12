@@ -10,10 +10,12 @@ const useProfileStore = create(
 			avatarNumber: useAvatarStore.getState().avatarNumber,
 			name: "نام کاربری",
 			biography: "توضیحات(بیوگرافی)",
-			transaction: 0,
+			profit: 0,
 			volume: 0,
-			rank: 0,
 			medals: [],
+			winRate: 0,
+			rankTotalProfit: 0,
+			rankTotalVolume: 0,
 
 			setAdmin: (isAdmin) => {
 				set({ isAdmin: isAdmin });
@@ -24,9 +26,8 @@ const useProfileStore = create(
 			},
 			setName: (name) => set({ name }),
 			setBiography: (biography) => set({ biography }),
-			setTransaction: (transaction) => set({ transaction }),
+			setProfit: (profit) => set({ profit }),
 			setVolume: (volume) => set({ volume }),
-			setRank: (rank) => set({ rank }),
 			setMedals: (medalNumbers) => {
 				const medals = medalNumbers.map((num) => ({
 					number: num,
@@ -34,6 +35,9 @@ const useProfileStore = create(
 				}));
 				set({ medals: medals });
 			},
+			setWinRate: (winRate) => set({ winRate }),
+			setRankTotalProfit: (rankTotalProfit) => set({ rankTotalProfit }),
+			setRankTotalVolume: (rankTotalVolume) => set({ rankTotalVolume }),
 			getMedalSources: () => get().medals.map((medal) => medal.src),
 			reset: () =>
 				set({
@@ -41,10 +45,12 @@ const useProfileStore = create(
 					avatarNumber: 1,
 					name: "نام کاربری",
 					biography: "توضیحات(بیوگرافی)",
-					transaction: 0,
+					profit: 0,
 					volume: 0,
-					rank: 0,
 					medals: [],
+					winRate: 0,
+					rankTotalProfit: 0,
+					rankTotalVolume: 0,
 				}),
 		}),
 		{

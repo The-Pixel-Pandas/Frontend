@@ -7,7 +7,7 @@ import googleButton from "../../../assets/images/googleButton.png";
 
 const GoogleVerification = ({ width, height, verificationType }) => {
 	const { setUser, setLoading, setError, setLoginMessage } = useAuthStore();
-	const { setToken } = useTokenStore();
+	const { setAccessToken, setRefreshToken } = useTokenStore();
 
 	const handleLoginSuccess = async (credentialResponse) => {
 		try {
@@ -24,7 +24,8 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 			const { email } = response.data;
 			// Store User Info
 			setUser(email, credentialResponse.access_token);
-			setToken(credentialResponse.access_token);
+			setAccessToken(credentialResponse.access_token);
+			setRefreshToken(credentialResponse.refresh_token);
 			// Set Login Message
 			setLoginMessage(`${verificationType} با موفقیت انجام شد`);
 		} catch (error) {

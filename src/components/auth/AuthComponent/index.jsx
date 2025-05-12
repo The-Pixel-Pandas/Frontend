@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore, eventHandler } from "../../../services";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../../chore/Toast";
 import {
 	httpService,
+	eventHandler,
 	useCoinStore,
-	useAvatarStore,
 	useTokenStore,
+	useAuthStore,
+	useProfileStore,
 } from "../../../services";
 import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
@@ -24,9 +25,21 @@ const AuthComponent = ({ authType }) => {
 		setUser,
 		setLoginMessage,
 	} = useAuthStore();
-	const { setAvatarNumber } = useAvatarStore();
+
 	const { setCoin } = useCoinStore();
-	const { setToken } = useTokenStore();
+	const { setAccessToken, setRefreshToken } = useTokenStore();
+	const {
+		setAdmin,
+		setAvatarNumber,
+		setName,
+		setBiography,
+		setProfit,
+		setVolume,
+		setMedals,
+		setWinRate,
+		setRankTotalProfit,
+		setRankTotalVolume,
+	} = useProfileStore();
 	const navigate = useNavigate();
 
 	const handleAuthAPI = (URL, data) => {
@@ -37,9 +50,21 @@ const AuthComponent = ({ authType }) => {
 				if (res.status == "success") {
 					// Store User Info
 					setUser(email, password);
-					setAvatarNumber(res.data.user.avatar);
-					setCoin(res.data.user.coinAmount);
-					setToken(res.data.token);
+
+					setCoin(res.user.total_balance);
+					setAccessToken(res.access);
+					setRefreshToken(res.refresh);
+					setAdmin(res.is_admin);
+
+					setAvatarNumber(res.user.avatar);
+					setName(res.user.user_name);
+					setBiography(res.user.bio);
+					setProfit(res.user.profit);
+					setVolume(res.user.volume);
+					setMedals(res.user.medals);
+					setWinRate(res.user.win_rate);
+					setRankTotalProfit(res.user.rank_total_profit);
+					setRankTotalVolume(res.user.rank_total_volume);
 					// Set Login Message
 					setLoginMessage(`${authType} با موفقیت انجام شد`);
 				} else {
@@ -71,15 +96,19 @@ const AuthComponent = ({ authType }) => {
 				return;
 			}
 
-			const data = {
-				email: email,
-				password: password,
-			};
-
 			if (authType === "ورود") {
-				handleAuthAPI("https://dummyjson.com/c/2a61-718b-4cd4-aeb2", data);
+				const data = {
+					gmail: email,
+					password: password,
+				};
+				handleAuthAPI("login/", data);
 			} else if (authType === "ثبت نام") {
-				handleAuthAPI("https://dummyjson.com/c/2083-02bd-418a-a281", data);
+				const data = {
+					user_name: email,
+					gmail: email,
+					password: password,
+				};
+				handleAuthAPI("signup/", data);
 			}
 		}
 	};
