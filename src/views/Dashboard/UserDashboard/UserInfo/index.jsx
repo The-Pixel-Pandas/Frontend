@@ -5,6 +5,7 @@ import {
 	useProfileStore,
 	userInfoYup,
 } from "../../../../services";
+import { Toast } from "../../../../components";
 import avatarBorder from "../../../../assets/images/avatarBorder.png";
 import inputUser from "../../../../assets/images/inputUser.png";
 import dropDownIcon from "../../../../assets/images/dropDownIcon.png";
@@ -29,15 +30,29 @@ const UserInfo = () => {
 		location: "",
 		favoriteTopic: "",
 	});
+	const [isSubmitted, setSubmitted] = useState(false);
 
 	const formik = useFormik({
 		initialValues: userInfoYup.initialValues,
 		validationSchema: userInfoYup.validationSchema,
 		validateOnChange: true,
 		validateOnBlur: true,
-		onSubmit: (values) => {
-			setName(values.username);
-			setBiography(values.biography);
+		onSubmit: async (values, { setSubmitting }) => {
+			try {
+				setName(values.username);
+				setBiography(values.biography);
+				setFormState((prev) => ({
+					...prev,
+					username: values.username,
+					biography: values.biography,
+				}));
+				setSubmitted(true);
+				Toast.success("اطلاعات با موفقیت ذخیره شد");
+			} catch (error) {
+				Toast.error("خطا در ذخیره اطلاعات");
+			} finally {
+				setSubmitting(false);
+			}
 		},
 	});
 	const calculateProgress = () => {
@@ -72,11 +87,7 @@ const UserInfo = () => {
 
 	return (
 		<>
-			<form
-				id="authForm"
-				onSubmit={formik.handleSubmit}
-				onChange={formik.handleSubmit}
-			>
+			<form id="authForm" onSubmit={formik.handleSubmit}>
 				<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
 					<div className="relative">
 						{/* BackGround Image */}
@@ -117,7 +128,11 @@ const UserInfo = () => {
 
 						{/* Button */}
 						<div className="absolute inset-0 z-50 flex flex-col justify-center items-center mr-96 mt-96 pt-20 pr-96 ">
-							<button className="hover:scale-105 transition duration-300 ease-in-out ">
+							<button
+								className="hover:scale-105 transition duration-300 ease-in-out"
+								type="submit"
+								disabled={!formik.isValid || formik.isSubmitting}
+							>
 								<div className="relative">
 									<img
 										src={userInfoButton}
@@ -444,6 +459,13 @@ const UserInfo = () => {
 					</div>
 				</div>
 			</form>
+			{isSubmitted && (
+				<Toast
+					type="success"
+					message={"تغییرات با موفقیت ثبت شد"}
+					position="top-center"
+				/>
+			)}
 		</>
 	);
 };
