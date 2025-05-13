@@ -26,5 +26,4 @@ export {
 	useProfileStore,
 	cacheService,
 	userInfoYup,
-
 };
