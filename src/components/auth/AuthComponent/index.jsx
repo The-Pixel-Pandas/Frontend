@@ -4,18 +4,13 @@ import { useNavigate } from "react-router-dom";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../../chore/Toast";
-import {
-	httpService,
-	eventHandler,
-	useCoinStore,
-	useTokenStore,
-	useAuthStore,
-	useProfileStore,
-} from "../../../services";
+import { eventHandler, useAuthStore } from "../../../services";
+import { useAuthApi } from "../../../hooks";
 import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
 
 const AuthComponent = ({ authType }) => {
+	const { handleAuthAPI } = useAuthApi();
 	const {
 		isAuthenticated,
 		isError,
@@ -25,62 +20,7 @@ const AuthComponent = ({ authType }) => {
 		setUser,
 		setLoginMessage,
 	} = useAuthStore();
-
-	const { setCoin } = useCoinStore();
-	const { setAccessToken, setRefreshToken } = useTokenStore();
-	const {
-		setAdmin,
-		setAvatarNumber,
-		setName,
-		setBiography,
-		setProfit,
-		setVolume,
-		setMedals,
-		setWinRate,
-		setRankTotalProfit,
-		setRankTotalVolume,
-	} = useProfileStore();
 	const navigate = useNavigate();
-
-	const handleAuthAPI = (URL, data) => {
-		httpService
-			.post(URL, data)
-			.then((res) => {
-				console.log("Login/Signin API response:", res);
-				if (res.user) {
-					// Store User Info
-					setUser(email, password);
-
-					setCoin(res.user.total_balance);
-					setAccessToken(res.access);
-					setRefreshToken(res.refresh);
-					setAdmin(res.is_admin);
-
-					setAvatarNumber(res.user.avatar);
-					setName(res.user.user_name);
-					setBiography(res.user.bio);
-					setProfit(res.user.profit);
-					setVolume(res.user.volume);
-					setMedals(res.user.medals);
-					setWinRate(res.user.win_rate);
-					setRankTotalProfit(res.user.rank_total_profit);
-					setRankTotalVolume(res.user.rank_total_volume);
-					// Set Login Message
-					setLoginMessage(`${authType} با موفقیت انجام شد`);
-				} else {
-					// Store User Info
-					setUser(email, password, false, false);
-					// Set Login Message
-					setLoginMessage(res.message);
-					console.log(res.message);
-				}
-			})
-			.catch((err) => {
-				console.log("Login/Signin API error:", err);
-				setUser(email, password, false, false);
-				setLoginMessage(err.message);
-			});
-	};
 
 	const submitButton = () => {
 		eventHandler.dispatchEvent("ClickSound");
@@ -101,15 +41,14 @@ const AuthComponent = ({ authType }) => {
 					gmail: email,
 					password: password,
 				};
-				handleAuthAPI("login/", data);
+				handleAuthAPI("login/", data, authType);
 			} else if (authType === "ثبت نام") {
 				const data = {
 					user_name: email,
 					gmail: email,
 					password: password,
 				};
-				console.log(password);
-				handleAuthAPI("signup/", data);
+				handleAuthAPI("signup/", data, authType);
 			}
 		}
 	};

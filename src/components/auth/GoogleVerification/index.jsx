@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useAuthStore, eventHandler, useTokenStore } from "../../../services";
+import { useAuthStore, eventHandler } from "../../../services";
+import { useAuthApi } from "../../../hooks";
 import axios from "axios";
 import googleButton from "../../../assets/images/googleButton.png";
 
 const GoogleVerification = ({ width, height, verificationType }) => {
-	const { setUser, setLoading, setError, setLoginMessage } = useAuthStore();
-	const { setAccessToken, setRefreshToken } = useTokenStore();
+	const { setLoading, setError } = useAuthStore();
+	const { handleAuthAPI } = useAuthApi();
 
 	const handleLoginSuccess = async (credentialResponse) => {
 		try {
@@ -22,12 +23,21 @@ const GoogleVerification = ({ width, height, verificationType }) => {
 				}
 			);
 			const { email } = response.data;
-			// Store User Info
-			setUser(email, credentialResponse.access_token);
-			setAccessToken(credentialResponse.access_token);
-			setRefreshToken(credentialResponse.refresh_token);
-			// Set Login Message
-			setLoginMessage(`${verificationType} با موفقیت انجام شد`);
+
+			if (verificationType === "ورود") {
+				const data = {
+					gmail: email,
+					password: email,
+				};
+				handleAuthAPI("login/", data, verificationType);
+			} else if (verificationType === "ثبت نام") {
+				const data = {
+					user_name: email,
+					gmail: email,
+					password: email,
+				};
+				handleAuthAPI("signup/", data, verificationType);
+			}
 		} catch (error) {
 			setError("خطا در دریافت اطلاعات کاربر");
 			console.error("Error fetching user data:", error);
