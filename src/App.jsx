@@ -10,7 +10,7 @@ import {
 	AudioProvider,
 	Game,
 	Wallet,
-	Dashboard,
+	DashboardBase,
 	UserInfo,
 	Tasks,
 	Preloader,
@@ -20,7 +20,7 @@ import {
 	AdminSubmitQuestion,
 	AdminManageQuestion,
 	AdminSubmitNews,
-	AdminManageNews,
+	AdminManageTasks,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components";
@@ -70,23 +70,21 @@ function App() {
 					path="/dashboard"
 					element={
 						<Layout>
-							<Dashboard />
+							<DashboardBase />
 						</Layout>
 					}
 				>
-					<Route index element={<UserProfile />} />
 					<Route path="userProfile" element={<UserProfile />} />
 					<Route path="userInfo" element={<UserInfo />} />
 					<Route path="tasks" element={<Tasks />} />
 					<Route path="wallet" element={<Wallet />} />
 					<Route path="submitQuestion" element={<SubmitQuestion />} />
 					<Route path="forecastResults" element={<ForecastResults />} />
-
 					<Route path="adminProfile" element={<AdminProfile />} />
 					<Route path="adminSubmitQuestion" element={<AdminSubmitQuestion />} />
 					<Route path="adminManageQuestion" element={<AdminManageQuestion />} />
 					<Route path="adminSubmitNews" element={<AdminSubmitNews />} />
-					<Route path="adminManageNews" element={<AdminManageNews />} />
+					<Route path="adminManageTasks" element={<AdminManageTasks />} />
 				</Route>
 
 				<Route path="/login" element={<Login />} />
