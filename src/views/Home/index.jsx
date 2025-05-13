@@ -69,10 +69,10 @@ const Home = () => {
 				try {
 					const [questionResponse, commentsResponse] = await Promise.all([
 						httpService.get(
-							`https://mocki.io/v1/cdeeecd7-f616-4a06-9da2-a9cc3f5e539d`
+							`https://mocki.io/v1/7e5852b3-6ec0-4c7a-b1fd-995d81590d0d`
 						),
 						httpService.get(
-							`https://mocki.io/v1/6ed43c72-ef71-4b5e-8c43-41514698ff21`
+							`https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b`
 						),
 					]);
 					setQuestionData(questionResponse.data);

@@ -14,8 +14,8 @@ import { useContentView } from "../../hooks";
 
 const NEWS_API = {
 	BASE: "https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405",
-	DETAILS: "https://mocki.io/v1/cdeeecd7-f616-4a06-9da2-a9cc3f5e539d",
-	COMMENTS: "https://mocki.io/v1/6ed43c72-ef71-4b5e-8c43-41514698ff21",
+	DETAILS: "https://mocki.io/v1/7e5852b3-6ec0-4c7a-b1fd-995d81590d0d",
+	COMMENTS: "https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b",
 };
 
 const News = () => {
