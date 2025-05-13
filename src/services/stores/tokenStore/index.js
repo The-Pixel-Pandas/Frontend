@@ -6,8 +6,8 @@ const useTokenStore = create(
 		(set) => ({
 			access: null,
 			refresh: null,
-			setAccessToken: (token) => set({ token }),
-			setRefreshToken: (token) => set({ token }),
+			setAccessToken: (token) => set({ access: token }),
+			setRefreshToken: (token) => set({ refresh: token }),
 			reset: () => set({ access: null, refresh: null }),
 		}),
 		{

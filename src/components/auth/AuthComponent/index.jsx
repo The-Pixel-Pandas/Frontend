@@ -47,7 +47,7 @@ const AuthComponent = ({ authType }) => {
 			.post(URL, data)
 			.then((res) => {
 				console.log("Login/Signin API response:", res);
-				if (res.status == "success") {
+				if (res.user) {
 					// Store User Info
 					setUser(email, password);
 
@@ -108,6 +108,7 @@ const AuthComponent = ({ authType }) => {
 					gmail: email,
 					password: password,
 				};
+				console.log(password);
 				handleAuthAPI("signup/", data);
 			}
 		}
