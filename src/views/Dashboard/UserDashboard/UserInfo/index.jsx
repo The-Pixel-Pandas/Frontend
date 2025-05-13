@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAvatarStore, useProfileStore } from "../../../../services";
+import { useAvatarStore, useProfileStore ,userInfoYup } from "../../../../services";
 import avatarBorder from "../../../../assets/images/avatarBorder.png";
 import inputUser from "../../../../assets/images/inputUser.png";
 import dropDownIcon from "../../../../assets/images/dropDownIcon.png";
