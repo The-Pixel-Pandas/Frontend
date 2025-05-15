@@ -5,7 +5,6 @@ import {
 	useProfileStore,
 	userInfoYup,
 	httpService,
-	useTokenStore,
 } from "../../../../services";
 import { Toast } from "../../../../components";
 import avatarBorder from "../../../../assets/images/avatarBorder.png";
@@ -65,14 +64,11 @@ const UserInfo = () => {
 				age: formState.age,
 				favorite_subject: formState.favoriteTopic,
 			};
+
 			httpService
-				.put(`profiles/${id}/`, data, {
-					headers: {
-						Authorization: `Bearer ${useTokenStore.getState().access}`,
-					},
-				})
+				.put(`profiles/${id}/`, data)
 				.then((res) => {
-					console.log(res);
+					console.log("Put profile API response:", res);
 					setName(values.username);
 					setBiography(values.biography);
 					setAvatarNumber(selectedAvatar + 1);
@@ -80,7 +76,7 @@ const UserInfo = () => {
 					setError(false);
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log("Put profile API error:", err);
 					setToastMessage("خطا در ذخیره اطلاعات");
 					setError(true);
 				});
