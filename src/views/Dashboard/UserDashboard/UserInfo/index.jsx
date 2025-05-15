@@ -19,7 +19,7 @@ const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
 	const { setAvatarNumber, setName, setBiography } = useProfileStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
-
+	const [toastMessage, setToastMessage] = useState("");
 	const [formState, setFormState] = useState({
 		avatarSelected: false,
 		username: "",
@@ -31,27 +31,37 @@ const UserInfo = () => {
 		favoriteTopic: "",
 	});
 	const [isSubmitted, setSubmitted] = useState(false);
+	const [isError, setError] = useState(false);
 
 	const formik = useFormik({
 		initialValues: userInfoYup.initialValues,
 		validationSchema: userInfoYup.validationSchema,
 		validateOnChange: true,
 		validateOnBlur: true,
-		onSubmit: async (values, { setSubmitting }) => {
+		onSubmit: (values) => {
+			setSubmitted(true);
+			if (calculateProgress() !== 100) {
+				setError(true);
+				if (!formState.avatarSelected) {
+					setToastMessage("لطفا آواتار موردنظر خود را انتخاب کنید");
+				}
+				if (formState.gender == "") {
+					setToastMessage("لطفا جنسیت خود را انتخاب کنید");
+				}
+				if (formState.favoriteTopic == "") {
+					setToastMessage("لطفا موضوع مورد علاقه خود را انتخاب کنید");
+				}
+				return;
+			}
 			try {
 				setName(values.username);
 				setBiography(values.biography);
-				setFormState((prev) => ({
-					...prev,
-					username: values.username,
-					biography: values.biography,
-				}));
-				setSubmitted(true);
-				Toast.success("اطلاعات با موفقیت ذخیره شد");
-			} catch (error) {
-				Toast.error("خطا در ذخیره اطلاعات");
-			} finally {
-				setSubmitting(false);
+				setAvatarNumber(selectedAvatar + 1);
+				setToastMessage("اطلاعات با موفقیت ذخیره شد");
+				setError(false);
+			} catch {
+				setToastMessage("خطا در ذخیره اطلاعات");
+				setError(true);
 			}
 		},
 	});
@@ -77,13 +87,20 @@ const UserInfo = () => {
 
 	const handleAvatarSelect = (index) => {
 		setSelectedAvatar(index);
-		setAvatarNumber(index + 1);
 		setFormState((prev) => ({ ...prev, avatarSelected: true }));
 	};
 
 	useEffect(() => {
 		setSelectedAvatar(getAvatarNumber() - 1);
 	}, [getAvatarNumber()]);
+
+	useEffect(() => {
+		if (toastMessage) {
+			setTimeout(() => {
+				setToastMessage("");
+			}, 3000);
+		}
+	}, [toastMessage]);
 
 	return (
 		<>
@@ -127,11 +144,10 @@ const UserInfo = () => {
 						</div>
 
 						{/* Button */}
-						<div className="absolute inset-0 z-50 flex flex-col justify-center items-center mr-96 mt-96 pt-20 pr-96 ">
+						<div className="absolute inset-0 z-50 flex flex-col justify-center items-center mr-96 mt-96 pt-20 pr-96">
 							<button
-								className="hover:scale-105 transition duration-300 ease-in-out"
 								type="submit"
-								disabled={!formik.isValid || formik.isSubmitting}
+								className="hover:scale-105 transition duration-300 ease-in-out outline-none border-none"
 							>
 								<div className="relative">
 									<img
@@ -216,7 +232,6 @@ const UserInfo = () => {
 										dir="rtl"
 										{...formik.getFieldProps("username")}
 										onChange={(e) => {
-											setName(e.target.value);
 											formik.handleChange(e);
 											setFormState((prev) => ({
 												...prev,
@@ -311,6 +326,7 @@ const UserInfo = () => {
 												className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 appearance-none rounded-tl-md rounded-tr-md "
 												dir="rtl"
 												style={{ backgroundImage: "none" }}
+												defaultValue={formState.gender}
 												onChange={(e) =>
 													setFormState((prev) => ({
 														...prev,
@@ -318,7 +334,7 @@ const UserInfo = () => {
 													}))
 												}
 											>
-												<option value="" disabled hidden selected>
+												<option value="" disabled hidden>
 													جنسیت
 												</option>
 												<option
@@ -364,7 +380,6 @@ const UserInfo = () => {
 										{...formik.getFieldProps("biography")}
 										onChange={(e) => {
 											formik.handleChange(e);
-											setBiography(e.target.value);
 											setFormState((prev) => ({
 												...prev,
 												biography: e.target.value,
@@ -422,6 +437,7 @@ const UserInfo = () => {
 												className="relative w-full h-full bg-transparent px-4 outline-none text-white font-MorabbaMedium text-lg z-10 appearance-none  "
 												dir="rtl"
 												style={{ backgroundImage: "none" }}
+												defaultValue={formState.favoriteTopic}
 												onChange={(e) =>
 													setFormState((prev) => ({
 														...prev,
@@ -429,13 +445,13 @@ const UserInfo = () => {
 													}))
 												}
 											>
-												<option value="" disabled hidden selected>
+												<option value="" disabled hidden>
 													موضوع مورد علاقه
 												</option>
 												{topics.map((category) => (
 													<option
-														key={category.id}
-														value={category.id}
+														key={category}
+														value={category}
 														style={{
 															background: "#2D1950",
 															color: "white",
@@ -459,12 +475,12 @@ const UserInfo = () => {
 					</div>
 				</div>
 			</form>
-			{isSubmitted && (
-				<Toast
-					type="success"
-					message={"تغییرات با موفقیت ثبت شد"}
-					position="top-center"
-				/>
+			{/* Toast */}
+			{isSubmitted && !isError && (
+				<Toast type="success" message={toastMessage} position="top-center" />
+			)}
+			{isSubmitted && isError && (
+				<Toast type="error" message={toastMessage} position="top-center" />
 			)}
 		</>
 	);

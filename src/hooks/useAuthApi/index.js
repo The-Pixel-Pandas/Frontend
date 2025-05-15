@@ -12,6 +12,7 @@ const useAuthApi = () => {
 	const { setCoin } = useCoinStore();
 	const { setAccessToken, setRefreshToken } = useTokenStore();
 	const {
+		setId,
 		setAdmin,
 		setAvatarNumber,
 		setName,
@@ -56,7 +57,7 @@ const useAuthApi = () => {
 		setAccessToken(data.tokens?.access || data.access);
 		setRefreshToken(data.tokens?.refresh || data.refresh);
 		setAdmin(data.is_admin);
-
+		setId(data.user.id);
 		setAvatarNumber(data.user.avatar);
 		setName(data.user.user_name);
 		setBiography(data.user.bio);

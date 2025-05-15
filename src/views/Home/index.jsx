@@ -26,21 +26,21 @@ const Home = () => {
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
 		);
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${category}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${category}`
 		);
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${page}&_category=${activeCategory}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${page}&_category=${activeCategory}`
 		);
 		event.preventDefault();
 	};
@@ -59,7 +59,7 @@ const Home = () => {
 
 	useEffect(() => {
 		handleQuestionAPI(
-			"https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140"
+			"https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059"
 		);
 	}, []);
 

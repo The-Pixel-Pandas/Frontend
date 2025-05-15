@@ -13,7 +13,7 @@ import {
 import { useContentView } from "../../hooks";
 
 const NEWS_API = {
-	BASE: "https://mocki.io/v1/0e5f8cf0-7026-46a4-8f48-18e42b96e405",
+	BASE: "https://mocki.io/v1/779b7b4b-8ee0-4e3b-adcf-87f06ebc0d8c",
 	DETAILS: "https://mocki.io/v1/7e5852b3-6ec0-4c7a-b1fd-995d81590d0d",
 	COMMENTS: "https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b",
 };
