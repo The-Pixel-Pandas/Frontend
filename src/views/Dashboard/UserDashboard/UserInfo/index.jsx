@@ -4,6 +4,8 @@ import {
 	useAvatarStore,
 	useProfileStore,
 	userInfoYup,
+	httpService,
+	useTokenStore,
 } from "../../../../services";
 import { Toast } from "../../../../components";
 import avatarBorder from "../../../../assets/images/avatarBorder.png";
@@ -17,7 +19,7 @@ import userInfoButton from "../../../../assets/images/userInfoButton.png";
 
 const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
-	const { setAvatarNumber, setName, setBiography } = useProfileStore();
+	const { id, setAvatarNumber, setName, setBiography } = useProfileStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
 	const [toastMessage, setToastMessage] = useState("");
 	const [formState, setFormState] = useState({
@@ -53,16 +55,35 @@ const UserInfo = () => {
 				}
 				return;
 			}
-			try {
-				setName(values.username);
-				setBiography(values.biography);
-				setAvatarNumber(selectedAvatar + 1);
-				setToastMessage("اطلاعات با موفقیت ذخیره شد");
-				setError(false);
-			} catch {
-				setToastMessage("خطا در ذخیره اطلاعات");
-				setError(true);
-			}
+			const data = {
+				user_name: formState.username,
+				bio: formState.biography,
+				location: formState.location,
+				avatar: selectedAvatar + 1,
+				job: formState.job,
+				gender: formState.gender,
+				age: formState.age,
+				favorite_subject: formState.favoriteTopic,
+			};
+			httpService
+				.put(`profiles/${id}/`, data, {
+					headers: {
+						Authorization: `Bearer ${useTokenStore.getState().access}`,
+					},
+				})
+				.then((res) => {
+					console.log(res);
+					setName(values.username);
+					setBiography(values.biography);
+					setAvatarNumber(selectedAvatar + 1);
+					setToastMessage("اطلاعات با موفقیت ذخیره شد");
+					setError(false);
+				})
+				.catch((err) => {
+					console.log(err);
+					setToastMessage("خطا در ذخیره اطلاعات");
+					setError(true);
+				});
 		},
 	});
 	const calculateProgress = () => {
@@ -294,17 +315,10 @@ const UserInfo = () => {
 											onChange={(e) => {
 												formik.handleChange(e);
 												const value = e.target.value;
-												e.target.value = value.replace(
-													/[0-9]/g,
-													(d) => "۰۱۲۳۴۵۶۷۸۹"[d]
-												);
-												setFormState((prev) => ({ ...prev, age: value }));
-											}}
-											onKeyDown={(e) => {
-												if (e.key === "Backspace") return;
-												if (!/[0-9]/.test(e.key)) {
-													e.preventDefault();
-												}
+												setFormState((prev) => ({
+													...prev,
+													age: parseInt(value, 10),
+												}));
 											}}
 										/>
 										{formik.touched.age && formik.errors.age && (
