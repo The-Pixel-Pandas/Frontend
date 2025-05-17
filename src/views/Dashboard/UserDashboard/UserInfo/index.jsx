@@ -11,7 +11,7 @@ import avatarBorder from "../../../../assets/images/avatarBorder.png";
 import inputUser from "../../../../assets/images/inputUser.png";
 import dropDownIcon from "../../../../assets/images/dropDownIcon.png";
 import inputBioUser from "../../../../assets/images/inputBioUser.png";
-import userInfoContainer from "../../../../assets/images/userInfoContainer.png";
+import infoContainer from "../../../../assets/images/infoContainer.png";
 import userInfoBox from "../../../../assets/images/userInfoBox.png";
 import inputUser2 from "../../../../assets/images/inputUser2.png";
 import userInfoButton from "../../../../assets/images/userInfoButton.png";
@@ -126,7 +126,7 @@ const UserInfo = () => {
 					<div className="relative">
 						{/* BackGround Image */}
 						<img
-							src={userInfoContainer}
+							src={infoContainer}
 							alt="dashboardContainer"
 							style={{ width: 1100, height: 600 }}
 						/>

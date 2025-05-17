@@ -75,6 +75,7 @@ function App() {
 					}
 				>
 					<Route path="userProfile" element={<UserProfile />} />
+					<Route path="profile" element={<UserProfile />} />
 					<Route path="userInfo" element={<UserInfo />} />
 					<Route path="tasks" element={<Tasks />} />
 					<Route path="wallet" element={<Wallet />} />

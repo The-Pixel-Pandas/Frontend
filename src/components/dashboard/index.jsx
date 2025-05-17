@@ -4,6 +4,7 @@ import ProfileHeaderContainer from "./ProfileHeaderContainer";
 import NavLinkButton from "./NavLinkButton";
 import ManageCard from "./ManageCard";
 import ManageButton from "./ManageButton";
+import Profile from "./Profile";
 
 export {
 	ProfileInfoContainer,
@@ -12,4 +13,5 @@ export {
 	NavLinkButton,
 	ManageCard,
 	ManageButton,
+	Profile,
 };

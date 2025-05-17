@@ -36,6 +36,7 @@ import {
 	NavLinkButton,
 	ManageCard,
 	ManageButton,
+	Profile,
 } from "./dashboard";
 
 // Navbar
@@ -77,6 +78,7 @@ export {
 	NavLinkButton,
 	ManageCard,
 	ManageButton,
+	Profile,
 
 	// Navbar elements
 	SearchBar,

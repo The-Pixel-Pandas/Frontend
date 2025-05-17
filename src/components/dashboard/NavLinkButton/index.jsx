@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import adminButton from "../../../assets/images/adminButton.png";
 import dashboardButton from "../../../assets/images/dashboardButton.png";
 import dashboardButtonBorder from "../../../assets/images/dashboardButtonBorder.png";
@@ -9,12 +9,17 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 	const [selectedButton, setSelectedButton] = useState(0);
 	const [isAdmin, setAdmin] = useState(isAdminButton);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	const handleClick = (index) => {
 		setSelectedButton(index);
 	};
 
 	useEffect(() => {
+		if (location.pathname === "/dashboard") {
+			navigate("/dashboard/profile");
+		}
+
 		switch (location.pathname) {
 			// User Dashboard
 			case "/dashboard/userProfile":
