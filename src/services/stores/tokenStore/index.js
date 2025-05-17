@@ -4,9 +4,11 @@ import { persist } from "zustand/middleware";
 const useTokenStore = create(
 	persist(
 		(set) => ({
-			token: null,
-			setToken: (token) => set({ token }),
-			reset: () => set({ token: null }),
+			access: null,
+			refresh: null,
+			setAccessToken: (token) => set({ access: token }),
+			setRefreshToken: (token) => set({ refresh: token }),
+			reset: () => set({ access: null, refresh: null }),
 		}),
 		{
 			name: "token-storage",

@@ -20,7 +20,7 @@ const useAuthStore = create(
 			) =>
 				set({
 					email,
-					...(password ? { password: "" } : {}),
+					...(password ? { password: password } : { password: "" }),
 					isAuthenticated: isAuthenticated,
 					isSuccess: isSuccess,
 					isError: !isSuccess,

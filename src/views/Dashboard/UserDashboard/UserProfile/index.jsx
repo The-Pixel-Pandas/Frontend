@@ -10,7 +10,7 @@ import infoContainer from "../../../../assets/images/infoContainer.png";
 import medalBox from "../../../../assets/images/medalBox.png";
 
 const UserProfile = () => {
-	const { name, biography, transaction, volume, rank, medals } =
+	const { name, biography, rankTotalProfit, rankTotalVolume, winRate, medals } =
 		useProfileStore.getState();
 	const goldMedal = medals.filter((medal) => medal === 1);
 	const silverMedal = medals.filter((medal) => medal === 2);
@@ -85,15 +85,18 @@ const UserProfile = () => {
 				{/* Info Container */}
 				<div className="flex flex-row gap-5 absolute top-1/2 left-0  mt-60 ml-40">
 					<div>
-						<ProfileInfoContainer text="درصد پاسخ صحیح" amount={transaction} />
-					</div>
-					<div>
-						<ProfileInfoContainer text="تعداد مشارکت" amount={volume} />
+						<ProfileInfoContainer text="درصد پاسخ صحیح" amount={winRate} />
 					</div>
 					<div>
 						<ProfileInfoContainer
-							text="رتبه فعلی در جدول امتیازات"
-							amount={rank}
+							text="رتبه در جدول میزان مشارکت"
+							amount={rankTotalVolume}
+						/>
+					</div>
+					<div>
+						<ProfileInfoContainer
+							text="رتبه در جدول امتیاز عملکرد"
+							amount={rankTotalProfit}
 						/>
 					</div>
 				</div>
