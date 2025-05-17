@@ -1,7 +1,8 @@
 import React from "react";
+import { Profile } from "../../../../components";
 
 const AdminProfile = () => {
-	return <></>;
+	return <Profile />;
 };
 
 export default AdminProfile;
