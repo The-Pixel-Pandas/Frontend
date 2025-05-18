@@ -135,22 +135,40 @@ const Profile = () => {
 						<div className="absolute inset-0 bottom-0 transform top-1/2 mt-2">
 							<div className="flex flex-row gap-10 absolute ml-5">
 								<div>
-									<ProfileInfoContainer
-										text="درصد پاسخ صحیح"
-										amount={winRate}
-									/>
+									{rankTotalProfit === undefined ? (
+										<div className="text-lg font-MorabbaBold text-white animate-pulse ml-[70px] whitespace-nowrap">
+											...در حال بارگذاری
+										</div>
+									) : (
+										<ProfileInfoContainer
+											text="رتبه در جدول امتیاز عملکرد"
+											amount={rankTotalProfit}
+										/>
+									)}
 								</div>
 								<div>
-									<ProfileInfoContainer
-										text="رتبه در جدول میزان مشارکت"
-										amount={rankTotalVolume}
-									/>
+									{rankTotalVolume === undefined ? (
+										<div className="text-lg font-MorabbaBold text-white animate-pulse ml-32 whitespace-nowrap">
+											...در حال بارگذاری
+										</div>
+									) : (
+										<ProfileInfoContainer
+											text="رتبه در جدول میزان مشارکت"
+											amount={rankTotalVolume}
+										/>
+									)}
 								</div>
 								<div>
-									<ProfileInfoContainer
-										text="رتبه در جدول امتیاز عملکرد"
-										amount={rankTotalProfit}
-									/>
+									{winRate === undefined ? (
+										<div className="text-lg font-MorabbaBold text-white animate-pulse ml-34 whitespace-nowrap">
+											...در حال بارگذاری
+										</div>
+									) : (
+										<ProfileInfoContainer
+											text="درصد پاسخ صحیح"
+											amount={winRate}
+										/>
+									)}
 								</div>
 							</div>
 						</div>
