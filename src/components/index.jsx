@@ -37,6 +37,7 @@ import {
 	ManageCard,
 	ManageButton,
 	Profile,
+	NotificationBox,
 } from "./dashboard";
 
 // Navbar
@@ -79,6 +80,7 @@ export {
 	ManageCard,
 	ManageButton,
 	Profile,
+	NotificationBox,
 
 	// Navbar elements
 	SearchBar,

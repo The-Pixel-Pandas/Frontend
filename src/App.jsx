@@ -21,6 +21,7 @@ import {
 	AdminManageQuestion,
 	AdminSubmitNews,
 	AdminManageTasks,
+	Notification,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components";
@@ -79,6 +80,7 @@ function App() {
 					<Route path="userInfo" element={<UserInfo />} />
 					<Route path="tasks" element={<Tasks />} />
 					<Route path="wallet" element={<Wallet />} />
+					<Route path="notification" element={<Notification />} />
 					<Route path="submitQuestion" element={<SubmitQuestion />} />
 					<Route path="forecastResults" element={<ForecastResults />} />
 					<Route path="adminProfile" element={<AdminProfile />} />
