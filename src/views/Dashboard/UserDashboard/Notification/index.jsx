@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NotificationBox } from "../../../../components";
+import { httpService } from "../../../../services";
 import bell from "../../../../assets/images/bell.png";
 import adminContainer from "../../../../assets/images/adminContainer.png";
 import blueBox from "../../../../assets/images/blueBox.png";
 import purpleBox from "../../../../assets/images/purpleBox.png";
 
 const Notification = () => {
+	const [notifications, setNotifications] = useState([]);
+
+	const handleGetData = () => {
+		try {
+			httpService
+				.get("https://mocki.io/v1/638e78f8-9e12-4ccb-a7f9-8b382d27dbdf")
+				.then((res) => {
+					setNotifications(res);
+					console.log("Notification Get API:", res);
+				})
+				.catch((err) => console.error("Notification Get API Error:", err));
+		} catch (err) {
+			console.error("Notification Get API Error:", err);
+		}
+	};
+	useEffect(() => {
+		handleGetData();
+	}, []);
+
 	return (
 		<>
 			<div className="absolute left-0 top-0 flex items-center z-0 ml-14">
@@ -34,31 +54,18 @@ const Notification = () => {
 					{/* Notifications */}
 					<div className="absolute inset-0 left-0 top-0 flex items-center z-50 ml-14 mt-44">
 						<div className="flex flex-col items-center h-[400px] gap-10 overflow-y-scroll no-scrollbar ">
-							<NotificationBox
-								title="یک خبر جدید ثبت شد"
-								description="طوفان امروز چه مقدار مخرب است؟"
-								background={blueBox}
-							/>
-							<NotificationBox
-								title="یک خبر جدید ثبت شد"
-								description="طوفان امروز چه مقدار مخرب است؟"
-								background={purpleBox}
-							/>
-							<NotificationBox
-								title="یک خبر جدید ثبت شد"
-								description="طوفان امروز چه مقدار مخرب است؟"
-								background={blueBox}
-							/>
-							<NotificationBox
-								title="یک خبر جدید ثبت شد"
-								description="طوفان امروز چه مقدار مخرب است؟"
-								background={purpleBox}
-							/>
-							<NotificationBox
-								title="یک خبر جدید ثبت شد"
-								description="طوفان امروز چه مقدار مخرب است؟"
-								background={blueBox}
-							/>
+							{notifications.map((notification, index) => {
+								const notificationBackground =
+									index % 2 === 0 ? blueBox : purpleBox;
+								return (
+									<NotificationBox
+										key={index}
+										title={notification.type}
+										description={notification.description}
+										background={notificationBackground}
+									/>
+								);
+							})}
 						</div>
 					</div>
 				</div>
