@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore, eventHandler } from "../../../services";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../../chore/Toast";
-import {
-	httpService,
-	useCoinStore,
-	useAvatarStore,
-	useTokenStore,
-} from "../../../services";
+import { eventHandler, useAuthStore } from "../../../services";
+import { useAuthApi } from "../../../hooks";
 import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
 
 const AuthComponent = ({ authType }) => {
+	const { handleAuthAPI } = useAuthApi();
 	const {
 		isAuthenticated,
 		isError,
@@ -24,38 +20,7 @@ const AuthComponent = ({ authType }) => {
 		setUser,
 		setLoginMessage,
 	} = useAuthStore();
-	const { setAvatarNumber } = useAvatarStore();
-	const { setCoin } = useCoinStore();
-	const { setToken } = useTokenStore();
 	const navigate = useNavigate();
-
-	const handleAuthAPI = (URL, data) => {
-		httpService
-			.post(URL, data)
-			.then((res) => {
-				console.log("Login/Signin API response:", res);
-				if (res.status == "success") {
-					// Store User Info
-					setUser(email, password);
-					setAvatarNumber(res.data.user.avatar);
-					setCoin(res.data.user.coinAmount);
-					setToken(res.data.token);
-					// Set Login Message
-					setLoginMessage(`${authType} با موفقیت انجام شد`);
-				} else {
-					// Store User Info
-					setUser(email, password, false, false);
-					// Set Login Message
-					setLoginMessage(res.message);
-					console.log(res.message);
-				}
-			})
-			.catch((err) => {
-				console.log("Login/Signin API error:", err);
-				setUser(email, password, false, false);
-				setLoginMessage(err.message);
-			});
-	};
 
 	const submitButton = () => {
 		eventHandler.dispatchEvent("ClickSound");
@@ -71,15 +36,19 @@ const AuthComponent = ({ authType }) => {
 				return;
 			}
 
-			const data = {
-				email: email,
-				password: password,
-			};
-
 			if (authType === "ورود") {
-				handleAuthAPI("https://dummyjson.com/c/2a61-718b-4cd4-aeb2", data);
+				const data = {
+					gmail: email,
+					password: password,
+				};
+				handleAuthAPI("login/", data, authType);
 			} else if (authType === "ثبت نام") {
-				handleAuthAPI("https://dummyjson.com/c/2083-02bd-418a-a281", data);
+				const data = {
+					user_name: email,
+					gmail: email,
+					password: password,
+				};
+				handleAuthAPI("signup/", data, authType);
 			}
 		}
 	};

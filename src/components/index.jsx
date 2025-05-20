@@ -33,7 +33,11 @@ import {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
+	ManageCard,
+	ManageButton,
+	Profile,
+	NotificationBox,
 } from "./dashboard";
 
 // Navbar
@@ -72,7 +76,11 @@ export {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
+	ManageCard,
+	ManageButton,
+	Profile,
+	NotificationBox,
 
 	// Navbar elements
 	SearchBar,

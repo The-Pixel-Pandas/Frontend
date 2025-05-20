@@ -26,21 +26,21 @@ const Home = () => {
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
 		);
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${pageNumber}&_category=${category}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${category}`
 		);
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140?_page=${page}&_category=${activeCategory}`
+			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${page}&_category=${activeCategory}`
 		);
 		event.preventDefault();
 	};
@@ -59,7 +59,7 @@ const Home = () => {
 
 	useEffect(() => {
 		handleQuestionAPI(
-			"https://mocki.io/v1/50b1e26f-2bd0-4a7a-b834-c63810c1d140"
+			"https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059"
 		);
 	}, []);
 
@@ -69,10 +69,10 @@ const Home = () => {
 				try {
 					const [questionResponse, commentsResponse] = await Promise.all([
 						httpService.get(
-							`https://mocki.io/v1/cdeeecd7-f616-4a06-9da2-a9cc3f5e539d`
+							`https://mocki.io/v1/7e5852b3-6ec0-4c7a-b1fd-995d81590d0d`
 						),
 						httpService.get(
-							`https://mocki.io/v1/6ed43c72-ef71-4b5e-8c43-41514698ff21`
+							`https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b`
 						),
 					]);
 					setQuestionData(questionResponse.data);

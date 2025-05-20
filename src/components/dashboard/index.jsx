@@ -1,11 +1,19 @@
 import ProfileInfoContainer from "./ProfileInfoContainer";
 import ProfileMedal from "./ProfileMedal";
 import ProfileHeaderContainer from "./ProfileHeaderContainer";
-import UserInfoInput from "./UserInfoInput";
+import NavLinkButton from "./NavLinkButton";
+import ManageCard from "./ManageCard";
+import ManageButton from "./ManageButton";
+import Profile from "./Profile";
+import NotificationBox from "./NotificationBox";
 
 export {
 	ProfileInfoContainer,
 	ProfileMedal,
 	ProfileHeaderContainer,
-	UserInfoInput,
+	NavLinkButton,
+	ManageCard,
+	ManageButton,
+	Profile,
+	NotificationBox,
 };
