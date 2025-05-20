@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import bilbilak from "../../../assets/images/bilbilak.png";
 
 const NotificationBox = ({ title, description, background }) => {
@@ -26,6 +27,12 @@ const NotificationBox = ({ title, description, background }) => {
 			</div>
 		</div>
 	);
+};
+
+NotificationBox.propTypes = {
+	title: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	background: PropTypes.string.isRequired,
 };
 
 export default NotificationBox;

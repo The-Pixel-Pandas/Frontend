@@ -45,10 +45,13 @@ const useContentView = (baseUrl, detailsUrl, commentsUrl) => {
 			// 	httpService.get(`${detailsUrl}/${id}`),
 			// 	httpService.get(`${commentsUrl}/${id}`),
 			// ]);
+			console.log("id of details:", id);
 			const [contentResponse, commentsResponse] = await Promise.all([
 				httpService.get(`${detailsUrl}`),
 				httpService.get(`${commentsUrl}`),
 			]);
+			console.log("contentResponse:", contentResponse);
+			console.log("commentsResponse:", commentsResponse);
 			setContentData(contentResponse.data);
 			setUsersData(commentsResponse);
 		} catch (err) {
