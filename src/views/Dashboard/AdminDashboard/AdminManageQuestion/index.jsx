@@ -121,7 +121,7 @@ const AdminManageQuestion = () => {
 								) : (
 									<SwiperSlide>
 										<div className="flex items-center justify-center h-full text-white font-MorabbaBold text-xl">
-											... در حال بارگذاری سوالات 
+											... در حال بارگذاری سوالات
 										</div>
 									</SwiperSlide>
 								)}

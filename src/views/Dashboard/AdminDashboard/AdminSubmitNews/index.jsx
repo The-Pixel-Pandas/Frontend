@@ -18,79 +18,140 @@ const AdminSubmitNews = () => {
 					style={{ width: 1100, height: 600 }}
 					className="mt-10"
 				/>
-				<div className="absolute left-0 top-0 w-full h-full flex flex-col justify-center items-start px-20 py-20 gap-6">
-					<div className="flex flex-row gap-8 w-full">
+				<div className="absolute left-0 top-0 w-full h-full flex flex-col justify-center items-start ml-20 -mt-5 ">
+					<div className="flex flex-row gap-28 w-full">
 						{/* Add Link */}
-						<div className="flex flex-col items-center justify-start w-1/3">
-							<img src={newsLink} alt="newsLink" className="w-full" />
-							<button className="w-full h-16 flex items-center justify-center mt-[-60px]">
-								افزودن لینک خبر
-							</button>
+						<div className="flex flex-col items-center justify-start w-1/3 mt-2">
+							<div className="relative">
+								<img
+									src={newsLink}
+									alt="newsLink"
+									style={{ width: 450, height: 80 }}
+								/>
+								<button className=" absolute inset-0 w-full flex items-center  justify-center ">
+									<div className="bg-clip-text text-transparent  bg-gradient-to-r from-[#315EC9] to-[#34A2B3] font-MorabbaMedium text-lg">
+										افزودن لینک خبر
+									</div>
+								</button>
+							</div>
 						</div>
-						<div className="flex flex-col gap-6 w-2/3">
+						<div className="flex flex-col gap-9">
 							{/* News Title Input */}
 							<div className="flex items-center w-full">
-								<img src={newsTitle} alt="newTitle" className="absolute ml-2" />
-								<input
-									type="text"
-									placeholder="خبر خود را وارد کنید ..."
-									className="w-full h-16 rounded-xl bg-gradient-to-l from-[#2e3a6a] to-[#2e3a6a]/60 text-white pr-16"
-									style={{ direction: "rtl" }}
-								/>
+								<div className="relative">
+									<img
+										src={newsTitle}
+										alt="newTitle"
+										style={{ width: 460, height: 110 }}
+									/>
+									<textarea
+										placeholder="خبر خود را وارد کنید ..."
+										className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[100px] resize-none"
+										style={{ direction: "rtl" }}
+									/>
+								</div>
 							</div>
 							{/* News Description */}
-							<div className="flex items-center w-full">
-								<img
-									src={newsDescription}
-									alt="newsDescription"
-									className="absolute ml-2"
-								/>
-								<textarea
-									placeholder="شرح خبر ..."
-									className="w-full h-40 rounded-xl bg-gradient-to-l from-[#2e3a6a] to-[#2e3a6a]/60 text-white pr-16 pt-4"
-									style={{ direction: "rtl" }}
-								/>
+							<div className="flex items-center ">
+								<div className="relative">
+									<img
+										src={newsDescription}
+										alt="newsDescription"
+										style={{ width: 460, height: 235 }}
+									/>
+									<textarea
+										placeholder="شرح خبر ..."
+										className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10  border-none outline-none overflow-y-scroll no-scrollbar max-h-[280px] resize-none"
+										style={{ direction: "rtl" }}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
 					{/* Bottom Row: Image Upload & Category/Submit */}
-					<div className="flex flex-row gap-8 w-full mt-4">
+					<div className="flex flex-row justify-center w-full absolute inset-0 mt-64 ">
 						{/* Add Image */}
-						<div className="flex flex-col items-center justify-start w-1/3">
-							<img
-								src={addPictureContainer}
-								alt="addPictureContainer"
-								className="w-full"
-							/>
-							<label className="w-full flex flex-col items-center justify-center mt-[-120px]">
-								<img src={uploudLogo} alt="uploadLogo" className="mb-2" />
-								<span className="text-cyan-300 text-lg">افزودن تصویر</span>
-								<input type="file" className="hidden" />
-							</label>
+						<div className="flex flex-col items-center  w-1/3 gap-10">
+							<div className="relative">
+								<img
+									src={addPictureContainer}
+									alt="addPictureContainer"
+									style={{ width: 538, height: 297 }}
+								/>
+								<label className="absolute inset-0 w-full flex flex-col items-center justify-center ">
+									<img
+										src={uploudLogo}
+										alt="uploadLogo"
+										className="mb-2"
+										style={{ width: 150, height: 150 }}
+									/>
+									<span className="bg-clip-text text-transparent  bg-gradient-to-r from-[#315EC9] to-[#34A2B3] font-MorabbaMedium text-xl">
+										افزودن &nbsp; تصویر
+									</span>
+									<input type="file" className="hidden" />
+								</label>
+							</div>
+							<div className="flex items-center mr-40 ">
+								<div className="relative">
+									<img
+										src={submitButton}
+										alt="submitButton"
+										style={{ width: 273, height: 48 }}
+									/>
+									<button className=" absolute inset-0  ">
+										<div className="text-white text-2xl font-MorabbaMedium">
+											افزودن
+										</div>
+									</button>
+								</div>
+							</div>
 						</div>
 						{/* Category Dropdown and Submit Button */}
-						<div className="flex flex-col justify-end w-2/3">
-							<div className="flex flex-col items-end gap-4 mt-8 w-full">
+						<div className="flex flex-col w-2/3 items-center justify-center   ">
+							<div className="flex flex-col items-end gap-4 w-full mr-96 pr-5 mt-52">
 								<div className="flex items-center w-1/2 h-12 rounded-xl bg-gradient-to-l self-end">
-									<img
-										src={categoryDropDown}
-										alt="categoryDropDown"
-										className="ml-2"
-									/>
-									<select className="text-white bg-transparent w-1/2">
-										<option>ورزشی</option>
-										<option>سیاسی</option>
-										<option>اقتصادی</option>
-									</select>
-									<span className="rounded-r-xl text-white text-lg mr-2">
-										دسته بندی ها
-									</span>
-								</div>
-								<div>
-									<img src={submitButton} alt="submitButton" />
-									<button className="w-1/2 h-10 rounded-xl bg-gradient-to-l">
-										افزودن
-									</button>
+									<div className="relative">
+										<img
+											src={categoryDropDown}
+											alt="categoryDropDown"
+											className="ml-2"
+										/>
+										<div className="absolute inset-0 w-full flex items-center justify-center">
+											<select className="text-white w-1/2 outline-none border-none font-MorabbaMedium bg-transparent">
+												<option
+													style={{
+														background: "#1F3B73",
+														color: "white",
+														fontWeight: "bold",
+													}}
+												>
+													ورزشی
+												</option>
+												<option
+													style={{
+														background: "#1F3B73",
+														color: "white",
+														fontWeight: "bold",
+													}}
+												>
+													سیاسی
+												</option>
+												<option
+													style={{
+														backgroundColor: "#1F3B73",
+														color: "white",
+														fontWeight: "bold",
+													}}
+												>
+													اقتصادی
+												</option>
+											</select>
+
+											<div className="rounded-r-xl text-white text-lg mr-2 font-MorabbaMedium">
+												دسته بندی ها
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
