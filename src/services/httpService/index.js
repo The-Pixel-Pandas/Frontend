@@ -31,9 +31,9 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-		const token = localStorage.getItem("token-storage");
+		const token = JSON.parse(localStorage.getItem("token-storage"));
 		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
+			config.headers.Authorization = `Bearer ${token.state.access}`;
 		}
 		return config;
 	},

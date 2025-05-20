@@ -10,6 +10,7 @@ import useMedalStore from "./stores/medalStore";
 import useTokenStore from "./stores/tokenStore";
 import useProfileStore from "./stores/profileStore";
 import cacheService from "./cacheService";
+import userInfoYup from "./yupObjects/userInfoYup";
 
 export {
 	httpService,
@@ -24,4 +25,5 @@ export {
 	useTokenStore,
 	useProfileStore,
 	cacheService,
+	userInfoYup,
 };

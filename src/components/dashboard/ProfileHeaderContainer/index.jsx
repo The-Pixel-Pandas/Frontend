@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import infoContainer from "../../../assets/images/infoContainer.png";
+import userInfoContainer from "../../../assets/images/userInfoContainer.png";
 
 const ProfileHeaderContainer = ({ text }) => {
 	return (
 		<div className="relative overflow-hidden z-50">
 			<div>
 				<img
-					src={infoContainer}
+					src={userInfoContainer}
 					alt="infoContainer"
 					style={{ width: 290, height: 150 }}
 				/>
