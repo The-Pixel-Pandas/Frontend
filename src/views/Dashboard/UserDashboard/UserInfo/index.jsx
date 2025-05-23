@@ -121,7 +121,7 @@ const UserInfo = () => {
 
 	return (
 		<>
-			<form id="authForm" onSubmit={formik.handleSubmit}>
+			<form id="userInfoForm" onSubmit={formik.handleSubmit}>
 				<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
 					<div className="relative">
 						{/* BackGround Image */}
