@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Toast } from "../../../../components";
 import { useFormik } from "formik";
-import { userSubmitQuestionYup } from "../../../../services";
+import { userSubmitQuestionYup, useCoinStore } from "../../../../services";
 import { useCoinChooser, useToast } from "../../../../hooks";
 import { AnimateCoinLogo } from "../../../../components";
 import userSubmitBackground from "../../../../assets/images/userSubmitBackground.png";
@@ -23,11 +23,16 @@ const SubmitQuestion = () => {
 	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast();
 
+	const { removeCoin } = useCoinStore();
+	const submitCost = 50;
+
 	const handleSubmitAPI = (values) => {
 		console.log(values);
 		console.log(selectedCategory);
 		console.log(selectedImage);
+
 		showToast("سوال با موفقیت ثبت شد", false);
+		removeCoin(submitCost);
 	};
 
 	const formik = useFormik({
@@ -288,7 +293,7 @@ const SubmitQuestion = () => {
 											className="text-white font-MorabbaMedium text-lg "
 											dir="rtl"
 										>
-											{(50).toLocaleString("fa")} &nbsp; پاندا کوین
+											{submitCost.toLocaleString("fa")} &nbsp; پاندا کوین
 										</div>
 										<div
 											className="text-white font-MorabbaMedium text-lg font-bold "

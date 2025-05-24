@@ -39,6 +39,7 @@ import {
 	Profile,
 	NotificationBox,
 	AnimateCoinLogo,
+	BalanceCtrlBtn,
 } from "./dashboard";
 
 // Navbar
@@ -83,6 +84,7 @@ export {
 	Profile,
 	NotificationBox,
 	AnimateCoinLogo,
+	BalanceCtrlBtn,
 
 	// Navbar elements
 	SearchBar,
