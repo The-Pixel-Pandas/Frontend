@@ -11,6 +11,7 @@ import useTokenStore from "./stores/tokenStore";
 import useProfileStore from "./stores/profileStore";
 import cacheService from "./cacheService";
 import userInfoYup from "./yupObjects/userInfoYup";
+import userSubmitQuestionYup from "./yupObjects/userSubmitQuestionYup";
 
 export {
 	httpService,
@@ -26,4 +27,5 @@ export {
 	useProfileStore,
 	cacheService,
 	userInfoYup,
+	userSubmitQuestionYup,
 };
