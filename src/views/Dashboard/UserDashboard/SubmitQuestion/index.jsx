@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Toast } from "../../../../components";
 import { useFormik } from "formik";
 import { userSubmitQuestionYup } from "../../../../services";
-import { useCoinChooser } from "../../../../hooks";
+import { useCoinChooser, useToast } from "../../../../hooks";
+import { AnimateCoinLogo } from "../../../../components";
 import userSubmitBackground from "../../../../assets/images/userSubmitBackground.png";
 import userSubmitBox from "../../../../assets/images/userSubmitBox.png";
 import userSubmitTitle from "../../../../assets/images/userSubmitTitle.png";
@@ -10,17 +11,23 @@ import userSubmitDescription from "../../../../assets/images/userSubmitDescripti
 import userSubmitCategoryContainer from "../../../../assets/images/userSubmitCategoryContainer.png";
 import userSubmitUploadBox from "../../../../assets/images/userSubmitUploadBox.png";
 import userSubmitUploadIcon from "../../../../assets/images/userSubmitUploadIcon.png";
-import userSubmitCoinLogo from "../../../../assets/images/userSubmitCoinLogo.png";
 import userSubmitCoinInput from "../../../../assets/images/userSubmitCoinInput.png";
 import userSubmitIncreaseButton from "../../../../assets/images/userSubmitIncreaseButton.png";
 import userSubmitDecreaseButton from "../../../../assets/images/userSubmitDecreaseButton.png";
 import userSubmitButton from "../../../../assets/images/userSubmitButton.png";
 
 const SubmitQuestion = () => {
+	const [selectedCategory, setSelectedCategory] = useState("همه موارد");
+	const [selectedImage, setSelectedImage] = useState(null);
+	const previousCoinRef = useRef(0);
+	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0);
+	const { toastMessage, isSubmitted, isError, showToast } = useToast();
+
 	const handleSubmitAPI = (values) => {
 		console.log(values);
 		console.log(selectedCategory);
 		console.log(selectedImage);
+		showToast("سوال با موفقیت ثبت شد", false);
 	};
 
 	const formik = useFormik({
@@ -29,29 +36,17 @@ const SubmitQuestion = () => {
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: (values) => {
-			setIsSubmitted(true);
 			if (selectedImage == null) {
-				setToastMessage("لطفا تصویری اپلود کنید");
-				setIsError(true);
+				showToast("لطفا تصویری اپلود کنید", true);
 				return;
 			}
 			if (!selectedCategory) {
-				setToastMessage("لطفا دسته بندی مورد نظر خود را انتخاب کنید");
-				setIsError(true);
+				showToast("لطفا دسته بندی مورد نظر خود را انتخاب کنید", true);
 				return;
 			}
-			setIsError(false);
 			handleSubmitAPI(values);
 		},
 	});
-
-	const [selectedCategory, setSelectedCategory] = useState("همه موارد");
-	const [selectedImage, setSelectedImage] = useState(null);
-	const previousCoinRef = useRef(0);
-	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0);
-	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const [toastMessage, setToastMessage] = useState("");
 
 	useEffect(() => {
 		if (previousCoinRef.current !== coin) {
@@ -59,14 +54,6 @@ const SubmitQuestion = () => {
 			formik.setFieldValue("coin", coin);
 		}
 	}, [coin]);
-
-	useEffect(() => {
-		if (toastMessage) {
-			setTimeout(() => {
-				setToastMessage("");
-			}, 3000);
-		}
-	}, [toastMessage]);
 
 	const categories = [
 		"همه موارد",
@@ -106,14 +93,14 @@ const SubmitQuestion = () => {
 											style={{ width: 503, height: 100 }}
 										/>
 										<textarea
-											placeholder="سوال خود را وارد کنید :"
-											className={`absolute inset-0  h-full w-full  bg-transparent text-white text-xl z-10 font-MorabbaMedium placeholder:font-MorabbaMedium placeholder:text-${formik.touched.question ? "red-500" : "white"} placeholder:text-2xl pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[100px] resize-none`}
+											placeholder="سوال :"
+											className={`absolute inset-0  h-full w-full z-50 bg-transparent text-white text-xl font-MorabbaMedium placeholder:font-MorabbaMedium placeholder:text-white placeholder:text-2xl pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[100px] resize-none`}
 											{...formik.getFieldProps("question")}
 											onChange={formik.handleChange}
 											style={{ direction: "rtl" }}
 										/>
 										{formik.errors.question && formik.touched.question && (
-											<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-red-500 text-sm">
+											<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center font-MorabbaMedium text-red-500 text-lg">
 												{formik.errors.question}
 											</div>
 										)}
@@ -127,14 +114,14 @@ const SubmitQuestion = () => {
 										/>
 										<textarea
 											placeholder="توضیحات :"
-											className={`absolute inset-0  h-full w-full  bg-transparent text-white text-xl font-MorabbaMedium placeholder:font-MorabbaMedium placeholder:text-${formik.touched.description ? "red-500" : "white"} placeholder:text-2xl pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[200px] resize-none`}
+											className={`absolute inset-0  h-full w-full z-50 bg-transparent text-white text-xl font-MorabbaMedium placeholder:font-MorabbaMedium placeholder:text-white placeholder:text-2xl pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[200px] resize-none`}
 											style={{ direction: "rtl" }}
 											{...formik.getFieldProps("description")}
 											onChange={formik.handleChange}
 										/>
 										{formik.touched.description &&
 											formik.errors.description && (
-												<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-red-500 text-sm">
+												<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center font-MorabbaMedium text-red-500 text-lg">
 													{formik.errors.description}
 												</div>
 											)}
@@ -227,32 +214,7 @@ const SubmitQuestion = () => {
 							</div>
 						</div>
 						<div className="absolute inset-0 z-50 flex flex-col gap-1 items-center mt-5 mr-[650px]">
-							{/* Coin Logo */}
-							<img
-								src={userSubmitCoinLogo}
-								alt="coinLogo"
-								style={{
-									width: 225,
-									height: 175,
-									animation: "resize 1.5s ease-in-out infinite",
-								}}
-								className="mr-5 mb-1"
-							/>
-							<style>
-								{`
-								@keyframes resize {
-									0% {
-										transform: scale(1);
-									}
-									50% {
-										transform: scale(1.1);
-									}
-									100% {
-										transform: scale(1);
-									}
-								}
-							`}
-							</style>
+							<AnimateCoinLogo />
 							{/* Coin Text */}
 							<div
 								className={`font-MorabbaMedium ${formik.errors.coin ? "text-red-500 text-xl" : "text-white text-3xl"} text-nowrap`}

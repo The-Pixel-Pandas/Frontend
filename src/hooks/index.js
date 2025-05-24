@@ -3,6 +3,7 @@ import useFetchData from "./useFetchData";
 import useContentView from "./useContentView";
 import useAuthApi from "./useAuthApi";
 import useCoinChooser from "./useCoinChooser";
+import useToast from "./useToast";
 
 export {
 	useProfilePopup,
@@ -10,4 +11,5 @@ export {
 	useContentView,
 	useAuthApi,
 	useCoinChooser,
+	useToast,
 };

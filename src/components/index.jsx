@@ -38,6 +38,7 @@ import {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
 } from "./dashboard";
 
 // Navbar
@@ -81,6 +82,7 @@ export {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
 
 	// Navbar elements
 	SearchBar,

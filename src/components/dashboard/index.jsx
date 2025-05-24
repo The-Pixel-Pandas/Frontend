@@ -6,6 +6,7 @@ import ManageCard from "./ManageCard";
 import ManageButton from "./ManageButton";
 import Profile from "./Profile";
 import NotificationBox from "./NotificationBox";
+import AnimateCoinLogo from "./AnimateCoinLogo";
 
 export {
 	ProfileInfoContainer,
@@ -16,4 +17,5 @@ export {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
 };
