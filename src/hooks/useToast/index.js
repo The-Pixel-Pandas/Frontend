@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useToast = () => {
+const useToast = ({ time = 3000 }) => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [toastMessage, setToastMessage] = useState("");
@@ -13,7 +13,7 @@ const useToast = () => {
 			setIsSubmitted(false);
 			setIsError(false);
 			setToastMessage("");
-		}, 3000);
+		}, time);
 	};
 
 	return {

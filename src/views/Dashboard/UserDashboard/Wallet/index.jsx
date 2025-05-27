@@ -4,7 +4,9 @@ import {
 	WalletBalanceCtrlBtn,
 	WalletCurrencyInput,
 	WalletHistoryItem,
+	Toast,
 } from "../../../../components";
+import { useToast } from "../../../../hooks";
 import { httpService, useCoinStore } from "../../../../services";
 import walletBackground from "../../../../assets/images/walletBackground.png";
 import walletSection from "../../../../assets/images/walletSection.png";
@@ -20,12 +22,15 @@ const Wallet = () => {
 		limitToman: 1000000,
 		limitCoin: 1000000,
 	};
-	
-	const [, setToman] = useState(unitInterval.initialToman);
-	const [, setCoin] = useState(unitInterval.initialCoin);
+
+	const [selectedToman, setSelectedToman] = useState(unitInterval.initialToman);
+	const [selectedCoin, setSelectedCoin] = useState(unitInterval.initialCoin);
 	const [, setBalance] = useState(unitInterval.initialCoin);
-	const { coin } = useCoinStore();
+	const { coin, addCoin } = useCoinStore();
 	const [history, setHistory] = useState([]);
+	const { toastMessage, isSubmitted, isError, showToast } = useToast({
+		time: 5000,
+	});
 
 	useEffect(() => {
 		httpService
@@ -36,6 +41,14 @@ const Wallet = () => {
 			})
 			.catch((err) => console.error("Wallet History Get API Error:", err));
 	}, []);
+
+	const manageExchange = () => {
+		showToast(
+			` مقدار ${selectedToman.toLocaleString("fa")} تومان به پاندا کوین تبدیل شد`,
+			false
+		);
+		addCoin(selectedCoin);
+	};
 
 	return (
 		<>
@@ -107,11 +120,15 @@ const Wallet = () => {
 										</div>
 										<div className="flex flex-row items-center justify-center gap-5 left-10 bottom-7 absolute">
 											<WalletBalanceCtrlBtn
-												onClick={() => {}}
+												onClick={() => {
+													showToast("این بخش در حال حاضر غیر فعال است", true);
+												}}
 												type="deposite"
 											/>
 											<WalletBalanceCtrlBtn
-												onClick={() => {}}
+												onClick={() => {
+													showToast("این بخش در حال حاضر غیر فعال است", true);
+												}}
 												type="withdrawal"
 											/>
 										</div>
@@ -128,19 +145,22 @@ const Wallet = () => {
 							معامله
 						</div>
 						<WalletCurrencyInput
-							onChange={setToman}
+							onChange={setSelectedToman}
 							unitType="تومان"
 							initialCoin={unitInterval.initialToman}
 							limit={unitInterval.limitToman}
 						/>
 						<div className="text-white text-lg font-MorabbaMedium">معادل</div>
 						<WalletCurrencyInput
-							onChange={setCoin}
+							onChange={setSelectedCoin}
 							unitType="پاندا کوین"
 							initialCoin={unitInterval.initialCoin}
 							limit={unitInterval.limitCoin}
 						/>
-						<button className="absolute inset-0 flex items-center justify-center mb-2 hover:scale-105 transition ease-in-out ">
+						<button
+							className="absolute inset-0 flex items-center justify-center mb-2 hover:scale-105 transition ease-in-out "
+							onClick={manageExchange}
+						>
 							<img
 								src={walletBuyButton}
 								alt="walletBuyButton"
@@ -183,6 +203,13 @@ const Wallet = () => {
 					</div>
 				</div>
 			</div>
+			{/* Toast */}
+			{isSubmitted && !isError && (
+				<Toast type="success" message={toastMessage} position="top-center" />
+			)}
+			{isSubmitted && isError && (
+				<Toast type="error" message={toastMessage} position="top-center" />
+			)}
 		</>
 	);
 };
