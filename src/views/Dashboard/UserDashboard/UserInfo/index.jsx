@@ -6,6 +6,7 @@ import {
 	userInfoYup,
 	httpService,
 } from "../../../../services";
+import { useToast } from "../../../../hooks";
 import { Toast } from "../../../../components";
 import avatarBorder from "../../../../assets/images/avatarBorder.png";
 import inputUser from "../../../../assets/images/inputUser.png";
@@ -20,7 +21,7 @@ const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
 	const { id, setAvatarNumber, setName, setBiography } = useProfileStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
-	const [toastMessage, setToastMessage] = useState("");
+	const { toastMessage, isSubmitted, isError, showToast } = useToast();
 	const [formState, setFormState] = useState({
 		avatarSelected: false,
 		username: "",
@@ -31,8 +32,6 @@ const UserInfo = () => {
 		location: "",
 		favoriteTopic: "",
 	});
-	const [isSubmitted, setSubmitted] = useState(false);
-	const [isError, setError] = useState(false);
 
 	const formik = useFormik({
 		initialValues: userInfoYup.initialValues,
@@ -40,17 +39,15 @@ const UserInfo = () => {
 		validateOnChange: true,
 		validateOnBlur: true,
 		onSubmit: (values) => {
-			setSubmitted(true);
 			if (calculateProgress() !== 100) {
-				setError(true);
 				if (!formState.avatarSelected) {
-					setToastMessage("لطفا آواتار موردنظر خود را انتخاب کنید");
+					showToast("لطفا آواتار موردنظر خود را انتخاب کنید", true);
 				}
 				if (formState.gender == "") {
-					setToastMessage("لطفا جنسیت خود را انتخاب کنید");
+					showToast("لطفا جنسیت خود را انتخاب کنید", true);
 				}
 				if (formState.favoriteTopic == "") {
-					setToastMessage("لطفا موضوع مورد علاقه خود را انتخاب کنید");
+					showToast("لطفا موضوع مورد علاقه خود را انتخاب کنید", true);
 				}
 				return;
 			}
@@ -72,13 +69,11 @@ const UserInfo = () => {
 					setName(values.username);
 					setBiography(values.biography);
 					setAvatarNumber(selectedAvatar + 1);
-					setToastMessage("اطلاعات با موفقیت ذخیره شد");
-					setError(false);
+					showToast("اطلاعات با موفقیت ذخیره شد", false);
 				})
 				.catch((err) => {
 					console.log("Put profile API error:", err);
-					setToastMessage("خطا در ذخیره اطلاعات");
-					setError(true);
+					showToast("خطا در ذخیره اطلاعات", true);
 				});
 		},
 	});
@@ -111,17 +106,9 @@ const UserInfo = () => {
 		setSelectedAvatar(getAvatarNumber() - 1);
 	}, [getAvatarNumber()]);
 
-	useEffect(() => {
-		if (toastMessage) {
-			setTimeout(() => {
-				setToastMessage("");
-			}, 3000);
-		}
-	}, [toastMessage]);
-
 	return (
 		<>
-			<form id="authForm" onSubmit={formik.handleSubmit}>
+			<form id="userInfoForm" onSubmit={formik.handleSubmit}>
 				<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
 					<div className="relative">
 						{/* BackGround Image */}

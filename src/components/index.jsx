@@ -38,6 +38,10 @@ import {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
+	WalletBalanceCtrlBtn,
+	WalletCurrencyInput,
+	WalletHistoryItem,
 } from "./dashboard";
 
 // Navbar
@@ -81,6 +85,10 @@ export {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
+	WalletBalanceCtrlBtn,
+	WalletCurrencyInput,
+	WalletHistoryItem,
 
 	// Navbar elements
 	SearchBar,
