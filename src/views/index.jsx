@@ -2,7 +2,6 @@ import Home from "./Home";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import News from "./News";
-import Wallet from "./Wallet";
 import LeaderBoard from "./LeaderBoard";
 import NotFound from "./NotFound";
 import AudioProvider from "./AudioProvider";
@@ -15,6 +14,7 @@ import UserInfo from "./Dashboard/UserDashboard/UserInfo";
 import Tasks from "./Dashboard/UserDashboard/Tasks";
 import UserProfile from "./Dashboard/UserDashboard/UserProfile";
 import SubmitQuestion from "./Dashboard/UserDashboard/SubmitQuestion";
+import Wallet from "./Dashboard/UserDashboard/Wallet";
 import ForecastResults from "./Dashboard/UserDashboard/ForecastResults";
 import AdminProfile from "./Dashboard/AdminDashboard/AdminProfile";
 import AdminSubmitQuestion from "./Dashboard/AdminDashboard/AdminSubmitQuestion";
@@ -28,7 +28,6 @@ export {
 	Login,
 	SignUp,
 	News,
-	Wallet,
 	LeaderBoard,
 	NotFound,
 	AudioProvider,
@@ -41,6 +40,7 @@ export {
 	UserInfo,
 	Tasks,
 	SubmitQuestion,
+	Wallet,
 	ForecastResults,
 	AdminProfile,
 	AdminSubmitQuestion,
