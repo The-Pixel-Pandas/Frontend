@@ -1,13 +1,15 @@
 import { useState } from "react";
 
-const useCoinChooser = (initialCoin) => {
+const useCoinChooser = (initialCoin, limit = Infinity) => {
 	const [coin, setCoin] = useState(initialCoin);
 
 	const increaseCoin = () => {
-		setCoin(coin + 1);
+		if (coin < limit) {
+			setCoin(coin + 1);
+		}
 	};
 	const decreaseCoin = () => {
-		if (coin > 1) {
+		if (coin > initialCoin) {
 			setCoin(coin - 1);
 		}
 	};

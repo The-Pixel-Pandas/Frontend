@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Toast } from "../../../../components";
 import { useFormik } from "formik";
-import { userSubmitQuestionYup, useCoinStore } from "../../../../services";
+import {
+	userSubmitQuestionYup,
+	useCoinStore,
+	httpService,
+} from "../../../../services";
 import { useCoinChooser, useToast } from "../../../../hooks";
 import { AnimateCoinLogo } from "../../../../components";
 import userSubmitBackground from "../../../../assets/images/userSubmitBackground.png";
@@ -20,16 +24,21 @@ const SubmitQuestion = () => {
 	const [selectedCategory, setSelectedCategory] = useState("همه موارد");
 	const [selectedImage, setSelectedImage] = useState(null);
 	const previousCoinRef = useRef(0);
-	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0);
+	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0, 50);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast();
 
 	const { removeCoin } = useCoinStore();
 	const submitCost = 50;
 
 	const handleSubmitAPI = (values) => {
-		console.log(values);
-		console.log(selectedCategory);
-		console.log(selectedImage);
+		const data = {
+			question_description: values.description,
+			question_topic: values.question,
+			question_type: selectedCategory,
+			question_tag: selectedCategory,
+			question_volume: coin,
+		};
+		httpService.post("questions/", data);
 
 		showToast("سوال با موفقیت ثبت شد", false);
 		removeCoin(submitCost);

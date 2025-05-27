@@ -4,7 +4,7 @@ import walletCtrlBtn from "../../../assets/images/walletCtrlBtn.png";
 import withdrawalIcon from "../../../assets/images/withdrawalIcon.png";
 import depositeIcon from "../../../assets/images/depositeIcon.png";
 
-const BalanceCtrlBtn = ({ onClick, type = "withdrawal" }) => {
+const WalletBalanceCtrlBtn = ({ onClick, type = "withdrawal" }) => {
 	let icon;
 	let text;
 	if (type !== "withdrawal") {
@@ -16,10 +16,7 @@ const BalanceCtrlBtn = ({ onClick, type = "withdrawal" }) => {
 	}
 	return (
 		<>
-			<button
-				onClick={onClick}
-				className="outline-none border-none hover:shadow-xl hover:opacity-75"
-			>
+			<button onClick={onClick} className="outline-none border-none">
 				<div className="relative">
 					<img
 						src={walletCtrlBtn}
@@ -42,9 +39,9 @@ const BalanceCtrlBtn = ({ onClick, type = "withdrawal" }) => {
 	);
 };
 
-BalanceCtrlBtn.propTypes = {
+WalletBalanceCtrlBtn.propTypes = {
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 };
 
-export default BalanceCtrlBtn;
+export default WalletBalanceCtrlBtn;
