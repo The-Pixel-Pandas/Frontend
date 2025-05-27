@@ -28,9 +28,7 @@ const Wallet = () => {
 	const [, setBalance] = useState(unitInterval.initialCoin);
 	const { coin, addCoin } = useCoinStore();
 	const [history, setHistory] = useState([]);
-	const { toastMessage, isSubmitted, isError, showToast } = useToast({
-		time: 5000,
-	});
+	const { toastMessage, isSubmitted, isError, showToast } = useToast(5000);
 
 	useEffect(() => {
 		httpService
