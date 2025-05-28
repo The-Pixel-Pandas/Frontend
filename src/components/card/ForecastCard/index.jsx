@@ -1,15 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import sample from "../../../assets/images/DataImages/sample.png";
+import { useCoinStore } from "../../../services";
 import forecastCardBox from "../../../assets/images/forecastCardBox.png";
 import coinLogo from "../../../assets/images/coinLogo.png";
 import forecastCardButton from "../../../assets/images/forecastCardButton.png";
 import arrowIcon from "../../../assets/images/arrowIcon.png";
 
-const ForecastCard = ({ item, width = 400, height = 220 }) => {
+const ForecastCard = ({ item, isTrueForecast, width = 400, height = 220 }) => {
+	const { addCoin, removeCoin } = useCoinStore();
+
+	const calculateCoin = () => {
+		if (isTrueForecast) addCoin(item.coin);
+		else removeCoin(item.coin);
+	};
+
 	return (
 		<>
-			<div style={{ width, height }} className="">
+			<div style={{ width, height }}>
 				<div className="flex relative flex-col">
 					<div
 						className="absolute z-10 text-white font-MorabbaMedium top-4 right-5 text-right flex flex-col gap-1"
@@ -38,13 +45,18 @@ const ForecastCard = ({ item, width = 400, height = 220 }) => {
 						/>
 						<div className=" absolute inset-0">
 							<div className="flex flex-row gap-0.5 items-center absolute right-2">
-								<div className="mr-44">
-									<img
-										src={arrowIcon}
-										alt="arrowIcon"
-										style={{ width: 24, height: 24 }}
-									/>
-								</div>
+								<button
+									className=" hover:scale-105 transition duration-300"
+									onClick={calculateCoin}
+								>
+									<div className="mr-[170px]">
+										<img
+											src={arrowIcon}
+											alt="arrowIcon"
+											style={{ width: 24, height: 24 }}
+										/>
+									</div>
+								</button>
 								<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
 									پاندا کوین
 								</span>
@@ -71,6 +83,7 @@ const ForecastCard = ({ item, width = 400, height = 220 }) => {
 
 ForecastCard.propTypes = {
 	item: PropTypes.object.isRequired,
+	isTrueForecast: PropTypes.bool.isRequired,
 	width: PropTypes.number,
 	height: PropTypes.number,
 };

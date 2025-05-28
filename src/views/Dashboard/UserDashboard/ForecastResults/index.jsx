@@ -43,7 +43,11 @@ const ForecastResults = () => {
 							</div>
 							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
 								{trueResult.map((item, index) => (
-									<ForecastCard key={index} item={item} />
+									<ForecastCard
+										key={index}
+										item={item}
+										isTrueForecast={false}
+									/>
 								))}
 							</div>
 						</div>
@@ -60,7 +64,7 @@ const ForecastResults = () => {
 							</div>
 							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
 								{falseResult.map((item, index) => (
-									<ForecastCard key={index} item={item} />
+									<ForecastCard key={index} item={item} isTrueForecast={true} />
 								))}
 							</div>
 						</div>
