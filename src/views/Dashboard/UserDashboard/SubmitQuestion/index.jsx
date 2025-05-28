@@ -8,7 +8,7 @@ import {
 } from "../../../../services";
 import { useCoinChooser, useToast } from "../../../../hooks";
 import { AnimateCoinLogo } from "../../../../components";
-import userSubmitBackground from "../../../../assets/images/userSubmitBackground.png";
+import userDashboardBackground from "../../../../assets/images/userDashboardBackground.png";
 import userSubmitBox from "../../../../assets/images/userSubmitBox.png";
 import userSubmitTitle from "../../../../assets/images/userSubmitTitle.png";
 import userSubmitDescription from "../../../../assets/images/userSubmitDescription.png";
@@ -85,7 +85,7 @@ const SubmitQuestion = () => {
 					<div className="relative">
 						{/* BackGround Image */}
 						<img
-							src={userSubmitBackground}
+							src={userDashboardBackground}
 							alt="dashboardContainer"
 							style={{ width: 1100, height: 600 }}
 						/>
