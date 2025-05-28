@@ -19,6 +19,7 @@
     "axios": "^1.8.1",
     "dotenv": "^16.4.7",
     "formik": "^2.4.6",
+    "framer-motion": "^12.15.0",
     "phaser": "^3.88.2",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
