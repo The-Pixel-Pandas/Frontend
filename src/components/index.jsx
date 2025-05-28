@@ -14,7 +14,7 @@ import {
 import { AuthComponent } from "./auth";
 
 // Card Component
-import { CardGrid,ForecastCard } from "./card";
+import { CardGrid, ForecastCard } from "./card";
 
 // LeaderBoard components
 import { LeaderBoardTable } from "./leaderBoard";

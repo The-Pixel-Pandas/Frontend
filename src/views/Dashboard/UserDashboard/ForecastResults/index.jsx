@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ForecastCard } from "../../../../components";
+import { httpService } from "../../../../services";
 import resultContainer from "../../../../assets/images/resultContainer.png";
 import userDashboardBackground from "../../../../assets/images/userDashboardBackground.png";
 
 const ForecastResults = () => {
-	const item = {
-		title: "عنوان",
-		description:
-			"(توضیحات هر عنوان )لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-		image: "https://via.placeholder.com/150",
-		coin: 100,
-	};
+	const [trueResult, setTrueResult] = useState([]);
+	const [falseResult, setFalseResult] = useState([]);
+
+	useEffect(() => {
+		httpService
+			.get("https://mocki.io/v1/b9c0a94a-e4ae-4529-8b49-8e7472cd1968")
+			.then((response) => {
+				setTrueResult(response.current_node.data);
+				setFalseResult(response.current_node.data);
+				console.log("Forecast get API response:", err);
+			})
+			.catch((err) => {
+				console.log("Forecast get API error:", err);
+			});
+	}, []);
+
 	return (
 		<>
 			<div className="absolute left-0 top-0 flex items-center z-0 ml-14 mt-10">
@@ -32,10 +42,9 @@ const ForecastResults = () => {
 								پیش بینی های اشتباه
 							</div>
 							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
+								{trueResult.map((item, index) => (
+									<ForecastCard key={index} item={item} />
+								))}
 							</div>
 						</div>
 					</div>
@@ -50,10 +59,9 @@ const ForecastResults = () => {
 								پیش بینی های صحیح
 							</div>
 							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
-								<ForecastCard item={item} />
+								{falseResult.map((item, index) => (
+									<ForecastCard key={index} item={item} />
+								))}
 							</div>
 						</div>
 					</div>

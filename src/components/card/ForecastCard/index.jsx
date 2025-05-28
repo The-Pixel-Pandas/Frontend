@@ -4,6 +4,7 @@ import sample from "../../../assets/images/DataImages/sample.png";
 import forecastCardBox from "../../../assets/images/forecastCardBox.png";
 import coinLogo from "../../../assets/images/coinLogo.png";
 import forecastCardButton from "../../../assets/images/forecastCardButton.png";
+import arrowIcon from "../../../assets/images/arrowIcon.png";
 
 const ForecastCard = ({ item, width = 400, height = 220 }) => {
 	return (
@@ -17,7 +18,7 @@ const ForecastCard = ({ item, width = 400, height = 220 }) => {
 						{/* Title And Image */}
 						<div className="flex flex-row gap-2">
 							<img
-								src={sample}
+								src={item.image}
 								alt="DataImage"
 								style={{ width: 35, height: 35 }}
 							/>
@@ -37,6 +38,13 @@ const ForecastCard = ({ item, width = 400, height = 220 }) => {
 						/>
 						<div className=" absolute inset-0">
 							<div className="flex flex-row gap-0.5 items-center absolute right-2">
+								<div className="mr-44">
+									<img
+										src={arrowIcon}
+										alt="arrowIcon"
+										style={{ width: 24, height: 24 }}
+									/>
+								</div>
 								<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
 									پاندا کوین
 								</span>
