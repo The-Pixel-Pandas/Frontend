@@ -3,10 +3,19 @@ import { ForecastCard } from "../../../../components";
 import { httpService } from "../../../../services";
 import resultContainer from "../../../../assets/images/resultContainer.png";
 import userDashboardBackground from "../../../../assets/images/userDashboardBackground.png";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ForecastResults = () => {
 	const [trueResult, setTrueResult] = useState([]);
 	const [falseResult, setFalseResult] = useState([]);
+
+	const handleCardClick = (card, isTrueForecast) => {
+		if (isTrueForecast) {
+			setTrueResult((prev) => prev.filter((item) => item !== card));
+		} else {
+			setFalseResult((prev) => prev.filter((item) => item !== card));
+		}
+	};
 
 	useEffect(() => {
 		httpService
@@ -14,7 +23,7 @@ const ForecastResults = () => {
 			.then((response) => {
 				setTrueResult(response.current_node.data);
 				setFalseResult(response.current_node.data);
-				console.log("Forecast get API response:", err);
+				console.log("Forecast get API response:", response);
 			})
 			.catch((err) => {
 				console.log("Forecast get API error:", err);
@@ -41,15 +50,21 @@ const ForecastResults = () => {
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
 								پیش بینی های اشتباه
 							</div>
-							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
-								{trueResult.map((item, index) => (
-									<ForecastCard
-										key={index}
-										item={item}
-										isTrueForecast={false}
-									/>
-								))}
-							</div>
+							<motion.div
+								className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2 mt-16 items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar"
+								layout
+							>
+								<AnimatePresence mode="popLayout">
+									{falseResult.map((item, index) => (
+										<ForecastCard
+											key={item.id || index}
+											item={item}
+											isTrueForecast={false}
+											onCardClick={() => handleCardClick(item, false)}
+										/>
+									))}
+								</AnimatePresence>
+							</motion.div>
 						</div>
 					</div>
 					<div className="absolute inset-0 z-10 flex items-center justify-center ml-[530px] ">
@@ -62,11 +77,21 @@ const ForecastResults = () => {
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
 								پیش بینی های صحیح
 							</div>
-							<div className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2  mt-16  items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar ">
-								{falseResult.map((item, index) => (
-									<ForecastCard key={index} item={item} isTrueForecast={true} />
-								))}
-							</div>
+							<motion.div
+								className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2 mt-16 items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar"
+								layout
+							>
+								<AnimatePresence mode="popLayout">
+									{trueResult.map((item, index) => (
+										<ForecastCard
+											key={item.id || index}
+											item={item}
+											isTrueForecast={true}
+											onCardClick={() => handleCardClick(item, true)}
+										/>
+									))}
+								</AnimatePresence>
+							</motion.div>
 						</div>
 					</div>
 				</div>

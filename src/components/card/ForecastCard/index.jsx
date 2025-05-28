@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useCoinStore } from "../../../services";
+import { motion } from "framer-motion";
+
 import forecastCardBox from "../../../assets/images/forecastCardBox.png";
 import coinLogo from "../../../assets/images/coinLogo.png";
 import forecastCardButton from "../../../assets/images/forecastCardButton.png";
 import arrowIcon from "../../../assets/images/arrowIcon.png";
 
-const ForecastCard = ({ item, isTrueForecast, width = 400, height = 220 }) => {
+const ForecastCard = ({
+	item,
+	isTrueForecast,
+	onCardClick,
+	width = 400,
+	height = 220,
+}) => {
 	const { addCoin, removeCoin } = useCoinStore();
+	const [isRemoving, setIsRemoving] = useState(false);
 
 	const calculateCoin = () => {
 		if (isTrueForecast) addCoin(item.coin);
 		else removeCoin(item.coin);
+
+		setIsRemoving(true);
+
+		setTimeout(() => {
+			onCardClick(item);
+		}, 500);
 	};
 
 	return (
 		<>
-			<div style={{ width, height }}>
+			<motion.div
+				style={{ width, height }}
+				initial={{ opacity: 1, x: 0 }}
+				animate={{
+					opacity: isRemoving ? 0 : 1,
+					x: isRemoving ? -100 : 0,
+					height: isRemoving ? 0 : height,
+				}}
+				transition={{ duration: 0.5, ease: "easeOut" }}
+				layout
+			>
 				<div className="flex relative flex-col">
 					<div
 						className="absolute z-10 text-white font-MorabbaMedium top-4 right-5 text-right flex flex-col gap-1"
@@ -76,7 +101,7 @@ const ForecastCard = ({ item, isTrueForecast, width = 400, height = 220 }) => {
 					{/* BackGround Image */}
 					<img src={forecastCardBox} alt="forecastCardBox" />
 				</div>
-			</div>
+			</motion.div>
 		</>
 	);
 };
@@ -86,6 +111,7 @@ ForecastCard.propTypes = {
 	isTrueForecast: PropTypes.bool.isRequired,
 	width: PropTypes.number,
 	height: PropTypes.number,
+	onCardClick: PropTypes.func.isRequired,
 };
 
 export default ForecastCard;
