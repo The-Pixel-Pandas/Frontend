@@ -26,11 +26,21 @@ const Wallet = () => {
 	const [selectedToman, setSelectedToman] = useState(unitInterval.initialToman);
 	const [selectedCoin, setSelectedCoin] = useState(unitInterval.initialCoin);
 	const [, setBalance] = useState(unitInterval.initialCoin);
-	const { coin, addCoin } = useCoinStore();
+	const { coin, addCoin, setCoin } = useCoinStore();
 	const [history, setHistory] = useState([]);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast(5000);
 
 	useEffect(() => {
+		httpService
+			.get("wallet/")
+			.then((res) => {
+				if (coin != res.total_balance) {
+					setCoin(res.total_balance);
+				}
+				console.log("Wallet Balance Get API:", res);
+			})
+			.catch((err) => console.error("Wallet Balance Get API Error:", err));
+
 		httpService
 			.get("https://mocki.io/v1/78dee0d3-ad95-4f9b-be80-40c7d24ed477")
 			.then((res) => {

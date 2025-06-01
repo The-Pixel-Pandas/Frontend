@@ -14,7 +14,7 @@ const PublicProfilePopup = ({
 	avatarNumber = 1,
 	name = "نام کاربری",
 	biography = "بیوگرافی",
-	transaction = 0,
+	profit = 0,
 	volume = 0,
 	rank = 0,
 	medals = [1, 2, 3],
@@ -83,10 +83,10 @@ const PublicProfilePopup = ({
 									/>
 									<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center whitespace-nowrap">
 										<p className="text-white font-MorabbaMedium mb-5 ">
-											میزان معاملات
+											امتیاز عملکرد
 										</p>
 										<p className="text-white font-MorabbaMedium mt-2">
-											{transaction.toLocaleString("fa")}
+											{profit.toLocaleString("fa")}
 										</p>
 									</div>
 								</div>
@@ -166,7 +166,7 @@ PublicProfilePopup.propTypes = {
 	avatarNumber: PropTypes.number,
 	name: PropTypes.string,
 	biography: PropTypes.string,
-	transaction: PropTypes.number,
+	profit: PropTypes.number,
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.array,
