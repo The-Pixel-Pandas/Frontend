@@ -7,7 +7,7 @@ const ProfilePopupOverlay = ({
 	avatarNumber,
 	name,
 	biography,
-	transaction,
+	profit,
 	volume,
 	rank,
 	medals,
@@ -23,7 +23,7 @@ const ProfilePopupOverlay = ({
 					avatarNumber={avatarNumber}
 					name={name}
 					biography={biography}
-					transaction={transaction}
+					profit={profit}
 					volume={volume}
 					rank={rank}
 					medals={medals}
@@ -39,7 +39,7 @@ ProfilePopupOverlay.propTypes = {
 	avatarNumber: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	biography: PropTypes.string,
-	transaction: PropTypes.number,
+	profit: PropTypes.number,
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.arrayOf(PropTypes.number),
@@ -48,7 +48,7 @@ ProfilePopupOverlay.propTypes = {
 
 ProfilePopupOverlay.defaultProps = {
 	biography: "",
-	transaction: 0,
+	profit: 0,
 	volume: 0,
 	rank: 0,
 	medals: [],
