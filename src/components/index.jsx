@@ -14,7 +14,7 @@ import {
 import { AuthComponent } from "./auth";
 
 // Card Component
-import { CardGrid } from "./card";
+import { CardGrid, ForecastCard } from "./card";
 
 // LeaderBoard components
 import { LeaderBoardTable } from "./leaderBoard";
@@ -38,6 +38,10 @@ import {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
+	WalletBalanceCtrlBtn,
+	WalletCurrencyInput,
+	WalletHistoryItem,
 } from "./dashboard";
 
 // Navbar
@@ -59,6 +63,7 @@ export {
 
 	// Card
 	CardGrid,
+	ForecastCard,
 
 	// LeaderBoard
 	LeaderBoardTable,
@@ -81,6 +86,10 @@ export {
 	ManageButton,
 	Profile,
 	NotificationBox,
+	AnimateCoinLogo,
+	WalletBalanceCtrlBtn,
+	WalletCurrencyInput,
+	WalletHistoryItem,
 
 	// Navbar elements
 	SearchBar,

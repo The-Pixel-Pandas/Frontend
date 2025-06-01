@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useCoinStore, useAuthStore } from "../../../../services";
+import { useCoinChooser } from "../../../../hooks";
 import { Toast } from "../../../chore";
 import PercentageButton from "../PercentageButton";
 import exchangeBoxContainer from "../../../../assets/images/exchangeBoxContainer.png";
@@ -11,7 +12,6 @@ import decreaseButton from "../../../../assets/images/decreaseButton.png";
 import exchangeBtn from "../../../../assets/images/exchangeBtn.png";
 
 const ExchangeBox = ({ yesPercentage, noPercentage }) => {
-	const [coin, setCoin] = useState(10);
 	const [showToast, setShowToast] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [ToastMessage, setToastMessage] = useState("");
@@ -22,15 +22,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 	const [exchangeType, setExchangeType] = useState("");
 	const { getCoin, removeCoin } = useCoinStore();
 	const { isAuthenticated } = useAuthStore();
-
-	const increaseCoin = () => {
-		setCoin(coin + 1);
-	};
-	const decreaseCoin = () => {
-		if (coin > 1) {
-			setCoin(coin - 1);
-		}
-	};
+	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(10);
 
 	const handleTogglePosition = (id) => {
 		setButtonPositions((prev) => {

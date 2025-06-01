@@ -9,62 +9,26 @@ import { httpService } from "../../services";
 const LeaderBoard = () => {
 	const [volumeData, setVolumeData] = useState([]);
 	const [profitData, setProfitData] = useState([]);
+	const [selectedFilter, setSelectedFilter] = useState("all_time");
 
-	const [isWeekly, setIsWeekly] = useState(false);
-	const [isMonthly, setIsMonthly] = useState(false);
-	const [isSelected, setIsSelected] = useState(true);
-
-	const handleWeeklyClick = () => {
-		setIsSelected(true);
-		setIsWeekly(true);
-		setIsMonthly(false);
-
-		httpService
-			.get("https://mocki.io/v1/835f62da-6edb-41f7-8959-053447898474")
-			.then((res) => setVolumeData(res.current_node.data))
-			.catch((err) => console.log(err));
-
-		httpService
-			.get("https://mocki.io/v1/835f62da-6edb-41f7-8959-053447898474")
-			.then((res) => setProfitData(res.current_node.data))
-			.catch((err) => console.log(err));
-	};
-
-	const handleMonthlyClick = () => {
-		setIsSelected(true);
-		setIsWeekly(false);
-		setIsMonthly(true);
-
-		httpService
-			.get("https://mocki.io/v1/7546ffa3-5e10-4009-9a8a-7e45f32d1e75")
-			.then((res) => setVolumeData(res.current_node.data))
-			.catch((err) => console.log(err));
-
-		httpService
-			.get("https://mocki.io/v1/7546ffa3-5e10-4009-9a8a-7e45f32d1e75")
-			.then((res) => setProfitData(res.current_node.data))
-			.catch((err) => console.log(err));
-	};
-
-	const handleAllClick = () => {
-		setIsSelected(true);
-		setIsWeekly(false);
-		setIsMonthly(false);
-
-		httpService
-			.get("https://mocki.io/v1/f70a3024-f95a-4b36-a53d-a14600d62daf")
-			.then((res) => setVolumeData(res.current_node.data))
-			.catch((err) => console.log(err));
-
-		httpService
-			.get("https://mocki.io/v1/f70a3024-f95a-4b36-a53d-a14600d62daf")
-			.then((res) => setProfitData(res.current_node.data))
-			.catch((err) => console.log(err));
+	const fetchLeaderboardData = async () => {
+		try {
+			const res = await httpService.get("leaderboards/");
+			setVolumeData(res[selectedFilter].volume);
+			setProfitData(res[selectedFilter].profit);
+			console.log("LeaderBoard Get API:", res);
+		} catch (err) {
+			console.error("LeaderBoard Get API Error:", err);
+		}
 	};
 
 	useEffect(() => {
-		handleAllClick();
-	}, []);
+		fetchLeaderboardData();
+	}, [selectedFilter]);
+
+	const handleFilterChange = (filter) => {
+		setSelectedFilter(filter);
+	};
 
 	return (
 		<div className="flex flex-col justify-center items-center mt-10">
@@ -73,7 +37,7 @@ const LeaderBoard = () => {
 
 			{/* Buttons */}
 			<div className="flex flex-row justify-center items-center mt-5">
-				<button onClick={handleAllClick}>
+				<button onClick={() => handleFilterChange("all_time")}>
 					<div className="relative">
 						<div
 							className="absolute z-10 text-white font-Lalezar text-lg whitespace-nowrap"
@@ -85,7 +49,7 @@ const LeaderBoard = () => {
 						>
 							همه موارد
 						</div>
-						{isSelected && !isWeekly && !isMonthly && (
+						{selectedFilter === "all_time" && (
 							<div className="absolute z-10">
 								<img
 									src={leaderBoardButtonBorder}
@@ -97,7 +61,7 @@ const LeaderBoard = () => {
 					</div>
 				</button>
 
-				<button onClick={handleMonthlyClick} className="ml-3">
+				<button onClick={() => handleFilterChange("monthly")} className="ml-3">
 					<div className="relative">
 						<div
 							className="absolute z-10 text-white font-Lalezar text-lg"
@@ -109,7 +73,7 @@ const LeaderBoard = () => {
 						>
 							ماهانه
 						</div>
-						{isSelected && isMonthly && (
+						{selectedFilter === "monthly" && (
 							<div className="absolute z-10">
 								<img
 									src={leaderBoardButtonBorder}
@@ -121,7 +85,7 @@ const LeaderBoard = () => {
 					</div>
 				</button>
 
-				<button onClick={handleWeeklyClick} className="ml-3">
+				<button onClick={() => handleFilterChange("weekly")} className="ml-3">
 					<div className="relative">
 						<div
 							className="absolute z-10 text-white font-Lalezar text-lg"
@@ -133,7 +97,7 @@ const LeaderBoard = () => {
 						>
 							هفتگی
 						</div>
-						{isSelected && isWeekly && (
+						{selectedFilter === "weekly" && (
 							<div className="absolute z-10">
 								<img
 									src={leaderBoardButtonBorder}

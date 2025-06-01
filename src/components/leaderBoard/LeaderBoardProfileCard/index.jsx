@@ -13,7 +13,7 @@ const LeaderBoardProfileCard = ({
 	name,
 	coinAmount,
 	biography = "",
-	transaction = 0,
+	profit = 0,
 	volume = 0,
 	rank = 0,
 	medals = [1, 2, 3],
@@ -58,7 +58,7 @@ const LeaderBoardProfileCard = ({
 				avatarNumber={avatarNumber}
 				name={name}
 				biography={biography}
-				transaction={transaction}
+				profit={profit}
 				volume={volume}
 				rank={rank}
 				medals={medals}
@@ -75,7 +75,7 @@ LeaderBoardProfileCard.propTypes = {
 	name: PropTypes.string.isRequired,
 	coinAmount: PropTypes.number.isRequired,
 	biography: PropTypes.string,
-	transaction: PropTypes.number,
+	profit: PropTypes.number,
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.arrayOf(PropTypes.number),

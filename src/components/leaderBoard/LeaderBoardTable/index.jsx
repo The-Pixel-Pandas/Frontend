@@ -20,14 +20,14 @@ const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 					{usersData.map((user, index) => (
 						<LeaderBoardProfileCard
 							key={index}
-							avatarNumber={user.avatarNumber}
-							name={user.name}
-							coinAmount={user.coinAmount.toLocaleString("fa")}
-							biography={user.biography}
-							transaction={user.transaction}
+							avatarNumber={user.avatar}
+							name={user.username}
+							coinAmount={user.total_balance?.toLocaleString("fa") || "0"}
+							biography={user.biography || ""}
+							profit={user.profit}
 							volume={user.volume}
 							rank={user.rank}
-							medals={user.medals}
+							medals={user.medals || []}
 						/>
 					))}
 				</div>
