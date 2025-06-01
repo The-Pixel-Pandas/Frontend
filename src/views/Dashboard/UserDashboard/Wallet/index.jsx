@@ -51,11 +51,12 @@ const Wallet = () => {
 	}, []);
 
 	const manageExchange = () => {
-		showToast(
-			` مقدار ${selectedToman.toLocaleString("fa")} تومان به پاندا کوین تبدیل شد`,
-			false
-		);
-		addCoin(selectedCoin);
+		// showToast(
+		// 	` مقدار ${selectedToman.toLocaleString("fa")} تومان به پاندا کوین تبدیل شد`,
+		// 	false
+		// );
+		// addCoin(selectedCoin);
+		showToast("این بخش در حال حاضر غیر فعال است", true);
 	};
 
 	return (
