@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import addNewsContainer from "../../../../assets/images/adminContainer.png";
 import newsLink from "../../../../assets/images/newsLink.png";
 import addPictureContainer from "../../../../assets/images/addPictureContainer.png";
@@ -9,6 +9,16 @@ import newsTitle from "../../../../assets/images/newsTitle.png";
 import newsDescription from "../../../../assets/images/newsDescription.png";
 
 const AdminSubmitNews = () => {
+	const categories = [
+		"همه موارد",
+		"ورزشی",
+		"سیاسی",
+		"اجتماعی",
+		"اقتصادی",
+		"رمز ارزها",
+		"موسیقی",
+	];
+	const [selectedCategory, setSelectedCategory] = useState("همه موارد");
 	return (
 		<div className="absolute left-0 top-0 flex items-center z-0 ml-14">
 			<div className="relative">
@@ -35,7 +45,7 @@ const AdminSubmitNews = () => {
 								</button>
 							</div>
 						</div>
-						<div className="flex flex-col gap-9">
+						<div className="flex flex-col gap-9 z-50">
 							{/* News Title Input */}
 							<div className="flex items-center w-full">
 								<div className="relative">
@@ -52,7 +62,7 @@ const AdminSubmitNews = () => {
 								</div>
 							</div>
 							{/* News Description */}
-							<div className="flex items-center ">
+							<div className="flex items-center z-50 ">
 								<div className="relative">
 									<img
 										src={newsDescription}
@@ -117,34 +127,23 @@ const AdminSubmitNews = () => {
 											className="ml-2"
 										/>
 										<div className="absolute inset-0 w-full flex items-center justify-center">
-											<select className="text-white w-1/2 outline-none border-none font-MorabbaMedium bg-transparent">
-												<option
-													style={{
-														background: "#1F3B73",
-														color: "white",
-														fontWeight: "bold",
-													}}
-												>
-													ورزشی
-												</option>
-												<option
-													style={{
-														background: "#1F3B73",
-														color: "white",
-														fontWeight: "bold",
-													}}
-												>
-													سیاسی
-												</option>
-												<option
-													style={{
-														backgroundColor: "#1F3B73",
-														color: "white",
-														fontWeight: "bold",
-													}}
-												>
-													اقتصادی
-												</option>
+											<select
+												className="text-white w-1/2 outline-none border-none font-MorabbaMedium bg-transparent"
+												value={selectedCategory}
+												onChange={(e) => setSelectedCategory(e.target.value)}
+											>
+												{categories.map((category) => (
+													<option
+														key={category}
+														style={{
+															background: "#1F3B73",
+															color: "white",
+															fontWeight: "bold",
+														}}
+													>
+														{category}
+													</option>
+												))}
 											</select>
 
 											<div className="rounded-r-xl text-white text-lg mr-2 font-MorabbaMedium">
