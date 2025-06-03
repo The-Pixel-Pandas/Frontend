@@ -12,6 +12,7 @@ import useProfileStore from "./stores/profileStore";
 import cacheService from "./cacheService";
 import userInfoYup from "./yupObjects/userInfoYup";
 import userSubmitQuestionYup from "./yupObjects/userSubmitQuestionYup";
+import adminSubmitTaskYup from "./yupObjects/adminSubmitTaskYup";
 
 export {
 	httpService,
@@ -28,4 +29,5 @@ export {
 	cacheService,
 	userInfoYup,
 	userSubmitQuestionYup,
+	adminSubmitTaskYup,
 };

@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import userSubmitCoinLogo from "../../../assets/images/userSubmitCoinLogo.png";
+import shinyCoinLogo from "../../../assets/images/shinyCoinLogo.png";
 
-const AnimateCoinLogo = ({ width = 225, height = 175 }) => {
+const AnimateCoinLogo = ({ width = 225, height = 175, isShiny = false }) => {
 	return (
 		<>
 			<img
-				src={userSubmitCoinLogo}
+				src={isShiny ? shinyCoinLogo : userSubmitCoinLogo}
 				alt="coinLogo"
 				style={{
 					width: width,
@@ -37,6 +38,7 @@ const AnimateCoinLogo = ({ width = 225, height = 175 }) => {
 AnimateCoinLogo.propTypes = {
 	width: PropTypes.number,
 	height: PropTypes.number,
+	isShiny: PropTypes.bool,
 };
 
 export default AnimateCoinLogo;

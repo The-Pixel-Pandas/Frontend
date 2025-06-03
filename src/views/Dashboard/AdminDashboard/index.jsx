@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 						isAdminButton={true}
 					/>
 					<NavLinkButton
-						text=" مدیریت تسک ها"
+						text=" افزودن تسک جدید"
 						path="/dashboard/adminManageTasks"
 						number={4}
 						isAdminButton={true}
