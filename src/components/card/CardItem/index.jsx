@@ -5,7 +5,7 @@ import coinLogo from "../../../assets/images/coinLogo.png";
 import questionBox from "../../../assets/images/questionBox.png";
 import { useNavigate } from "react-router-dom";
 
-const CardItem = ({ item, width = 300, height = 160 }) => {
+const CardItem = ({ item, width = 300, height = 160, isExchange = true }) => {
 	const navigate = useNavigate();
 	return (
 		<>
@@ -41,23 +41,25 @@ const CardItem = ({ item, width = 300, height = 160 }) => {
 								</p>
 							</div>
 							{/* Coins */}
-							<div className="absolute bottom-0 right-0 flex items-center flex-row">
-								<div className="absolute right-10 flex flex-row gap-1 ">
-									<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
-										پاندا کوین
-									</span>
-									<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
-										{item.coin?.toLocaleString("fa")}
-									</span>
+							{isExchange && (
+								<div className="absolute bottom-0 right-0 flex items-center flex-row">
+									<div className="absolute right-10 flex flex-row gap-1 ">
+										<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
+											پاندا کوین
+										</span>
+										<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
+											{item.coin?.toLocaleString("fa")}
+										</span>
+									</div>
+									<div>
+										<img
+											src={coinLogo}
+											alt="coinLogo"
+											style={{ width: 47, height: 40 }}
+										/>
+									</div>
 								</div>
-								<div>
-									<img
-										src={coinLogo}
-										alt="coinLogo"
-										style={{ width: 47, height: 40 }}
-									/>
-								</div>
-							</div>
+							)}
 							{/* BackGround Image */}
 							<img src={questionBox} alt="questionBox" />
 						</div>
@@ -72,6 +74,7 @@ CardItem.propTypes = {
 	item: PropTypes.object.isRequired,
 	width: PropTypes.number,
 	height: PropTypes.number,
+	isExchange: PropTypes.bool,
 };
 
 export default CardItem;

@@ -29,6 +29,7 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 
 					<div className="mt-5">
 						<DataContainer
+							isExchange={isExchange}
 							width={isExchange ? 1000 : 1200}
 							height={isExchange ? 270 : 260}
 							title={postData.question_topic || postData.news_topic}

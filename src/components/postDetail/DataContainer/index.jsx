@@ -15,6 +15,7 @@ const DataContainer = ({
 	numberOfVisits,
 	coins,
 	date,
+	isExchange = true,
 }) => {
 	return (
 		<div className="flex justify-center items-center w-full">
@@ -47,12 +48,14 @@ const DataContainer = ({
 								: ""}
 						</p>
 						<div className="flex flex-row gap-4 items-center absolute bottom-5 left-10">
-							<div className="flex flex-row gap-0 items-center">
-								<img src={coinLogo} alt="coinLogo" className="w-14 h-12" />
-								<p className="text-white text-lg font-MorabbaRegular">
-									{coins.toLocaleString("fa")} &nbsp; پاندا کوین
-								</p>
-							</div>
+							{isExchange && (
+								<div className="flex flex-row gap-0 items-center">
+									<img src={coinLogo} alt="coinLogo" className="w-14 h-12" />
+									<p className="text-white text-lg font-MorabbaRegular">
+										{coins.toLocaleString("fa")} &nbsp; پاندا کوین
+									</p>
+								</div>
+							)}
 							{date && (
 								<div className="flex flex-row gap-2 items-center">
 									<img src={clock} alt="clock" className="w-5 h-5" />
@@ -95,6 +98,7 @@ DataContainer.propTypes = {
 	numberOfVisits: PropTypes.number.isRequired,
 	coins: PropTypes.number.isRequired,
 	date: PropTypes.string.isRequired,
+	isExchange: PropTypes.bool,
 };
 
 export default DataContainer;

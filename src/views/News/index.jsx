@@ -102,7 +102,11 @@ const News = () => {
 			<CategoryFilter onSelect={handleCategoryClick} />
 			{/* News Layout */}
 			<div className="flex mt-0 justify-center mb-10 pb-24">
-				{isLoading ? <HomeSkeleton /> : <CardGrid items={data.results} />}
+				{isLoading ? (
+					<HomeSkeleton />
+				) : (
+					<CardGrid items={data.results} isExchange={false} />
+				)}
 			</div>
 			{/* Pagination */}
 			<div>
