@@ -15,37 +15,35 @@ import {
 
 const News = () => {
 	const { fetchData, data, isLoading, error } = useFetchData();
-	const [questionData, setQuestionData] = useState(null);
+	const [NewsData, setNewsData] = useState(null);
 	const [usersData, setUsersData] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
-	const { questionId } = useParams();
+	const { newsId } = useParams();
 	const [activeCategory, setActiveCategory] = useState("همه موارد");
 	const [totalPages, setTotalPages] = useState(0);
 
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
-		handleQuestionAPI(
-			`news/?page=${pageNumber}&page_size=20&search=${searchText}`
-		);
+		handleNewsAPI(`news/?page=${pageNumber}&page_size=20&search=${searchText}`);
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
 		console.log(category);
-		handleQuestionAPI(
+		handleNewsAPI(
 			`news/?page=${pageNumber}&page_size=20&${category == "همه موارد" ? "" : `type=${category}`}`
 		);
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
-		handleQuestionAPI(
+		handleNewsAPI(
 			`news/?page=${page}&page_size=20&${activeCategory == "همه موارد" ? "" : `type=${activeCategory}`}`
 		);
 		event.preventDefault();
 	};
 
-	const handleQuestionAPI = async (url) => {
+	const handleNewsAPI = async (url) => {
 		try {
 			const response = await fetchData(url);
 			console.log("Fetched data:", response);
@@ -56,40 +54,40 @@ const News = () => {
 	};
 
 	useEffect(() => {
-		handleQuestionAPI(`news/?page=${pageNumber}&page_size=20`);
+		handleNewsAPI(`news/?page=${pageNumber}&page_size=20`);
 	}, []);
 
 	useEffect(() => {
-		if (questionId) {
-			const fetchQuestionDetails = async () => {
+		if (newsId) {
+			const fetchNewsDetails = async () => {
 				try {
-					const [questionResponse, commentsResponse] = await Promise.all([
-						httpService.get(`news/${questionId}`),
+					const [NewsResponse, commentsResponse] = await Promise.all([
+						httpService.get(`news/${newsId}`),
 						httpService.get(
 							`https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b`
 						),
 					]);
-					setQuestionData(questionResponse);
+					setNewsData(NewsResponse);
 					setUsersData(commentsResponse);
 				} catch (err) {
-					console.error("Failed to fetch question details:", err);
+					console.error("Failed to fetch News details:", err);
 				}
 			};
 
-			fetchQuestionDetails();
+			fetchNewsDetails();
 		}
-	}, [questionId]);
+	}, [newsId]);
 
 	if (error) {
 		return <Toast type="error" message={error} position="bottom-left" />;
 	}
 
-	if (questionId && questionData) {
+	if (newsId && NewsData) {
 		return (
 			<PostDetail
-				postData={questionData}
+				postData={NewsData}
 				usersData={usersData}
-				isExchange={true}
+				isExchange={false}
 			/>
 		);
 	}
@@ -102,7 +100,7 @@ const News = () => {
 			</div>
 			{/* CategoryFilter */}
 			<CategoryFilter onSelect={handleCategoryClick} />
-			{/* Questions Layout */}
+			{/* News Layout */}
 			<div className="flex mt-0 justify-center mb-10 pb-24">
 				{isLoading ? <HomeSkeleton /> : <CardGrid items={data.results} />}
 			</div>

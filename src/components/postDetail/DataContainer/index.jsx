@@ -42,7 +42,9 @@ const DataContainer = ({
 							{description}
 						</p>
 						<p className="text-white text-lg font-MorabbaRegular absolute top-5 left-10">
-							{numberOfVisits.toLocaleString("fa")} &nbsp; بازدید
+							{numberOfVisits
+								? numberOfVisits.toLocaleString("fa") + " مشارکت"
+								: ""}
 						</p>
 						<div className="flex flex-row gap-4 items-center absolute bottom-5 left-10">
 							<div className="flex flex-row gap-0 items-center">
@@ -51,12 +53,14 @@ const DataContainer = ({
 									{coins.toLocaleString("fa")} &nbsp; پاندا کوین
 								</p>
 							</div>
-							<div className="flex flex-row gap-2 items-center">
-								<img src={clock} alt="clock" className="w-5 h-5" />
-								<p className="text-white text-lg font-MorabbaRegular">
-									{date.toLocaleString("fa")}
-								</p>
-							</div>
+							{date && (
+								<div className="flex flex-row gap-2 items-center">
+									<img src={clock} alt="clock" className="w-5 h-5" />
+									<p className="text-white text-lg font-MorabbaRegular">
+										{date.toLocaleString("fa")}
+									</p>
+								</div>
+							)}
 						</div>
 					</div>
 
