@@ -11,7 +11,13 @@ const CardItem = ({ item, width = 300, height = 160 }) => {
 		<>
 			<Tilt tiltMaxAngleX={15} tiltMaxAngleY={15}>
 				<div style={{ width, height }} className="mt-7">
-					<button onClick={() => navigate(`${item.id}`, { relative: "path" })}>
+					<button
+						onClick={() =>
+							navigate(`${item.news_id || item.question_id}`, {
+								relative: "path",
+							})
+						}
+					>
 						<div className="flex relative flex-col">
 							<div
 								className="absolute z-10 text-white font-MorabbaMedium top-4 right-5 text-right flex flex-col gap-1"
@@ -25,10 +31,14 @@ const CardItem = ({ item, width = 300, height = 160 }) => {
 										style={{ width: 35, height: 35 }}
 									/>
 
-									<p className="text-lg font-MorabbaBold">{item.title}</p>
+									<p className="text-lg font-MorabbaBold">
+										{item.question_topic || item.news_topic}
+									</p>
 								</div>
 								{/* Description */}
-								<p className="mr-11 pl-5">{item.description}</p>
+								<p className="mr-11 pl-5">
+									{item.question_description || item.news_description}
+								</p>
 							</div>
 							{/* Coins */}
 							<div className="absolute bottom-0 right-0 flex items-center flex-row">
@@ -37,7 +47,7 @@ const CardItem = ({ item, width = 300, height = 160 }) => {
 										پاندا کوین
 									</span>
 									<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
-										{item.coin.toLocaleString("fa")}
+										{item.coin?.toLocaleString("fa")}
 									</span>
 								</div>
 								<div>

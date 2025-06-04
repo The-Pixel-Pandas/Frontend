@@ -6,7 +6,7 @@ import {
 	useCoinStore,
 	httpService,
 } from "../../../../services";
-import { useCoinChooser, useToast } from "../../../../hooks";
+import { useCoinChooser, useToast, useImageConverter } from "../../../../hooks";
 import { AnimateCoinLogo } from "../../../../components";
 import userDashboardBackground from "../../../../assets/images/userDashboardBackground.png";
 import userSubmitBox from "../../../../assets/images/userSubmitBox.png";
@@ -23,6 +23,7 @@ import userSubmitButton from "../../../../assets/images/userSubmitButton.png";
 const SubmitQuestion = () => {
 	const [selectedCategory, setSelectedCategory] = useState("همه موارد");
 	const [selectedImage, setSelectedImage] = useState(null);
+	const { convertToBase64 } = useImageConverter();
 	const previousCoinRef = useRef(0);
 	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0, 50);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast();
@@ -30,18 +31,39 @@ const SubmitQuestion = () => {
 	const { removeCoin } = useCoinStore();
 	const submitCost = 50;
 
-	const handleSubmitAPI = (values) => {
-		const data = {
-			question_description: values.description,
-			question_topic: values.question,
-			question_type: selectedCategory,
-			question_tag: selectedCategory,
-			question_volume: coin,
-		};
-		httpService.post("questions/", data);
+	const handleSubmitAPI = async (values) => {
+		if (!selectedImage) {
+			showToast("لطفا تصویری اپلود کنید", true);
+			return;
+		}
 
-		showToast("سوال با موفقیت ثبت شد", false);
-		removeCoin(submitCost);
+		try {
+			// Convert image to base64
+			const base64Image = await convertToBase64(selectedImage);
+			if (!base64Image) {
+				showToast("خطا در تبدیل تصویر", true);
+				return;
+			}
+
+			// Prepare data for submission
+			const data = {
+				question_description: values.description,
+				question_topic: values.question,
+				question_type: selectedCategory,
+				question_tag: selectedCategory,
+				question_volume: coin,
+				question_image: base64Image,
+			};
+			console.log(data.question_image);
+
+			// Submit the question
+			httpService.post("questions/", data);
+			showToast("سوال با موفقیت ثبت شد", false);
+			removeCoin(submitCost);
+		} catch (error) {
+			showToast("خطا در ارسال سوال", true);
+			console.error("Error submitting question:", error);
+		}
 	};
 
 	const formik = useFormik({
@@ -75,7 +97,7 @@ const SubmitQuestion = () => {
 		"سیاسی",
 		"اجتماعی",
 		"اقتصادی",
-		"رمز ارزها",
+		"رمز ارز",
 		"موسیقی",
 	];
 	return (

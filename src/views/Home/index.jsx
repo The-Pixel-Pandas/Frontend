@@ -15,7 +15,6 @@ import { useParams } from "react-router-dom";
 
 const Home = () => {
 	const { fetchData, data, isLoading, error } = useFetchData();
-	const [initialLoad, setInitialLoad] = useState(true);
 	const [questionData, setQuestionData] = useState(null);
 	const [usersData, setUsersData] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
@@ -26,21 +25,24 @@ const Home = () => {
 	const handleSearch = (searchText) => {
 		console.log("Searched!", searchText);
 		handleQuestionAPI(
-			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${activeCategory}&_search=${searchText}`
+			`questions/?page=${pageNumber}&page_size=20&search=${searchText}`
 		);
 	};
 
 	const handleCategoryClick = (category) => {
 		setActiveCategory(category);
+		console.log(
+			`questions/?page=${pageNumber}&page_size=20&${category == "همه موارد" ? "" : `type=${category}`}`
+		);
 		handleQuestionAPI(
-			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${pageNumber}&_category=${category}`
+			`questions/?page=${pageNumber}&page_size=20&${category == "همه موارد" ? "" : `type=${category}`}`
 		);
 	};
 
 	const handleChangePage = (event, page) => {
 		setPageNumber(page);
 		handleQuestionAPI(
-			`https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059?_page=${page}&_category=${activeCategory}`
+			`questions/?page=${page}&page_size=20&${activeCategory == "همه موارد" ? "" : `type=${activeCategory}`}`
 		);
 		event.preventDefault();
 	};
@@ -49,18 +51,14 @@ const Home = () => {
 		try {
 			const response = await fetchData(url);
 			console.log("Fetched data:", response);
-			setInitialLoad(false);
-			setTotalPages(response.current_node.total_pages);
+			setTotalPages(Math.ceil(response.count / 20));
 		} catch (error) {
 			console.error("Error fetching initial data:", error);
-			setInitialLoad(false);
 		}
 	};
 
 	useEffect(() => {
-		handleQuestionAPI(
-			"https://mocki.io/v1/895dfaf7-ba48-42d4-865d-0907d53ce059"
-		);
+		handleQuestionAPI(`questions/?page=${pageNumber}&page_size=20`);
 	}, []);
 
 	useEffect(() => {
@@ -68,14 +66,12 @@ const Home = () => {
 			const fetchQuestionDetails = async () => {
 				try {
 					const [questionResponse, commentsResponse] = await Promise.all([
-						httpService.get(
-							`https://mocki.io/v1/7e5852b3-6ec0-4c7a-b1fd-995d81590d0d`
-						),
+						httpService.get(`questions/${questionId}`),
 						httpService.get(
 							`https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b`
 						),
 					]);
-					setQuestionData(questionResponse.data);
+					setQuestionData(questionResponse);
 					setUsersData(commentsResponse);
 				} catch (err) {
 					console.error("Failed to fetch question details:", err);
@@ -110,11 +106,7 @@ const Home = () => {
 			<CategoryFilter onSelect={handleCategoryClick} />
 			{/* Questions Layout */}
 			<div className="flex mt-0 justify-center mb-10 pb-24">
-				{isLoading && initialLoad ? (
-					<HomeSkeleton />
-				) : (
-					<CardGrid items={data.current_node.data} />
-				)}
+				{isLoading ? <HomeSkeleton /> : <CardGrid items={data.results} />}
 			</div>
 			{/* Pagination */}
 			<div>

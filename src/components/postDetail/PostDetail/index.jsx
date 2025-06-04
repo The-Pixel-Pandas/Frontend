@@ -14,8 +14,16 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 				<div className="flex flex-row justify-center items-center gap-10">
 					{isExchange && (
 						<ExchangeBox
-							yesPercentage={postData.yesPercentage}
-							noPercentage={postData.noPercentage}
+							yesPercentage={
+								postData.options[0].description == "Yes"
+									? postData.options[0].chance
+									: postData.options[1].chance
+							}
+							noPercentage={
+								postData.options[1].description == "No"
+									? postData.options[1].chance
+									: postData.options[0].chance
+							}
 						/>
 					)}
 
@@ -23,13 +31,19 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 						<DataContainer
 							width={isExchange ? 1000 : 1200}
 							height={isExchange ? 270 : 260}
-							title={postData.title}
-							description={postData.description}
+							title={postData.question_topic || postData.news_topic}
+							description={
+								postData.question_description || postData.news_description
+							}
 							image={postData.image}
-							categories={postData.categories}
-							numberOfVisits={postData.numberOfVisits}
-							coins={postData.coin}
-							date={postData.date}
+							categories={
+								postData.question_type
+									? [postData.question_type, postData.question_tag]
+									: [postData.news_type, postData.news_tag]
+							}
+							numberOfVisits={postData.numberOfVisits || 100}
+							coins={postData.coin || 100}
+							date={postData.updated_at}
 						/>
 					</div>
 				</div>
