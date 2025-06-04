@@ -42,7 +42,7 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 									: [postData.news_type, postData.news_tag]
 							}
 							numberOfVisits={Math.ceil(postData.question_volume)}
-							coins={postData.coin || 100}
+							coins={postData.coin || ""}
 							date={
 								isExchange
 									? new Intl.DateTimeFormat("fa-IR", {
