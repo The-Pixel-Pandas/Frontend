@@ -14,22 +14,45 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 				<div className="flex flex-row justify-center items-center gap-10">
 					{isExchange && (
 						<ExchangeBox
-							yesPercentage={postData.yesPercentage}
-							noPercentage={postData.noPercentage}
+							yesPercentage={
+								postData.options[0].description == "Yes"
+									? Math.ceil(postData.options[0].chance)
+									: Math.ceil(postData.options[1].chance)
+							}
+							noPercentage={
+								postData.options[1].description == "No"
+									? Math.ceil(postData.options[1].chance)
+									: Math.ceil(postData.options[0].chance)
+							}
 						/>
 					)}
 
 					<div className="mt-5">
 						<DataContainer
+							isExchange={isExchange}
 							width={isExchange ? 1000 : 1200}
 							height={isExchange ? 270 : 260}
-							title={postData.title}
-							description={postData.description}
+							title={postData.question_topic || postData.news_topic}
+							description={
+								postData.question_description || postData.news_description
+							}
 							image={postData.image}
-							categories={postData.categories}
-							numberOfVisits={postData.numberOfVisits}
-							coins={postData.coin}
-							date={postData.date}
+							categories={
+								postData.question_type
+									? [postData.question_type, postData.question_tag]
+									: [postData.news_type, postData.news_tag]
+							}
+							numberOfVisits={Math.ceil(postData.question_volume)}
+							coins={postData.coin || ""}
+							date={
+								isExchange
+									? new Intl.DateTimeFormat("fa-IR", {
+											year: "numeric",
+											month: "2-digit",
+											day: "2-digit",
+										}).format(new Date(postData.updated_at))
+									: ""
+							}
 						/>
 					</div>
 				</div>

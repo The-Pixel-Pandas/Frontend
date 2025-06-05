@@ -15,7 +15,7 @@ const AdminSubmitNews = () => {
 		"سیاسی",
 		"اجتماعی",
 		"اقتصادی",
-		"رمز ارزها",
+		"رمز ارز",
 		"موسیقی",
 	];
 	const [selectedCategory, setSelectedCategory] = useState("همه موارد");

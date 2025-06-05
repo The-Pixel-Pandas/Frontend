@@ -11,7 +11,7 @@ const UserComment = ({
 	avatarNumber,
 	name,
 	biography = "",
-	transaction = 0,
+	profit = 0,
 	volume = 0,
 	rank = 0,
 	medals = [],
@@ -92,7 +92,7 @@ const UserComment = ({
 				avatarNumber={avatarNumber}
 				name={name}
 				biography={biography}
-				transaction={transaction}
+				profit={profit}
 				volume={volume}
 				rank={rank}
 				medals={medals}
@@ -106,7 +106,7 @@ UserComment.propTypes = {
 	avatarNumber: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	biography: PropTypes.string,
-	transaction: PropTypes.number,
+	profit: PropTypes.number,
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.arrayOf(PropTypes.number),
