@@ -126,15 +126,15 @@ const Comment = ({ users }) => {
 									key={user.id}
 									width={500}
 									height={75}
-									avatarNumber={user.avatarNumber}
-									name={user.name}
-									biography={user.biography}
-									transaction={user.transaction}
+									avatarNumber={user.avatar}
+									name={user.user_name}
+									biography={user.bio}
+									profit={user.profit || 0}
 									volume={user.volume}
 									rank={user.rank}
 									medals={user.medals}
 									comment={user.comment}
-									likesNumber={user.likesNumber}
+									likesNumber={user.likes}
 								/>
 							))}
 						</div>

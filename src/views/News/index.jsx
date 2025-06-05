@@ -64,7 +64,7 @@ const News = () => {
 					const [NewsResponse, commentsResponse] = await Promise.all([
 						httpService.get(`news/${newsId}`),
 						httpService.get(
-							`https://mocki.io/v1/ed2f226e-b1b6-4e47-9dfe-6accfbfd466b`
+							`https://mocki.io/v1/f6213b73-ebbe-4a15-8fcf-e4aff241b2f7`
 						),
 					]);
 					setNewsData(NewsResponse);

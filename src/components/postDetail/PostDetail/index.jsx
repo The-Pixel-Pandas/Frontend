@@ -16,13 +16,13 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 						<ExchangeBox
 							yesPercentage={
 								postData.options[0].description == "Yes"
-									? postData.options[0].chance
-									: postData.options[1].chance
+									? Math.ceil(postData.options[0].chance)
+									: Math.ceil(postData.options[1].chance)
 							}
 							noPercentage={
 								postData.options[1].description == "No"
-									? postData.options[1].chance
-									: postData.options[0].chance
+									? Math.ceil(postData.options[1].chance)
+									: Math.ceil(postData.options[0].chance)
 							}
 						/>
 					)}

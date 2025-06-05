@@ -36,12 +36,12 @@ const DataContainer = ({
 					{/* Text Content */}
 					<div className="flex-grow pr-6">
 						<p className="text-white text-3xl font-Lalezar">{title}</p>
-						<p
-							className="text-white text-xl font-MorabbaMedium mt-5"
+						<div
+							className="text-white text-2xl font-MorabbaMedium mt-5"
 							style={{ width: "93%" }}
 						>
 							{description}
-						</p>
+						</div>
 						<p className="text-white text-lg font-MorabbaRegular absolute top-5 left-10">
 							{numberOfVisits
 								? numberOfVisits.toLocaleString("fa") + " مشارکت"
