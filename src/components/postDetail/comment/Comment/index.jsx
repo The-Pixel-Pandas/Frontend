@@ -46,12 +46,13 @@ const Comment = ({ users }) => {
 		}
 		const { avatarNumber, name, biography, transaction, volume, rank, medals } =
 			useProfileStore.getState();
+		console.log(users);
 
 		users.unshift({
 			id: users.length + 1,
 			comment: comment,
 			likesNumber: 0,
-			avatarNumber: avatarNumber,
+			avatar: avatarNumber,
 			name: name,
 			biography: biography,
 			transaction: transaction,
@@ -129,7 +130,7 @@ const Comment = ({ users }) => {
 									avatarNumber={user.avatar}
 									name={user.user_name}
 									biography={user.bio}
-									profit={user.profit || 0}
+									profit={user.profit}
 									volume={user.volume}
 									rank={user.rank}
 									medals={user.medals}

@@ -68,7 +68,7 @@ const Home = () => {
 					const [questionResponse, commentsResponse] = await Promise.all([
 						httpService.get(`questions/${questionId}`),
 						httpService.get(
-							`https://mocki.io/v1/f6213b73-ebbe-4a15-8fcf-e4aff241b2f7`
+							`https://mocki.io/v1/4c8e9836-3940-4e57-aedc-7dc11e329229`
 						),
 					]);
 					setQuestionData(questionResponse);
