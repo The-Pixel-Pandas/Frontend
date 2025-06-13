@@ -23,10 +23,10 @@ const Wallet = () => {
 		limitCoin: 1000000,
 	};
 
-	const [selectedToman, setSelectedToman] = useState(unitInterval.initialToman);
-	const [selectedCoin, setSelectedCoin] = useState(unitInterval.initialCoin);
+	const [, setSelectedToman] = useState(unitInterval.initialToman);
+	const [, setSelectedCoin] = useState(unitInterval.initialCoin);
 	const [, setBalance] = useState(unitInterval.initialCoin);
-	const { coin, addCoin, setCoin } = useCoinStore();
+	const { coin, setCoin } = useCoinStore();
 	const [history, setHistory] = useState([]);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast(5000);
 
@@ -42,20 +42,15 @@ const Wallet = () => {
 			.catch((err) => console.error("Wallet Balance Get API Error:", err));
 
 		httpService
-			.get("https://mocki.io/v1/78dee0d3-ad95-4f9b-be80-40c7d24ed477")
+			.get("transaction-history/")
 			.then((res) => {
-				setHistory(res);
+				setHistory(res.results);
 				console.log("Wallet History Get API:", res);
 			})
 			.catch((err) => console.error("Wallet History Get API Error:", err));
 	}, []);
 
 	const manageExchange = () => {
-		// showToast(
-		// 	` مقدار ${selectedToman.toLocaleString("fa")} تومان به پاندا کوین تبدیل شد`,
-		// 	false
-		// );
-		// addCoin(selectedCoin);
 		showToast("این بخش در حال حاضر غیر فعال است", true);
 	};
 
@@ -201,8 +196,10 @@ const Wallet = () => {
 										return (
 											<WalletHistoryItem
 												key={index}
-												isProfit={item.isProfit}
-												amount={item.amount}
+												isProfit={item.amount > 0}
+												type={item.transaction_type}
+												amount={parseFloat(item.amount).toLocaleString("fa-IR")}
+												date={item.date}
 											/>
 										);
 									})}

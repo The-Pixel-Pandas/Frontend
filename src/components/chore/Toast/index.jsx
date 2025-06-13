@@ -13,7 +13,6 @@ const Toast = ({
 	useEffect(() => {
 		if (message) {
 			showToast(message);
-			console.log("toast showed");
 		}
 	}, [message, type]);
 

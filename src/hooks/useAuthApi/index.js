@@ -7,7 +7,7 @@ import {
 } from "../../services";
 
 const useAuthApi = () => {
-	const { email, password, setUser, setLoginMessage } = useAuthStore();
+	const { setUser, setLoginMessage } = useAuthStore();
 
 	const { setCoin } = useCoinStore();
 	const { setAccessToken, setRefreshToken } = useTokenStore();
@@ -27,15 +27,21 @@ const useAuthApi = () => {
 
 	const handleAuthAPI = (URL, data, authType) => {
 		httpService
-			.post(URL, data)
+			.post(URL, data, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
 			.then((res) => {
 				console.log("Login/Signin API response:", res);
-				setUser(email, password);
+				setUser(data.gmail, data.password);
 				setSuccessInformation(res, authType);
 			})
 			.catch((err) => {
+				console.log(data.gmail);
+				console.log(data.password);
 				console.log("Login/Signin API error:", err);
-				setUser(email, password, false, false);
+				setUser(data.gmail, data.password, false, false);
 				setErrorInformation(err);
 			});
 	};

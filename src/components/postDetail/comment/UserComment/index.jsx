@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useAvatarStore, eventHandler } from "../../../../services";
+import {
+	useAvatarStore,
+	eventHandler,
+	httpService,
+} from "../../../../services";
 import { useProfilePopup } from "../../../../hooks";
 import ProfilePopupOverlay from "../../../profilePopup/ProfilePopupOverlay";
 import userCommentBox from "../../../../assets/images/userCommentBox.png";
@@ -17,10 +21,14 @@ const UserComment = ({
 	medals = [],
 	comment = "",
 	likesNumber = 0,
+	isExchange = true,
+	commentId,
+	dataId,
+	isLike,
 }) => {
 	const { getAvatarByNumber } = useAvatarStore();
 	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
-	const [isLiked, setIsLiked] = useState(false);
+	const [isLiked, setIsLiked] = useState(isLike);
 	const [likesCount, setLikesCount] = useState(likesNumber);
 
 	const handleLike = () => {
@@ -31,6 +39,9 @@ const UserComment = ({
 			setLikesCount(likesCount + 1);
 		}
 		setIsLiked(!isLiked);
+		httpService.post(
+			`${isExchange ? "questions" : "news"}/${dataId}/comments/${commentId}/like/`
+		);
 	};
 
 	return (
@@ -112,6 +123,10 @@ UserComment.propTypes = {
 	medals: PropTypes.arrayOf(PropTypes.number),
 	comment: PropTypes.string,
 	likesNumber: PropTypes.number,
+	isExchange: PropTypes.bool,
+	commentId: PropTypes.number,
+	dataId: PropTypes.number,
+	isLike: PropTypes.bool,
 };
 
 export default UserComment;

@@ -2,65 +2,36 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserComment from "../UserComment";
 import submitComment from "../../../../assets/images/submitComment.png";
-import { useProfileStore, useAuthStore } from "../../../../services";
+import { useAuthStore, httpService } from "../../../../services";
 import { Toast } from "../../../../components";
-// import { httpService } from "../../../../services";
 
-const Comment = ({ users }) => {
+const Comment = ({ users, id, isExchange }) => {
 	const [comment, setComment] = useState("");
 	const [showToast, setShowToast] = useState(false);
 	const [ToastMessage, setToastMessage] = useState("");
 
-	// const getUserInfoAPI = async () => {
-	// 	try {
-	// 		const response = await httpService.get(
-	// 			`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`
-	// 		);
-	// 		return response.data.user;
-	// 	} catch (err) {
-	// 		console.error("Failed to fetch user info:", err);
-	// 	}
-	// };
-
-	const setCommentAPI = async () => {
-		// try {
-		// 	const response = await httpService.post(
-		// 		`https://mocki.io/v1/3fc991f0-b555-44c8-b9d5-7c51456f1254`,
-		// 		{
-		// 			comment: comment,
-		// 		}
-		// 	);
-		// 	return response.data;
-		// } catch (err) {
-		// 	console.error("Failed to set comment:", err);
-		// }
+	const setCommentAPI = () => {
+		const data = {
+			content: comment,
+		};
+		httpService
+			.post(`${isExchange ? "questions" : "news"}/${id}/comments/`, data)
+			.then((res) => {
+				setComment("");
+				console.log("Comment API", res);
+			})
+			.catch((err) => {
+				console.log("Comment API Error", err);
+			});
 	};
 
-	const addComment = async () => {
-		// const response = await getUserInfoAPI();
+	const addComment = () => {
 		const { isAuthenticated } = useAuthStore.getState();
 		if (!isAuthenticated) {
 			setShowToast(true);
 			setToastMessage("لطفا ابتدا وارد حساب کاربری خود شوید");
 			return;
 		}
-		const { avatarNumber, name, biography, transaction, volume, rank, medals } =
-			useProfileStore.getState();
-		console.log(users);
-
-		users.unshift({
-			id: users.length + 1,
-			comment: comment,
-			likesNumber: 0,
-			avatar: avatarNumber,
-			name: name,
-			biography: biography,
-			transaction: transaction,
-			volume: volume,
-			rank: rank,
-			medals: medals,
-		});
-		setComment("");
 		setCommentAPI();
 	};
 
@@ -124,18 +95,22 @@ const Comment = ({ users }) => {
 						<div className="flex flex-col gap-5">
 							{users.map((user) => (
 								<UserComment
-									key={user.id}
+									key={user.comment_id}
 									width={500}
 									height={75}
-									avatarNumber={user.avatar}
+									avatarNumber={user.avatar || 1}
 									name={user.user_name}
 									biography={user.bio}
 									profit={user.profit}
 									volume={user.volume}
-									rank={user.rank}
+									rank={user.rank_total_profit}
 									medals={user.medals}
-									comment={user.comment}
-									likesNumber={user.likes}
+									comment={user.content}
+									likesNumber={user.like_count}
+									isExchange={isExchange}
+									commentId={user.comment_id}
+									dataId={id}
+									isLike={user.is_liked}
 								/>
 							))}
 						</div>
@@ -154,6 +129,8 @@ const Comment = ({ users }) => {
 
 Comment.propTypes = {
 	users: PropTypes.array,
+	id: PropTypes.number,
+	isExchange: PropTypes.bool,
 };
 
 export default Comment;

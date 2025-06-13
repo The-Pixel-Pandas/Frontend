@@ -12,7 +12,6 @@ const DataContainer = ({
 	description,
 	image,
 	categories,
-	numberOfVisits,
 	coins,
 	date,
 	isExchange = true,
@@ -42,17 +41,12 @@ const DataContainer = ({
 						>
 							{description}
 						</div>
-						<p className="text-white text-lg font-MorabbaRegular absolute top-5 left-10">
-							{numberOfVisits
-								? numberOfVisits.toLocaleString("fa") + " مشارکت"
-								: ""}
-						</p>
 						<div className="flex flex-row gap-4 items-center absolute bottom-5 left-10">
 							{isExchange && (
 								<div className="flex flex-row gap-0 items-center">
 									<img src={coinLogo} alt="coinLogo" className="w-14 h-12" />
 									<p className="text-white text-lg font-MorabbaRegular">
-										{coins.toLocaleString("fa")} &nbsp; پاندا کوین
+										{coins.toLocaleString("fa")} &nbsp; حجم پاندا کوین
 									</p>
 								</div>
 							)}
@@ -95,7 +89,6 @@ DataContainer.propTypes = {
 	description: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
 	categories: PropTypes.array.isRequired,
-	numberOfVisits: PropTypes.number.isRequired,
 	coins: PropTypes.number.isRequired,
 	date: PropTypes.string.isRequired,
 	isExchange: PropTypes.bool,

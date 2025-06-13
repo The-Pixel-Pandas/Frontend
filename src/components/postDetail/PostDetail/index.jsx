@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { httpService } from "../../../services";
 import DataContainer from "../DataContainer";
 import { Comment } from "../comment";
 import ExchangeBox from "../exchangeContainer";
 import { DraggableButton } from "../../chore";
 
 const PostDetail = ({ postData, usersData, isExchange = true }) => {
+	const [questionVolume, setQuestionVolume] = useState(
+		Math.ceil(postData.question_volume)
+	);
+	const [postDataOptions, setPostDataOptions] = useState(postData.options);
+
+	const updateAction = (data) => {
+		// update volume and chance in page
+		setQuestionVolume(data.option_volume);
+		httpService.get(`questions/${postData.question_id}`).then((res) => {
+			setPostDataOptions(res.options);
+		});
+	};
+
+	useEffect(() => {
+		if (isExchange) {
+			setQuestionVolume(Math.ceil(postData.question_volume));
+			setPostDataOptions(postData.options);
+		}
+	}, [postData]);
+
 	return (
 		<>
 			<DraggableButton />
@@ -15,15 +36,16 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 					{isExchange && (
 						<ExchangeBox
 							yesPercentage={
-								postData.options[0].description == "Yes"
-									? Math.ceil(postData.options[0].chance)
-									: Math.ceil(postData.options[1].chance)
+								postDataOptions[0].description == "Yes"
+									? postDataOptions[0]
+									: postDataOptions[1]
 							}
 							noPercentage={
-								postData.options[1].description == "No"
-									? Math.ceil(postData.options[1].chance)
-									: Math.ceil(postData.options[0].chance)
+								postDataOptions[1].description == "No"
+									? postDataOptions[1]
+									: postDataOptions[0]
 							}
+							updateAction={updateAction}
 						/>
 					)}
 
@@ -36,14 +58,13 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 							description={
 								postData.question_description || postData.news_description
 							}
-							image={postData.image}
+							image={postData.image_base64}
 							categories={
 								postData.question_type
 									? [postData.question_type, postData.question_tag]
 									: [postData.news_type, postData.news_tag]
 							}
-							numberOfVisits={Math.ceil(postData.question_volume)}
-							coins={postData.coin || ""}
+							coins={questionVolume}
 							date={
 								isExchange
 									? new Intl.DateTimeFormat("fa-IR", {
@@ -58,7 +79,11 @@ const PostDetail = ({ postData, usersData, isExchange = true }) => {
 				</div>
 
 				<div className="mr-40">
-					<Comment users={usersData} />
+					<Comment
+						users={usersData}
+						id={postData.question_id || postData.news_id}
+						isExchange={isExchange}
+					/>
 				</div>
 			</div>
 		</>

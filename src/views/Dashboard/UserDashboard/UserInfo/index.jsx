@@ -5,6 +5,7 @@ import {
 	useProfileStore,
 	userInfoYup,
 	httpService,
+	useCoinStore,
 } from "../../../../services";
 import { useToast } from "../../../../hooks";
 import { Toast } from "../../../../components";
@@ -19,6 +20,7 @@ import userInfoButton from "../../../../assets/images/userInfoButton.png";
 
 const UserInfo = () => {
 	const { avatars, getAvatarNumber } = useAvatarStore();
+	const { setCoin } = useCoinStore();
 	const { id, setAvatarNumber, setName, setBiography } = useProfileStore();
 	const [selectedAvatar, setSelectedAvatar] = useState(0);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast();
@@ -63,17 +65,33 @@ const UserInfo = () => {
 			};
 
 			httpService
-				.put(`profiles/${id}/`, data)
+				.put("profile/update/", data)
 				.then((res) => {
 					console.log("Put profile API response:", res);
 					setName(values.username);
 					setBiography(values.biography);
 					setAvatarNumber(selectedAvatar + 1);
 					showToast("اطلاعات با موفقیت ذخیره شد", false);
+					formik.resetForm();
 				})
 				.catch((err) => {
 					console.log("Put profile API error:", err);
 					showToast("خطا در ذخیره اطلاعات", true);
+				});
+
+			const coinData = {
+				amount: 100,
+				user_id: id,
+			};
+
+			httpService
+				.post("update-balance/", coinData)
+				.then((res) => {
+					setCoin(res.new_balance);
+					console.log("update-balance API response:", res);
+				})
+				.catch((err) => {
+					console.log("update-balance API error:", err);
 				});
 		},
 	});
@@ -118,18 +136,18 @@ const UserInfo = () => {
 							style={{ width: 1100, height: 600 }}
 						/>
 						{/* Text */}
-						<div className="absolute inset-0 z-50 flex flex-col right-1/2 translate-x-1/2 mr-72 mt-28">
+						<div className="absolute inset-0 z-50 flex flex-col right-1/2 translate-x-1/2 mr-[283px] mt-28">
 							<div
-								className=" text-white text-4xl font-MorabbaMedium whitespace-nowrap"
+								className=" text-white text-[34px] font-MorabbaMedium whitespace-nowrap"
 								dir="rtl"
 							>
-								پروفایل خود را تکمیل کنید
+								به ازای هر بار ویرایش پروفایل
 							</div>
 							<div
-								className=" text-white text-4xl font-MorabbaMedium whitespace-nowrap"
+								className=" text-white text-[34px] font-MorabbaMedium whitespace-nowrap"
 								dir="rtl"
 							>
-								پاداش دریافت کنید !
+								صد سکه پاداش دریافت کنید !
 							</div>
 						</div>
 						{/* Progress Bar */}

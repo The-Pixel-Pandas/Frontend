@@ -32,7 +32,7 @@ const SearchBar = ({ width = "535px", searchAction }) => {
 							}
 						}}
 						className="relative m-0 block w-full rounded-md b bg-white bg-clip-padding px-3 py-[0.25rem] pr-10 text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-gray/400  motion-reduce:transition-none font-MorabbaRegular"
-						placeholder=" جستجوی سوال ها براساس عنواین و تگ ها ..."
+						placeholder="جستجو بر اساس عنواین ..."
 						aria-label="Search"
 						id="exampleFormControlInput2"
 						dir="rtl"

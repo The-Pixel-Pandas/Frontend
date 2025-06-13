@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useCoinStore, useAuthStore } from "../../../../services";
+import { useCoinStore, useAuthStore, httpService } from "../../../../services";
 import { useCoinChooser } from "../../../../hooks";
 import { Toast } from "../../../chore";
 import PercentageButton from "../PercentageButton";
@@ -11,7 +11,7 @@ import increaseButton from "../../../../assets/images/increaseButton.png";
 import decreaseButton from "../../../../assets/images/decreaseButton.png";
 import exchangeBtn from "../../../../assets/images/exchangeBtn.png";
 
-const ExchangeBox = ({ yesPercentage, noPercentage }) => {
+const ExchangeBox = ({ yesPercentage, noPercentage, updateAction }) => {
 	const [showToast, setShowToast] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [ToastMessage, setToastMessage] = useState("");
@@ -20,9 +20,9 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		no: true,
 	});
 	const [exchangeType, setExchangeType] = useState("");
-	const { getCoin, removeCoin } = useCoinStore();
+	const { getCoin, setCoin } = useCoinStore();
 	const { isAuthenticated } = useAuthStore();
-	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(10);
+	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(100);
 
 	const handleTogglePosition = (id) => {
 		setButtonPositions((prev) => {
@@ -48,6 +48,28 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 		}
 	};
 
+	const handleExchangeAPI = () => {
+		const id =
+			exchangeType == "بله" ? yesPercentage.option_id : noPercentage.option_id;
+		const data = {
+			amount: coin,
+		};
+		httpService
+			.post(`options/${id}/bets/`, data)
+			.then((res) => {
+				console.log("Bet API Response:", res);
+				setIsError(false);
+				setCoin(res.remaining_balance);
+				updateAction(res);
+				setToastMessage(`مبادله با موفقیت روی "${exchangeType}" انجام شد`);
+			})
+			.catch((err) => {
+				console.log("Bet API Error:", err);
+				setIsError(true);
+				setToastMessage("این پیشبینی بسته شده است");
+			});
+	};
+
 	const handleExchange = () => {
 		setShowToast(true);
 
@@ -68,10 +90,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 			setToastMessage("تعداد پانداکوین کافی نیست");
 			return;
 		}
-
-		removeCoin(coin);
-		setIsError(false);
-		setToastMessage(`مبادله با موفقیت روی "${exchangeType}" انجام شد`);
+		handleExchangeAPI();
 	};
 
 	useEffect(() => {
@@ -91,16 +110,16 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 			<div className="flex justify-center items-center flex-col mt-5">
 				<div className="relative ">
 					{/* Yes/No Percentage */}
-					<div className="flex flex-col gap-14 absolute inset-0 top-16">
+					<div className="flex flex-col gap-14 absolute inset-0 top-17">
 						<PercentageButton
-							percentage={yesPercentage}
+							percentage={Math.ceil(yesPercentage.chance)}
 							text="بله"
 							isRight={buttonPositions.yes}
 							onTogglePosition={handleTogglePosition}
 							id="yes"
 						/>
 						<PercentageButton
-							percentage={noPercentage}
+							percentage={Math.ceil(noPercentage.chance)}
 							text="نه"
 							isRight={buttonPositions.no}
 							onTogglePosition={handleTogglePosition}
@@ -110,7 +129,9 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 
 					{/* Title */}
 					<div className="absolute right-5 top-2 flex flex-row items-center gap-2">
-						<span className="text-white font-MorabbaRegular text-lg">خرید</span>
+						<div className="text-white font-MorabbaMedium text-lg ">
+							پیشبینی
+						</div>
 						<img src={drop} alt="drop" style={{ width: 15, height: 15 }} />
 					</div>
 
@@ -128,11 +149,10 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 								/>
 							</button>
 							<div className="relative">
-								<div className="absolute inset-0 left-10 -translate-x-1/2 items-center flex">
-									<span
-										className="text-white font-MorabbaMedium text-sm whitespace-nowrap "
-										dir="rtl"
-									>{`${coin.toLocaleString("fa")} ${String.fromCharCode(0x00a0)} پانداکوین`}</span>
+								<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center flex">
+									<span className=" text-white font-MorabbaMedium whitespace-nowrap  font-bold text-xl text-center">
+										{coin.toLocaleString("fa")}
+									</span>
 								</div>
 								<img
 									src={exchangeCoinInput}
@@ -162,7 +182,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 							<div className="relative">
 								<div className="absolute inset-0 flex items-center justify-center items-center ">
 									<span className="text-white font-Lalezar text-lg mb-1">
-										مبادله
+										خرید
 									</span>
 								</div>
 								<img
@@ -207,6 +227,7 @@ const ExchangeBox = ({ yesPercentage, noPercentage }) => {
 ExchangeBox.propTypes = {
 	yesPercentage: PropTypes.number,
 	noPercentage: PropTypes.number,
+	updateAction: PropTypes.func,
 };
 
 export default ExchangeBox;

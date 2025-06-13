@@ -3,6 +3,7 @@ import useAvatarStore from "../stores/avatarStore";
 import useCoinStore from "../stores/coinStore";
 import useTokenStore from "../stores/tokenStore";
 import useProfileStore from "../stores/profileStore";
+import useTaskStore from "../stores/taskStore";
 
 const STORE_CONFIGS = [
 	{ store: useAuthStore, storageKey: "auth-storage" },
@@ -10,6 +11,7 @@ const STORE_CONFIGS = [
 	{ store: useCoinStore, storageKey: "coin-storage" },
 	{ store: useTokenStore, storageKey: "token-storage" },
 	{ store: useProfileStore, storageKey: "profile-storage" },
+	{ store: useTaskStore, storageKey: "task-storage" },
 ];
 
 function reset(store, storageKey) {

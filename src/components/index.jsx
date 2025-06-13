@@ -14,7 +14,7 @@ import {
 import { AuthComponent } from "./auth";
 
 // Card Component
-import { CardGrid, ForecastCard } from "./card";
+import { CardGrid, ForecastCard, TaskCard } from "./card";
 
 // LeaderBoard components
 import { LeaderBoardTable } from "./leaderBoard";
@@ -42,6 +42,7 @@ import {
 	WalletBalanceCtrlBtn,
 	WalletCurrencyInput,
 	WalletHistoryItem,
+	SubmitView,
 } from "./dashboard";
 
 // Navbar
@@ -64,6 +65,7 @@ export {
 	// Card
 	CardGrid,
 	ForecastCard,
+	TaskCard,
 
 	// LeaderBoard
 	LeaderBoardTable,
@@ -90,6 +92,7 @@ export {
 	WalletBalanceCtrlBtn,
 	WalletCurrencyInput,
 	WalletHistoryItem,
+	SubmitView,
 
 	// Navbar elements
 	SearchBar,
