@@ -5,12 +5,12 @@ const useCoinChooser = (initialCoin, limit = Infinity) => {
 
 	const increaseCoin = () => {
 		if (coin < limit) {
-			setCoin(coin + 1);
+			setCoin(coin + 100);
 		}
 	};
 	const decreaseCoin = () => {
 		if (coin > initialCoin) {
-			setCoin(coin - 1);
+			setCoin(coin - 100);
 		}
 	};
 

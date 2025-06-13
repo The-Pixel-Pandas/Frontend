@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useFormik } from "formik";
 import { AnimateCoinLogo, Toast } from "../../../../components";
 import { useCoinChooser, useToast } from "../../../../hooks";
-import { adminSubmitTaskYup } from "../../../../services";
+import { adminSubmitTaskYup, httpService } from "../../../../services";
 import addCoinContainer from "../../../../assets/images/addPictureContainer.png";
 import adminContainer from "../../../../assets/images/adminContainer.png";
 import taskTitle from "../../../../assets/images/newsTitle.png";
@@ -14,14 +14,31 @@ import submitButton from "../../../../assets/images/submitButton.png";
 
 const AdminManageTasks = () => {
 	const [selectedImage, setSelectedImage] = useState(null);
-	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0, 50);
+	const { coin, increaseCoin, decreaseCoin } = useCoinChooser(0);
 	const { toastMessage, isSubmitted, isError, showToast } = useToast();
 	const previousCoinRef = useRef(0);
 
 	const handleSubmitAPI = (values) => {
-		console.log(values);
-		console.log(selectedImage);
-		showToast("تسک با موفقیت اضافه شد", false);
+		const data = {
+			task_topic: values.title,
+			task_description: values.description,
+			task_tag: values.link,
+			amount: coin,
+			image_base64: selectedImage,
+		};
+
+		httpService
+			.post("tasks/", data)
+			.then(() => {
+				console.log("Add Task API Response:", data);
+				showToast("تسک با موفقیت اضافه شد", false);
+				setSelectedImage(null);
+				formik.resetForm();
+			})
+			.catch((error) => {
+				console.log("Add Task API Error:", error);
+				showToast("خطا در اضافه کردن تسک", true);
+			});
 	};
 
 	const formik = useFormik({
@@ -57,16 +74,16 @@ const AdminManageTasks = () => {
 							style={{ width: 1100, height: 600 }}
 						/>
 						{/* Right Section */}
-						<div className="absolute inset-0 z-50 flex items-center justify-center flex-col gap-10 ml-[480px] mb-5">
+						<div className="absolute inset-0 z-50 flex items-center justify-center flex-col gap-5 ml-[480px] mb-5">
 							<div className="relative">
 								<img
 									src={taskTitle}
 									alt="taskTitle"
-									style={{ width: 460, height: 110 }}
+									style={{ width: 460, height: 90 }}
 								/>
 								<textarea
 									placeholder="عنوان تسک ..."
-									className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[100px] resize-none z-50"
+									className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[90px] resize-none z-50"
 									style={{ direction: "rtl" }}
 									{...formik.getFieldProps("title")}
 									onChange={formik.handleChange}
@@ -81,11 +98,11 @@ const AdminManageTasks = () => {
 								<img
 									src={taskDescription}
 									alt="taskDescription"
-									style={{ width: 460, height: 285 }}
+									style={{ width: 460, height: 210 }}
 								/>
 								<textarea
 									placeholder="شرح تسک ..."
-									className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10  border-none outline-none overflow-y-scroll no-scrollbar max-h-[280px] resize-none z-50"
+									className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10  border-none outline-none overflow-y-scroll no-scrollbar max-h-[210px] resize-none z-50"
 									style={{ direction: "rtl" }}
 									{...formik.getFieldProps("description")}
 									onChange={formik.handleChange}
@@ -93,6 +110,25 @@ const AdminManageTasks = () => {
 								{formik.errors.description && formik.touched.description && (
 									<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center font-MorabbaSemiBold text-red-800 text-lg mt-[45px] ">
 										{formik.errors.description}
+									</div>
+								)}
+							</div>
+							<div className="relative">
+								<img
+									src={uploadImageBox}
+									alt="taskTitle"
+									style={{ width: 460, height: 90 }}
+								/>
+								<textarea
+									placeholder="لینک انجام تسک ..."
+									className="absolute inset-0  h-full w-full  bg-transparent text-white text-lg font-MorabbaMedium placeholder:font-MorabbaMedium pr-10 pt-5 pl-10 border-none outline-none overflow-y-scroll no-scrollbar max-h-[90px] resize-none z-50 placeholder:bg-clip-text placeholder:text-transparent placeholder:bg-gradient-to-r placeholder:from-[#315EC9] placeholder:to-[#34A2B3]  "
+									style={{ direction: "rtl" }}
+									{...formik.getFieldProps("link")}
+									onChange={formik.handleChange}
+								/>
+								{formik.errors.link && formik.touched.link && (
+									<div className="absolute top-0 left-0 w-full h-full flex items-center justify-center font-MorabbaSemiBold text-red-800 text-lg mt-5 ">
+										{formik.errors.link}
 									</div>
 								)}
 							</div>

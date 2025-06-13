@@ -45,9 +45,6 @@ const AuthForm = () => {
 						placeholder="ایمیل"
 						style={{ width: 411, height: 61 }}
 						{...formik.getFieldProps("email")}
-						onChange={(e) => {
-							formik.handleChange(e);
-						}}
 					/>
 					<img
 						src={authInput}

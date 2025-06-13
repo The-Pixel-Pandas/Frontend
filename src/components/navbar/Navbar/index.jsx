@@ -110,7 +110,9 @@ const Navbar = ({ isAuthenticated = false }) => {
 					<div className="flex flex-col items-center mr-10 relative">
 						{/* Coin */}
 						<div className="text-white font-Lalezar text-lg absolute mt-12">
-							{getCoin().toLocaleString("fa")}
+							{parseFloat(getCoin()).toLocaleString("fa-IR", {
+								useGrouping: false,
+							})}
 						</div>
 						{/* Icon */}
 						<button
