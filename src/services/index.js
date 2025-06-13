@@ -9,9 +9,13 @@ import useNewsStore from "./stores/newsStore";
 import useMedalStore from "./stores/medalStore";
 import useTokenStore from "./stores/tokenStore";
 import useProfileStore from "./stores/profileStore";
+import useForecastStore from "./stores/forecastStore";
+import useTaskStore from "./stores/taskStore";
 import cacheService from "./cacheService";
 import userInfoYup from "./yupObjects/userInfoYup";
 import userSubmitQuestionYup from "./yupObjects/userSubmitQuestionYup";
+import adminSubmitTaskYup from "./yupObjects/adminSubmitTaskYup";
+import userSubmitNewsYup from "./yupObjects/userSubmitNewsYup";
 
 export {
 	httpService,
@@ -25,7 +29,11 @@ export {
 	useMedalStore,
 	useTokenStore,
 	useProfileStore,
+	useForecastStore,
+	useTaskStore,
 	cacheService,
 	userInfoYup,
 	userSubmitQuestionYup,
+	adminSubmitTaskYup,
+	userSubmitNewsYup,
 };

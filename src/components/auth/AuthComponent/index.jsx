@@ -10,7 +10,6 @@ import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
 
 const AuthComponent = ({ authType }) => {
-	const { handleAuthAPI } = useAuthApi();
 	const {
 		isAuthenticated,
 		isError,
@@ -20,6 +19,7 @@ const AuthComponent = ({ authType }) => {
 		setUser,
 		setLoginMessage,
 	} = useAuthStore();
+	const { handleAuthAPI } = useAuthApi();
 	const navigate = useNavigate();
 
 	const submitButton = () => {

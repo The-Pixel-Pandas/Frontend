@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useAvatarStore, eventHandler } from "../../../../services";
+import {
+	useAvatarStore,
+	eventHandler,
+	httpService,
+} from "../../../../services";
 import { useProfilePopup } from "../../../../hooks";
 import ProfilePopupOverlay from "../../../profilePopup/ProfilePopupOverlay";
 import userCommentBox from "../../../../assets/images/userCommentBox.png";
@@ -11,16 +15,20 @@ const UserComment = ({
 	avatarNumber,
 	name,
 	biography = "",
-	transaction = 0,
+	profit = 0,
 	volume = 0,
 	rank = 0,
 	medals = [],
 	comment = "",
 	likesNumber = 0,
+	isExchange = true,
+	commentId,
+	dataId,
+	isLike,
 }) => {
 	const { getAvatarByNumber } = useAvatarStore();
 	const { showProfile, openPopUp, closePopUp } = useProfilePopup();
-	const [isLiked, setIsLiked] = useState(false);
+	const [isLiked, setIsLiked] = useState(isLike);
 	const [likesCount, setLikesCount] = useState(likesNumber);
 
 	const handleLike = () => {
@@ -31,6 +39,9 @@ const UserComment = ({
 			setLikesCount(likesCount + 1);
 		}
 		setIsLiked(!isLiked);
+		httpService.post(
+			`${isExchange ? "questions" : "news"}/${dataId}/comments/${commentId}/like/`
+		);
 	};
 
 	return (
@@ -92,7 +103,7 @@ const UserComment = ({
 				avatarNumber={avatarNumber}
 				name={name}
 				biography={biography}
-				transaction={transaction}
+				profit={profit}
 				volume={volume}
 				rank={rank}
 				medals={medals}
@@ -106,12 +117,16 @@ UserComment.propTypes = {
 	avatarNumber: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	biography: PropTypes.string,
-	transaction: PropTypes.number,
+	profit: PropTypes.number,
 	volume: PropTypes.number,
 	rank: PropTypes.number,
 	medals: PropTypes.arrayOf(PropTypes.number),
 	comment: PropTypes.string,
 	likesNumber: PropTypes.number,
+	isExchange: PropTypes.bool,
+	commentId: PropTypes.number,
+	dataId: PropTypes.number,
+	isLike: PropTypes.bool,
 };
 
 export default UserComment;

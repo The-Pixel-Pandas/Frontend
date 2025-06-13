@@ -10,6 +10,7 @@ import AnimateCoinLogo from "./AnimateCoinLogo";
 import WalletBalanceCtrlBtn from "./WalletBalanceCtrlBtn";
 import WalletCurrencyInput from "./WalletCurrencyInput";
 import WalletHistoryItem from "./WalletHistoryItem";
+import SubmitView from "./SubmitView";
 
 export {
 	ProfileInfoContainer,
@@ -24,4 +25,5 @@ export {
 	WalletBalanceCtrlBtn,
 	WalletCurrencyInput,
 	WalletHistoryItem,
+	SubmitView,
 };

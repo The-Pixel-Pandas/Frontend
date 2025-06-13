@@ -29,11 +29,11 @@ const Dashboard = () => {
 						path="/dashboard/forecastResults"
 						number={5}
 					/>
-					<NavLinkButton
+					{/* <NavLinkButton
 						text="اعلانات"
 						path="/dashboard/notification"
 						number={6}
-					/>
+					/> */}
 				</div>
 
 				<Outlet />

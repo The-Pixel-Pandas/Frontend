@@ -18,6 +18,7 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 	useEffect(() => {
 		if (location.pathname === "/dashboard") {
 			navigate("/dashboard/profile");
+			setSelectedButton(0);
 		}
 
 		switch (location.pathname) {
@@ -57,7 +58,7 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 				setSelectedButton(3);
 				setAdmin(true);
 				break;
-			case "/dashboard/adminManageNews":
+			case "/dashboard/adminManageTasks":
 				setSelectedButton(4);
 				setAdmin(true);
 				break;
