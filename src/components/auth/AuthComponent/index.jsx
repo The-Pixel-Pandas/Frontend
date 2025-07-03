@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import GoogleVerification from "../GoogleVerification";
 import AuthForm from "../AuthForm";
 import Toast from "../../chore/Toast";
-import { eventHandler, useAuthStore } from "../../../services";
+import { eventHandler, useAuthStore, httpService } from "../../../services";
 import { useAuthApi } from "../../../hooks";
 import authButton from "../../../assets/images/authButton.png";
 import logo from "../../../assets/images/logo.png";
@@ -41,15 +41,18 @@ const AuthComponent = ({ authType }) => {
 					gmail: email,
 					password: password,
 				};
-				handleAuthAPI("https://pixel-pandas.liara.run/api/login/", data, authType);
+				handleAuthAPI("login/", data, authType);
 			} else if (authType === "ثبت نام") {
 				const data = {
 					user_name: email,
 					gmail: email,
 					password: password,
 				};
-				handleAuthAPI("https://pixel-pandas.liara.run/api/signup/", data, authType);
+				handleAuthAPI("signup/", data, authType);
 			}
+			httpService
+				.get("https://mocki.io/v1/fe78a5ea-d3b0-467f-b088-c77501fb88b7")
+				.then((res) => console.log(res));
 		}
 	};
 
