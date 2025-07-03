@@ -41,14 +41,14 @@ const AuthComponent = ({ authType }) => {
 					gmail: email,
 					password: password,
 				};
-				handleAuthAPI("login/", data, authType);
+				handleAuthAPI("https://pixel-pandas.liara.run/api/login/", data, authType);
 			} else if (authType === "ثبت نام") {
 				const data = {
 					user_name: email,
 					gmail: email,
 					password: password,
 				};
-				handleAuthAPI("signup/", data, authType);
+				handleAuthAPI("https://pixel-pandas.liara.run/api/signup/", data, authType);
 			}
 		}
 	};
