@@ -7,22 +7,14 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const ForecastResults = () => {
 	const [trueResult, setTrueResult] = useState([]);
-	const [, setFalseResult] = useState([]);
-	const [allResult, setAllResult] = useState([]);
-	const { removedCardIds, addRemovedCard } = useForecastStore();
-
-	const handleCardClick = (card) => {
-		addRemovedCard(card.transaction_id);
-		setTrueResult((prev) => prev.filter((item) => item !== card));
-	};
+	const [falseResult, setFalseResult] = useState([]);
+	const [, setAllResult] = useState([]);
+	const { removedCardIds } = useForecastStore();
 
 	useEffect(() => {
 		httpService
 			.get("transaction-history/")
 			.then((response) => {
-				const filteredResults = response.results.filter(
-					(item) => !removedCardIds.includes(item.transaction_id)
-				);
 				setAllResult(
 					response.results.filter(
 						(item) =>
@@ -31,12 +23,14 @@ const ForecastResults = () => {
 					)
 				);
 				setTrueResult(
-					filteredResults.filter((item) => item.transaction_type === "WIN")
+					response.results.filter((item) => item.transaction_type === "WIN")
 				);
 				setFalseResult(
-					filteredResults.filter((item) => item.transaction_type === "LOSS")
+					response.results.filter((item) => item.transaction_type === "LOSS")
 				);
 				console.log("Forecast get API response:", response);
+				console.log(trueResult);
+				console.log(falseResult);
 			})
 			.catch((err) => {
 				console.log("Forecast get API error:", err);
@@ -61,14 +55,14 @@ const ForecastResults = () => {
 								style={{ width: 450, height: 570 }}
 							/>
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
-								تاریخچه تمامی پیش بینی ها
+								پیشبینی های اشتباه
 							</div>
 							<motion.div
 								className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2 mt-16 items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar"
 								layout
 							>
 								<AnimatePresence mode="popLayout">
-									{allResult.map((item, index) => (
+									{falseResult.map((item, index) => (
 										<ForecastCard
 											key={item.transaction_id || index}
 											item={item}
@@ -89,7 +83,7 @@ const ForecastResults = () => {
 								style={{ width: 450, height: 570 }}
 							/>
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
-								جوایز قابل دریافت
+								پیشبینی های صحیح
 							</div>
 							<motion.div
 								className=" absolute inset-0 flex flex-col gap-5 pb-2 pt-2 mt-16 items-center z-50 max-h-[570px] overflow-y-scroll no-scrollbar"
@@ -101,8 +95,8 @@ const ForecastResults = () => {
 											key={item.transaction_id || index}
 											item={item}
 											isTrueForecast={true}
-											isAllResult={false}
-											onCardClick={() => handleCardClick(item)}
+											isAllResult={true}
+											onCardClick={() => {}}
 										/>
 									))}
 								</AnimatePresence>

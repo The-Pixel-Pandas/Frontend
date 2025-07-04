@@ -48,7 +48,7 @@ const Profile = () => {
 					res.bio !== biography ||
 					res.profit !== rankTotalProfit ||
 					res.volume !== rankTotalVolume ||
-					res.winrate !== winRate ||
+					res.total_balance !== winRate ||
 					res.medals !== medals ||
 					res.rank_total_profit !== rankTotalProfit ||
 					res.rank_total_volume !== rankTotalVolume
@@ -58,7 +58,7 @@ const Profile = () => {
 					setProfit(res.profit);
 					setVolume(res.volume);
 					setMedals(res.medals);
-					setWinRate(res.winrate);
+					setWinRate(res.total_balance);
 					setRankTotalProfit(res.rank_total_profit);
 					setRankTotalVolume(res.rank_total_volume);
 				}
@@ -165,8 +165,8 @@ const Profile = () => {
 										</div>
 									) : (
 										<ProfileInfoContainer
-											text="درصد پاسخ صحیح"
-											amount={winRate}
+											text="تعداد سکه ها "
+											amount={Math.ceil(winRate)}
 										/>
 									)}
 								</div>

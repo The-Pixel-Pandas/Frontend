@@ -13,7 +13,7 @@ const LeaderBoard = () => {
 
 	const fetchLeaderboardData = async () => {
 		try {
-			const res = await httpService.get("leaderboards/");
+			const res = await httpService.get("wallet-leaderboards/");
 			setVolumeData(res[selectedFilter].volume);
 			setProfitData(res[selectedFilter].profit);
 			console.log("LeaderBoard Get API:", res);

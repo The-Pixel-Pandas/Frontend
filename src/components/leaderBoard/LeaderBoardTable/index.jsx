@@ -21,11 +21,11 @@ const LeaderBoardTable = ({ title, titleImg, usersData }) => {
 						<LeaderBoardProfileCard
 							key={index}
 							avatarNumber={user.avatar}
-							name={user.username}
+							name={user.user_name}
 							coinAmount={user.total_balance?.toLocaleString("fa") || "0"}
 							biography={user.biography || ""}
-							profit={user.profit}
-							volume={user.volume}
+							profit={user.profit || user.value}
+							volume={user.volume || user.value}
 							rank={user.rank}
 							medals={user.medals || []}
 						/>
