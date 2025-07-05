@@ -94,7 +94,7 @@ const AdminManageQuestion = () => {
 									centeredSlides={true}
 									grabCursor={true}
 									initialSlide={0}
-									spaceBetween={70}
+									spaceBetween={180}
 									loop={false}
 									allowTouchMove={!isCompleted}
 									onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -109,9 +109,10 @@ const AdminManageQuestion = () => {
 
 											let className =
 												"transition-all duration-500 flex items-center justify-center h-full ";
-											className += isActive
-												? " scale-100 opacity-100 z-50 "
-												: " scale-90 opacity-20 z-10 ";
+											className +=
+												isActive == true
+													? " scale-100 opacity-100 z-50 "
+													: " scale-90 opacity-10 z-10 ";
 
 											return (
 												<SwiperSlide key={question.id}>

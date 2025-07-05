@@ -46,7 +46,7 @@ const ManageCard = ({
 
 						<div className="flex ">
 							{/* Coin */}
-							<div className="flex flex-row items-center absolute right-0 bottom-0 mr-5 mb-2.5">
+							<div className="flex flex-row items-center absolute right-0 bottom-0 mr-5 mb-2.5 ">
 								<div className="absolute right-0 mr-14">
 									<div className="text-[14px] font-MorabbaBold text-white whitespace-nowrap ">
 										<div className="flex flex-row gap-1 items-center">
@@ -62,7 +62,7 @@ const ManageCard = ({
 								/>
 							</div>
 							{/* Categories */}
-							<div className="flex flex-row gap-2 items-center absolute bottom-5 left-10">
+							<div className="flex flex-row gap-2 items-center absolute bottom-5 left-10 ">
 								{categories.map((category, index) => (
 									<div key={index} className="relative">
 										<img

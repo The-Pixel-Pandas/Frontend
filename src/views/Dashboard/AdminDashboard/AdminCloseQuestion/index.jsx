@@ -108,7 +108,7 @@ const AdminCloseQuestion = () => {
 									centeredSlides={true}
 									grabCursor={true}
 									initialSlide={0}
-									spaceBetween={70}
+									spaceBetween={190}
 									loop={false}
 									allowTouchMove={!isCompleted}
 									onSwiper={(swiper) => (swiperRef.current = swiper)}

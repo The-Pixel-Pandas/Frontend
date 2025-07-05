@@ -62,6 +62,10 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 				setSelectedButton(4);
 				setAdmin(true);
 				break;
+			case "/dashboard/adminCloseQuestion":
+				setSelectedButton(5);
+				setAdmin(true);
+				break;
 			default:
 				break;
 		}
