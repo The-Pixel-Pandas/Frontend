@@ -21,6 +21,7 @@ import {
 	AdminManageQuestion,
 	AdminSubmitNews,
 	AdminManageTasks,
+	AdminCloseQuestion,
 	Notification,
 } from "./views";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -88,6 +89,7 @@ function App() {
 					<Route path="adminManageQuestion" element={<AdminManageQuestion />} />
 					<Route path="adminSubmitNews" element={<AdminSubmitNews />} />
 					<Route path="adminManageTasks" element={<AdminManageTasks />} />
+					<Route path="adminCloseQuestion" element={<AdminCloseQuestion />} />
 				</Route>
 
 				<Route path="/login" element={<Login />} />

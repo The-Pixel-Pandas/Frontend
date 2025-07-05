@@ -24,7 +24,7 @@ const Home = () => {
 	const [totalPages, setTotalPages] = useState(0);
 	const [isFirstLoad, setIsFirstLoad] = useState(true);
 	const [count, setCount] = useState(0);
-	const [checked, setChecked] = useState(true);
+	const [checked, setChecked] = useState(false);
 
 	const handleCheckboxChange = (event) => {
 		const isChecked = event.target.checked;
@@ -86,7 +86,9 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		handleQuestionAPI(`questions/?page=${pageNumber}`);
+		handleQuestionAPI(
+			`questions/?page=${pageNumber}${checked ? "&is_active=true" : ""}`
+		);
 	}, []);
 
 	useEffect(() => {

@@ -37,6 +37,12 @@ const AdminDashboard = () => {
 						number={4}
 						isAdminButton={true}
 					/>
+					<NavLinkButton
+						text="تعیین نتایج سوالات"
+						path="/dashboard/adminCloseQuestion"
+						number={5}
+						isAdminButton={true}
+					/>
 				</div>
 
 				<Outlet />

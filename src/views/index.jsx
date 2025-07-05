@@ -21,6 +21,7 @@ import AdminSubmitQuestion from "./Dashboard/AdminDashboard/AdminSubmitQuestion"
 import AdminManageQuestion from "./Dashboard/AdminDashboard/AdminManageQuestion";
 import AdminSubmitNews from "./Dashboard/AdminDashboard/AdminSubmitNews";
 import AdminManageTasks from "./Dashboard/AdminDashboard/AdminManageTasks";
+import AdminCloseQuestion from "./Dashboard/AdminDashboard/AdminCloseQuestion";
 import Notification from "./Dashboard/UserDashboard/Notification";
 
 export {
@@ -47,5 +48,6 @@ export {
 	AdminManageQuestion,
 	AdminSubmitNews,
 	AdminManageTasks,
+	AdminCloseQuestion,
 	Notification,
 };

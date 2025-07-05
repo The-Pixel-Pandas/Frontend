@@ -1,17 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import manageCardContainer from "../../../assets/images/manageCardContainer.png";
+import manageCardContainer2 from "../../../assets/images/manageCardContainer2.png";
 import manageCoinLogo from "../../../assets/images/manageCoinLogo.png";
 import manageCardCategory from "../../../assets/images/manageCardCategory.png";
 
-const ManageCard = ({ title, description, coin, categories, image }) => {
+const ManageCard = ({
+	title,
+	description,
+	coin,
+	categories,
+	image,
+	isAnotherColor = false,
+}) => {
 	return (
 		<>
 			<div>
 				<div className="relative ">
 					{/* BackGround Image */}
 					<img
-						src={manageCardContainer}
+						src={isAnotherColor ? manageCardContainer2 : manageCardContainer}
 						alt="manageCardContainer"
 						style={{ width: 740, height: 276 }}
 					/>
@@ -82,6 +90,7 @@ ManageCard.propTypes = {
 	description: PropTypes.string.isRequired,
 	coin: PropTypes.number.isRequired,
 	categories: PropTypes.array.isRequired,
+	isAnotherColor: PropTypes.bool,
 };
 
 export default ManageCard;
