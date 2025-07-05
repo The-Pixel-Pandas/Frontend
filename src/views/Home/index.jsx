@@ -30,9 +30,13 @@ const Home = () => {
 		const isChecked = event.target.checked;
 		setChecked(isChecked);
 		if (isChecked) {
-			handleQuestionAPI(`questions/?is_active=true`);
+			handleQuestionAPI(
+				`questions/?${activeCategory == "همه موارد" ? "" : `type=${activeCategory}`}&is_active=true`
+			);
 		} else {
-			handleQuestionAPI(`questions/`);
+			handleQuestionAPI(
+				`questions/?${activeCategory == "همه موارد" ? "" : `type=${activeCategory}`}`
+			);
 		}
 	};
 
