@@ -25,7 +25,7 @@ const AdminCloseQuestion = () => {
 	const handleAction = (type) => {
 		if (isCompleted) return;
 
-		let winingId = 0;
+		let winingOptId = 0;
 		if (type == "next") {
 			setIsGoNext(true);
 		}
@@ -35,14 +35,20 @@ const AdminCloseQuestion = () => {
 			if (type === "confirm") {
 				setIsConfirm(true);
 				setIsReject(false);
-				winingId = 0;
+				const yesOption = questions[currentIndex].options.find(
+					(opt) => opt.description.toLowerCase() === "yes"
+				);
+				winingOptId = yesOption.option_id;
 			} else {
 				setIsReject(true);
 				setIsConfirm(false);
-				winingId = 1;
+				const noOption = questions[currentIndex].options.find(
+					(opt) => opt.description.toLowerCase() === "no"
+				);
+				winingOptId = noOption.option_id;
 			}
 			const data = {
-				winning_option_id: questions[currentIndex].options[winingId].option_id,
+				winning_option_id: winingOptId,
 			};
 			httpService
 				.post(`questions/${questions[currentIndex].question_id}/resolve/`, data)
