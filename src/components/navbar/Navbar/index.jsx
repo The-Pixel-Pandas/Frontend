@@ -9,6 +9,7 @@ import userProfile from "../../../assets/images/userProfile.png";
 import news from "../../../assets/images/news.png";
 import leaderboard from "../../../assets/images/leaderBoard.png";
 import logo from "../../../assets/images/logo.png";
+import question from "../../../assets/images/question.png";
 
 const Navbar = ({ isAuthenticated = false }) => {
 	const navigate = useNavigate();
@@ -47,10 +48,10 @@ const Navbar = ({ isAuthenticated = false }) => {
 				</div>
 				<div className="flex flex-1 ml-10"></div>
 				{/* User Buttons */}
-				<div className="flex flex-row mr-10">
+				<div className={`flex flex-row justify-center items-center gap-7`}>
 					<button
 						style={{ width: "46px", height: "46px" }}
-						className="mr-10 transition-transform hover:scale-105 outline-none mt-1.5"
+						className="transition-transform hover:scale-105 outline-none mt-1.5"
 						onClick={() => {
 							eventHandler.dispatchEvent("ClickSound");
 							navigate("/game");
@@ -62,38 +63,48 @@ const Navbar = ({ isAuthenticated = false }) => {
 							style={{ width: "38px", height: "25.13px" }}
 						/>
 					</button>
+					<button
+						style={{ width: "26.5px", height: "30.67px" }}
+						className=" transition-transform hover:scale-105 outline-none"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							if (isAuthenticated) navigate("/dashboard");
+							else navigate("/login");
+						}}
+					>
+						<img src={userProfile} alt="userProfile" />
+					</button>
+					<button
+						style={{ width: "33.33px", height: "30px" }}
+						className="mb-0.5 transition-transform hover:scale-105 outline-none mt-1.5"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							navigate("/");
+						}}
+					>
+						<img src={question} alt="question" />
+					</button>
+					<button
+						style={{ width: "28.67px", height: "28.67px" }}
+						className="transition-transform hover:scale-105 outline-none"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							navigate("/news");
+						}}
+					>
+						<img src={news} alt="news" />
+					</button>
+					<button
+						style={{ width: "25.5px", height: "28.67px" }}
+						className=" transition-transform hover:scale-105 outline-none"
+						onClick={() => {
+							eventHandler.dispatchEvent("ClickSound");
+							navigate("/leaderboard");
+						}}
+					>
+						<img src={leaderboard} alt="leaderboard" />
+					</button>
 					<div className="flex flex-row mr-10 mt-3">
-						<button
-							style={{ width: "26.5px", height: "30.67px" }}
-							className="mr-10 transition-transform hover:scale-105 outline-none"
-							onClick={() => {
-								eventHandler.dispatchEvent("ClickSound");
-								if (isAuthenticated) navigate("/dashboard");
-								else navigate("/login");
-							}}
-						>
-							<img src={userProfile} alt="userProfile" />
-						</button>
-						<button
-							style={{ width: "28.67px", height: "28.67px" }}
-							className="mr-10 transition-transform hover:scale-105 outline-none"
-							onClick={() => {
-								eventHandler.dispatchEvent("ClickSound");
-								navigate("/news");
-							}}
-						>
-							<img src={news} alt="news" />
-						</button>
-						<button
-							style={{ width: "25.5px", height: "28.67px" }}
-							className=" transition-transform hover:scale-105 outline-none"
-							onClick={() => {
-								eventHandler.dispatchEvent("ClickSound");
-								navigate("/leaderboard");
-							}}
-						>
-							<img src={leaderboard} alt="leaderboard" />
-						</button>
 						{/* Auth Buttons */}
 						<div className={isAuth ? "hidden" : ""}>
 							<div className="flex flex-row ml-10">

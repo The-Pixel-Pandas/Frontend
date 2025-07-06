@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TaskCard } from "../../../../components";
+import { TaskCard, TaskSkeleton } from "../../../../components";
 import { httpService, useTaskStore, useCoinStore } from "../../../../services";
 import resultContainer from "../../../../assets/images/resultContainer.png";
 import userDashboardBackground from "../../../../assets/images/userDashboardBackground.png";
@@ -7,6 +7,8 @@ import taskContainer from "../../../../assets/images/taskContainer.png";
 
 const Tasks = () => {
 	const [doneResult, setDoneResult] = useState([]);
+	const [isLoadingDoneTask, setIsLoadingDoneTask] = useState(true);
+	const [isLoadingUnDoneTask, setIsLoadingUnDoneTask] = useState(true);
 	const [todoResult, setTodoResult] = useState([]);
 	const { removedCardIds, addRemovedCard } = useTaskStore();
 	const { setCoin } = useCoinStore();
@@ -42,7 +44,11 @@ const Tasks = () => {
 	};
 
 	useEffect(() => {
+		// GET DONE TASKS
+		setIsLoadingDoneTask(true);
+		getDoneTask();
 		// GET UNDONE TASKS
+		setIsLoadingUnDoneTask(true);
 		httpService
 			.get("tasks/")
 			.then((response) => {
@@ -54,9 +60,10 @@ const Tasks = () => {
 			})
 			.catch((err) => {
 				console.log("Tasks get API error:", err);
+			})
+			.finally(() => {
+				setIsLoadingUnDoneTask(false);
 			});
-		// GET DONE TASKS
-		getDoneTask();
 	}, []);
 
 	useEffect(() => {
@@ -78,6 +85,9 @@ const Tasks = () => {
 			})
 			.catch((err) => {
 				console.log("Tasks get API error:", err);
+			})
+			.finally(() => {
+				setIsLoadingDoneTask(false);
 			});
 	};
 
@@ -111,16 +121,29 @@ const Tasks = () => {
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
 								تسک های انجام شده
 							</div>
-							<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-16 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
-								{doneResult.map((item, index) => (
-									<TaskCard
-										key={index}
-										item={item}
-										isDoneTask={true}
-										onCardClick={() => {}}
-									/>
-								))}
-							</div>
+							{isLoadingDoneTask ? (
+								<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-10 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
+									<TaskSkeleton />
+								</div>
+							) : (
+								<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-16 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
+									{doneResult.map((item, index) => (
+										<TaskCard
+											key={index}
+											item={item}
+											isDoneTask={true}
+											onCardClick={() => {}}
+										/>
+									))}
+								</div>
+							)}
+							{doneResult.length == 0 && !isLoadingDoneTask && (
+								<div className=" absolute top-1/2 ml-26 mb-14 pb-5 text-center z-50 ">
+									<span className="text-4xl font-MorabbaBold text-transparent bg-clip-text bg-gradient-to-r from-[#013cff] to-[#01ddff] animate-pulse duration-1000 ease-in-out transition-all transform-gpu scale-150 hover:scale-125">
+										دیتایی یافت نشد
+									</span>
+								</div>
+							)}
 						</div>
 					</div>
 					<div className="absolute inset-0 z-10 flex items-center justify-center ml-[530px] ">
@@ -142,16 +165,29 @@ const Tasks = () => {
 							<div className=" absolute inset-0 mt-5 pb-5 text-2xl font-MorabbaBold text-center text-white">
 								تسک های فعلی
 							</div>
-							<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-16 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
-								{todoResult.map((item, index) => (
-									<TaskCard
-										key={index}
-										item={item}
-										isDoneTask={false}
-										onCardClick={() => handleCardClick(item)}
-									/>
-								))}
-							</div>
+							{isLoadingUnDoneTask || isLoadingDoneTask ? (
+								<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-10 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
+									<TaskSkeleton />
+								</div>
+							) : (
+								<div className="absolute inset-0 flex flex-col gap-4 pb-2 pt-5 mt-16 items-center z-50 mb-0.5 max-h-[550px] overflow-y-scroll no-scrollbar rounded-[60px]">
+									{todoResult.map((item, index) => (
+										<TaskCard
+											key={index}
+											item={item}
+											isDoneTask={false}
+											onCardClick={() => handleCardClick(item)}
+										/>
+									))}
+								</div>
+							)}
+							{todoResult.length == 0 && !isLoadingUnDoneTask && (
+								<div className=" absolute top-1/2 ml-26 mb-14 pb-5 text-center z-50 ">
+									<span className="text-4xl font-MorabbaBold text-transparent bg-clip-text bg-gradient-to-r from-[#013cff] to-[#01ddff] animate-pulse duration-1000 ease-in-out transition-all transform-gpu scale-150 hover:scale-125">
+										دیتایی یافت نشد
+									</span>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

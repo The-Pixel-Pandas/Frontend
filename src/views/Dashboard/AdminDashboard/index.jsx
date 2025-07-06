@@ -6,7 +6,7 @@ const AdminDashboard = () => {
 	return (
 		<>
 			<div className="relative">
-				<div className="absolute right-0 top-0 flex flex-col items-end justify-end mt-16 gap-5 mr-14">
+				<div className="absolute right-0 top-0 flex flex-col items-end justify-end mt-16 gap-1 mr-14">
 					<NavLinkButton
 						text="پروفایل"
 						path="/dashboard/adminProfile"

@@ -37,11 +37,16 @@ const PublicProfilePopup = ({
 						/>
 
 						<div className="flex flex-col gap-0.5 relative">
-							<div className=" text-white font-MorabbaBold text-2xl whitespace-nowrap">
+							<div
+								className=" text-white font-MorabbaBold text-2xl overflow-x-scroll no-scrollbar  whitespace-nowrap "
+								style={{
+									maxWidth: `calc(${width}px - 180px)`,
+								}}
+							>
 								{name}
 							</div>
 							<div
-								className="text-white text-xl font-MorabbaMedium overflow-hidden overflow-ellipsis whitespace-pre-wrap"
+								className="text-white text-xl font-MorabbaMedium overflow-x-scroll no-scrollbar  whitespace-pre-wrap"
 								style={{
 									maxWidth: `calc(${width}px - 150px)`,
 								}}

@@ -7,12 +7,15 @@ import { useToast } from "../../../../hooks";
 import adminContainer from "../../../../assets/images/adminContainer.png";
 import checkTrue from "../../../../assets/images/checkTrue.png";
 import checkFalse from "../../../../assets/images/checkFalse.png";
+import nextCheckButton from "../../../../assets/images/nextCheckButton.png";
+import nextClicked from "../../../../assets/images/nextClicked.png";
 import checkTrueClicked from "../../../../assets/images/checkTrueClicked.png";
 import checkFalseClicked from "../../../../assets/images/checkFalseClicked.png";
 
 const AdminCloseQuestion = () => {
 	const [isConfirm, setIsConfirm] = useState(false);
 	const [isReject, setIsReject] = useState(false);
+	const [isGoNext, setIsGoNext] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isCompleted, setIsCompleted] = useState(false);
 	const swiperRef = useRef(null);
@@ -23,27 +26,33 @@ const AdminCloseQuestion = () => {
 		if (isCompleted) return;
 
 		let winingId = 0;
-
-		if (type === "confirm") {
-			setIsConfirm(true);
-			setIsReject(false);
-			winingId = 0;
-		} else {
-			setIsReject(true);
-			setIsConfirm(false);
-			winingId = 1;
+		if (type == "next") {
+			setIsGoNext(true);
 		}
-		const data = {
-			winning_option_id: questions[currentIndex].options[winingId].option_id,
-		};
-		httpService
-			.post(`questions/${questions[currentIndex].question_id}/resolve/`, data)
-			.then((res) => {
-				console.log("Resolve api response", res);
-			})
-			.catch((err) => {
-				console.log("Resolve api error", err);
-			});
+
+		if (type !== "next") {
+			setIsGoNext(false);
+			if (type === "confirm") {
+				setIsConfirm(true);
+				setIsReject(false);
+				winingId = 0;
+			} else {
+				setIsReject(true);
+				setIsConfirm(false);
+				winingId = 1;
+			}
+			const data = {
+				winning_option_id: questions[currentIndex].options[winingId].option_id,
+			};
+			httpService
+				.post(`questions/${questions[currentIndex].question_id}/resolve/`, data)
+				.then((res) => {
+					console.log("Resolve api response", res);
+				})
+				.catch((err) => {
+					console.log("Resolve api error", err);
+				});
+		}
 
 		setTimeout(() => {
 			if (currentIndex === questions.length - 1) {
@@ -54,6 +63,9 @@ const AdminCloseQuestion = () => {
 			if (swiperRef.current) {
 				swiperRef.current.slideNext();
 			}
+			setIsGoNext(false);
+			setIsConfirm(false);
+			setIsReject(false);
 		}, 500);
 	};
 
@@ -180,6 +192,18 @@ const AdminCloseQuestion = () => {
 										clickState={isConfirm}
 										check={checkTrue}
 										checkClicked={checkTrueClicked}
+									/>
+								</button>
+							</div>
+							<div>
+								<button
+									className="absolute right-0 bottom-0 mr-2 mb-1 hover:scale-75 transition-all duration-500 scale-70"
+									onClick={() => handleAction("next")}
+								>
+									<ManageButton
+										clickState={isGoNext}
+										check={nextCheckButton}
+										checkClicked={nextClicked}
 									/>
 								</button>
 							</div>

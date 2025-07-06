@@ -40,6 +40,8 @@ const AdminManageQuestion = () => {
 			if (swiperRef.current) {
 				swiperRef.current.slideNext();
 			}
+			setIsConfirm(false);
+			setIsReject(false);
 		}, 500);
 	};
 

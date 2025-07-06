@@ -45,7 +45,10 @@ const CardItem = ({ item, width = 300, height = 160, isExchange = true }) => {
 							</div>
 							{/* Coins */}
 							{isExchange && (
-								<div className="absolute bottom-0 right-0 flex items-center flex-row">
+								<div
+									className="absolute bottom-0 right-0 flex items-center flex-row"
+									dir="ltr"
+								>
 									<div className="absolute right-10 flex flex-row gap-1 ">
 										<span className="text-white font-MorabbaMedium text-[13px] whitespace-nowrap">
 											حجم پاندا کوین
