@@ -66,6 +66,10 @@ const NavLinkButton = ({ text, path, number, isAdminButton = false }) => {
 				setSelectedButton(5);
 				setAdmin(true);
 				break;
+			case "/dashboard/adminForecastResult":
+				setSelectedButton(6);
+				setAdmin(true);
+				break;
 			default:
 				break;
 		}

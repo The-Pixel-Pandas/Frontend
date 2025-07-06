@@ -43,6 +43,12 @@ const AdminDashboard = () => {
 						number={5}
 						isAdminButton={true}
 					/>
+					<NavLinkButton
+						text=" نتایج پیشبینی  "
+						path="/dashboard/adminForecastResult"
+						number={6}
+						isAdminButton={true}
+					/>
 				</div>
 
 				<Outlet />

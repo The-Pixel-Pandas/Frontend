@@ -72,39 +72,43 @@ const ForecastCard = ({
 						src={forecastCardButton}
 						alt="forecastCardButton"
 						style={{ width: 340, height: 35 }}
-						className="mt-0.5"
+						className="mt-0.5 relative"
 					/>
+					{/* Coin Button */}
+					<button
+						className={`hover:scale-105 transition duration-300  absolute left-5 bottom-1.5   z-50 ${isAllResult ? "hidden" : ""}`}
+						onClick={calculateCoin}
+					>
+						<div
+							className={` flex flex-row gap-0.5 items-center  justify-center ${isRemoved ? "hidden" : ""}`}
+						>
+							<img
+								src={arrowIcon}
+								alt="arrowIcon"
+								style={{ width: 24, height: 24 }}
+							/>
+							<div>
+								<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
+									دریافت پاداش
+								</span>
+							</div>
+						</div>
+						<div className={` ${isRemoved ? "" : "hidden"}`}>
+							<span className="text-[#03fc13] font-MorabbaMedium text-sm whitespace-nowrap">
+								پاداش دریافت شده است
+							</span>
+						</div>
+					</button>
+					{/* Coin Data */}
 					<div className="absolute inset-0 ">
 						<div className="flex flex-row gap-0.5 items-center absolute right-2">
-							<button
-								className={`hover:scale-105 transition duration-300 ${isAllResult ? "hidden" : ""}`}
-								onClick={calculateCoin}
-							>
-								<div
-									className={` flex flex-row gap-0.5 items-center mr-[90px] justify-center ${isRemoved ? "hidden" : ""}`}
-								>
-									<img
-										src={arrowIcon}
-										alt="arrowIcon"
-										style={{ width: 24, height: 24 }}
-									/>
-									<div>
-										<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
-											دریافت پاداش
-										</span>
-									</div>
-								</div>
-								<div className={`mr-[60px] ${isRemoved ? "" : "hidden"}`}>
-									<span className="text-[#03fc13] font-MorabbaMedium text-sm whitespace-nowrap">
-										پاداش دریافت شده است
-									</span>
-								</div>
-							</button>
-							<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
+							<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap mr-0.5">
 								پاندا کوین
 							</span>
 							<span className="text-white font-MorabbaMedium text-sm whitespace-nowrap">
-								{item.amount.toLocaleString("fa")}
+								{parseFloat(item.amount).toLocaleString("fa-IR", {
+									useGrouping: false,
+								})}
 							</span>
 							<div>
 								<img
