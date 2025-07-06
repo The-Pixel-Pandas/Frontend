@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { useProfileStore, httpService } from "../../../services";
+import { useProfileStore, httpService, useCoinStore } from "../../../services";
 import { ProfileMedal, UserAvatar, ProfileInfoContainer } from "../../index";
 import userInfoHeader from "../../../assets/images/userInfoHeader.png";
 import adminInfoHeader from "../../../assets/images/adminInfoHeader.png";
@@ -7,6 +7,7 @@ import userProfileBody from "../../../assets/images/userProfileBody.png";
 import adminProfileBody from "../../../assets/images/adminProfileBody.png";
 
 const Profile = () => {
+	const { getCoin } = useCoinStore();
 	const {
 		id,
 		name,
@@ -40,7 +41,7 @@ const Profile = () => {
 
 	useEffect(() => {
 		httpService
-			.get(`profiles/${id}/`)
+			.get(`profiles/me/`)
 			.then((res) => {
 				console.log("Get Profile API Response: ", res);
 				if (
@@ -166,7 +167,9 @@ const Profile = () => {
 									) : (
 										<ProfileInfoContainer
 											text="تعداد سکه ها "
-											amount={Math.ceil(winRate)}
+											amount={parseFloat(getCoin()).toLocaleString("fa-IR", {
+												useGrouping: false,
+											})}
 										/>
 									)}
 								</div>

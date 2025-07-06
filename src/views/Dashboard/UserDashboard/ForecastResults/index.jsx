@@ -11,7 +11,19 @@ const ForecastResults = () => {
 	const [isLoadingTrueResult, setIsLoadingTrueResult] = useState(true);
 	const [isLoadingFalseResult, setIsLoadingFalseResult] = useState(true);
 	const [, setAllResult] = useState([]);
-	const { removedCardIds } = useForecastStore();
+	const { removedCardIds, addRemovedCard } = useForecastStore();
+
+	const handleCardClick = (card) => {
+		if (!isCardRemoved(card.transaction_id)) {
+			addRemovedCard(card.transaction_id);
+			return true;
+		}
+		return false;
+	};
+
+	const isCardRemoved = (transaction_id) => {
+		return removedCardIds.includes(transaction_id);
+	};
 
 	useEffect(() => {
 		setIsLoadingFalseResult(true);
@@ -41,7 +53,7 @@ const ForecastResults = () => {
 				setIsLoadingFalseResult(false);
 				setIsLoadingTrueResult(false);
 			});
-	}, [removedCardIds]);
+	}, []);
 
 	return (
 		<>
@@ -120,8 +132,9 @@ const ForecastResults = () => {
 												key={item.transaction_id || index}
 												item={item}
 												isTrueForecast={true}
-												isAllResult={true}
-												onCardClick={() => {}}
+												isAllResult={false}
+												onCardClick={handleCardClick}
+												isRemoved={isCardRemoved(item.transaction_id)}
 											/>
 										))}
 									</AnimatePresence>

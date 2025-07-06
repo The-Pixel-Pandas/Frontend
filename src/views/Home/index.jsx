@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Pagination } from "@mui/material";
-import { httpService } from "../../services";
+import { httpService, useCoinStore } from "../../services";
 import { useFetchData } from "../../hooks";
 import {
 	Footer,
@@ -25,6 +25,7 @@ const Home = () => {
 	const [isFirstLoad, setIsFirstLoad] = useState(true);
 	const [count, setCount] = useState(0);
 	const [checked, setChecked] = useState(false);
+	const { setCoin, coin } = useCoinStore();
 
 	const handleCheckboxChange = (event) => {
 		const isChecked = event.target.checked;
@@ -104,6 +105,18 @@ const Home = () => {
 
 		return () => clearInterval(interval);
 	}, [questionId]);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			httpService.get("wallet/").then((res) => {
+				if (res.total_balance != coin) {
+					setCoin(res.total_balance);
+				}
+			});
+		}, 5000);
+
+		return () => clearInterval(interval);
+	}, []);
 
 	useEffect(() => {
 		if (questionId) fetchQuestionDetails();
