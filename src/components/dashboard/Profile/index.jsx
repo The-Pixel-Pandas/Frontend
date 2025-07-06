@@ -27,15 +27,15 @@ const Profile = () => {
 		setRankTotalVolume,
 	} = useProfileStore.getState();
 	const goldMedal = useMemo(
-		() => medals.filter((medal) => medal === 1),
+		() => medals.filter((medal) => medal.number === 1),
 		[medals]
 	);
 	const silverMedal = useMemo(
-		() => medals.filter((medal) => medal === 2),
+		() => medals.filter((medal) => medal.number === 2),
 		[medals]
 	);
 	const bronzeMedal = useMemo(
-		() => medals.filter((medal) => medal === 3),
+		() => medals.filter((medal) => medal.number === 3),
 		[medals]
 	);
 
